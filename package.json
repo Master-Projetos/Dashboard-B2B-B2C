@@ -1,0 +1,21 @@
+{
+  "name": "master-projetos-painel",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "dev": "vite",
+    "start": "vercel dev",
+    "build": "vite build",
+    "preview": "vite preview",
+    "snapshot": "node scripts/gerar-snapshot.mjs"
+  },
+  "dependencies": {
+    "echarts": "^5.5.1"
+  },
+  "devDependencies": {
+    "vite": "^5.4.10"
+  },
+  "allowScripts": {
+    "esbuild@0.21.5": true
+  }
+}

@@ -1,0 +1,8 @@
+# O slideshow tem deploy próprio (pasta slideshow/)
+slideshow
+
+# Arquivos pessoais nunca vão para o deploy
+*.vbs
+
+node_modules
+dist

@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="icon" href="/imagens/master-projetos.png">
+  <title>Painel Master Projetos</title>
+</head>
+<body>
+
+  <div id="painel">
+
+    <header id="cabecalho">
+      <div class="marca">
+        <img src="/imagens/master-projetos.png" alt="Master Projetos">
+      </div>
+
+      <h1>Painel de Projetos &amp; Viabilidade</h1>
+
+      <div id="prazos" class="prazos"></div>
+
+      <div class="atualizacoes">
+        <span id="atualizacaoB2b">B2B —</span>
+        <span id="atualizacaoViabilidade">Viabilidade —</span>
+      </div>
+    </header>
+
+    <section id="indicadores" class="indicadores"></section>
+
+    <section class="grade-graficos">
+      <article class="cartao">
+        <h2>Projetos por mês (B2B)</h2>
+        <div class="area-grafico" id="graficoProjetosPorMes"></div>
+      </article>
+
+      <article class="cartao">
+        <h2>Status dos projetos (B2B)</h2>
+        <div class="area-grafico" id="graficoStatus"></div>
+      </article>
+
+      <article class="cartao">
+        <h2 id="tituloPrioridade">Prioridade (B2B)</h2>
+        <div class="area-grafico" id="graficoPrioridade"></div>
+      </article>
+
+      <article class="cartao">
+        <h2>Portas por regional</h2>
+        <div class="area-grafico" id="graficoPortasPorRegional"></div>
+      </article>
+
+      <article class="cartao">
+        <h2>Cidades com mais portas</h2>
+        <div class="area-grafico" id="graficoCidades"></div>
+      </article>
+
+      <article class="cartao">
+        <h2>Status por equipe (B2B)</h2>
+        <div class="area-grafico" id="graficoStatusPorEquipe"></div>
+      </article>
+    </section>
+
+  </div>
+
+  <div id="detalhesDePrazo" hidden></div>
+
+  <script type="module" src="/src/main.js"></script>
+</body>
+</html>

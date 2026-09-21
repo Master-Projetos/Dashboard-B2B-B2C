@@ -1,0 +1,398 @@
+/* Tema claro é o padrão; o escuro entra via data-tema no <html>. */
+:root {
+  color-scheme: light;
+
+  --plano-pagina: #eef1f6;
+  --superficie: #ffffff;
+  --superficie-topo: #ffffff;
+  --superficie-base: #f7f9fc;
+  --borda: rgba(11, 11, 11, 0.09);
+  --sombra: 0 1px 2px rgba(11, 11, 11, 0.06), 0 4px 12px rgba(11, 11, 11, 0.04);
+
+  --texto-primario: #0b0b0b;
+  --texto-secundario: #52514e;
+  --texto-suave: #7b7a75;
+
+  --serie-1: #2a78d6;
+  --status-bom: #0ca30c;
+  --status-atencao: #fab219;
+  --status-critico: #d03b3b;
+
+  /* Tudo escala com a altura da tela: o painel precisa caber sem rolagem
+     tanto num notebook de 768px quanto numa TV de 1080p. */
+  --espaco: clamp(7px, 1.1vh, 13px);
+  --raio: 12px;
+  --altura-logo: clamp(28px, 4.2vh, 46px);
+  --fonte-titulo: clamp(14px, 1.9vh, 20px);
+  --fonte-rotulo: clamp(9px, 1.15vh, 11px);
+  --fonte-indicador: clamp(18px, 3.2vh, 30px);
+  --fonte-detalhe: clamp(9px, 1.1vh, 11px);
+}
+
+:root[data-tema="escuro"] {
+  color-scheme: dark;
+
+  --plano-pagina: #0d1017;
+  --superficie: #151a24;
+  --superficie-topo: #1a2130;
+  --superficie-base: #141a24;
+  --borda: rgba(255, 255, 255, 0.09);
+  --sombra: 0 1px 2px rgba(0, 0, 0, 0.4);
+
+  --texto-primario: #ffffff;
+  --texto-secundario: #c3c2b7;
+  --texto-suave: #8b93a3;
+
+  --serie-1: #3987e5;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html, body {
+  height: 100%;
+  overflow: hidden;
+}
+
+body {
+  background: var(--plano-pagina);
+  color: var(--texto-primario);
+  font-family: system-ui, -apple-system, "Segoe UI", sans-serif;
+  -webkit-font-smoothing: antialiased;
+  transition: background 0.25s ease, color 0.25s ease;
+}
+
+#painel {
+  height: 100vh;
+  height: 100dvh;
+  padding: var(--espaco);
+  display: grid;
+  grid-template-rows: auto auto minmax(0, 1fr);
+  gap: var(--espaco);
+}
+
+/* ===== Cabeçalho ===== */
+
+#cabecalho {
+  display: flex;
+  align-items: center;
+  gap: clamp(10px, 1.6vw, 22px);
+}
+
+.marca {
+  background: #ffffff;
+  border: 1px solid var(--borda);
+  border-radius: var(--raio);
+  padding: clamp(4px, 0.7vh, 8px) clamp(8px, 1vw, 14px);
+  display: flex;
+  align-items: center;
+  flex-shrink: 0;
+  box-shadow: var(--sombra);
+}
+
+.marca img {
+  height: var(--altura-logo);
+  width: auto;
+  display: block;
+}
+
+#cabecalho h1 {
+  font-size: var(--fonte-titulo);
+  font-weight: 650;
+  letter-spacing: -0.2px;
+  white-space: nowrap;
+}
+
+.prazos {
+  display: flex;
+  gap: 8px;
+  margin-left: auto;
+  flex-wrap: wrap;
+  justify-content: flex-end;
+}
+
+.prazo {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  padding: clamp(3px, 0.5vh, 6px) clamp(8px, 0.8vw, 12px);
+  background: var(--superficie);
+  border: 1px solid var(--borda);
+  border-radius: 999px;
+  font-size: var(--fonte-detalhe);
+  color: var(--texto-secundario);
+  white-space: nowrap;
+  box-shadow: var(--sombra);
+}
+
+.prazo strong {
+  color: var(--texto-primario);
+  font-weight: 650;
+}
+
+.prazo::before {
+  content: "";
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  background: var(--marcador, var(--texto-suave));
+  flex-shrink: 0;
+}
+
+.atualizacoes {
+  display: flex;
+  flex-direction: column;
+  gap: 1px;
+  font-size: var(--fonte-detalhe);
+  color: var(--texto-suave);
+  text-align: right;
+  white-space: nowrap;
+}
+
+/* ===== Indicadores ===== */
+
+.indicadores {
+  display: grid;
+  grid-template-columns: repeat(6, minmax(0, 1fr));
+  gap: var(--espaco);
+}
+
+.indicador {
+  position: relative;
+  background: linear-gradient(170deg, var(--superficie-topo), var(--superficie-base));
+  border: 1px solid var(--borda);
+  border-radius: var(--raio);
+  padding: clamp(7px, 1.1vh, 13px) clamp(11px, 0.95vw, 17px);
+  box-shadow: var(--sombra);
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+/* Faixa superior colorida: identifica a origem do dado (rede x projetos) sem
+   depender de texto, e some nos cartões de espera. */
+.indicador::before {
+  content: "";
+  position: absolute;
+  inset: 0 0 auto 0;
+  height: 3px;
+  background: var(--realce, transparent);
+}
+
+.indicador .rotulo {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font-size: var(--fonte-rotulo);
+  letter-spacing: 0.75px;
+  text-transform: uppercase;
+  font-weight: 600;
+  color: var(--texto-suave);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.indicador .valor {
+  margin-top: 3px;
+  font-size: var(--fonte-indicador);
+  font-weight: 680;
+  line-height: 1.1;
+  letter-spacing: -0.7px;
+  color: var(--texto-primario);
+}
+
+.indicador .detalhe {
+  margin-top: 2px;
+  font-size: var(--fonte-detalhe);
+  color: var(--texto-secundario);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.indicador.aguardando .valor {
+  color: var(--texto-suave);
+}
+
+/* ===== Gráficos ===== */
+
+.grade-graficos {
+  display: grid;
+  grid-template-columns: 1.25fr 1fr 1fr;
+  grid-template-rows: repeat(2, minmax(0, 1fr));
+  gap: var(--espaco);
+  min-height: 0;
+}
+
+.cartao {
+  background: var(--superficie);
+  border: 1px solid var(--borda);
+  border-radius: var(--raio);
+  padding: clamp(6px, 1vh, 12px) clamp(8px, 0.7vw, 14px);
+  display: flex;
+  flex-direction: column;
+  min-height: 0;
+  box-shadow: var(--sombra);
+}
+
+.cartao h2 {
+  font-size: var(--fonte-rotulo);
+  font-weight: 650;
+  letter-spacing: 0.75px;
+  text-transform: uppercase;
+  color: var(--texto-secundario);
+  margin-bottom: clamp(2px, 0.5vh, 6px);
+  flex-shrink: 0;
+}
+
+/* min-height: 0 é o que permite o gráfico encolher dentro do grid sem estourar */
+.area-grafico {
+  flex: 1;
+  min-height: 0;
+  width: 100%;
+}
+
+.aviso {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 100%;
+  font-size: var(--fonte-detalhe);
+  color: var(--texto-suave);
+  text-align: center;
+  padding: 0 12px;
+}
+
+/* ===== Detalhes de prazo (sobreposto) ===== */
+
+.prazo.clicavel {
+  cursor: pointer;
+}
+
+.prazo.clicavel:hover {
+  border-color: var(--texto-suave);
+}
+
+#detalhesDePrazo {
+  position: fixed;
+  inset: 0;
+  z-index: 50;
+  background: rgba(8, 10, 15, 0.55);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 4vh 4vw;
+}
+
+#detalhesDePrazo[hidden] {
+  display: none;
+}
+
+.caixa-de-detalhes {
+  background: var(--superficie);
+  border: 1px solid var(--borda);
+  border-radius: var(--raio);
+  box-shadow: 0 12px 40px rgba(0, 0, 0, 0.3);
+  width: min(880px, 100%);
+  max-height: 100%;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+}
+
+.caixa-de-detalhes header {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 14px 18px;
+  border-bottom: 1px solid var(--borda);
+}
+
+.caixa-de-detalhes h2 {
+  font-size: clamp(13px, 1.8vh, 16px);
+  font-weight: 650;
+}
+
+.caixa-de-detalhes h2 span {
+  margin-left: 6px;
+  padding: 1px 8px;
+  border-radius: 999px;
+  background: var(--plano-pagina);
+  color: var(--texto-secundario);
+  font-size: 0.82em;
+}
+
+.fechar-detalhes {
+  margin-left: auto;
+  border: 1px solid var(--borda);
+  background: var(--superficie);
+  color: var(--texto-secundario);
+  border-radius: 8px;
+  width: 30px;
+  height: 30px;
+  cursor: pointer;
+  font-size: 13px;
+  line-height: 1;
+}
+
+.fechar-detalhes:hover {
+  color: var(--texto-primario);
+  border-color: var(--texto-suave);
+}
+
+/* Só o conteúdo do painel rola — a página em si continua sem rolagem.
+   Sem padding no topo: qualquer folga aqui deixaria as linhas aparecerem
+   acima do cabeçalho fixo enquanto rolam. */
+.corpo-de-detalhes {
+  overflow-y: auto;
+  padding: 0 18px 16px;
+}
+
+/* `separate` (e não `collapse`) porque com bordas colapsadas a borda do
+   cabeçalho fixo não acompanha a rolagem. */
+.tabela-de-prazos {
+  width: 100%;
+  border-collapse: separate;
+  border-spacing: 0;
+  font-size: clamp(11px, 1.35vh, 13px);
+}
+
+.tabela-de-prazos th {
+  position: sticky;
+  top: 0;
+  z-index: 2; /* sem isto, o texto das linhas passa por cima do cabeçalho */
+  background: var(--superficie);
+  text-align: left;
+  font-size: var(--fonte-rotulo);
+  letter-spacing: 0.6px;
+  text-transform: uppercase;
+  color: var(--texto-suave);
+  padding: 12px 10px 8px 0;
+  box-shadow: inset 0 -1px 0 var(--borda);
+}
+
+.tabela-de-prazos td {
+  padding: 9px 10px 9px 0;
+  box-shadow: inset 0 -1px 0 var(--borda);
+  color: var(--texto-secundario);
+}
+
+.tabela-de-prazos td:first-child {
+  color: var(--texto-primario);
+  font-weight: 550;
+}
+
+.tabela-de-prazos .prazo-atrasado {
+  color: var(--status-critico);
+  font-weight: 650;
+}
+
+.tabela-de-prazos .prazo-hoje {
+  color: var(--status-atencao);
+  font-weight: 650;
+}

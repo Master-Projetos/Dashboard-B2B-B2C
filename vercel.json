@@ -1,0 +1,11 @@
+{
+  "framework": "vite",
+  "buildCommand": "vite build",
+  "outputDirectory": "dist",
+  "crons": [
+    {
+      "path": "/api/atualizar-viabilidade",
+      "schedule": "0 3 * * *"
+    }
+  ]
+}
