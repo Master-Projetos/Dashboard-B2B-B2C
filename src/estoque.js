@@ -185,7 +185,7 @@ export function desenharTabelaDeEstoque(estoque) {
     return;
   }
 
-  const colunas = `<col class="coluna-item"><col class="coluna-minimo">${REGIONAIS.map(() => '<col class="coluna-regional">').join("")}`;
+  const colunas = `<col class="coluna-unidade"><col class="coluna-item"><col class="coluna-minimo">${REGIONAIS.map(() => '<col class="coluna-regional">').join("")}`;
   const cabecalho = REGIONAIS.map(({ sigla, nome }) => `<th title="${escapar(nome)}">${sigla}</th>`).join("");
 
   const linhas = itens
@@ -197,12 +197,12 @@ export function desenharTabelaDeEstoque(estoque) {
         return `<td class="${classe}" title="${escapar(descreverCelula(dados, nome))}">${texto}</td>`;
       }).join("");
 
-      const unidade = item.unidade ? ` <span class="unidade">${escapar(item.unidade)}</span>` : "";
       const minimo = item.minimo === null ? "—" : formatarNumero(item.minimo);
 
       return `
         <tr>
-          <th scope="row" title="${escapar(`${item.codigo} · ${item.nome}`)}">${escapar(item.nome)}${unidade}</th>
+          <td class="coluna-da-unidade" title="Unidade de medida">${escapar(item.unidade || "—")}</td>
+          <th scope="row" title="${escapar(`${item.codigo} · ${item.nome}`)}">${escapar(item.nome)}</th>
           <td class="coluna-do-minimo" title="Estoque mínimo">${minimo}</td>
           ${celulas}
         </tr>
@@ -215,6 +215,7 @@ export function desenharTabelaDeEstoque(estoque) {
       <colgroup>${colunas}</colgroup>
       <thead>
         <tr>
+          <th scope="col" title="Unidade de medida">Un.</th>
           <th scope="col">Item</th>
           <th scope="col" title="Estoque mínimo">Mín.</th>
           ${cabecalho}
@@ -258,12 +259,6 @@ export function desenharIndicadoresDeEstoque(estoque) {
       rotulo: "Normais",
       valor: contagem.ok,
       detalhe: "item · regional com folga",
-      realce: CORES.serie1,
-    },
-    {
-      rotulo: "Sem mínimo",
-      valor: contagem.semMinimo,
-      detalhe: "sem parâmetro para alertar",
       realce: CORES.serie1,
     },
     {

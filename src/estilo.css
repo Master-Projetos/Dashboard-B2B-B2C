@@ -321,6 +321,14 @@ body {
   gap: var(--espaco);
 }
 
+/* A tela de estoque tem menos números que valham cartão: a linha se ajusta a
+   quantos existirem, em vez de deixar um buraco na grade de seis. */
+#indicadoresEstoque {
+  grid-template-columns: none;
+  grid-auto-flow: column;
+  grid-auto-columns: minmax(0, 1fr);
+}
+
 .indicador {
   position: relative;
   background: linear-gradient(170deg, var(--superficie-topo), var(--superficie-base));
@@ -460,6 +468,7 @@ body {
 
 /* Cinco colunas de número com largura igual e folga para "15.000"; o nome do
    item fica com o resto. */
+.grade-de-estoque col.coluna-unidade { width: clamp(36px, 3vw, 58px); }
 .grade-de-estoque col.coluna-item { width: auto; }
 .grade-de-estoque col.coluna-minimo { width: clamp(46px, 4vw, 74px); }
 .grade-de-estoque col.coluna-regional { width: clamp(50px, 4.5vw, 84px); }
@@ -478,18 +487,27 @@ body {
   color: var(--texto-suave);
 }
 
-.grade-de-estoque thead th:first-child,
-.grade-de-estoque tbody th {
+/* Unidade e nome alinhados à esquerda; os números, centrados. */
+.grade-de-estoque thead th:nth-child(-n + 2),
+.grade-de-estoque tbody th,
+.grade-de-estoque .coluna-da-unidade {
   text-align: left;
 }
 
-/* O mínimo é referência, não medida: fica visível mas sem competir com os
-   saldos. A divisória mais forte à direita separa "o que deveria ter" de "o
-   que tem em cada regional". */
+/* Unidade e mínimo são referência, não medida: ficam visíveis sem competir
+   com os saldos. */
+.grade-de-estoque .coluna-da-unidade,
 .grade-de-estoque .coluna-do-minimo,
-.grade-de-estoque thead th:nth-child(2) {
+.grade-de-estoque thead th:nth-child(1),
+.grade-de-estoque thead th:nth-child(3) {
   color: var(--texto-suave);
   font-weight: 550;
+}
+
+/* Divisória mais forte à direita do mínimo: separa "o que deveria ter" de "o
+   que tem em cada regional". */
+.grade-de-estoque .coluna-do-minimo,
+.grade-de-estoque thead th:nth-child(3) {
   box-shadow: inset -2px 0 0 var(--borda-grade), inset 0 -1px 0 var(--borda);
 }
 
@@ -498,12 +516,6 @@ body {
   color: var(--texto-primario);
   overflow: hidden;
   text-overflow: ellipsis;
-}
-
-/* Faixa alternada para o olho não trocar de linha no meio do caminho. Fica
-   abaixo das células coloridas, que têm fundo próprio. */
-.grade-de-estoque tbody tr:nth-child(even) {
-  background: color-mix(in srgb, var(--texto-suave) 7%, transparent);
 }
 
 .grade-de-estoque td {
@@ -544,10 +556,9 @@ body {
   opacity: 0.55;
 }
 
-.grade-de-estoque .unidade {
-  color: var(--texto-suave);
-  font-weight: 400;
-  font-size: 0.9em;
+.grade-de-estoque .coluna-da-unidade {
+  font-size: 0.92em;
+  letter-spacing: 0.4px;
 }
 
 .cartao {
