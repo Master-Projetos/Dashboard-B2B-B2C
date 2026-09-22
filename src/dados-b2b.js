@@ -41,8 +41,10 @@ export const ROTULOS_DE_EQUIPE = {
 };
 
 // remaining_days: 0 = vence hoje, positivo = dias restantes, negativo = atraso.
+// Sem dia nenhum, a leitura do time é que o projeto está concluído — um traço
+// deixaria quem não conhece a base sem saber se é isso ou se faltou dado.
 export function descreverPrazo(diasRestantes) {
-  if (diasRestantes === null || diasRestantes === undefined) return "—";
+  if (diasRestantes === null || diasRestantes === undefined) return "Concluído";
   if (diasRestantes === 0) return "vence hoje";
   if (diasRestantes < 0) return `${Math.abs(diasRestantes)} ${Math.abs(diasRestantes) === 1 ? "dia" : "dias"} em atraso`;
   return `${diasRestantes} ${diasRestantes === 1 ? "dia" : "dias"}`;

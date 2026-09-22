@@ -11,9 +11,10 @@ function escapar(texto) {
 }
 
 function montarLinha(item, { mostrarValor, mostrarDestaque }) {
+  const semPrazo = item.remaining_days === null || item.remaining_days === undefined;
   const atrasado = item.remaining_days < 0;
   const venceHoje = item.remaining_days === 0;
-  const classeDoPrazo = atrasado ? "prazo-atrasado" : venceHoje ? "prazo-hoje" : "";
+  const classeDoPrazo = semPrazo ? "prazo-concluido" : atrasado ? "prazo-atrasado" : venceHoje ? "prazo-hoje" : "";
 
   return `
     <tr>

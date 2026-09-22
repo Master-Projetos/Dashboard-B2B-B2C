@@ -15,6 +15,7 @@
 
   --serie-1: #2a78d6;
   --status-bom: #0ca30c;
+  --texto-concluido: #0c8a0c; /* 4,5:1 sobre branco; o --status-bom só passa como marcador */
   --status-atencao: #fab219;
   --status-critico: #d03b3b;
 
@@ -44,6 +45,7 @@
   --texto-suave: #8b93a3;
 
   --serie-1: #3987e5;
+  --texto-concluido: #3fbf5f;
 }
 
 * {
@@ -453,6 +455,11 @@ body {
 .tabela-de-prazos td:first-child {
   color: var(--texto-primario);
   font-weight: 550;
+}
+
+.tabela-de-prazos .prazo-concluido {
+  color: var(--texto-concluido);
+  font-weight: 600;
 }
 
 .tabela-de-prazos .prazo-atrasado {
