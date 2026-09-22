@@ -153,18 +153,32 @@ body {
   display: none;
 }
 
-.periodo input {
+.periodo select {
   font: inherit;
   font-size: var(--fonte-detalhe);
+  font-weight: 650;
   color: var(--texto-primario);
   background: var(--superficie);
   border: 1px solid var(--borda);
-  border-radius: 8px;
-  padding: clamp(3px, 0.5vh, 5px) 6px;
+  border-radius: 999px;
+  padding: clamp(3px, 0.5vh, 6px) clamp(8px, 0.8vw, 12px);
   box-shadow: var(--sombra);
+  cursor: pointer;
+  /* A seta nativa varia demais entre navegadores; esta é sempre a mesma. */
+  appearance: none;
+  padding-right: clamp(20px, 1.8vw, 26px);
+  background-image: linear-gradient(45deg, transparent 50%, currentColor 50%),
+                    linear-gradient(135deg, currentColor 50%, transparent 50%);
+  background-size: 4px 4px, 4px 4px;
+  background-position: right 11px top 50%, right 7px top 50%;
+  background-repeat: no-repeat;
 }
 
-.periodo input:focus {
+.periodo select:hover {
+  border-color: var(--texto-suave);
+}
+
+.periodo select:focus-visible {
   outline: 2px solid var(--serie-1);
   outline-offset: 1px;
 }

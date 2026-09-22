@@ -14,10 +14,10 @@ import {
   mostrarAvisoNoGrafico,
   aoRedimensionar,
 } from "./graficos.js";
-import { formatarHorario, formatarDataCurta } from "./formatadores.js";
+import { formatarHorario, formatarDataCurta, formatarMes } from "./formatadores.js";
 import { restaurarTemaSalvo, alternarTema } from "./tema.js";
 import { iniciarNavegacao, telaVisivel } from "./navegacao.js";
-import { aplicarPeriodo, ehPeriodoVazio, faixaDeDatas } from "./periodo.js";
+import { aplicarPeriodo, ehPeriodoVazio, mesesDisponiveis, ultimoDiaDoMes } from "./periodo.js";
 
 const INTERVALO_ATUALIZACAO_B2B_MS = 60 * 1000; // rota rápida: recarregada a cada minuto
 const INTERVALO_VERIFICACAO_VIABILIDADE_MS = 30 * 60 * 1000; // rota lenta: o cache de 48h fica no servidor
@@ -75,40 +75,55 @@ const campoDeInicio = document.getElementById("periodoInicio");
 const campoDeFim = document.getElementById("periodoFim");
 const botaoDeLimpar = document.getElementById("limparPeriodo");
 
+// As opções são os meses que têm projeto. Só são remontadas quando a lista
+// muda de verdade — refazer a cada desenho apagaria a escolha da pessoa.
+let mesesNasOpcoes = "";
+
+function preencherMeses() {
+  const meses = dadosB2b ? mesesDisponiveis(dadosB2b) : [];
+  if (meses.join() === mesesNasOpcoes) return;
+
+  mesesNasOpcoes = meses.join();
+  const opcoes = meses.map((mes) => `<option value="${mes}">${formatarMes(mes)}</option>`).join("");
+
+  campoDeInicio.innerHTML = `<option value="">começo</option>${opcoes}`;
+  campoDeFim.innerHTML = `<option value="">hoje</option>${opcoes}`;
+}
+
 function atualizarControleDePeriodo() {
   const container = document.getElementById("periodo");
   container.hidden = telaVisivel() !== "b2b" || !dadosB2b;
   botaoDeLimpar.hidden = ehPeriodoVazio(periodo);
 
-  // Fora da faixa não existe projeto nenhum para achar.
-  const faixa = dadosB2b && faixaDeDatas(dadosB2b);
-  for (const campo of [campoDeInicio, campoDeFim]) {
-    campo.min = faixa?.primeiro ?? "";
-    campo.max = faixa?.ultimo ?? "";
-  }
+  preencherMeses();
 }
 
+// O mês escolhido vale inteiro: de 01 ao último dia.
 function lerPeriodoDosCampos() {
-  // Datas invertidas não devolveriam nada; trocar é o que a pessoa quis dizer.
-  const [inicio, fim] = [campoDeInicio.value, campoDeFim.value];
-  return inicio && fim && inicio > fim ? { inicio: fim, fim: inicio } : { inicio, fim };
+  let [inicio, fim] = [campoDeInicio.value, campoDeFim.value];
+
+  // Meses invertidos não devolveriam nada; trocar é o que a pessoa quis dizer.
+  if (inicio && fim && inicio > fim) {
+    [inicio, fim] = [fim, inicio];
+    [campoDeInicio.value, campoDeFim.value] = [inicio, fim];
+  }
+
+  return { inicio: inicio ? `${inicio}-01` : "", fim: fim ? ultimoDiaDoMes(fim) : "" };
 }
 
 function aoMudarPeriodo() {
   periodo = lerPeriodoDosCampos();
-  campoDeInicio.value = periodo.inicio;
-  campoDeFim.value = periodo.fim;
   desenharTelaVisivel();
 }
-
-campoDeInicio.addEventListener("change", aoMudarPeriodo);
-campoDeFim.addEventListener("change", aoMudarPeriodo);
 
 botaoDeLimpar.addEventListener("click", () => {
   campoDeInicio.value = "";
   campoDeFim.value = "";
   aoMudarPeriodo();
 });
+
+campoDeInicio.addEventListener("change", aoMudarPeriodo);
+campoDeFim.addEventListener("change", aoMudarPeriodo);
 
 function desenharTelaB2c() {
   desenharPrazos(null); // os prazos são do B2B; não aparecem nesta tela

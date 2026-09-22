@@ -135,19 +135,17 @@ export function aplicarPeriodo(b2b, periodo) {
   };
 }
 
-function ultimoDiaDoMes(mes) {
+export function ultimoDiaDoMes(mes) {
   const [ano, numeroDoMes] = mes.split("-").map(Number);
-  return new Date(ano, numeroDoMes, 0).toISOString().slice(0, 10);
+  return new Date(Date.UTC(ano, numeroDoMes, 0)).toISOString().slice(0, 10);
 }
 
-// Limites do seletor: fora deles não há projeto nenhum para achar.
-export function faixaDeDatas(b2b) {
+// O seletor lista só os meses que têm projeto: assim não dá para escolher um
+// recorte vazio sem querer.
+export function mesesDisponiveis(b2b) {
   const meses = obterItens(b2b, DIMENSOES.mes)
     .map((projeto) => projeto.month)
-    .filter((mes) => /^\d{4}-\d{2}$/.test(mes ?? ""))
-    .sort();
+    .filter((mes) => /^\d{4}-\d{2}$/.test(mes ?? ""));
 
-  if (!meses.length) return null;
-
-  return { primeiro: `${meses[0]}-01`, ultimo: ultimoDiaDoMes(meses[meses.length - 1]) };
+  return [...new Set(meses)].sort();
 }
