@@ -27,13 +27,15 @@ const NIVEIS = {
 //
 // `alert` e `critical_alert` vêm nulos quando o item não tem mínimo
 // cadastrado — aí não dá para dizer que está bem, só que não dá para julgar.
+// Mínimo ZERO é diferente de mínimo ausente: o item tem parâmetro, ele é zero,
+// e a API julga normalmente. Quem manda é o par de booleanos, não o mínimo.
 // Esta é a única função que conhece esse formato; o resto da tela trabalha
 // sobre { itens: [{ nome, codigo, unidade, porRegional: { SIGLA: {...} } }] }.
 
 function nivelDaLinha(linha) {
   if (linha.critical_alert) return "critical";
   if (linha.alert) return "alert";
-  if (linha.alert === null || linha.alert === undefined || !linha.min_stock) return "semMinimo";
+  if (linha.alert === null || linha.alert === undefined) return "semMinimo";
   return "ok";
 }
 
