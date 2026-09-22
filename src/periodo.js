@@ -101,9 +101,11 @@ const somarValores = (projetos) => projetos.reduce((soma, projeto) => soma + (pr
 const maiorValor = (projetos) =>
   projetos.reduce((maior, projeto) => (!maior || projeto.value > maior.value ? projeto : maior), null);
 
-// Nem todo projeto tem valor: são 120 de 188. A média divide pelos que têm,
-// como a própria API faz — dividir por 188 daria um ticket médio menor que o
-// de qualquer projeto real.
+// Nem todo projeto tem valor: são 120 de 188, e os 68 de fora não são zerados,
+// é valor que não existe na API (10 de inviabilidade técnica, 24 de pendência
+// comercial...). Contá-los como zero derrubaria o ticket médio de R$ 13,5 mil
+// para R$ 8,6 mil. A média divide pelos projetos com valor acima de zero:
+// projeto sem cobrança não é venda pequena, é venda nenhuma.
 function recortarFinanceiro(financeiro, visiveis) {
   const valores = indexarValores(financeiro);
 
@@ -113,12 +115,13 @@ function recortarFinanceiro(financeiro, visiveis) {
     .map(({ valor, ...projeto }) => ({ ...projeto, value: valor }));
 
   const aprovados = comValor.filter((projeto) => projeto.aprovado);
+  const cobrados = comValor.filter((projeto) => projeto.value > 0);
   const total = somarValores(comValor);
 
   return {
     ...financeiro,
     total_value: total,
-    average_value: comValor.length ? total / comValor.length : 0,
+    average_value: cobrados.length ? total / cobrados.length : 0,
     highest_value: maiorValor(comValor)?.value ?? 0,
     highest_project: maiorValor(comValor),
     approved_value: somarValores(aprovados),
@@ -160,20 +163,26 @@ export function ehPeriodoVazio(periodo) {
 // Devolve um b2b com o mesmo formato, só que contado sobre o período — o bloco
 // financeiro incluído.
 export function aplicarPeriodo(b2b, periodo) {
-  if (!b2b || ehPeriodoVazio(periodo)) return b2b;
+  if (!b2b) return b2b;
 
   const projetos = unirProjetos(b2b);
   if (!projetos) return b2b;
 
-  const visiveis = projetos.filter((projeto) => dentroDoPeriodo(projeto, periodo));
+  const visiveis = ehPeriodoVazio(periodo)
+    ? projetos
+    : projetos.filter((projeto) => dentroDoPeriodo(projeto, periodo));
 
-  // Recorte que não exclui ninguém não é recorte: devolve o dado como veio,
-  // e assim os cartões de dinheiro não passam a avisar "período todo" à toa.
-  if (visiveis.length === projetos.length) return b2b;
+  // O financeiro é recomposto mesmo sem recorte: ele é somado dos projetos, e
+  // não copiado das contagens da API. Se só recompusesse ao filtrar, o ticket
+  // médio mudaria de método conforme o filtro estivesse ligado ou não.
+  const financial = recortarFinanceiro(b2b.financial, visiveis);
+
+  // As contagens, essas sim, ficam como vieram quando ninguém é excluído.
+  if (visiveis.length === projetos.length) return { ...b2b, financial };
 
   return {
     ...b2b,
-    financial: recortarFinanceiro(b2b.financial, visiveis),
+    financial,
     priority: contar(visiveis, (projeto) => projeto.priority),
     status: { counts: contar(visiveis, (projeto) => projeto.status), items: visiveis },
     status_by_region: {
