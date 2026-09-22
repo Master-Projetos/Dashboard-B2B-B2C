@@ -235,8 +235,18 @@ export function desenharStatus(b2b) {
 
 const ORDEM_DE_PRIORIDADE = ["Baixa", "Média", "Alta", "Atividade Crítica"];
 
-// Clicar numa prioridade abre quem são os solicitantes daquela fatia; clicar de
-// novo volta para a visão geral.
+// A API passou a mandar os projetos de cada prioridade, com o solicitante em
+// cada linha. Antes o clique trocava o gráfico por uma barra de solicitantes e
+// o clique seguinte voltava — dois significados para o mesmo gesto, diferente
+// de todos os outros gráficos do painel. Agora o clique abre a lista, igual ao
+// resto, e o solicitante aparece como coluna.
+function abrirProjetosDaPrioridade(b2b, prioridade) {
+  const itens = obterItens(b2b, DIMENSOES.prioridade).filter((item) => item.priority === prioridade);
+  abrirDetalhes(`Prioridade: ${prioridade}`, itens);
+}
+
+// Enquanto a API não trouxer os itens, o clique continua abrindo os
+// solicitantes daquela prioridade — melhor que um clique que não faz nada.
 let prioridadeAberta = null;
 
 function escreverTituloDaPrioridade(texto) {
@@ -244,9 +254,9 @@ function escreverTituloDaPrioridade(texto) {
 }
 
 function desenharSolicitantesDaPrioridade(b2b, prioridade) {
-  const porSolicitante = b2b.priority_by_requester[prioridade] ?? {};
+  const porPrioridade = obterContagens(b2b, DIMENSOES.prioridade);
 
-  const solicitantes = Object.entries(porSolicitante)
+  const solicitantes = Object.entries(porPrioridade[prioridade] ?? {})
     .filter(([, quantidade]) => quantidade > 0)
     .sort(([, a], [, b]) => a - b);
 
@@ -285,18 +295,22 @@ function desenharSolicitantesDaPrioridade(b2b, prioridade) {
     prioridadeAberta = null;
     desenharPrioridade(b2b);
   });
-
 }
 
 export function desenharPrioridade(b2b) {
-  if (prioridadeAberta) {
+  const temItens = obterItens(b2b, DIMENSOES.prioridade).length > 0;
+
+  if (prioridadeAberta && !temItens) {
     desenharSolicitantesDaPrioridade(b2b, prioridadeAberta);
     return;
   }
 
+  prioridadeAberta = null;
   escreverTituloDaPrioridade("Prioridade");
   document.getElementById("graficoPrioridade").onclick = null; // deixado pelo caso sem solicitantes
+
   const prioridades = ORDEM_DE_PRIORIDADE.filter((nome) => nome in b2b.priority);
+  const dica = temItens ? "clique para ver os projetos" : "clique para ver os solicitantes";
 
   const instancia = desenhar("graficoPrioridade", {
     grid: { top: 30, right: 10, bottom: 4, left: 6, containLabel: true },
@@ -304,7 +318,7 @@ export function desenharPrioridade(b2b) {
       trigger: "axis",
       axisPointer: { type: "shadow", shadowStyle: { color: "rgba(128, 128, 128, 0.12)" } },
       formatter: ([ponto]) =>
-        `${ponto.name}<br/><b>${formatarNumero(ponto.value)}</b> projetos<br/><span style="opacity:.7">clique para ver os solicitantes</span>`,
+        `${ponto.name}<br/><b>${formatarNumero(ponto.value)}</b> projetos<br/><span style="opacity:.7">${dica}</span>`,
     }),
     xAxis: eixoDeCategoria({
       data: prioridades,
@@ -329,6 +343,11 @@ export function desenharPrioridade(b2b) {
   aoClicarNaFaixa(instancia, "x", (indice) => {
     const nome = prioridades[indice];
     if (!nome) return;
+
+    if (temItens) {
+      abrirProjetosDaPrioridade(b2b, nome);
+      return;
+    }
 
     prioridadeAberta = nome;
     desenharPrioridade(b2b);

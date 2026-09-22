@@ -12,6 +12,33 @@ function escapar(texto) {
 
 const semPrazo = (item) => item.remaining_days === null || item.remaining_days === undefined;
 
+// Verde concluído, vermelho atrasado, amarelo o que ainda está correndo.
+function classeDoPrazo(item) {
+  if (semPrazo(item)) return "prazo-concluido";
+  return item.remaining_days < 0 ? "prazo-atrasado" : "prazo-em-aberto";
+}
+
+// Cada lista traz campos diferentes: só os maiores projetos têm destaque, só os
+// financeiros têm valor, só a prioridade tem solicitante. A coluna entra quando
+// algum item da lista a preenche — senão seria uma coluna inteira de vazio.
+const COLUNAS = [
+  { titulo: "Destaque", classe: () => "coluna-destaque", ler: (item) => item.destaque },
+  { titulo: "Cliente", ler: (item) => item.client, sempre: true },
+  { titulo: "Solicitante", ler: (item) => item.requester },
+  { titulo: "Regional", ler: (item) => String(item.region ?? "").replace("Regional - ", ""), sempre: true },
+  { titulo: "Setor", ler: (item) => item.sector, sempre: true },
+  {
+    titulo: "Valor",
+    classe: () => "coluna-valor",
+    ler: (item) => (item.value === undefined ? undefined : formatarMoeda(item.value)),
+  },
+  { titulo: "Prazo", classe: classeDoPrazo, ler: (item) => descreverPrazo(item.remaining_days), sempre: true },
+];
+
+function colunasPara(itens) {
+  return COLUNAS.filter((coluna) => coluna.sempre || itens.some((item) => coluna.ler(item) !== undefined));
+}
+
 // Quem ainda tem prazo correndo vai para o topo: numa lista de 184 concluídos,
 // os poucos em andamento sumiriam no meio da rolagem. Entre eles, o mais
 // atrasado primeiro. A ordem original é preservada no resto (ordenação estável).
@@ -23,24 +50,13 @@ function emAndamentoPrimeiro(itens) {
   });
 }
 
-function montarLinha(item, { mostrarValor, mostrarDestaque }) {
-  // Verde concluído, vermelho atrasado, amarelo o que ainda está correndo.
-  const classeDoPrazo = semPrazo(item)
-    ? "prazo-concluido"
-    : item.remaining_days < 0
-      ? "prazo-atrasado"
-      : "prazo-em-aberto";
+function montarLinha(item, colunas) {
+  const celulas = colunas.map((coluna) => {
+    const classe = coluna.classe ? ` class="${coluna.classe(item)}"` : "";
+    return `<td${classe}>${escapar(coluna.ler(item))}</td>`;
+  });
 
-  return `
-    <tr>
-      ${mostrarDestaque ? `<td class="coluna-destaque">${escapar(item.destaque)}</td>` : ""}
-      <td>${escapar(item.client)}</td>
-      <td>${escapar(item.region).replace("Regional - ", "")}</td>
-      <td>${escapar(item.sector)}</td>
-      ${mostrarValor ? `<td class="coluna-valor">${escapar(formatarMoeda(item.value ?? 0))}</td>` : ""}
-      <td class="${classeDoPrazo}">${escapar(descreverPrazo(item.remaining_days))}</td>
-    </tr>
-  `;
+  return `<tr>${celulas.join("")}</tr>`;
 }
 
 function fechar() {
@@ -50,23 +66,11 @@ function fechar() {
 export function abrirDetalhes(titulo, itensRecebidos) {
   const painel = document.getElementById("detalhes");
   const itens = emAndamentoPrimeiro(itensRecebidos);
-  // Valor e destaque só existem nos destaques financeiros; nas demais listas
-  // seriam colunas inteiras de vazio.
-  const colunas = {
-    mostrarValor: itens.some((item) => item.value !== undefined),
-    mostrarDestaque: itens.some((item) => item.destaque !== undefined),
-  };
+  const colunas = colunasPara(itens);
 
   const corpo = itens.length
     ? `<table class="tabela-de-prazos">
-         <thead>
-           <tr>
-             ${colunas.mostrarDestaque ? "<th>Destaque</th>" : ""}
-             <th>Cliente</th><th>Regional</th><th>Setor</th>
-             ${colunas.mostrarValor ? "<th>Valor</th>" : ""}
-             <th>Prazo</th>
-           </tr>
-         </thead>
+         <thead><tr>${colunas.map((coluna) => `<th>${coluna.titulo}</th>`).join("")}</tr></thead>
          <tbody>${itens.map((item) => montarLinha(item, colunas)).join("")}</tbody>
        </table>`
     : `<p class="aviso">Nenhum projeto nesta situação.</p>`;

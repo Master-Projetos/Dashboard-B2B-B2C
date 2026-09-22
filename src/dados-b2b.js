@@ -8,6 +8,7 @@ export const DIMENSOES = {
   status: "status",
   mes: "projects_by_month",
   equipe: "status_by_region",
+  prioridade: "priority_by_requester",
 };
 
 export function obterContagens(b2b, dimensao) {
