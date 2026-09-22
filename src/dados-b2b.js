@@ -24,25 +24,24 @@ export function temDetalhes(b2b, dimensao) {
   return obterItens(b2b, dimensao).length > 0;
 }
 
-// O balde "Concluido" da API não quer dizer projeto entregue: é onde caem os
-// projetos SEM prazo cadastrado — todos vêm com remaining_days nulo, e entre
-// eles há "Aguardando BP", "Pendencia Comercial", "Cancelada". Por isso o
-// painel os chama de "sem prazo". O mesmo vale para "Concluída"/"Em Andamento"
-// em status_by_region, que é exatamente a mesma divisão.
+// Concluído quer dizer que a etapa de prazo fechou: o prazo é apagado e o
+// projeto pode parar ali. Por isso o balde reúne 184 projetos com
+// remaining_days nulo e status como "Aguardando BP" ou "Cancelada".
+// "Concluída"/"Em Andamento" em status_by_region é a mesma divisão, por equipe.
 export const ROTULOS_DE_PRAZO = {
-  Concluido: "Sem prazo",
+  Concluido: "Concluídos",
   Urgente: "Urgentes",
   Atrasada: "Atrasados",
 };
 
 export const ROTULOS_DE_EQUIPE = {
-  "Concluída": "Sem prazo",
-  "Em Andamento": "Prazo em aberto",
+  "Concluída": "Concluídas",
+  "Em Andamento": "Em andamento",
 };
 
 // remaining_days: 0 = vence hoje, positivo = dias restantes, negativo = atraso.
-// Sem dia nenhum, a leitura do time é que o projeto está concluído — um traço
-// deixaria quem não conhece a base sem saber se é isso ou se faltou dado.
+// Sem dia nenhum, está concluído — um traço deixaria quem não conhece a base
+// sem saber se é isso ou se faltou dado.
 export function descreverPrazo(diasRestantes) {
   if (diasRestantes === null || diasRestantes === undefined) return "Concluído";
   if (diasRestantes === 0) return "vence hoje";

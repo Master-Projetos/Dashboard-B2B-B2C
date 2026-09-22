@@ -443,11 +443,9 @@ export function desenharStatusPorEquipe(b2b, quantidade = 8) {
     .sort((a, b) => a.concluidas + a.emAndamento - (b.concluidas + b.emAndamento))
     .slice(-quantidade);
 
-  // A API separa por "Concluída"/"Em Andamento", mas o que ela realmente diz é
-  // se o projeto tem prazo cadastrado — ver ROTULOS_DE_EQUIPE.
   const faixas = [
     { rotulo: ROTULOS_DE_EQUIPE["Concluída"], chave: "concluidas", cor: CORES.serie1 },
-    { rotulo: ROTULOS_DE_EQUIPE["Em Andamento"], chave: "emAndamento", cor: CORES.statusAtencao },
+    { rotulo: ROTULOS_DE_EQUIPE["Em Andamento"], chave: "emAndamento", cor: CORES.serie2 },
   ];
 
   const instancia = desenhar("graficoStatusPorEquipe", {

@@ -49,7 +49,7 @@ export function desenharIndicadoresB2b(b2b) {
     {
       rotulo: "Projetos B2B",
       valor: formatarNumero(totalDeProjetos),
-      detalhe: `${formatarNumero(contagens.Concluido ?? 0)} sem prazo cadastrado`,
+      detalhe: `${formatarNumero(contagens.Concluido ?? 0)} concluídos`,
       realce: CORES.serie2,
     },
     {
@@ -166,10 +166,8 @@ export function desenharPrazos(b2b) {
   const contagens = obterContagens(b2b, DIMENSOES.prazo);
   const clicavel = temDetalhes(b2b, DIMENSOES.prazo);
 
-  // "Sem prazo" fica em cinza de propósito: não é uma conquista como era
-  // quando o painel chamava esses projetos de concluídos.
   const prazos = [
-    { tipo: "Concluido", cor: CORES.textoSuave },
+    { tipo: "Concluido", cor: CORES.statusBom },
     { tipo: "Urgente", cor: CORES.statusAtencao },
     { tipo: "Atrasada", cor: CORES.statusCritico },
   ];
