@@ -225,6 +225,8 @@ export function desenharTabelaDeEstoque(estoque) {
   `;
 }
 
+// Azul para o que é só contagem, amarelo/laranja/vermelho conforme a gravidade.
+// Verde fica reservado à tela B2C.
 export function desenharIndicadoresDeEstoque(estoque) {
   const contagem = contarNiveis(estoque);
   const porRegional = contarPorRegional(estoque);
@@ -256,13 +258,13 @@ export function desenharIndicadoresDeEstoque(estoque) {
       rotulo: "Normais",
       valor: contagem.ok,
       detalhe: "item · regional com folga",
-      realce: CORES.statusBom,
+      realce: CORES.serie1,
     },
     {
       rotulo: "Sem mínimo",
       valor: contagem.semMinimo,
       detalhe: "sem parâmetro para alertar",
-      realce: CORES.textoSuave,
+      realce: CORES.serie1,
     },
     {
       rotulo: "Regional mais crítica",
