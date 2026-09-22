@@ -406,7 +406,9 @@ body {
 /* Estoque: a lista de itens ocupa o espaço grande; o resumo por regional
    fica na coluna estreita ao lado. */
 .grade-estoque {
-  grid-template-columns: minmax(0, 2.1fr) minmax(0, 1fr);
+  /* O resumo por regional são cinco barras: não precisa de um terço da tela.
+     O espaço vai para a lista, que é o que se lê de longe. */
+  grid-template-columns: minmax(0, 1fr) clamp(200px, 19vw, 300px);
   grid-template-rows: minmax(0, 1fr);
 }
 
@@ -422,15 +424,24 @@ body {
   width: 100%;
   border-collapse: separate;
   border-spacing: 0;
-  font-size: clamp(10px, 1.25vh, 13px);
+  /* `fixed` é o que faz as larguras abaixo valerem: sem isso o navegador dá
+     quase tudo ao nome do item e espreme os números na borda. */
+  table-layout: fixed;
+  font-size: clamp(11px, 1.5vh, 17px);
 }
 
 .grade-de-estoque th,
 .grade-de-estoque td {
-  padding: clamp(3px, 0.6vh, 7px) 6px;
+  padding: clamp(3px, 0.55vh, 7px) clamp(4px, 0.5vw, 10px);
   box-shadow: inset 0 -1px 0 var(--borda);
   white-space: nowrap;
 }
+
+/* Cinco colunas de número com largura igual e folga para "15.000"; o nome do
+   item fica com o resto. */
+.grade-de-estoque col.coluna-item { width: auto; }
+.grade-de-estoque col.coluna-minimo { width: clamp(46px, 4vw, 74px); }
+.grade-de-estoque col.coluna-regional { width: clamp(50px, 4.5vw, 84px); }
 
 /* Cabeçalho fixo com z-index: sem ele o texto das linhas passa por cima ao
    rolar, como já aconteceu na tabela de prazos. */
@@ -451,19 +462,25 @@ body {
   text-align: left;
 }
 
+/* O mínimo é referência, não medida: fica visível mas sem competir com os
+   saldos, que são o que muda. */
+.grade-de-estoque .coluna-do-minimo {
+  color: var(--texto-suave);
+  font-weight: 550;
+  box-shadow: inset 0 -1px 0 var(--borda), inset -1px 0 0 var(--borda);
+}
+
 .grade-de-estoque tbody th {
   font-weight: 550;
   color: var(--texto-primario);
-  width: 99%; /* empurra as colunas de número para a direita */
   overflow: hidden;
   text-overflow: ellipsis;
-  max-width: 0;
 }
 
 .grade-de-estoque td {
   text-align: center;
   font-variant-numeric: tabular-nums;
-  font-weight: 650;
+  font-weight: 700;
   color: var(--texto-secundario);
 }
 

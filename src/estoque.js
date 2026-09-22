@@ -64,6 +64,10 @@ export function normalizarEstoque(bruto) {
         codigo,
         nome: linha.description ?? codigo,
         unidade: linha.unit ?? "",
+        // O mínimo é do item, não da regional: nos 31 itens ele vem igual nas
+        // cinco. Se algum dia divergir, a coluna mostra o do primeiro e o
+        // valor de cada regional continua na dica da célula.
+        minimo: linha.min_stock ?? null,
         porRegional: {},
       });
     }
@@ -181,6 +185,7 @@ export function desenharTabelaDeEstoque(estoque) {
     return;
   }
 
+  const colunas = `<col class="coluna-item"><col class="coluna-minimo">${REGIONAIS.map(() => '<col class="coluna-regional">').join("")}`;
   const cabecalho = REGIONAIS.map(({ sigla, nome }) => `<th title="${escapar(nome)}">${sigla}</th>`).join("");
 
   const linhas = itens
@@ -193,13 +198,28 @@ export function desenharTabelaDeEstoque(estoque) {
       }).join("");
 
       const unidade = item.unidade ? ` <span class="unidade">${escapar(item.unidade)}</span>` : "";
-      return `<tr><th scope="row" title="${escapar(`${item.codigo} · ${item.nome}`)}">${escapar(item.nome)}${unidade}</th>${celulas}</tr>`;
+      const minimo = item.minimo === null ? "—" : formatarNumero(item.minimo);
+
+      return `
+        <tr>
+          <th scope="row" title="${escapar(`${item.codigo} · ${item.nome}`)}">${escapar(item.nome)}${unidade}</th>
+          <td class="coluna-do-minimo" title="Estoque mínimo">${minimo}</td>
+          ${celulas}
+        </tr>
+      `;
     })
     .join("");
 
   alvo.innerHTML = `
     <table class="grade-de-estoque">
-      <thead><tr><th scope="col">Item</th>${cabecalho}</tr></thead>
+      <colgroup>${colunas}</colgroup>
+      <thead>
+        <tr>
+          <th scope="col">Item</th>
+          <th scope="col" title="Estoque mínimo">Mín.</th>
+          ${cabecalho}
+        </tr>
+      </thead>
       <tbody>${linhas}</tbody>
     </table>
   `;
