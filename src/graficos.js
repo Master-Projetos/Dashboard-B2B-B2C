@@ -170,7 +170,9 @@ export function desenharStatus(b2b) {
   const contagens = obterContagens(b2b, DIMENSOES.status);
   const itens = obterItens(b2b, DIMENSOES.status);
 
-  const cores = { andamento: CORES.serie1, concluido: CORES.statusBom, cancelado: CORES.statusCritico };
+  // O verde é o mesmo da tela B2C (serie3): mais fechado que o verde puro dos
+  // marcadores e melhor ao lado do azul da série.
+  const cores = { andamento: CORES.serie1, concluido: CORES.serie3, cancelado: CORES.statusCritico };
 
   const grupos = GRUPOS_DE_STATUS.map((grupo) => ({
     ...grupo,

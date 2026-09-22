@@ -200,7 +200,9 @@ export function desenharPrazos(b2b) {
   const clicavel = temDetalhes(b2b, DIMENSOES.prazo);
 
   const prazos = [
-    { tipo: "Concluido", cor: CORES.statusBom },
+    // Mesmo verde da barra "Concluído" ao lado: dois verdes diferentes para a
+    // mesma coisa, na mesma tela, pareceria erro.
+    { tipo: "Concluido", cor: CORES.serie3 },
     { tipo: "Urgente", cor: CORES.statusAtencao },
     { tipo: "Atrasada", cor: CORES.statusCritico },
   ];
