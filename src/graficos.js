@@ -72,6 +72,24 @@ function rotuloDeValor(opcoesExtras = {}) {
   };
 }
 
+// Numa tela de toque não existe "sair com o mouse": a dica aberta no toque
+// fica presa na tela, inclusive por cima da caixa de detalhes, já que o
+// ECharts a desenha com z-index próprio bem alto.
+export function esconderDicas(idDoGraficoPreservado) {
+  instancias.forEach((instancia, id) => {
+    if (id !== idDoGraficoPreservado) instancia.dispatchAction({ type: "hideTip" });
+  });
+}
+
+// Só no toque. No mouse, o próprio ECharts esconde a dica ao sair do gráfico,
+// e mexer nisso estragaria o comportamento que já funciona. Cada toque deixa
+// no máximo uma dica em pé: a do gráfico tocado, ou nenhuma se foi fora.
+document.addEventListener("pointerdown", (evento) => {
+  if (evento.pointerType === "mouse") return;
+
+  esconderDicas(evento.target.closest(".area-grafico")?.id);
+});
+
 // O ECharts tem dois canais de clique — na série (`on`) e na área toda
 // (`getZr().on`). Os dois precisam ser limpos ao redesenhar, senão o handler
 // anterior continua ativo.
@@ -89,7 +107,10 @@ function aoClicarNaFaixa(instancia, eixo, aoEscolher) {
   instancia.getZr().on("click", (evento) => {
     const posicao = instancia.convertFromPixel({ seriesIndex: 0 }, [evento.offsetX, evento.offsetY]);
     const indice = Math.round(eixo === "x" ? posicao[0] : posicao[1]);
-    if (indice >= 0) aoEscolher(indice);
+    if (indice < 0) return;
+
+    esconderDicas(); // no toque ela ficaria por cima da caixa que vai abrir
+    aoEscolher(indice);
   });
 }
 
@@ -260,6 +281,7 @@ function desenharSolicitantesDaPrioridade(b2b, prioridade) {
 
   limparCliques(instancia);
   instancia.getZr().on("click", () => {
+    esconderDicas();
     prioridadeAberta = null;
     desenharPrioridade(b2b);
   });
