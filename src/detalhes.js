@@ -10,11 +10,26 @@ function escapar(texto) {
     ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;" })[caractere]);
 }
 
+const semPrazo = (item) => item.remaining_days === null || item.remaining_days === undefined;
+
+// Quem ainda tem prazo correndo vai para o topo: numa lista de 184 concluídos,
+// os poucos em andamento sumiriam no meio da rolagem. Entre eles, o mais
+// atrasado primeiro. A ordem original é preservada no resto (ordenação estável).
+function emAndamentoPrimeiro(itens) {
+  return [...itens].sort((primeiro, segundo) => {
+    if (semPrazo(primeiro) !== semPrazo(segundo)) return semPrazo(primeiro) ? 1 : -1;
+    if (semPrazo(primeiro)) return 0;
+    return primeiro.remaining_days - segundo.remaining_days;
+  });
+}
+
 function montarLinha(item, { mostrarValor, mostrarDestaque }) {
-  const semPrazo = item.remaining_days === null || item.remaining_days === undefined;
-  const atrasado = item.remaining_days < 0;
-  const venceHoje = item.remaining_days === 0;
-  const classeDoPrazo = semPrazo ? "prazo-concluido" : atrasado ? "prazo-atrasado" : venceHoje ? "prazo-hoje" : "";
+  // Verde concluído, vermelho atrasado, amarelo o que ainda está correndo.
+  const classeDoPrazo = semPrazo(item)
+    ? "prazo-concluido"
+    : item.remaining_days < 0
+      ? "prazo-atrasado"
+      : "prazo-em-aberto";
 
   return `
     <tr>
@@ -32,8 +47,9 @@ function fechar() {
   document.getElementById("detalhes").hidden = true;
 }
 
-export function abrirDetalhes(titulo, itens) {
+export function abrirDetalhes(titulo, itensRecebidos) {
   const painel = document.getElementById("detalhes");
+  const itens = emAndamentoPrimeiro(itensRecebidos);
   // Valor e destaque só existem nos destaques financeiros; nas demais listas
   // seriam colunas inteiras de vazio.
   const colunas = {

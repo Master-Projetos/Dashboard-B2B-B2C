@@ -15,7 +15,10 @@
 
   --serie-1: #2a78d6;
   --status-bom: #0ca30c;
-  --texto-concluido: #0c8a0c; /* 4,5:1 sobre branco; o --status-bom só passa como marcador */
+  /* Tons próprios para texto: os --status-* são calibrados como marcador e
+     ficam fracos demais em texto miúdo sobre branco (o âmbar dá 1,8:1). */
+  --texto-concluido: #0c8a0c;
+  --texto-em-aberto: #996a00;
   --status-atencao: #fab219;
   --status-critico: #d03b3b;
 
@@ -46,6 +49,7 @@
 
   --serie-1: #3987e5;
   --texto-concluido: #3fbf5f;
+  --texto-em-aberto: #fab219;
 }
 
 * {
@@ -467,7 +471,7 @@ body {
   font-weight: 650;
 }
 
-.tabela-de-prazos .prazo-hoje {
-  color: var(--status-atencao);
+.tabela-de-prazos .prazo-em-aberto {
+  color: var(--texto-em-aberto);
   font-weight: 650;
 }
