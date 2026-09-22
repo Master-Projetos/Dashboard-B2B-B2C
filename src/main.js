@@ -1,6 +1,6 @@
 import "./estilo.css";
 
-import { buscarB2b, buscarViabilidade } from "./api.js";
+import { buscarB2b, buscarViabilidade, buscarEstoque } from "./api.js";
 import { salvarDados, carregarDados } from "./armazenamento.js";
 import { desenharIndicadoresB2b, desenharIndicadoresB2c, desenharPrazos } from "./indicadores.js";
 import {
@@ -9,6 +9,7 @@ import {
   desenharPrioridade,
   desenharStatusPorEquipe,
   desenharPortasPorRegional,
+  desenharEstoquePorRegional,
   desenharCidades,
   desenharOcupacaoPorRegional,
   mostrarAvisoNoGrafico,
@@ -18,6 +19,7 @@ import { formatarHorario, formatarDataCurta, formatarMes } from "./formatadores.
 import { restaurarTemaSalvo, alternarTema } from "./tema.js";
 import { iniciarNavegacao, telaVisivel } from "./navegacao.js";
 import { aplicarPeriodo, mesesDisponiveis, mesInicialPadrao, ultimoDiaDoMes } from "./periodo.js";
+import { normalizarEstoque, contarPorRegional, desenharIndicadoresDeEstoque, desenharTabelaDeEstoque } from "./estoque.js";
 
 const INTERVALO_ATUALIZACAO_B2B_MS = 60 * 1000; // rota rápida: recarregada a cada minuto
 const INTERVALO_VERIFICACAO_VIABILIDADE_MS = 30 * 60 * 1000; // rota lenta: o cache de 48h fica no servidor
@@ -27,6 +29,7 @@ const GRAFICOS_DE_B2C = ["graficoCidades", "graficoPortasPorRegional", "graficoO
 
 let dadosB2b = null;
 let dadosViabilidade = null;
+let dadosDeEstoque = null;
 let periodo = { inicio: "", fim: "" };
 
 function escreverStatus(idDoElemento, texto) {
@@ -160,9 +163,26 @@ function desenharTelaB2c() {
   desenharOcupacaoPorRegional(dadosViabilidade);
 }
 
+function desenharTelaEstoque() {
+  desenharPrazos(null); // os prazos são do B2B
+  const estoque = normalizarEstoque(dadosDeEstoque);
+
+  desenharIndicadoresDeEstoque(estoque);
+  desenharTabelaDeEstoque(estoque);
+
+  if (!estoque.itens.length) {
+    mostrarAvisoNoGrafico("graficoEstoquePorRegional", "Estoque ainda não publicado pela API");
+    return;
+  }
+
+  desenharEstoquePorRegional(contarPorRegional(estoque));
+}
+
 function desenharTelaVisivel() {
-  atualizarControleDePeriodo(); // o seletor é do B2B; some na outra tela
+  atualizarControleDePeriodo(); // o seletor é do B2B; some nas outras telas
+
   if (telaVisivel() === "b2c") desenharTelaB2c();
+  else if (telaVisivel() === "estoque") desenharTelaEstoque();
   else desenharTelaB2b();
 }
 
@@ -172,8 +192,11 @@ function restaurarDoArmazenamento() {
   const b2bSalvo = carregarDados("b2b");
   const viabilidadeSalva = carregarDados("viabilidade");
 
+  const estoqueSalvo = carregarDados("estoque");
+
   if (b2bSalvo) dadosB2b = b2bSalvo.dados;
   if (viabilidadeSalva) dadosViabilidade = viabilidadeSalva.dados;
+  if (estoqueSalvo) dadosDeEstoque = estoqueSalvo.dados;
 
   if (b2bSalvo) escreverStatus("atualizacaoB2b", `B2B de ${formatarHorario(b2bSalvo.salvoEm)} (salvo)`);
 }
@@ -203,6 +226,19 @@ async function atualizarB2b() {
     escreverStatus("atualizacaoB2b", "B2B indisponível");
     desenharTelaVisivel();
   }
+}
+
+// A rota de estoque é rápida e não tem cache: recarregada junto com o B2B.
+async function atualizarEstoque() {
+  try {
+    dadosDeEstoque = await buscarEstoque();
+    salvarDados("estoque", dadosDeEstoque);
+  } catch (erro) {
+    // Falha de rede não apaga o que já está na tela.
+    if (!dadosDeEstoque) dadosDeEstoque = carregarDados("estoque")?.dados ?? null;
+  }
+
+  if (telaVisivel() === "estoque") desenharTelaVisivel();
 }
 
 async function atualizarViabilidade() {
@@ -255,7 +291,9 @@ restaurarDoArmazenamento();
 iniciarNavegacao(desenharTelaVisivel);
 
 atualizarB2b();
+atualizarEstoque();
 atualizarViabilidade();
 
 setInterval(atualizarB2b, INTERVALO_ATUALIZACAO_B2B_MS);
+setInterval(atualizarEstoque, INTERVALO_ATUALIZACAO_B2B_MS);
 setInterval(atualizarViabilidade, INTERVALO_VERIFICACAO_VIABILIDADE_MS);

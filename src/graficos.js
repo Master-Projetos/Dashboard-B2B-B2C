@@ -451,6 +451,51 @@ export function desenharOcupacaoPorRegional(viabilidade) {
   });
 }
 
+// ===== Estoque por regional =====
+
+export function desenharEstoquePorRegional(porRegional) {
+  const regionais = [...porRegional].reverse(); // o eixo cresce de baixo para cima
+
+  const faixas = [
+    { rotulo: "Críticos", chave: "criticos", cor: CORES.statusCritico },
+    { rotulo: "Em alerta", chave: "alertas", cor: CORES.statusAtencao },
+  ];
+
+  desenhar("graficoEstoquePorRegional", {
+    grid: { top: 6, right: 34, bottom: 26, left: 4, containLabel: true },
+    tooltip: dicaDeContexto({
+      trigger: "axis",
+      axisPointer: { type: "shadow", shadowStyle: { color: "rgba(128, 128, 128, 0.12)" } },
+      formatter: (pontos) => {
+        const regional = regionais[pontos[0].dataIndex];
+        const linhas = pontos.map((p) => `${p.marker} ${p.seriesName}: <b>${formatarNumero(p.value)}</b>`);
+        return `${regional.sigla} — ${regional.nome}<br/>${linhas.join("<br/>")}`;
+      },
+    }),
+    legend: legendaInferior(),
+    xAxis: eixoDeValor({ minInterval: 1 }),
+    yAxis: eixoDeCategoria({ data: regionais.map((regional) => regional.sigla), axisLine: { show: false } }),
+    series: faixas.map(({ rotulo, chave, cor }, indice) => ({
+      name: rotulo,
+      type: "bar",
+      stack: "estoque",
+      data: regionais.map((regional) => regional[chave]),
+      barMaxWidth: 22,
+      itemStyle: { color: cor, borderColor: CORES.superficie, borderWidth: 1 },
+      label: indice === faixas.length - 1
+        ? rotuloDeValor({
+            position: "right",
+            distance: 6,
+            formatter: ({ dataIndex }) => {
+              const total = regionais[dataIndex].criticos + regionais[dataIndex].alertas;
+              return total ? formatarNumero(total) : "";
+            },
+          })
+        : { show: false },
+    })),
+  });
+}
+
 // ===== Status por equipe =====
 
 function encurtarNomeDaEquipe(nome) {

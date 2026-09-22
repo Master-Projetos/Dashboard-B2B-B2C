@@ -1,4 +1,4 @@
-// As duas rotas passam por funções serverless: a API original não envia
+// As rotas passam por funções serverless: a API original não envia
 // cabeçalho CORS, então o navegador não consegue chamá-la diretamente.
 // Ambas devolvem um snapshot salvo quando a origem falha, então só chegam a
 // dar erro aqui se o próprio painel estiver fora do ar.
@@ -33,4 +33,8 @@ export function buscarB2b() {
 
 export function buscarViabilidade() {
   return buscarComTentativas("/api/viabilidade");
+}
+
+export function buscarEstoque() {
+  return buscarComTentativas("/api/estoque");
 }

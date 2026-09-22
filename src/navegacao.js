@@ -1,10 +1,16 @@
 // O painel continua sendo uma página só: as telas são seções que se alternam,
 // e o endereço muda junto (#/b2b, #/b2c) para cada uma ter sua própria URL.
 
+// `entraNoRodizio: false` tira a tela do revezamento automático — ela continua
+// acessível pelas setas, pela aba e pela própria URL, mas o painel deixado
+// sozinho numa TV nunca para nela.
 export const TELAS = [
-  { id: "b2b", titulo: "Projetos B2B", rotulo: "B2B" },
-  { id: "b2c", titulo: "Viabilidade B2C", rotulo: "B2C" },
+  { id: "b2b", titulo: "Projetos B2B", rotulo: "B2B", entraNoRodizio: true },
+  { id: "estoque", titulo: "Estoque", rotulo: "Estoque", entraNoRodizio: false },
+  { id: "b2c", titulo: "Viabilidade B2C", rotulo: "B2C", entraNoRodizio: true },
 ];
+
+const TELAS_DO_RODIZIO = TELAS.filter((tela) => tela.entraNoRodizio);
 
 const INTERVALO_DE_RODIZIO_MS = 5 * 60 * 1000;
 
@@ -45,7 +51,15 @@ function mostrarTela(id) {
 // logo em seguida.
 function reiniciarRodizio() {
   clearInterval(temporizadorDoRodizio);
-  temporizadorDoRodizio = setInterval(avancarTela, INTERVALO_DE_RODIZIO_MS);
+  temporizadorDoRodizio = setInterval(rodar, INTERVALO_DE_RODIZIO_MS);
+}
+
+// O rodízio anda só entre as telas que participam dele. Estando numa tela de
+// fora, o próximo giro leva para a primeira do revezamento.
+function rodar() {
+  const atual = TELAS_DO_RODIZIO.findIndex((tela) => tela.id === telaAtual);
+  const proxima = TELAS_DO_RODIZIO[(atual + 1) % TELAS_DO_RODIZIO.length];
+  irParaTela(proxima.id, { reiniciarContagem: false });
 }
 
 export function irParaTela(id, { reiniciarContagem = true } = {}) {
@@ -61,6 +75,7 @@ export function irParaTela(id, { reiniciarContagem = true } = {}) {
   aoTrocarDeTela(telaAtual);
 }
 
+// As setas andam por todas as telas, inclusive as que ficam fora do rodízio.
 export function avancarTela(passo = 1) {
   const proximo = (indiceDaTela(telaAtual) + passo + TELAS.length) % TELAS.length;
   irParaTela(TELAS[proximo].id);

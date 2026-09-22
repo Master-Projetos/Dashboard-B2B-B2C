@@ -1,0 +1,393 @@
+{
+  "summary": {
+    "total_items": 31,
+    "total_sites": 1,
+    "alert_rows": 2,
+    "critical_alert_rows": 2
+  },
+  "alerts_by_site": {
+    "critical_alert": {
+      "CD": 2
+    },
+    "no_minimum": {
+      "CD": 2
+    },
+    "ok": {
+      "CD": 27
+    }
+  },
+  "items": [
+    {
+      "site": "CD",
+      "code": "993138",
+      "description": "ABRACADEIRA NYLON 300X3,6MM BR",
+      "unit": "UN",
+      "min_stock": 100,
+      "safe_stock": 130,
+      "balance": 1618,
+      "alert": false,
+      "critical_alert": false,
+      "total": 1896
+    },
+    {
+      "site": "CD",
+      "code": "998222",
+      "description": "ACCESS POINT UBIQITI UNIFI U6 MESH (OUTDOOR)",
+      "unit": "UN",
+      "min_stock": 10,
+      "safe_stock": 13,
+      "balance": 0,
+      "alert": true,
+      "critical_alert": true,
+      "total": 5
+    },
+    {
+      "site": "CD",
+      "code": "995796",
+      "description": "ALCA PREFORMADA (6,8MM - 7,4MM",
+      "unit": "UN",
+      "min_stock": 60,
+      "safe_stock": 78,
+      "balance": 428,
+      "alert": false,
+      "critical_alert": false,
+      "total": 1443
+    },
+    {
+      "site": "CD",
+      "code": "992761",
+      "description": "ANTENA LITEBEAM AC GEN2",
+      "unit": "UN",
+      "min_stock": 2,
+      "safe_stock": 3,
+      "balance": 4,
+      "alert": false,
+      "critical_alert": false,
+      "total": 11
+    },
+    {
+      "site": "CD",
+      "code": "993161",
+      "description": "Antena Rocket Dish 30CM",
+      "unit": "UN",
+      "min_stock": 2,
+      "safe_stock": 3,
+      "balance": 10,
+      "alert": false,
+      "critical_alert": false,
+      "total": 10
+    },
+    {
+      "site": "CD",
+      "code": "993170",
+      "description": "ARAME DE ESPINAR ROLO C/ 105",
+      "unit": "RL",
+      "min_stock": 10,
+      "safe_stock": 13,
+      "balance": 151,
+      "alert": false,
+      "critical_alert": false,
+      "total": 189
+    },
+    {
+      "site": "CD",
+      "code": "993184",
+      "description": "BAP 3 ( BRACADEIRA PARA POSTE",
+      "unit": "UN",
+      "min_stock": 134,
+      "safe_stock": 175,
+      "balance": 187,
+      "alert": false,
+      "critical_alert": false,
+      "total": 758
+    },
+    {
+      "site": "CD",
+      "code": "993223",
+      "description": "CABO DE REDE UTP CAT 5 BRANCO",
+      "unit": "MT",
+      "min_stock": 610,
+      "safe_stock": 793,
+      "balance": 4000,
+      "alert": false,
+      "critical_alert": false,
+      "total": 5664
+    },
+    {
+      "site": "CD",
+      "code": "993339",
+      "description": "CABO OPTICO ASU 80 DE 6 FIBRAS",
+      "unit": "MT",
+      "min_stock": 3000,
+      "safe_stock": 3900,
+      "balance": 15000,
+      "alert": false,
+      "critical_alert": false,
+      "total": 23917
+    },
+    {
+      "site": "CD",
+      "code": "993552",
+      "description": "CAIXA DE TERMINACAO OPTICA 2 PORTAS T.O",
+      "unit": "UN",
+      "min_stock": 81,
+      "safe_stock": 106,
+      "balance": 152,
+      "alert": false,
+      "critical_alert": false,
+      "total": 369
+    },
+    {
+      "site": "CD",
+      "code": "991706",
+      "description": "CONECTOR CAT6 RJ45",
+      "unit": "UN",
+      "min_stock": 50,
+      "safe_stock": 65,
+      "balance": 728,
+      "alert": false,
+      "critical_alert": false,
+      "total": 870
+    },
+    {
+      "site": "CD",
+      "code": "991085",
+      "description": "CORDAO OPTICO DUPLEX MONOMODO",
+      "unit": "UN",
+      "min_stock": 10,
+      "safe_stock": 13,
+      "balance": 156,
+      "alert": false,
+      "critical_alert": false,
+      "total": 167
+    },
+    {
+      "site": "CD",
+      "code": "991084",
+      "description": "CORDAO OPTICO DUPLEX MONOMODO",
+      "unit": "UN",
+      "min_stock": 0,
+      "safe_stock": 0,
+      "balance": 122,
+      "alert": false,
+      "critical_alert": false,
+      "total": 133
+    },
+    {
+      "site": "CD",
+      "code": "991445",
+      "description": "CORDAO OPTICO LC/PC SC/PC SM 2",
+      "unit": "UN",
+      "min_stock": 20,
+      "safe_stock": 26,
+      "balance": 136,
+      "alert": false,
+      "critical_alert": false,
+      "total": 140
+    },
+    {
+      "site": "CD",
+      "code": "991949",
+      "description": "EDD 2104 DATACOM DMSWITCH",
+      "unit": "UN",
+      "min_stock": 3,
+      "safe_stock": 4,
+      "balance": 11,
+      "alert": false,
+      "critical_alert": false,
+      "total": 17
+    },
+    {
+      "site": "CD",
+      "code": "990801",
+      "description": "EDD 4370 DATACOM",
+      "unit": "UN",
+      "min_stock": 2,
+      "safe_stock": 3,
+      "balance": 4,
+      "alert": false,
+      "critical_alert": false,
+      "total": 9
+    },
+    {
+      "site": "CD",
+      "code": "993352",
+      "description": "FONTE 48V PORTA GIGA (UNIFI)",
+      "unit": "UN",
+      "min_stock": null,
+      "safe_stock": null,
+      "balance": 30,
+      "alert": null,
+      "critical_alert": null,
+      "total": 30
+    },
+    {
+      "site": "CD",
+      "code": "993073",
+      "description": "INJETOR POE 802.3AF UNIFI 6 LITE",
+      "unit": "UN",
+      "min_stock": 10,
+      "safe_stock": 13,
+      "balance": 57,
+      "alert": false,
+      "critical_alert": false,
+      "total": 57
+    },
+    {
+      "site": "CD",
+      "code": "995971",
+      "description": "MIKROTIK ROUTERBOARD RB 3011",
+      "unit": "PC",
+      "min_stock": 1,
+      "safe_stock": 2,
+      "balance": 5,
+      "alert": false,
+      "critical_alert": false,
+      "total": 7
+    },
+    {
+      "site": "CD",
+      "code": "993456",
+      "description": "PLACA AMARELA DE IDENTIFICACAO",
+      "unit": "UN",
+      "min_stock": 286,
+      "safe_stock": 372,
+      "balance": 8970,
+      "alert": false,
+      "critical_alert": false,
+      "total": 9890
+    },
+    {
+      "site": "CD",
+      "code": "995838",
+      "description": "Power Bean AC",
+      "unit": "UN",
+      "min_stock": 2,
+      "safe_stock": 3,
+      "balance": 0,
+      "alert": true,
+      "critical_alert": true,
+      "total": 0
+    },
+    {
+      "site": "CD",
+      "code": "993546",
+      "description": "SUPA (SUPORTE ANCORAGEM P/ CAB",
+      "unit": "UN",
+      "min_stock": 240,
+      "safe_stock": 312,
+      "balance": 322,
+      "alert": false,
+      "critical_alert": false,
+      "total": 1591
+    },
+    {
+      "site": "CD",
+      "code": "997984",
+      "description": "TELEFONE IP GXP1610 GRANDSTREAM",
+      "unit": "UN",
+      "min_stock": 2,
+      "safe_stock": 3,
+      "balance": 9,
+      "alert": false,
+      "critical_alert": false,
+      "total": 9
+    },
+    {
+      "site": "CD",
+      "code": "990987",
+      "description": "TRANSCEPTOR F.M SFP 1.25G 10KM BIDI LC DDM TX 1550",
+      "unit": "UN",
+      "min_stock": 3,
+      "safe_stock": 4,
+      "balance": 15,
+      "alert": false,
+      "critical_alert": false,
+      "total": 20
+    },
+    {
+      "site": "CD",
+      "code": "996313",
+      "description": "TRANSCEPTOR OPTICO SFP TX 1310NM RX 1550NM 1.25G 2",
+      "unit": "PC",
+      "min_stock": 3,
+      "safe_stock": 4,
+      "balance": 7,
+      "alert": false,
+      "critical_alert": false,
+      "total": 17
+    },
+    {
+      "site": "CD",
+      "code": "993996",
+      "description": "TRANSCEPTOR OPTICO SFP TX1270NM RX1330NM 10G 20KM",
+      "unit": "UN",
+      "min_stock": 2,
+      "safe_stock": 3,
+      "balance": 19,
+      "alert": false,
+      "critical_alert": false,
+      "total": 28
+    },
+    {
+      "site": "CD",
+      "code": "993997",
+      "description": "TRANSCEPTOR OPTICO SFP TX1330NM RX1270NM 10G 20KM",
+      "unit": "UN",
+      "min_stock": 2,
+      "safe_stock": 3,
+      "balance": 7,
+      "alert": false,
+      "critical_alert": false,
+      "total": 16
+    },
+    {
+      "site": "CD",
+      "code": "999213",
+      "description": "TUBETE PROTETOR DE EMENDA OPTI",
+      "unit": "UN",
+      "min_stock": 1000,
+      "safe_stock": 1300,
+      "balance": 9747,
+      "alert": false,
+      "critical_alert": false,
+      "total": 10294
+    },
+    {
+      "site": "CD",
+      "code": "997174",
+      "description": "TV BOX ROKU",
+      "unit": "UN",
+      "min_stock": 55,
+      "safe_stock": 72,
+      "balance": 168,
+      "alert": false,
+      "critical_alert": false,
+      "total": 283
+    },
+    {
+      "site": "CD",
+      "code": "999485",
+      "description": "UNIFI AP AC LITE 24V",
+      "unit": "UN",
+      "min_stock": 10,
+      "safe_stock": 13,
+      "balance": 29,
+      "alert": false,
+      "critical_alert": false,
+      "total": 50
+    },
+    {
+      "site": "CD",
+      "code": "993002",
+      "description": "UNIFI WI-FI 6 LITE",
+      "unit": "UN",
+      "min_stock": null,
+      "safe_stock": null,
+      "balance": 94,
+      "alert": null,
+      "critical_alert": null,
+      "total": 94
+    }
+  ]
+}

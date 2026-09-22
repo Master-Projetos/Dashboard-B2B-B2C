@@ -403,6 +403,107 @@ body {
   grid-row: span 2;
 }
 
+/* Estoque: a lista de itens ocupa o espaço grande; o resumo por regional
+   fica na coluna estreita ao lado. */
+.grade-estoque {
+  grid-template-columns: minmax(0, 2.1fr) minmax(0, 1fr);
+  grid-template-rows: minmax(0, 1fr);
+}
+
+/* A página não rola, mas a lista de itens pode ser longa: a rolagem vive
+   dentro do cartão. */
+.corpo-de-estoque {
+  flex: 1;
+  min-height: 0;
+  overflow-y: auto;
+}
+
+.grade-de-estoque {
+  width: 100%;
+  border-collapse: separate;
+  border-spacing: 0;
+  font-size: clamp(10px, 1.25vh, 13px);
+}
+
+.grade-de-estoque th,
+.grade-de-estoque td {
+  padding: clamp(3px, 0.6vh, 7px) 6px;
+  box-shadow: inset 0 -1px 0 var(--borda);
+  white-space: nowrap;
+}
+
+/* Cabeçalho fixo com z-index: sem ele o texto das linhas passa por cima ao
+   rolar, como já aconteceu na tabela de prazos. */
+.grade-de-estoque thead th {
+  position: sticky;
+  top: 0;
+  z-index: 2;
+  background: var(--superficie);
+  text-align: center;
+  font-size: var(--fonte-rotulo);
+  letter-spacing: 0.6px;
+  text-transform: uppercase;
+  color: var(--texto-suave);
+}
+
+.grade-de-estoque thead th:first-child,
+.grade-de-estoque tbody th {
+  text-align: left;
+}
+
+.grade-de-estoque tbody th {
+  font-weight: 550;
+  color: var(--texto-primario);
+  width: 99%; /* empurra as colunas de número para a direita */
+  overflow: hidden;
+  text-overflow: ellipsis;
+  max-width: 0;
+}
+
+.grade-de-estoque td {
+  text-align: center;
+  font-variant-numeric: tabular-nums;
+  font-weight: 650;
+  color: var(--texto-secundario);
+}
+
+/* O destaque é o ponto da tela: crítico e alerta têm fundo próprio, para
+   serem achados de longe sem precisar ler o número. */
+.grade-de-estoque .nivel-critico {
+  color: var(--status-critico);
+  background: color-mix(in srgb, var(--status-critico) 16%, transparent);
+}
+
+.grade-de-estoque .nivel-alerta {
+  color: var(--texto-em-aberto);
+  background: color-mix(in srgb, var(--status-atencao) 20%, transparent);
+}
+
+.grade-de-estoque .nivel-normal {
+  color: var(--texto-suave);
+  font-weight: 550;
+}
+
+/* Sem mínimo cadastrado não é "normal": o traço na borda marca que ali não há
+   parâmetro para julgar, sem gritar como um alerta. */
+.grade-de-estoque .nivel-sem-minimo {
+  color: var(--texto-suave);
+  font-weight: 550;
+  box-shadow: inset 0 -1px 0 var(--borda), inset 0 0 0 1px var(--borda);
+}
+
+.grade-de-estoque .nivel-sem-dado {
+  color: var(--texto-suave);
+  font-weight: 400;
+  opacity: 0.55;
+}
+
+.grade-de-estoque .unidade {
+  color: var(--texto-suave);
+  font-weight: 400;
+  font-size: 0.9em;
+}
+
 .cartao {
   background: var(--superficie);
   border: 1px solid var(--borda);
