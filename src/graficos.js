@@ -242,7 +242,7 @@ const ORDEM_DE_PRIORIDADE = ["Baixa", "Média", "Alta", "Atividade Crítica"];
 // resto, e o solicitante aparece como coluna.
 function abrirProjetosDaPrioridade(b2b, prioridade) {
   const itens = obterItens(b2b, DIMENSOES.prioridade).filter((item) => item.priority === prioridade);
-  abrirDetalhes(`Prioridade: ${prioridade}`, itens);
+  abrirDetalhes(`Prioridade: ${prioridade}`, itens, { filtrarPorSolicitante: true });
 }
 
 // Enquanto a API não trouxer os itens, o clique continua abrindo os

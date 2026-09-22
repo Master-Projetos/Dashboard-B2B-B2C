@@ -59,31 +59,85 @@ function montarLinha(item, colunas) {
   return `<tr>${celulas.join("")}</tr>`;
 }
 
+function montarTabela(itens, colunas) {
+  if (!itens.length) return `<p class="aviso">Nenhum projeto nesta situação.</p>`;
+
+  return `<table class="tabela-de-prazos">
+            <thead><tr>${colunas.map((coluna) => `<th>${coluna.titulo}</th>`).join("")}</tr></thead>
+            <tbody>${itens.map((item) => montarLinha(item, colunas)).join("")}</tbody>
+          </table>`;
+}
+
+// A API manda algum projeto sem solicitante. Sem uma opção para eles, essas
+// linhas só apareceriam em "todos" — somem ao filtrar e o total não fecha.
+// Do maior para o menor: quem tem mais projetos é quem se costuma procurar.
+function contarPorSolicitante(itens) {
+  const contagem = new Map();
+
+  for (const item of itens) {
+    contagem.set(item.requester ?? null, (contagem.get(item.requester ?? null) ?? 0) + 1);
+  }
+
+  return [...contagem]
+    .sort(([, a], [, b]) => b - a)
+    .map(([nome, quantidade]) => ({ nome, quantidade }));
+}
+
+function montarFiltro(solicitantes) {
+  if (solicitantes.length < 2) return ""; // com um só na lista o filtro não filtra nada
+
+  // O valor da opção é a posição na lista, não o nome: nome vira texto de
+  // atributo HTML, e um projeto sem solicitante não teria valor nenhum.
+  const opcoes = solicitantes
+    .map(({ nome, quantidade }, indice) =>
+      `<option value="${indice}">${escapar(nome ?? "Sem solicitante")} (${quantidade})</option>`)
+    .join("");
+
+  return `<select class="filtro-de-detalhes" aria-label="Filtrar por solicitante">
+            <option value="">Todos os solicitantes</option>${opcoes}
+          </select>`;
+}
+
 function fechar() {
   document.getElementById("detalhes").hidden = true;
 }
 
-export function abrirDetalhes(titulo, itensRecebidos) {
+export function abrirDetalhes(titulo, itensRecebidos, { filtrarPorSolicitante = false } = {}) {
   const painel = document.getElementById("detalhes");
   const itens = emAndamentoPrimeiro(itensRecebidos);
+  // Colunas calculadas sobre a lista inteira: se saíssem do resultado filtrado,
+  // a tabela mudaria de formato a cada escolha.
   const colunas = colunasPara(itens);
-
-  const corpo = itens.length
-    ? `<table class="tabela-de-prazos">
-         <thead><tr>${colunas.map((coluna) => `<th>${coluna.titulo}</th>`).join("")}</tr></thead>
-         <tbody>${itens.map((item) => montarLinha(item, colunas)).join("")}</tbody>
-       </table>`
-    : `<p class="aviso">Nenhum projeto nesta situação.</p>`;
+  const solicitantes = filtrarPorSolicitante ? contarPorSolicitante(itens) : [];
 
   painel.innerHTML = `
     <div class="caixa-de-detalhes" role="dialog" aria-label="${escapar(titulo)}">
       <header>
         <h2>${escapar(titulo)} <span>${itens.length}</span></h2>
+        ${montarFiltro(solicitantes)}
         <button type="button" class="fechar-detalhes" aria-label="Fechar">✕</button>
       </header>
-      <div class="corpo-de-detalhes">${corpo}</div>
+      <div class="corpo-de-detalhes"></div>
     </div>
   `;
+
+  const corpo = painel.querySelector(".corpo-de-detalhes");
+  const contador = painel.querySelector("h2 span");
+  const filtro = painel.querySelector(".filtro-de-detalhes");
+
+  function mostrar(posicaoEscolhida) {
+    const escolhido = solicitantes[Number(posicaoEscolhida)];
+    const visiveis = posicaoEscolhida === ""
+      ? itens
+      : itens.filter((item) => (item.requester ?? null) === escolhido.nome);
+
+    contador.textContent = visiveis.length;
+    corpo.innerHTML = montarTabela(visiveis, colunas);
+    corpo.scrollTop = 0;
+  }
+
+  mostrar("");
+  if (filtro) filtro.onchange = () => mostrar(filtro.value);
 
   painel.hidden = false;
 

@@ -401,6 +401,28 @@ body {
   font-size: 0.82em;
 }
 
+.filtro-de-detalhes {
+  margin-left: auto;
+  font: inherit;
+  font-size: clamp(11px, 1.4vh, 13px);
+  color: var(--texto-primario);
+  background: var(--superficie);
+  border: 1px solid var(--borda);
+  border-radius: 8px;
+  padding: 5px 8px;
+  max-width: 45%;
+  cursor: pointer;
+}
+
+.filtro-de-detalhes:hover {
+  border-color: var(--texto-suave);
+}
+
+/* Com o filtro presente, é ele que empurra o ✕ para a direita. */
+.filtro-de-detalhes + .fechar-detalhes {
+  margin-left: 10px;
+}
+
 .fechar-detalhes {
   margin-left: auto;
   border: 1px solid var(--borda);
