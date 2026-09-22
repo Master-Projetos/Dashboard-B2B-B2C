@@ -123,13 +123,9 @@ export function desenharProjetosPorMes(b2b) {
   const meses = Object.keys(contagens).sort();
   const valores = meses.map((mes) => contagens[mes]);
 
-  const maiorValor = Math.max(...valores);
-  const indiceDoPico = valores.indexOf(maiorValor);
-  const indiceDoUltimo = valores.length - 1;
-  const indicesDestacados = new Set([indiceDoPico, indiceDoUltimo]);
-
   const instancia = desenhar("graficoProjetosPorMes", {
-    grid: { top: 26, right: 18, bottom: 22, left: 34 },
+    // Folga em cima para o número do ponto mais alto não encostar na borda.
+    grid: { top: 30, right: 22, bottom: 22, left: 34 },
     // Gatilho por eixo (e não por ponto): a área de acerto é a coluna inteira,
     // então não é preciso acertar a bolinha no pixel.
     tooltip: dicaDeContexto({
@@ -155,13 +151,7 @@ export function desenharProjetosPorMes(b2b) {
           { offset: 1, color: CORES.gradienteArea[1] },
         ]),
       },
-      // Rotular todos os pontos vira ruído: só o pico e o mês mais recente.
-      label: rotuloDeValor({
-        position: "top",
-        distance: 8,
-        color: CORES.textoPrimario,
-        formatter: ({ value, dataIndex }) => (indicesDestacados.has(dataIndex) ? formatarNumero(value) : ""),
-      }),
+      label: rotuloDeValor({ position: "top", distance: 9, color: CORES.textoPrimario }),
     }],
   });
 

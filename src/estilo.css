@@ -183,16 +183,33 @@ body {
   outline-offset: 1px;
 }
 
+/* Mesma pílula dos seletores ao lado, só que discreta: é uma saída, não uma
+   escolha. O ✕ vem do CSS para o botão não depender de fonte de ícone. */
 .periodo button {
+  display: flex;
+  align-items: center;
+  gap: 5px;
   font: inherit;
   font-size: var(--fonte-detalhe);
-  color: var(--texto-secundario);
+  font-weight: 650;
+  color: var(--texto-suave);
   background: transparent;
-  border: none;
-  border-radius: 8px;
-  padding: 2px 6px;
+  border: 1px solid var(--borda);
+  border-radius: 999px;
+  padding: clamp(3px, 0.5vh, 6px) clamp(8px, 0.7vw, 11px);
   cursor: pointer;
-  text-decoration: underline;
+}
+
+.periodo button::before {
+  content: "✕";
+  font-size: 0.85em;
+  line-height: 1;
+}
+
+.periodo button:hover {
+  color: var(--texto-primario);
+  border-color: var(--texto-suave);
+  background: var(--superficie);
 }
 
 .periodo button[hidden] {
