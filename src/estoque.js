@@ -25,13 +25,18 @@ const NIVEIS = {
 //     critical_alert, total }
 //
 // `alert` e `critical_alert` vêm nulos quando o item não tem mínimo cadastrado.
-// Nesse caso o mínimo vale zero, e qualquer saldo o atende: a linha é normal.
 // O que falta segue dito na dica da célula, para ninguém achar que o item foi
 // conferido quando na verdade não há parâmetro.
 // Esta é a única função que conhece esse formato; o resto da tela trabalha
 // sobre { itens: [{ nome, codigo, unidade, porRegional: { SIGLA: {...} } }] }.
 
 function nivelDaLinha(linha) {
+  // Mínimo zero — cadastrado como zero ou ausente — é atendido por qualquer
+  // saldo, inclusive zero: não há o que repor. A API marca algumas dessas
+  // linhas como críticas; aqui elas são normais, e por isso a contagem de
+  // críticos do painel pode ficar abaixo do critical_alert_rows dela.
+  if (!(linha.min_stock > 0)) return "ok";
+
   if (linha.critical_alert) return "critical";
   if (linha.alert) return "alert";
   return "ok";
