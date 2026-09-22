@@ -5,7 +5,7 @@ import { CanvasRenderer } from "echarts/renderers";
 
 import { CORES, FONTE, eixoDeCategoria, eixoDeValor, dicaDeContexto, estiloDeTextoSuave, tamanhoDeFonteDoGrafico } from "./tema.js";
 import { formatarNumero, formatarMes } from "./formatadores.js";
-import { DIMENSOES, ROTULOS_DE_EQUIPE, obterContagens, obterItens } from "./dados-b2b.js";
+import { DIMENSOES, GRUPOS_DE_STATUS, ROTULOS_DE_EQUIPE, grupoDoStatus, obterContagens, obterItens } from "./dados-b2b.js";
 import { abrirDetalhes } from "./detalhes.js";
 
 echarts.use([BarChart, LineChart, GridComponent, TooltipComponent, LegendComponent, GraphicComponent, CanvasRenderer]);
@@ -166,58 +166,55 @@ export function desenharProjetosPorMes(b2b) {
 
 // ===== Status dos projetos =====
 
-// Status com pouquíssimos projetos viram "Outros": 12 barras não cabem legíveis.
-// Cada barra guarda os status que ela representa, para o clique saber quais
-// projetos listar — "Outros" reúne vários.
-function agruparStatusMenores(contagens, minimoParaAparecer = 3) {
-  const ordenados = Object.entries(contagens).sort(([, a], [, b]) => a - b);
-
-  const relevantes = ordenados
-    .filter(([, valor]) => valor >= minimoParaAparecer)
-    .map(([nome, valor]) => ({ nome, valor, statusReunidos: [nome] }));
-
-  const menores = ordenados.filter(([, valor]) => valor < minimoParaAparecer);
-  if (menores.length === 0) return relevantes;
-
-  return [
-    {
-      nome: "Outros",
-      valor: menores.reduce((soma, [, valor]) => soma + valor, 0),
-      statusReunidos: menores.map(([nome]) => nome),
-    },
-    ...relevantes,
-  ];
-}
-
 export function desenharStatus(b2b) {
-  const status = agruparStatusMenores(obterContagens(b2b, DIMENSOES.status));
+  const contagens = obterContagens(b2b, DIMENSOES.status);
+  const itens = obterItens(b2b, DIMENSOES.status);
+
+  const cores = { andamento: CORES.serie1, concluido: CORES.statusBom, cancelado: CORES.statusCritico };
+
+  const grupos = GRUPOS_DE_STATUS.map((grupo) => ({
+    ...grupo,
+    // Conta pelos status que a API mandou de fato, não pela lista fixa: um
+    // status novo entra em "Em andamento" por grupoDoStatus.
+    quantidade: Object.entries(contagens)
+      .filter(([status]) => grupoDoStatus(status).id === grupo.id)
+      .reduce((soma, [, valor]) => soma + valor, 0),
+  })).reverse(); // o eixo cresce de baixo para cima
 
   const instancia = desenhar("graficoStatus", {
-    grid: { top: 6, right: 46, bottom: 4, left: 4, containLabel: true },
+    grid: { top: 6, right: 52, bottom: 4, left: 4, containLabel: true },
     tooltip: dicaDeContexto({
       trigger: "axis",
-      axisPointer: { type: "shadow", shadowStyle: { color: "rgba(255,255,255,0.04)" } },
-      formatter: ([ponto]) =>
-        `${ponto.name}<br/><b>${formatarNumero(ponto.value)}</b> projetos<br/>${DICA_DE_CLIQUE}`,
+      axisPointer: { type: "shadow", shadowStyle: { color: "rgba(128, 128, 128, 0.12)" } },
+      formatter: ([ponto]) => {
+        const grupo = grupos[ponto.dataIndex];
+        const detalhe = Object.entries(contagens)
+          .filter(([status]) => grupoDoStatus(status).id === grupo.id)
+          .sort(([, a], [, b]) => b - a)
+          .map(([status, valor]) => `${status}: ${formatarNumero(valor)}`)
+          .join("<br/>");
+
+        return `<b>${grupo.rotulo}</b> — ${formatarNumero(ponto.value)} projetos<br/>${detalhe}<br/>${DICA_DE_CLIQUE}`;
+      },
     }),
     xAxis: eixoDeValor({ show: false }),
-    yAxis: eixoDeCategoria({ data: status.map((faixa) => faixa.nome), axisLine: { show: false } }),
+    yAxis: eixoDeCategoria({ data: grupos.map((grupo) => grupo.rotulo), axisLine: { show: false } }),
     series: [{
       type: "bar",
       cursor: "pointer",
-      data: status.map((faixa) => faixa.valor),
-      barMaxWidth: 16,
-      itemStyle: { color: CORES.serie1, borderRadius: [0, 4, 4, 0] },
-      label: rotuloDeValor({ position: "right", distance: 6 }),
+      data: grupos.map((grupo) => ({ value: grupo.quantidade, itemStyle: { color: cores[grupo.id], borderRadius: [0, 4, 4, 0] } })),
+      barMaxWidth: 34,
+      showBackground: true,
+      backgroundStyle: { color: "rgba(128, 128, 128, 0.07)", borderRadius: [0, 4, 4, 0] },
+      label: rotuloDeValor({ position: "right", distance: 6, color: CORES.textoPrimario }),
     }],
   });
 
   aoClicarNaFaixa(instancia, "y", (indice) => {
-    const faixa = status[indice];
-    if (!faixa) return;
+    const grupo = grupos[indice];
+    if (!grupo) return;
 
-    const itens = obterItens(b2b, DIMENSOES.status).filter((item) => faixa.statusReunidos.includes(item.status));
-    abrirDetalhes(`Status: ${faixa.nome}`, itens);
+    abrirDetalhes(`Status: ${grupo.rotulo}`, itens.filter((item) => grupoDoStatus(item.status).id === grupo.id));
   });
 }
 

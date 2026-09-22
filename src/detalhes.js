@@ -27,6 +27,9 @@ const COLUNAS = [
   { titulo: "Solicitante", ler: (item) => item.requester },
   { titulo: "Regional", ler: (item) => String(item.region ?? "").replace("Regional - ", ""), sempre: true },
   { titulo: "Setor", ler: (item) => item.sector, sempre: true },
+  // O gráfico agrupa os doze status em três; aqui aparece o status real, que
+  // é o que some ao agrupar.
+  { titulo: "Status", ler: (item) => item.status },
   {
     titulo: "Valor",
     classe: () => "coluna-valor",

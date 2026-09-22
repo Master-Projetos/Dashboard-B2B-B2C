@@ -35,6 +35,25 @@ export const ROTULOS_DE_PRAZO = {
   Atrasada: "Atrasados",
 };
 
+// A API manda doze status operacionais. No gráfico eles viram três situações,
+// que é como se fala do projeto: ou está andando, ou entregou, ou morreu.
+// "Ativado" é a entrega; inviabilidade técnica e BP não aprovado são fins de
+// linha, então contam como cancelado. Status novo que a API inventar cai em
+// "Em andamento": existe, não entregou e não morreu.
+export const GRUPOS_DE_STATUS = [
+  {
+    id: "andamento",
+    rotulo: "Em andamento",
+    status: ["Aguardando BP", "Pendencia Comercial", "Estudo", "Estudo Técnico", "Vistoria", "Configuração", "Execução", "Estoque B2B"],
+  },
+  { id: "concluido", rotulo: "Concluído", status: ["Ativado"] },
+  { id: "cancelado", rotulo: "Cancelado", status: ["Cancelada", "Inviabilidade Técnica", "BP - Não Aprovado"] },
+];
+
+export function grupoDoStatus(status) {
+  return GRUPOS_DE_STATUS.find((grupo) => grupo.status.includes(status)) ?? GRUPOS_DE_STATUS[0];
+}
+
 export const ROTULOS_DE_EQUIPE = {
   "Concluída": "Concluídas",
   "Em Andamento": "Em andamento",
