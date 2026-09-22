@@ -150,11 +150,18 @@ function ordenarPorGravidade(itens) {
   });
 }
 
-// Só alerta e crítico: "sem mínimo" é falta de cadastro, não falta de peça —
-// aparece no cartão próprio, para não diluir a lista de quem precisa de ação.
+// Quantos itens precisam de ação — é o número do cartão, não o que a tabela
+// mostra: a tabela lista todos, e são estes que ela põe no topo.
 export function itensParaAtencao(estoque) {
   const precisa = (item) => ["critical", "alert"].includes(piorNivelDoItem(item));
-  return ordenarPorGravidade(estoque.itens.filter(precisa));
+  return estoque.itens.filter(precisa);
+}
+
+// A tabela mostra o estoque inteiro, do mais grave ao normal. Esconder o que
+// está em ordem economizava três linhas e fazia a lista não bater com os 31
+// itens monitorados.
+export function itensOrdenados(estoque) {
+  return ordenarPorGravidade(estoque.itens);
 }
 
 // ===== Desenho =====
@@ -181,11 +188,7 @@ export function desenharTabelaDeEstoque(estoque) {
     return;
   }
 
-  const itens = itensParaAtencao(estoque);
-  if (!itens.length) {
-    alvo.innerHTML = `<p class="aviso">Nenhum item em alerta ou crítico</p>`;
-    return;
-  }
+  const itens = itensOrdenados(estoque);
 
   const colunas = `<col class="coluna-unidade"><col class="coluna-item"><col class="coluna-minimo">${REGIONAIS.map(() => '<col class="coluna-regional">').join("")}`;
   const cabecalho = REGIONAIS.map(({ sigla, nome }) => `<th title="${escapar(nome)}">${sigla}</th>`).join("");
