@@ -37,10 +37,16 @@ function nivelDaLinha(linha) {
   return "ok";
 }
 
+// A API manda a sigla ("CD"), mas o mapa dela parte dos nomes sem acento
+// ("DIVINOPOLIS", "TAUBATE", "UNAI"). Comparar sem acento aceita os dois sem
+// depender de qual lado chegar.
+const semAcento = (texto) =>
+  String(texto ?? "").normalize("NFD").replace(/[̀-ͯ]/g, "").replace(/\s+/g, " ").trim().toUpperCase();
+
 function encontrarSigla(chave) {
-  const texto = String(chave ?? "").trim().toUpperCase();
+  const texto = semAcento(chave);
   return REGIONAIS.find(
-    (regional) => regional.sigla === texto || regional.nome.toUpperCase() === texto,
+    (regional) => regional.sigla === texto || semAcento(regional.nome) === texto,
   )?.sigla;
 }
 
