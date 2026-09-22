@@ -26,6 +26,7 @@
   --texto-critico: #c62f2f;
   --fundo-critico: rgba(208, 59, 59, 0.13);
   --fundo-alerta: rgba(250, 178, 25, 0.26);
+  --fundo-normal: rgba(12, 163, 12, 0.11);
   --status-atencao: #fab219;
   --status-critico: #d03b3b;
 
@@ -64,6 +65,7 @@
   --texto-critico: #ff7a7a;
   --fundo-critico: rgba(255, 90, 90, 0.15);
   --fundo-alerta: rgba(250, 178, 25, 0.16);
+  --fundo-normal: rgba(63, 191, 95, 0.12);
 }
 
 * {
@@ -537,9 +539,13 @@ body {
   background: var(--fundo-alerta);
 }
 
+/* Quem está sem alerta nenhum ganha um verde fraco: de longe, o que não é
+   verde é o que precisa de atenção. O texto usa o verde já calibrado para
+   leitura (4,5:1 no claro, 7,4:1 no escuro). */
 .grade-de-estoque .nivel-normal {
-  color: var(--texto-suave);
-  font-weight: 550;
+  color: var(--texto-concluido);
+  background: var(--fundo-normal);
+  font-weight: 650;
 }
 
 /* Sem mínimo cadastrado não é "normal", mas também não é alerta: fica em
