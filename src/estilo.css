@@ -529,6 +529,45 @@ body {
 
 /* O destaque é o ponto da tela: crítico e alerta têm fundo próprio, para
    serem achados de longe sem precisar ler o número. */
+/* Caixa aberta no clique de uma célula: mostra o mesmo que o `title`, que na
+   TV e no toque ninguém consegue ver. */
+.dica-de-celula {
+  position: fixed;
+  z-index: 60;
+  display: flex;
+  flex-direction: column;
+  gap: 3px;
+  max-width: min(320px, 90vw);
+  padding: clamp(8px, 1.1vh, 13px) clamp(11px, 1vw, 16px);
+  border: 1px solid var(--borda);
+  border-radius: var(--raio);
+  background: var(--superficie);
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.28);
+  font-size: clamp(11px, 1.4vh, 15px);
+  color: var(--texto-secundario);
+  line-height: 1.35;
+}
+
+.dica-de-celula strong {
+  color: var(--texto-primario);
+  font-weight: 650;
+}
+
+.dica-de-celula > strong:first-child {
+  font-size: 1.05em;
+  white-space: normal;
+}
+
+.grade-de-estoque .celula-clicavel {
+  cursor: pointer;
+}
+
+/* A célula aberta fica marcada para se saber de onde a caixa saiu. */
+.grade-de-estoque .celula-aberta {
+  outline: 2px solid var(--serie-1);
+  outline-offset: -2px;
+}
+
 .grade-de-estoque .nivel-critico {
   color: var(--texto-critico);
   background: var(--fundo-critico);

@@ -183,6 +183,63 @@ function descreverCelula(dados, nome) {
 saldo ${formatarNumero(dados.quantidade)} · ${minimo}${seguro}`;
 }
 
+// O `title` só aparece com o mouse parado em cima; numa TV ou tablet ninguém
+// vê. O clique mostra o mesmo conteúdo numa caixa presa à célula.
+function montarDica(dados, nome, item) {
+  if (!dados) return `<strong>${escapar(nome)}</strong><span>Regional não informada pela API</span>`;
+
+  const seguro = dados.seguro === null
+    ? "<span>Sem estoque seguro cadastrado</span>"
+    : `<span>Saudável a partir de <strong>${formatarNumero(dados.seguro)}</strong></span>`;
+
+  const minimo = dados.minimoCadastrado
+    ? `<span>Mínimo <strong>${formatarNumero(dados.minimo)}</strong></span>`
+    : "<span>Sem mínimo cadastrado</span>";
+
+  return `
+    <strong>${escapar(item.nome)}</strong>
+    <span>${escapar(nome)} · ${NIVEIS[dados.nivel].rotulo}</span>
+    <span>Saldo <strong>${formatarNumero(dados.quantidade)}</strong> ${escapar(item.unidade || "")}</span>
+    ${minimo}
+    ${seguro}
+  `;
+}
+
+function fecharDica() {
+  document.querySelector(".dica-de-celula")?.remove();
+  document.querySelector(".celula-aberta")?.classList.remove("celula-aberta");
+}
+
+function abrirDicaDaCelula(celulaDoDom, conteudo) {
+  const jaAberta = celulaDoDom.classList.contains("celula-aberta");
+  fecharDica();
+  if (jaAberta) return; // clicar de novo na mesma célula fecha
+
+  const caixa = document.createElement("div");
+  caixa.className = "dica-de-celula";
+  caixa.innerHTML = conteudo;
+  document.body.append(caixa);
+
+  const area = celulaDoDom.getBoundingClientRect();
+  const dica = caixa.getBoundingClientRect();
+
+  // Abre para o lado que tem espaço, para não vazar da tela.
+  const esquerda = Math.min(Math.max(8, area.left + area.width / 2 - dica.width / 2), window.innerWidth - dica.width - 8);
+  const acima = area.top - dica.height - 8;
+  caixa.style.left = `${esquerda}px`;
+  caixa.style.top = `${acima > 8 ? acima : area.bottom + 8}px`;
+
+  celulaDoDom.classList.add("celula-aberta");
+}
+
+document.addEventListener("click", (evento) => {
+  if (!evento.target.closest(".dica-de-celula") && !evento.target.closest(".grade-de-estoque td")) fecharDica();
+});
+
+document.addEventListener("keydown", (evento) => {
+  if (evento.key === "Escape") fecharDica();
+});
+
 export function desenharTabelaDeEstoque(estoque) {
   const alvo = document.getElementById("tabelaDeEstoque");
 
@@ -204,7 +261,8 @@ export function desenharTabelaDeEstoque(estoque) {
         // significa no estoque, e um traço só faria a coluna parecer quebrada.
         const classe = dados ? NIVEIS[dados.nivel].classe : "nivel-normal";
         const texto = formatarNumero(dados?.quantidade ?? 0);
-        return `<td class="${classe}" title="${escapar(descreverCelula(dados, nome))}">${texto}</td>`;
+        const dica = escapar(montarDica(dados, nome, item));
+        return `<td class="${classe} celula-clicavel" title="${escapar(descreverCelula(dados, nome))}" data-dica="${dica}">${texto}</td>`;
       }).join("");
 
       const minimo = formatarNumero(item.minimo);
@@ -219,6 +277,11 @@ export function desenharTabelaDeEstoque(estoque) {
       `;
     })
     .join("");
+
+  alvo.onclick = (evento) => {
+    const celulaDoDom = evento.target.closest("td.celula-clicavel");
+    if (celulaDoDom) abrirDicaDaCelula(celulaDoDom, celulaDoDom.dataset.dica);
+  };
 
   alvo.innerHTML = `
     <table class="grade-de-estoque">

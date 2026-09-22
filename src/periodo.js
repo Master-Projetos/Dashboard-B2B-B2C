@@ -78,26 +78,52 @@ function dentroDoPeriodo(projeto, { inicio, fim }) {
   return true;
 }
 
-// Os projetos aprovados vêm numa lista à parte, sem mês. O mês é buscado na
-// lista unida pela mesma chave cliente/regional/setor, e daí o valor aprovado
-// e o maior aprovado passam a valer para o recorte.
-function recortarFinanceiro(financeiro, projetos, periodo) {
-  const mesPorProjeto = new Map(projetos.map((projeto) => [chaveDoProjeto(projeto), projeto.month]));
+// Valor e aprovação vêm em duas listas à parte (approved_projects e
+// unapproved_projects), sem os campos das outras dimensões. A chave
+// cliente/regional/setor é única nas duas, então dá para colar o valor no
+// projeto já unido — e daí recompor o financeiro para o recorte.
+function indexarValores(financeiro) {
+  const porProjeto = new Map();
 
-  const aprovados = (financeiro?.approved_projects ?? [])
-    .map((projeto) => ({ ...projeto, month: mesPorProjeto.get(chaveDoProjeto(projeto)) }));
+  const registrar = (lista, aprovado) => {
+    for (const projeto of lista ?? []) {
+      porProjeto.set(chaveDoProjeto(projeto), { valor: projeto.value, aprovado });
+    }
+  };
 
-  // Se a chave deixar de casar, é melhor mostrar o total do que zerar o cartão.
-  if (aprovados.length && aprovados.every((projeto) => !projeto.month)) return null;
+  registrar(financeiro?.approved_projects, true);
+  registrar(financeiro?.unapproved_projects, false);
 
-  const noPeriodo = aprovados.filter((projeto) => dentroDoPeriodo(projeto, periodo));
-  const maior = noPeriodo.reduce((maiorAte, projeto) => (!maiorAte || projeto.value > maiorAte.value ? projeto : maiorAte), null);
+  return porProjeto;
+}
+
+const somarValores = (projetos) => projetos.reduce((soma, projeto) => soma + (projeto.value ?? 0), 0);
+const maiorValor = (projetos) =>
+  projetos.reduce((maior, projeto) => (!maior || projeto.value > maior.value ? projeto : maior), null);
+
+// Nem todo projeto tem valor: são 120 de 188. A média divide pelos que têm,
+// como a própria API faz — dividir por 188 daria um ticket médio menor que o
+// de qualquer projeto real.
+function recortarFinanceiro(financeiro, visiveis) {
+  const valores = indexarValores(financeiro);
+
+  const comValor = visiveis
+    .map((projeto) => ({ ...projeto, ...valores.get(chaveDoProjeto(projeto)) }))
+    .filter((projeto) => projeto.valor !== undefined)
+    .map(({ valor, ...projeto }) => ({ ...projeto, value: valor }));
+
+  const aprovados = comValor.filter((projeto) => projeto.aprovado);
+  const total = somarValores(comValor);
 
   return {
     ...financeiro,
-    approved_projects: noPeriodo,
-    approved_value: noPeriodo.reduce((soma, projeto) => soma + (projeto.value ?? 0), 0),
-    highest_approved_project: maior,
+    total_value: total,
+    average_value: comValor.length ? total / comValor.length : 0,
+    highest_value: maiorValor(comValor)?.value ?? 0,
+    highest_project: maiorValor(comValor),
+    approved_value: somarValores(aprovados),
+    approved_projects: aprovados,
+    highest_approved_project: maiorValor(aprovados),
   };
 }
 
@@ -131,9 +157,8 @@ export function ehPeriodoVazio(periodo) {
   return !periodo?.inicio && !periodo?.fim;
 }
 
-// Devolve um b2b com o mesmo formato, só que contado sobre o período. O bloco
-// financeiro fica como veio: a API só manda valor por projeto nos aprovados, e
-// nenhum deles traz data, então não há como recompor total nem ticket médio.
+// Devolve um b2b com o mesmo formato, só que contado sobre o período — o bloco
+// financeiro incluído.
 export function aplicarPeriodo(b2b, periodo) {
   if (!b2b || ehPeriodoVazio(periodo)) return b2b;
 
@@ -146,11 +171,9 @@ export function aplicarPeriodo(b2b, periodo) {
   // e assim os cartões de dinheiro não passam a avisar "período todo" à toa.
   if (visiveis.length === projetos.length) return b2b;
 
-  const financeiro = recortarFinanceiro(b2b.financial, projetos, periodo);
-
   return {
     ...b2b,
-    financial: financeiro ?? b2b.financial,
+    financial: recortarFinanceiro(b2b.financial, visiveis),
     priority: contar(visiveis, (projeto) => projeto.priority),
     status: { counts: contar(visiveis, (projeto) => projeto.status), items: visiveis },
     status_by_region: {
@@ -163,9 +186,6 @@ export function aplicarPeriodo(b2b, periodo) {
       counts: contarCruzado(visiveis, (projeto) => projeto.priority, (projeto) => projeto.requester),
       items: visiveis,
     },
-    // Valor total e ticket médio continuam sendo os do período todo: a API só
-    // manda valor por projeto nos aprovados, então não há como recompô-los.
-    totaisNaoFiltrados: true,
   };
 }
 

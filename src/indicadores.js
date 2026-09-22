@@ -57,9 +57,7 @@ export function desenharIndicadoresB2b(b2b) {
   const aprovados = b2b.financial?.approved_projects ?? [];
   const destaques = destaquesFinanceiros(b2b);
   const maiorAprovado = b2b.financial?.highest_approved_project ?? null;
-  // Valor total e ticket médio saem do período: a API não manda valor por
-  // projeto fora dos aprovados, então não dá para recompô-los por data.
-  const avisoDeTotal = b2b.totaisNaoFiltrados ? " · período todo" : "";
+  const temValores = (b2b.financial?.total_value ?? 0) > 0;
   const prazosEmAberto = (contagens.Urgente ?? 0) + (contagens.Atrasada ?? 0);
 
   escreverIndicadores("indicadoresB2b", [
@@ -81,8 +79,8 @@ export function desenharIndicadoresB2b(b2b) {
     },
     {
       rotulo: "Valor total",
-      valor: formatarMoedaCompacta(b2b.financial.total_value),
-      detalhe: formatarMoeda(b2b.financial.total_value) + avisoDeTotal,
+      valor: temValores ? formatarMoedaCompacta(b2b.financial.total_value) : "—",
+      detalhe: temValores ? formatarMoeda(b2b.financial.total_value) : "nenhum projeto com valor no período",
       realce: CORES.serie1,
     },
     {
@@ -100,8 +98,8 @@ export function desenharIndicadoresB2b(b2b) {
     },
     {
       rotulo: "Ticket médio",
-      valor: formatarMoedaCompacta(b2b.financial.average_value),
-      detalhe: formatarMoeda(b2b.financial.average_value) + avisoDeTotal,
+      valor: temValores ? formatarMoedaCompacta(b2b.financial.average_value) : "—",
+      detalhe: temValores ? formatarMoeda(b2b.financial.average_value) : "sem base para a média",
       realce: CORES.serie1,
     },
     {
@@ -134,11 +132,10 @@ const mesmoProjeto = (um, outro) =>
 // mostrar a mesma linha duas vezes.
 function destaquesFinanceiros(b2b) {
   const { highest_project: proposto, highest_approved_project: aprovado } = b2b.financial ?? {};
-  const avisoDeTotal = b2b.totaisNaoFiltrados ? " · período todo" : "";
 
   return [
     aprovado && { ...aprovado, destaque: "Aprovado" },
-    !mesmoProjeto(proposto, aprovado) && proposto && { ...proposto, destaque: `Proposto, não aprovado${avisoDeTotal}` },
+    !mesmoProjeto(proposto, aprovado) && proposto && { ...proposto, destaque: "Proposto, não aprovado" },
   ].filter(Boolean);
 }
 
