@@ -5,7 +5,7 @@ import { CanvasRenderer } from "echarts/renderers";
 
 import { CORES, FONTE, eixoDeCategoria, eixoDeValor, dicaDeContexto, estiloDeTextoSuave, tamanhoDeFonteDoGrafico } from "./tema.js";
 import { formatarNumero, formatarMes } from "./formatadores.js";
-import { DIMENSOES, obterContagens, obterItens } from "./dados-b2b.js";
+import { DIMENSOES, ROTULOS_DE_EQUIPE, obterContagens, obterItens } from "./dados-b2b.js";
 import { abrirDetalhes } from "./detalhes.js";
 
 echarts.use([BarChart, LineChart, GridComponent, TooltipComponent, LegendComponent, GraphicComponent, CanvasRenderer]);
@@ -443,9 +443,11 @@ export function desenharStatusPorEquipe(b2b, quantidade = 8) {
     .sort((a, b) => a.concluidas + a.emAndamento - (b.concluidas + b.emAndamento))
     .slice(-quantidade);
 
+  // A API separa por "Concluída"/"Em Andamento", mas o que ela realmente diz é
+  // se o projeto tem prazo cadastrado — ver ROTULOS_DE_EQUIPE.
   const faixas = [
-    { rotulo: "Concluídas", chave: "concluidas", cor: CORES.serie1 },
-    { rotulo: "Em andamento", chave: "emAndamento", cor: CORES.serie2 },
+    { rotulo: ROTULOS_DE_EQUIPE["Concluída"], chave: "concluidas", cor: CORES.serie1 },
+    { rotulo: ROTULOS_DE_EQUIPE["Em Andamento"], chave: "emAndamento", cor: CORES.statusAtencao },
   ];
 
   const instancia = desenhar("graficoStatusPorEquipe", {

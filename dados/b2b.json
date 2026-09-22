@@ -1312,14 +1312,14 @@
       {
         "client": "W&W EVENTOS - MONTES CLAROS",
         "region": "Regional - Montes Claros",
-        "remaining_days": -1,
+        "remaining_days": null,
         "sector": "Operação",
         "status": "Estudo"
       },
       {
         "client": "AGAH MADEIRAS - PASSOS",
         "region": "Regional - Sul Minas",
-        "remaining_days": 0,
+        "remaining_days": null,
         "sector": "Operação",
         "status": "Vistoria"
       },
@@ -1370,9 +1370,9 @@
         "Engenharia - Transmissão": 2,
         "Projetos": 11,
         "Regional - Centro Oeste": 38,
-        "Regional - Montes Claros": 33,
+        "Regional - Montes Claros": 34,
         "Regional - Norte": 8,
-        "Regional - Sul Minas": 44,
+        "Regional - Sul Minas": 45,
         "Regional - São Paulo": 25
       },
       "Em Andamento": {
@@ -1383,9 +1383,9 @@
         "Engenharia - Transmissão": 0,
         "Projetos": 0,
         "Regional - Centro Oeste": 0,
-        "Regional - Montes Claros": 1,
+        "Regional - Montes Claros": 0,
         "Regional - Norte": 0,
-        "Regional - Sul Minas": 3,
+        "Regional - Sul Minas": 2,
         "Regional - São Paulo": 2
       }
     },
@@ -2681,16 +2681,16 @@
       {
         "client": "W&W EVENTOS - MONTES CLAROS",
         "region": "Regional - Montes Claros",
-        "remaining_days": -1,
+        "remaining_days": null,
         "sector": "Operação",
-        "status": "Em Andamento"
+        "status": "Concluída"
       },
       {
         "client": "AGAH MADEIRAS - PASSOS",
         "region": "Regional - Sul Minas",
-        "remaining_days": 0,
+        "remaining_days": null,
         "sector": "Operação",
-        "status": "Em Andamento"
+        "status": "Concluída"
       },
       {
         "client": "FIBRA APAGADA TUNA ( AO PARQUE PAUA )",
@@ -4048,14 +4048,14 @@
       {
         "client": "W&W EVENTOS - MONTES CLAROS",
         "region": "Regional - Montes Claros",
-        "remaining_days": -1,
+        "remaining_days": null,
         "sector": "Operação",
         "month": "2026-09"
       },
       {
         "client": "AGAH MADEIRAS - PASSOS",
         "region": "Regional - Sul Minas",
-        "remaining_days": 0,
+        "remaining_days": null,
         "sector": "Operação",
         "month": "2026-09"
       },
@@ -4077,9 +4077,9 @@
   },
   "deadline": {
     "counts": {
-      "Concluido": 182,
-      "Atrasada": 3,
-      "Urgente": 3
+      "Concluido": 184,
+      "Atrasada": 2,
+      "Urgente": 2
     },
     "items": [
       {
@@ -5373,16 +5373,16 @@
       {
         "client": "W&W EVENTOS - MONTES CLAROS",
         "region": "Regional - Montes Claros",
-        "remaining_days": -1,
+        "remaining_days": null,
         "sector": "Operação",
-        "deadline": "Atrasada"
+        "deadline": "Concluido"
       },
       {
         "client": "AGAH MADEIRAS - PASSOS",
         "region": "Regional - Sul Minas",
-        "remaining_days": 0,
+        "remaining_days": null,
         "sector": "Operação",
-        "deadline": "Urgente"
+        "deadline": "Concluido"
       },
       {
         "client": "FIBRA APAGADA TUNA ( AO PARQUE PAUA )",

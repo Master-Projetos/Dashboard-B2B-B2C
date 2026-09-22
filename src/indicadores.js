@@ -1,6 +1,6 @@
 import { CORES } from "./tema.js";
 import { formatarNumero, formatarMoeda, formatarMoedaCompacta, formatarPorcentagem } from "./formatadores.js";
-import { DIMENSOES, obterContagens, obterItens, temDetalhes } from "./dados-b2b.js";
+import { DIMENSOES, ROTULOS_DE_PRAZO, obterContagens, obterItens, temDetalhes } from "./dados-b2b.js";
 import { abrirDetalhes } from "./detalhes.js";
 
 function montarIndicador({ rotulo, valor, detalhe, realce, aguardando, clicavel, acao }) {
@@ -31,7 +31,7 @@ function indicadoresVazios(rotulos, detalhe) {
   }));
 }
 
-const ROTULOS_B2B = ["Projetos B2B", "Concluídos", "Valor total", "Valor aprovado", "Ticket médio", "Maior projeto"];
+const ROTULOS_B2B = ["Projetos B2B", "Prazos em aberto", "Valor total", "Valor aprovado", "Ticket médio", "Maior projeto"];
 const ROTULOS_B2C = ["Portas", "Portas livres", "Ocupação", "Cobertura", "Equipamentos", "Em atendimento"];
 
 export function desenharIndicadoresB2b(b2b) {
@@ -43,19 +43,22 @@ export function desenharIndicadoresB2b(b2b) {
   const totalDeProjetos = Object.values(b2b.priority).reduce((soma, valor) => soma + valor, 0);
   const contagens = obterContagens(b2b, DIMENSOES.prazo);
   const destaques = destaquesFinanceiros(b2b);
+  const prazosEmAberto = (contagens.Urgente ?? 0) + (contagens.Atrasada ?? 0);
 
   escreverIndicadores("indicadoresB2b", [
     {
       rotulo: "Projetos B2B",
       valor: formatarNumero(totalDeProjetos),
-      detalhe: `${formatarNumero(contagens.Urgente ?? 0)} urgentes`,
+      detalhe: `${formatarNumero(contagens.Concluido ?? 0)} sem prazo cadastrado`,
       realce: CORES.serie2,
     },
     {
-      rotulo: "Concluídos",
-      valor: formatarNumero(contagens.Concluido ?? 0),
-      detalhe: `${formatarNumero(contagens.Atrasada ?? 0)} atrasados`,
-      realce: CORES.serie2,
+      // Só os projetos com prazo cadastrado entram aqui: o resto da base vem da
+      // API sem data nenhuma, e contá-los como concluídos seria inventar.
+      rotulo: "Prazos em aberto",
+      valor: formatarNumero(prazosEmAberto),
+      detalhe: `${formatarNumero(contagens.Atrasada ?? 0)} atrasados · ${formatarNumero(contagens.Urgente ?? 0)} urgentes`,
+      realce: prazosEmAberto > 0 ? CORES.statusAtencao : CORES.serie2,
     },
     {
       rotulo: "Valor total",
@@ -163,14 +166,17 @@ export function desenharPrazos(b2b) {
   const contagens = obterContagens(b2b, DIMENSOES.prazo);
   const clicavel = temDetalhes(b2b, DIMENSOES.prazo);
 
+  // "Sem prazo" fica em cinza de propósito: não é uma conquista como era
+  // quando o painel chamava esses projetos de concluídos.
   const prazos = [
-    { tipo: "Concluido", rotulo: "Concluídos", cor: CORES.statusBom },
-    { tipo: "Urgente", rotulo: "Urgentes", cor: CORES.statusAtencao },
-    { tipo: "Atrasada", rotulo: "Atrasados", cor: CORES.statusCritico },
+    { tipo: "Concluido", cor: CORES.textoSuave },
+    { tipo: "Urgente", cor: CORES.statusAtencao },
+    { tipo: "Atrasada", cor: CORES.statusCritico },
   ];
 
   container.innerHTML = prazos
-    .map(({ tipo, rotulo, cor }) => {
+    .map(({ tipo, cor }) => {
+      const rotulo = ROTULOS_DE_PRAZO[tipo];
       const valor = formatarNumero(contagens[tipo] ?? 0);
       const atributos = clicavel
         ? `class="prazo clicavel" data-prazo="${tipo}" title="Ver os projetos"`
@@ -182,13 +188,11 @@ export function desenharPrazos(b2b) {
 
   if (!clicavel) return;
 
-  const titulos = { Concluido: "Projetos concluídos", Urgente: "Projetos urgentes", Atrasada: "Projetos atrasados" };
-
   container.querySelectorAll(".prazo").forEach((chip) => {
     const tipo = chip.dataset.prazo;
     chip.onclick = () => {
       const itens = obterItens(b2b, DIMENSOES.prazo).filter((item) => item.deadline === tipo);
-      abrirDetalhes(titulos[tipo] ?? tipo, itens);
+      abrirDetalhes(`Projetos: ${ROTULOS_DE_PRAZO[tipo] ?? tipo}`, itens);
     };
   });
 }
