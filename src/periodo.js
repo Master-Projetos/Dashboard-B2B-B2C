@@ -117,6 +117,10 @@ export function aplicarPeriodo(b2b, periodo) {
 
   const visiveis = projetos.filter((projeto) => dentroDoPeriodo(projeto, periodo));
 
+  // Recorte que não exclui ninguém não é recorte: devolve o dado como veio,
+  // e assim os cartões de dinheiro não passam a avisar "período todo" à toa.
+  if (visiveis.length === projetos.length) return b2b;
+
   return {
     ...b2b,
     priority: contar(visiveis, (projeto) => projeto.priority),
@@ -148,4 +152,21 @@ export function mesesDisponiveis(b2b) {
     .filter((mes) => /^\d{4}-\d{2}$/.test(mes ?? ""));
 
   return [...new Set(meses)].sort();
+}
+
+// O painel abre nos últimos 12 meses: mais que isso e o gráfico de meses vira
+// um amontoado. Para ver mais atrás, é só abrir o seletor — ele continua
+// listando todos os meses que existem.
+const MESES_POR_PADRAO = 12;
+
+export function mesInicialPadrao(b2b) {
+  const meses = mesesDisponiveis(b2b);
+  if (!meses.length) return "";
+
+  // Doze meses de calendário contados do mês mais recente, não doze meses
+  // presentes na base — a base pode ter buracos.
+  const [ano, mes] = meses[meses.length - 1].split("-").map(Number);
+  const limite = new Date(Date.UTC(ano, mes - MESES_POR_PADRAO, 1)).toISOString().slice(0, 7);
+
+  return meses.find((mesDisponivel) => mesDisponivel >= limite) ?? meses[0];
 }

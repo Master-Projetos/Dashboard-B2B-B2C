@@ -17,7 +17,7 @@ import {
 import { formatarHorario, formatarDataCurta, formatarMes } from "./formatadores.js";
 import { restaurarTemaSalvo, alternarTema } from "./tema.js";
 import { iniciarNavegacao, telaVisivel } from "./navegacao.js";
-import { aplicarPeriodo, ehPeriodoVazio, mesesDisponiveis, ultimoDiaDoMes } from "./periodo.js";
+import { aplicarPeriodo, mesesDisponiveis, mesInicialPadrao, ultimoDiaDoMes } from "./periodo.js";
 
 const INTERVALO_ATUALIZACAO_B2B_MS = 60 * 1000; // rota rápida: recarregada a cada minuto
 const INTERVALO_VERIFICACAO_VIABILIDADE_MS = 30 * 60 * 1000; // rota lenta: o cache de 48h fica no servidor
@@ -86,16 +86,37 @@ function preencherMeses() {
   mesesNasOpcoes = meses.join();
   const opcoes = meses.map((mes) => `<option value="${mes}">${formatarMes(mes)}</option>`).join("");
 
-  campoDeInicio.innerHTML = `<option value="">começo</option>${opcoes}`;
+  const escolhido = { inicio: campoDeInicio.value, fim: campoDeFim.value };
+
+  // O início é sempre um mês de verdade — o primeiro da lista é o mais antigo
+  // que existe. Só o fim fica aberto, para meses novos entrarem sozinhos.
+  campoDeInicio.innerHTML = opcoes;
   campoDeFim.innerHTML = `<option value="">hoje</option>${opcoes}`;
+
+  // O B2B recarrega a cada minuto; quando um mês novo entra na lista, a
+  // escolha de quem está olhando não pode se perder. Mês que sumiu vira "".
+  campoDeInicio.value = escolhido.inicio;
+  campoDeFim.value = escolhido.fim;
+
+  if (!campoDeInicio.value) voltarAoPadrao();
+}
+
+function voltarAoPadrao() {
+  campoDeInicio.value = mesInicialPadrao(dadosB2b);
+  campoDeFim.value = "";
+  periodo = lerPeriodoDosCampos();
+}
+
+function ehPadrao() {
+  return campoDeInicio.value === mesInicialPadrao(dadosB2b) && campoDeFim.value === "";
 }
 
 function atualizarControleDePeriodo() {
   const container = document.getElementById("periodo");
   container.hidden = telaVisivel() !== "b2b" || !dadosB2b;
-  botaoDeLimpar.hidden = ehPeriodoVazio(periodo);
 
   preencherMeses();
+  botaoDeLimpar.hidden = !dadosB2b || ehPadrao();
 }
 
 // O mês escolhido vale inteiro: de 01 ao último dia.
@@ -116,10 +137,10 @@ function aoMudarPeriodo() {
   desenharTelaVisivel();
 }
 
+// "limpar" devolve ao recorte padrão dos últimos 12 meses, não a tudo.
 botaoDeLimpar.addEventListener("click", () => {
-  campoDeInicio.value = "";
-  campoDeFim.value = "";
-  aoMudarPeriodo();
+  voltarAoPadrao();
+  desenharTelaVisivel();
 });
 
 campoDeInicio.addEventListener("change", aoMudarPeriodo);
