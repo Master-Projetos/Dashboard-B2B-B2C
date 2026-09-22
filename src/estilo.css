@@ -146,7 +146,9 @@ body {
      cobre o padding do contêiner; o 1px restante é a borda do próprio
      controle, que a aba não tem. */
   --recheio-vertical: calc(clamp(3px, 0.5vh, 6px) + 3px);
-  --recheio-lateral: calc(clamp(10px, 1vw, 16px) + 3px);
+  /* Mais largos que as abas de propósito: "fev/26" é mais curto que "B2B" e
+     as pílulas ficavam apertadas ao lado delas. */
+  --recheio-lateral: calc(clamp(10px, 1vw, 16px) + 12px);
 
   display: flex;
   align-items: center;

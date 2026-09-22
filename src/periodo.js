@@ -14,8 +14,10 @@ const LISTAS = [DIMENSOES.status, DIMENSOES.equipe, DIMENSOES.mes, DIMENSOES.pra
 // passa a valer por dia sem mais nada mudar.
 const CAMPOS_DE_DATA = ["date", "created_at", "opened_at", "start_date", "data"];
 
+const chaveDoProjeto = (projeto) => [projeto.client, projeto.region, projeto.sector].join("|");
+
 function mesmaLinha(um, outro) {
-  return um.client === outro.client && um.region === outro.region && um.sector === outro.sector;
+  return chaveDoProjeto(um) === chaveDoProjeto(outro);
 }
 
 // Só une se as listas realmente casarem linha a linha. Se a API mudar a ordem
@@ -76,6 +78,29 @@ function dentroDoPeriodo(projeto, { inicio, fim }) {
   return true;
 }
 
+// Os projetos aprovados vêm numa lista à parte, sem mês. O mês é buscado na
+// lista unida pela mesma chave cliente/regional/setor, e daí o valor aprovado
+// e o maior aprovado passam a valer para o recorte.
+function recortarFinanceiro(financeiro, projetos, periodo) {
+  const mesPorProjeto = new Map(projetos.map((projeto) => [chaveDoProjeto(projeto), projeto.month]));
+
+  const aprovados = (financeiro?.approved_projects ?? [])
+    .map((projeto) => ({ ...projeto, month: mesPorProjeto.get(chaveDoProjeto(projeto)) }));
+
+  // Se a chave deixar de casar, é melhor mostrar o total do que zerar o cartão.
+  if (aprovados.length && aprovados.every((projeto) => !projeto.month)) return null;
+
+  const noPeriodo = aprovados.filter((projeto) => dentroDoPeriodo(projeto, periodo));
+  const maior = noPeriodo.reduce((maiorAte, projeto) => (!maiorAte || projeto.value > maiorAte.value ? projeto : maiorAte), null);
+
+  return {
+    ...financeiro,
+    approved_projects: noPeriodo,
+    approved_value: noPeriodo.reduce((soma, projeto) => soma + (projeto.value ?? 0), 0),
+    highest_approved_project: maior,
+  };
+}
+
 function contar(projetos, ler) {
   const contagem = {};
 
@@ -121,8 +146,11 @@ export function aplicarPeriodo(b2b, periodo) {
   // e assim os cartões de dinheiro não passam a avisar "período todo" à toa.
   if (visiveis.length === projetos.length) return b2b;
 
+  const financeiro = recortarFinanceiro(b2b.financial, projetos, periodo);
+
   return {
     ...b2b,
+    financial: financeiro ?? b2b.financial,
     priority: contar(visiveis, (projeto) => projeto.priority),
     status: { counts: contar(visiveis, (projeto) => projeto.status), items: visiveis },
     status_by_region: {
@@ -135,7 +163,9 @@ export function aplicarPeriodo(b2b, periodo) {
       counts: contarCruzado(visiveis, (projeto) => projeto.priority, (projeto) => projeto.requester),
       items: visiveis,
     },
-    financeiroNaoFiltrado: true,
+    // Valor total e ticket médio continuam sendo os do período todo: a API só
+    // manda valor por projeto nos aprovados, então não há como recompô-los.
+    totaisNaoFiltrados: true,
   };
 }
 

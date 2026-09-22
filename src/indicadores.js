@@ -53,12 +53,13 @@ export function desenharIndicadoresB2b(b2b) {
 
   const totalDeProjetos = Object.values(b2b.priority).reduce((soma, valor) => soma + valor, 0);
   const contagens = obterContagens(b2b, DIMENSOES.prazo);
-  const destaques = destaquesFinanceiros(b2b);
   const itensEmAberto = obterItens(b2b, DIMENSOES.prazo).filter((item) => item.deadline !== "Concluido");
   const aprovados = b2b.financial?.approved_projects ?? [];
-  // Com período escolhido, os números de dinheiro continuam sendo os do total:
-  // a API só manda valor nos projetos aprovados, e nenhum deles traz data.
-  const avisoDoFinanceiro = b2b.financeiroNaoFiltrado ? " · período todo" : "";
+  const destaques = destaquesFinanceiros(b2b);
+  const maiorAprovado = b2b.financial?.highest_approved_project ?? null;
+  // Valor total e ticket médio saem do período: a API não manda valor por
+  // projeto fora dos aprovados, então não dá para recompô-los por data.
+  const avisoDeTotal = b2b.totaisNaoFiltrados ? " · período todo" : "";
   const prazosEmAberto = (contagens.Urgente ?? 0) + (contagens.Atrasada ?? 0);
 
   escreverIndicadores("indicadoresB2b", [
@@ -81,17 +82,18 @@ export function desenharIndicadoresB2b(b2b) {
     {
       rotulo: "Valor total",
       valor: formatarMoedaCompacta(b2b.financial.total_value),
-      detalhe: formatarMoeda(b2b.financial.total_value) + avisoDoFinanceiro,
+      detalhe: formatarMoeda(b2b.financial.total_value) + avisoDeTotal,
       realce: CORES.serie1,
     },
     {
       rotulo: "Valor aprovado",
-      valor: formatarMoedaCompacta(b2b.financial.approved_value),
+      // "R$ 0" parece um total apurado; o traço deixa claro que não houve.
+      valor: aprovados.length ? formatarMoedaCompacta(b2b.financial.approved_value) : "—",
       // A lista soma exatamente o approved_value, então a contagem cabe aqui
       // sem tirar o valor exato de vista.
-      detalhe: (aprovados.length
+      detalhe: aprovados.length
         ? `${formatarNumero(aprovados.length)} projetos · ${formatarMoeda(b2b.financial.approved_value)}`
-        : formatarMoeda(b2b.financial.approved_value)) + avisoDoFinanceiro,
+        : "nenhum aprovado no período",
       realce: CORES.serie1,
       clicavel: aprovados.length > 0,
       acao: "projetos-aprovados",
@@ -99,14 +101,18 @@ export function desenharIndicadoresB2b(b2b) {
     {
       rotulo: "Ticket médio",
       valor: formatarMoedaCompacta(b2b.financial.average_value),
-      detalhe: formatarMoeda(b2b.financial.average_value) + avisoDoFinanceiro,
+      detalhe: formatarMoeda(b2b.financial.average_value) + avisoDeTotal,
       realce: CORES.serie1,
     },
     {
+      // O número em destaque é o do maior projeto APROVADO — dinheiro que
+      // entrou. O maior proposto sai no clique, para não confundir proposta
+      // com fechamento.
       rotulo: "Maior projeto",
-      valor: formatarMoedaCompacta(b2b.financial.highest_value),
-      // Com o cliente à mostra o cartão já responde "qual é" antes do clique.
-      detalhe: (destaques.length ? destaques[0].client : formatarMoeda(b2b.financial.highest_value)) + avisoDoFinanceiro,
+      valor: maiorAprovado ? formatarMoedaCompacta(maiorAprovado.value) : "—",
+      // "aprovado" vem antes do cliente porque nome de cliente é longo e o
+      // fim da linha é cortado.
+      detalhe: maiorAprovado ? `aprovado · ${maiorAprovado.client}` : "nenhum aprovado no período",
       realce: CORES.serie1,
       clicavel: destaques.length > 0,
       acao: "maiores-projetos",
@@ -120,14 +126,19 @@ export function desenharIndicadoresB2b(b2b) {
   });
 }
 
-// A API destaca o maior projeto e o maior já aprovado; juntos eles explicam a
-// diferença entre "valor total" e "valor aprovado" nos cartões ao lado.
+const mesmoProjeto = (um, outro) =>
+  um && outro && um.client === outro.client && um.region === outro.region && um.sector === outro.sector;
+
+// O aprovado primeiro, porque é o número do cartão. O proposto só entra quando
+// é outro projeto — quando o maior de todos já foi aprovado, repeti-lo seria
+// mostrar a mesma linha duas vezes.
 function destaquesFinanceiros(b2b) {
-  const { highest_project: maior, highest_approved_project: maiorAprovado } = b2b.financial ?? {};
+  const { highest_project: proposto, highest_approved_project: aprovado } = b2b.financial ?? {};
+  const avisoDeTotal = b2b.totaisNaoFiltrados ? " · período todo" : "";
 
   return [
-    maior && { ...maior, destaque: "Maior valor" },
-    maiorAprovado && { ...maiorAprovado, destaque: "Maior aprovado" },
+    aprovado && { ...aprovado, destaque: "Aprovado" },
+    !mesmoProjeto(proposto, aprovado) && proposto && { ...proposto, destaque: `Proposto, não aprovado${avisoDeTotal}` },
   ].filter(Boolean);
 }
 
