@@ -19,6 +19,17 @@ function escreverIndicadores(idDoContainer, indicadores) {
   document.getElementById(idDoContainer).innerHTML = indicadores.map(montarIndicador).join("");
 }
 
+// Os cartões são reescritos a cada atualização, então o clique é religado aqui
+// depois de cada desenho.
+function ligarCliques(idDoContainer, acoes) {
+  const container = document.getElementById(idDoContainer);
+
+  for (const [acao, aoClicar] of Object.entries(acoes)) {
+    const cartao = container.querySelector(`[data-acao="${acao}"]`);
+    if (cartao) cartao.onclick = aoClicar;
+  }
+}
+
 // Sem dados, os cartões viram espaço reservado: a grade não estica e fica claro
 // que o número está por vir, em vez de sumir da tela.
 function indicadoresVazios(rotulos, detalhe) {
@@ -43,6 +54,7 @@ export function desenharIndicadoresB2b(b2b) {
   const totalDeProjetos = Object.values(b2b.priority).reduce((soma, valor) => soma + valor, 0);
   const contagens = obterContagens(b2b, DIMENSOES.prazo);
   const destaques = destaquesFinanceiros(b2b);
+  const itensEmAberto = obterItens(b2b, DIMENSOES.prazo).filter((item) => item.deadline !== "Concluido");
   const prazosEmAberto = (contagens.Urgente ?? 0) + (contagens.Atrasada ?? 0);
 
   escreverIndicadores("indicadoresB2b", [
@@ -59,6 +71,8 @@ export function desenharIndicadoresB2b(b2b) {
       valor: formatarNumero(prazosEmAberto),
       detalhe: `${formatarNumero(contagens.Atrasada ?? 0)} atrasados · ${formatarNumero(contagens.Urgente ?? 0)} urgentes`,
       realce: prazosEmAberto > 0 ? CORES.statusAtencao : CORES.serie2,
+      clicavel: itensEmAberto.length > 0,
+      acao: "prazos-em-aberto",
     },
     {
       rotulo: "Valor total",
@@ -89,10 +103,10 @@ export function desenharIndicadoresB2b(b2b) {
     },
   ]);
 
-  const cartaoDoMaiorProjeto = document.querySelector('[data-acao="maiores-projetos"]');
-  if (cartaoDoMaiorProjeto) {
-    cartaoDoMaiorProjeto.onclick = () => abrirDetalhes("Maiores projetos", destaques);
-  }
+  ligarCliques("indicadoresB2b", {
+    "prazos-em-aberto": () => abrirDetalhes("Prazos em aberto", itensEmAberto),
+    "maiores-projetos": () => abrirDetalhes("Maiores projetos", destaques),
+  });
 }
 
 // A API destaca o maior projeto e o maior já aprovado; juntos eles explicam a
