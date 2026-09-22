@@ -1,5 +1,0 @@
-[23928:24644:0921/171630.725:ERROR:net\socket\tcp_socket_win.cc:555] bind() returned an error: Normalmente é permitida apenas uma utilização de cada endereço de soquete (protocolo/endereço de rede/porta). (0x2740)
-
-DevTools listening on ws://[::1]:9333/devtools/browser/f769de37-5a9a-4ed4-8c40-528be7e11073
-[23928:27168:0921/171631.201:ERROR:components\edge_auth\edge_auth_errors.cc:553] EDGE_IDENTITY: Image Fetch FAILED: Error: Primary Error: kAccountImageFetchFailure, Secondary Error: kUnspecified, Platform error: 0, Error string: [empty]
-

@@ -6,53 +6,2707 @@
     "Atividade Crítica": 2
   },
   "status": {
-    "Aguardando BP": 86,
-    "Ativado": 38,
-    "Pendencia Comercial": 27,
-    "Inviabilidade Técnica": 10,
-    "Estudo": 7,
-    "Configuração": 6,
-    "Vistoria": 5,
-    "Cancelada": 4,
-    "Estoque B2B": 2,
-    "Execução": 1,
-    "BP - Não Aprovado": 1,
-    "Estudo Técnico": 1
+    "counts": {
+      "Aguardando BP": 86,
+      "Ativado": 41,
+      "Pendencia Comercial": 28,
+      "Inviabilidade Técnica": 10,
+      "Estudo": 6,
+      "Configuração": 5,
+      "Cancelada": 4,
+      "Vistoria": 4,
+      "Execução": 1,
+      "BP - Não Aprovado": 1,
+      "Estudo Técnico": 1,
+      "Estoque B2B": 1
+    },
+    "items": [
+      {
+        "client": "IGN TELECOMUNICAÇÕES DO BRASIL LTDA",
+        "region": "Regional - Sul Minas",
+        "remaining_days": null,
+        "sector": "Operação",
+        "status": "Ativado"
+      },
+      {
+        "client": "Vistoria Brasiltecpar - TTE",
+        "region": "Regional - São Paulo",
+        "remaining_days": null,
+        "sector": "Comercial B2B",
+        "status": "Aguardando BP"
+      },
+      {
+        "client": "Vistoria Netmig - PTU",
+        "region": "Regional - Norte",
+        "remaining_days": null,
+        "sector": "Comercial B2B",
+        "status": "Aguardando BP"
+      },
+      {
+        "client": "Vistoria BrDigital - PÇS",
+        "region": "Regional - Sul Minas",
+        "remaining_days": null,
+        "sector": "Comercial B2B",
+        "status": "Aguardando BP"
+      },
+      {
+        "client": "R N TINTAS E FERRAMENTAS LTDA",
+        "region": "Regional - Sul Minas",
+        "remaining_days": null,
+        "sector": "Operação",
+        "status": "Ativado"
+      },
+      {
+        "client": "FIBER 37 DIVINOPOLIS- VALE DO SOL",
+        "region": "Regional - Centro Oeste",
+        "remaining_days": null,
+        "sector": "Engenharia",
+        "status": "Ativado"
+      },
+      {
+        "client": "Vistoria Refinaria Henrique Lage - SJC",
+        "region": "Regional - São Paulo",
+        "remaining_days": null,
+        "sector": "Comercial B2B",
+        "status": "Aguardando BP"
+      },
+      {
+        "client": "Vistoria TAURUS ACADEMIA - MCL",
+        "region": "Regional - Montes Claros",
+        "remaining_days": null,
+        "sector": "Comercial B2B",
+        "status": "Pendencia Comercial"
+      },
+      {
+        "client": "MAGLIONI RIBEIRO & CIA LTDA",
+        "region": "Regional - Sul Minas",
+        "remaining_days": null,
+        "sector": "Engenharia",
+        "status": "Ativado"
+      },
+      {
+        "client": "KOYA FUSION CUISINE LTDA - MONTES CLAROS",
+        "region": "Regional - Montes Claros",
+        "remaining_days": null,
+        "sector": "Comercial B2B",
+        "status": "Aguardando BP"
+      },
+      {
+        "client": "Algar - 383387 - POCOS DE CALDAS - Aguard. nova vistoria (Igor Raposo)",
+        "region": "Regional - Sul Minas",
+        "remaining_days": null,
+        "sector": "Comercial B2B",
+        "status": "Pendencia Comercial"
+      },
+      {
+        "client": "ACADEMIA SAO JOAO MONTES CLAROS LTDA",
+        "region": "Regional - Montes Claros",
+        "remaining_days": null,
+        "sector": "Comercial B2B",
+        "status": "Aguardando BP"
+      },
+      {
+        "client": "CAMA E CAFE HOSPEDAGEM - LAVRAS",
+        "region": "CD - Centro de Distruibuição",
+        "remaining_days": null,
+        "sector": "Engenharia",
+        "status": "Ativado"
+      },
+      {
+        "client": "EVENTO CHURRASCANDO 2026 - PARACATU MG",
+        "region": "Regional - Norte",
+        "remaining_days": null,
+        "sector": "Comercial B2B",
+        "status": "Aguardando BP"
+      },
+      {
+        "client": "CEL CENTRAL ELETRICA LTDA",
+        "region": "Regional - Montes Claros",
+        "remaining_days": null,
+        "sector": "Engenharia",
+        "status": "Ativado"
+      },
+      {
+        "client": "SAMM TECNOLOGIA E TELECOMUNICACOES S.A.",
+        "region": "Regional - Sul Minas",
+        "remaining_days": null,
+        "sector": "Operação",
+        "status": "Ativado"
+      },
+      {
+        "client": "LA SUÍTE MOTEL - MONTES CLAROS",
+        "region": "Regional - Montes Claros",
+        "remaining_days": null,
+        "sector": "Comercial B2B",
+        "status": "Configuração"
+      },
+      {
+        "client": "RG TECH - PARA DE MINAS",
+        "region": "Regional - Centro Oeste",
+        "remaining_days": null,
+        "sector": "Comercial B2B",
+        "status": "Aguardando BP"
+      },
+      {
+        "client": "TURANO - TRANSFERENCIA - MOC",
+        "region": "Comercial B2B",
+        "remaining_days": null,
+        "sector": "Comercial B2B",
+        "status": "Aguardando BP"
+      },
+      {
+        "client": "UNIMED - VARGINHA",
+        "region": "Regional - Sul Minas",
+        "remaining_days": null,
+        "sector": "Operação",
+        "status": "Execução"
+      },
+      {
+        "client": "ONE NET - TAUBATE",
+        "region": "Regional - São Paulo",
+        "remaining_days": null,
+        "sector": "Comercial B2B",
+        "status": "Aguardando BP"
+      },
+      {
+        "client": "CEVA LOGISTICS LTDA",
+        "region": "Regional - Sul Minas",
+        "remaining_days": null,
+        "sector": "Engenharia",
+        "status": "Ativado"
+      },
+      {
+        "client": "ELAINE REIS BATISTA ME - PARACATU/MG",
+        "region": "Regional - Norte",
+        "remaining_days": null,
+        "sector": "Comercial B2B",
+        "status": "Aguardando BP"
+      },
+      {
+        "client": "SLA 360 - MONTES CLAROS",
+        "region": "Regional - Montes Claros",
+        "remaining_days": null,
+        "sector": "Comercial B2B",
+        "status": "Pendencia Comercial"
+      },
+      {
+        "client": "IGREJA BATISTA DA GRAÇA - TAUBATÉ",
+        "region": "Regional - São Paulo",
+        "remaining_days": null,
+        "sector": "Comercial B2B",
+        "status": "Aguardando BP"
+      },
+      {
+        "client": "Norte conexão varginha",
+        "region": "Regional - Sul Minas",
+        "remaining_days": null,
+        "sector": "Comercial B2B",
+        "status": "Aguardando BP"
+      },
+      {
+        "client": "CONDOMINIO DIAMOND II - MONTES CLAROS",
+        "region": "Regional - Montes Claros",
+        "remaining_days": null,
+        "sector": "Comercial B2B",
+        "status": "Aguardando BP"
+      },
+      {
+        "client": "ASTRAL - UNIFI - MONTES CLAROS",
+        "region": "Regional - Montes Claros",
+        "remaining_days": null,
+        "sector": "Engenharia",
+        "status": "Ativado"
+      },
+      {
+        "client": "Lançamento Latwan - TTE - lançamento interno 18/05, solicitação do cliente..",
+        "region": "Regional - São Paulo",
+        "remaining_days": null,
+        "sector": "Operação",
+        "status": "Ativado"
+      },
+      {
+        "client": "Vistoria BrFibra - PSO",
+        "region": "Regional - Sul Minas",
+        "remaining_days": null,
+        "sector": "Operação",
+        "status": "Ativado"
+      },
+      {
+        "client": "Rede Minas e Rádio Inconfidência - Montes Claros",
+        "region": "Regional - Montes Claros",
+        "remaining_days": null,
+        "sector": "Comercial B2B",
+        "status": "BP - Não Aprovado"
+      },
+      {
+        "client": "AURA TELECOMUNICACOES E INFORMATICA LTDA - CAJURU",
+        "region": "Engenharia - IP e Serviços",
+        "remaining_days": null,
+        "sector": "Engenharia",
+        "status": "Configuração"
+      },
+      {
+        "client": "Fast Telekom - Paracatu",
+        "region": "Regional - Norte",
+        "remaining_days": null,
+        "sector": "Comercial B2B",
+        "status": "Aguardando BP"
+      },
+      {
+        "client": "FRIGOLAVRAS - LAVRAS",
+        "region": "Regional - Sul Minas",
+        "remaining_days": null,
+        "sector": "Operação",
+        "status": "Ativado"
+      },
+      {
+        "client": "RRN HOTEL LTDA",
+        "region": "Regional - Centro Oeste",
+        "remaining_days": null,
+        "sector": "Operação",
+        "status": "Ativado"
+      },
+      {
+        "client": "SANTA MÔNICA LOCAÇÕES - MONTES CLAROS",
+        "region": "Regional - Montes Claros",
+        "remaining_days": null,
+        "sector": "Comercial B2B",
+        "status": "Aguardando BP"
+      },
+      {
+        "client": "SUPERMIX CONCRETO S/A - MONTES CLAROS",
+        "region": "Engenharia - Transmissão",
+        "remaining_days": null,
+        "sector": "Comercial B2B",
+        "status": "Aguardando BP"
+      },
+      {
+        "client": "HOTEL FATIMA - DIVINOPOLIS",
+        "region": "Regional - Centro Oeste",
+        "remaining_days": null,
+        "sector": "Operação",
+        "status": "Inviabilidade Técnica"
+      },
+      {
+        "client": "AVICOLA - CARMO DO CAJURU",
+        "region": "Regional - Centro Oeste",
+        "remaining_days": null,
+        "sector": "Engenharia",
+        "status": "Ativado"
+      },
+      {
+        "client": "KNN IDIOMAS - MONTES CLAROS",
+        "region": "Regional - Montes Claros",
+        "remaining_days": null,
+        "sector": "Comercial B2B",
+        "status": "Aguardando BP"
+      },
+      {
+        "client": "CONEXÃO FITNESS - DIVINÓPOLIS",
+        "region": "Regional - Centro Oeste",
+        "remaining_days": null,
+        "sector": "Comercial B2B",
+        "status": "Aguardando BP"
+      },
+      {
+        "client": "BRINCA LOUMINOS/OKTOBERFEST - CAMPOS DO JORDÃO",
+        "region": "Regional - São Paulo",
+        "remaining_days": null,
+        "sector": "Engenharia",
+        "status": "Ativado"
+      },
+      {
+        "client": "Foco - Divinópolis",
+        "region": "Engenharia - Noc",
+        "remaining_days": null,
+        "sector": "Engenharia",
+        "status": "Ativado"
+      },
+      {
+        "client": "COMERCIO E REPRESENTACOES CECOTI LTDA",
+        "region": "Projetos",
+        "remaining_days": null,
+        "sector": "Engenharia",
+        "status": "Ativado"
+      },
+      {
+        "client": "SIR INFORMATICA",
+        "region": "Regional - São Paulo",
+        "remaining_days": null,
+        "sector": "Operação",
+        "status": "Inviabilidade Técnica"
+      },
+      {
+        "client": "COLEGIO ANGLO - DIVINOPOLIS",
+        "region": "Regional - Centro Oeste",
+        "remaining_days": null,
+        "sector": "Comercial B2B",
+        "status": "Pendencia Comercial"
+      },
+      {
+        "client": "BRDIGITAL",
+        "region": "Projetos",
+        "remaining_days": null,
+        "sector": "Comercial B2B",
+        "status": "Aguardando BP"
+      },
+      {
+        "client": "VP TELECOM - TRANSPORTE L2L - TAUBATE",
+        "region": "Engenharia - IP e Serviços",
+        "remaining_days": null,
+        "sector": "Comercial B2B",
+        "status": "Aguardando BP"
+      },
+      {
+        "client": "NAILAN METAIS - DIVINOPOLIS - CHORO",
+        "region": "Regional - Centro Oeste",
+        "remaining_days": null,
+        "sector": "Comercial B2B",
+        "status": "Aguardando BP"
+      },
+      {
+        "client": "NAILAN METAIS - DIVINOPOLIS - CACOCO",
+        "region": "Regional - Centro Oeste",
+        "remaining_days": null,
+        "sector": "Comercial B2B",
+        "status": "Aguardando BP"
+      },
+      {
+        "client": "ALGAR - 12311 - VARGINHA",
+        "region": "Regional - Sul Minas",
+        "remaining_days": null,
+        "sector": "Operação",
+        "status": "Inviabilidade Técnica"
+      },
+      {
+        "client": "GRAND'DENIO HOTEL CANTINA - VARGINHA",
+        "region": "Regional - Sul Minas",
+        "remaining_days": null,
+        "sector": "Comercial B2B",
+        "status": "Aguardando BP"
+      },
+      {
+        "client": "SAVASSI SÃO LUIZ LTDA - MONTES CLAROS",
+        "region": "Regional - Montes Claros",
+        "remaining_days": null,
+        "sector": "Comercial B2B",
+        "status": "Aguardando BP"
+      },
+      {
+        "client": "GWG TELCO - CAMPOS DO JORDÃO",
+        "region": "Regional - São Paulo",
+        "remaining_days": null,
+        "sector": "Comercial B2B",
+        "status": "Aguardando BP"
+      },
+      {
+        "client": "CLUBE DOS SERVIDORES MUNICIPAIS DE DIVIONOPOLIS",
+        "region": "Comercial B2B",
+        "remaining_days": null,
+        "sector": "Comercial B2B",
+        "status": "Aguardando BP"
+      },
+      {
+        "client": "GOMES SOLUÇÕES CORPORATIVAS - MONTES CLAROS",
+        "region": "Regional - Montes Claros",
+        "remaining_days": null,
+        "sector": "Engenharia",
+        "status": "Ativado"
+      },
+      {
+        "client": "COMPUNET - SÃO JOSÉ DOS CAMPOS",
+        "region": "Comercial B2B",
+        "remaining_days": null,
+        "sector": "Comercial B2B",
+        "status": "Aguardando BP"
+      },
+      {
+        "client": "ALTHAIA - POÇOS DE CALDAS",
+        "region": "Regional - Sul Minas",
+        "remaining_days": null,
+        "sector": "Comercial B2B",
+        "status": "Aguardando BP"
+      },
+      {
+        "client": "POÇOSTEC - FILIAL - POÇOS DE CALDAS",
+        "region": "Regional - Sul Minas",
+        "remaining_days": null,
+        "sector": "Comercial B2B",
+        "status": "Cancelada"
+      },
+      {
+        "client": "DANONE - LTDA -POÇOS DE CALDAS",
+        "region": "Regional - Sul Minas",
+        "remaining_days": null,
+        "sector": "Comercial B2B",
+        "status": "Aguardando BP"
+      },
+      {
+        "client": "LAMESA - POÇOS DE CALDAS",
+        "region": "Regional - Sul Minas",
+        "remaining_days": null,
+        "sector": "Comercial B2B",
+        "status": "Aguardando BP"
+      },
+      {
+        "client": "MYRALIS PHARMA DISTRIBUIDORA - POÇOS DE CALDAS",
+        "region": "Regional - Sul Minas",
+        "remaining_days": null,
+        "sector": "Comercial B2B",
+        "status": "Aguardando BP"
+      },
+      {
+        "client": "THYSSENKRUPP BRASIL LTDA - POÇOS DE CALDAS",
+        "region": "Regional - Sul Minas",
+        "remaining_days": null,
+        "sector": "Comercial B2B",
+        "status": "Aguardando BP"
+      },
+      {
+        "client": "PRADOLUX S.A - POÇOS DE CALDAS",
+        "region": "Regional - Sul Minas",
+        "remaining_days": null,
+        "sector": "Comercial B2B",
+        "status": "Aguardando BP"
+      },
+      {
+        "client": "CAMPO VERDE ARMAZÉNS GERAIS LTDA - POÇOS DE CALDAS",
+        "region": "Regional - Sul Minas",
+        "remaining_days": null,
+        "sector": "Projetos",
+        "status": "Aguardando BP"
+      },
+      {
+        "client": "PRESIDENTE HOTEL - POÇOS DE CALDAS",
+        "region": "Regional - Sul Minas",
+        "remaining_days": null,
+        "sector": "Operação",
+        "status": "Inviabilidade Técnica"
+      },
+      {
+        "client": "PRINCIPE HOTEL - POÇOS DE CALDAS",
+        "region": "Regional - Sul Minas",
+        "remaining_days": null,
+        "sector": "Operação",
+        "status": "Inviabilidade Técnica"
+      },
+      {
+        "client": "NORTH HOTEL - AMPLIAÇÃO 12 UNIFI - MONTES CLAROS",
+        "region": "Regional - Montes Claros",
+        "remaining_days": null,
+        "sector": "Operação",
+        "status": "Estudo Técnico"
+      },
+      {
+        "client": "ufinet methues leme",
+        "region": "Regional - Centro Oeste",
+        "remaining_days": null,
+        "sector": "Comercial B2B",
+        "status": "Aguardando BP"
+      },
+      {
+        "client": "ALGAR MERCADO LIVRE -Betim",
+        "region": "Regional - Centro Oeste",
+        "remaining_days": null,
+        "sector": "Engenharia",
+        "status": "Configuração"
+      },
+      {
+        "client": "MUNICIPIO DE TRES CORAÇÕES - CREAS RODOVIARIA",
+        "region": "Regional - Sul Minas",
+        "remaining_days": null,
+        "sector": "Comercial B2B",
+        "status": "Aguardando BP"
+      },
+      {
+        "client": "EVENTO IP EXPOMONTES 2025 - BARES",
+        "region": "Regional - Montes Claros",
+        "remaining_days": null,
+        "sector": "Projetos",
+        "status": "Ativado"
+      },
+      {
+        "client": "CONCESSIONARIA ECOVIAS DAS GERAIS S.A.",
+        "region": "Regional - Montes Claros",
+        "remaining_days": null,
+        "sector": "Comercial B2B",
+        "status": "Aguardando BP"
+      },
+      {
+        "client": "Tassi Transportes - POÇOS DE CALDAS",
+        "region": "Regional - Sul Minas",
+        "remaining_days": null,
+        "sector": "Comercial B2B",
+        "status": "Pendencia Comercial"
+      },
+      {
+        "client": "SICREDI VANGUARDA Tremembé SP",
+        "region": "Regional - São Paulo",
+        "remaining_days": null,
+        "sector": "Comercial B2B",
+        "status": "Aguardando BP"
+      },
+      {
+        "client": "MGNET",
+        "region": "Regional - Centro Oeste",
+        "remaining_days": null,
+        "sector": "Engenharia",
+        "status": "Ativado"
+      },
+      {
+        "client": "JW ATIVIDADES MEDICAS LTDA - PARACATU",
+        "region": "Regional - Norte",
+        "remaining_days": null,
+        "sector": "Comercial B2B",
+        "status": "Pendencia Comercial"
+      },
+      {
+        "client": "UFLA - UPGRADE",
+        "region": "Regional - Sul Minas",
+        "remaining_days": null,
+        "sector": "Comercial B2B",
+        "status": "Pendencia Comercial"
+      },
+      {
+        "client": "OSVALDO BATISTA VELOSO",
+        "region": "Engenharia - IP e Serviços",
+        "remaining_days": null,
+        "sector": "Comercial B2B",
+        "status": "Pendencia Comercial"
+      },
+      {
+        "client": "IGN VARGINHA",
+        "region": "Projetos",
+        "remaining_days": null,
+        "sector": "Operação",
+        "status": "Ativado"
+      },
+      {
+        "client": "FIBER NET - IP TRANSITO - SÃO JOSE DO ALEGRE",
+        "region": "Regional - Sul Minas",
+        "remaining_days": null,
+        "sector": "Comercial B2B",
+        "status": "Pendencia Comercial"
+      },
+      {
+        "client": "SEARA ALIMENTOS - PASSOS",
+        "region": "Comercial B2B",
+        "remaining_days": null,
+        "sector": "Comercial B2B",
+        "status": "Pendencia Comercial"
+      },
+      {
+        "client": "BRASILTECPAR",
+        "region": "Regional - Montes Claros",
+        "remaining_days": null,
+        "sector": "Engenharia",
+        "status": "Configuração"
+      },
+      {
+        "client": "SICREDI Divinópolis",
+        "region": "Regional - Centro Oeste",
+        "remaining_days": null,
+        "sector": "Engenharia",
+        "status": "Ativado"
+      },
+      {
+        "client": "TRIAL R2NET CONTAGEM",
+        "region": "Regional - Centro Oeste",
+        "remaining_days": null,
+        "sector": "Operação",
+        "status": "Ativado"
+      },
+      {
+        "client": "CPX Distribuidora S.A. - Montes Claros",
+        "region": "Regional - Montes Claros",
+        "remaining_days": null,
+        "sector": "Comercial B2B",
+        "status": "Aguardando BP"
+      },
+      {
+        "client": "intelle três corações",
+        "region": "Regional - Sul Minas",
+        "remaining_days": null,
+        "sector": "Comercial B2B",
+        "status": "Aguardando BP"
+      },
+      {
+        "client": "8 NOVE TELECOMUNICACOES - CONECTE SLP - TAUBATE",
+        "region": "Regional - São Paulo",
+        "remaining_days": null,
+        "sector": "Projetos",
+        "status": "Ativado"
+      },
+      {
+        "client": "Orchest do Brasil LTDA",
+        "region": "Regional - São Paulo",
+        "remaining_days": null,
+        "sector": "Comercial B2B",
+        "status": "Aguardando BP"
+      },
+      {
+        "client": "Fabrica De Rações JBS - Passos",
+        "region": "Regional - Sul Minas",
+        "remaining_days": null,
+        "sector": "Comercial B2B",
+        "status": "Aguardando BP"
+      },
+      {
+        "client": "AVIVAR - ADM GAMELEIRA - CARMO DO CAJURU",
+        "region": "Regional - Centro Oeste",
+        "remaining_days": null,
+        "sector": "Comercial B2B",
+        "status": "Aguardando BP"
+      },
+      {
+        "client": "EXPRESSO TELECOM - ALFREDO ROSENDO - UPGRADE L2L 2 GBPS",
+        "region": "Engenharia - IP e Serviços",
+        "remaining_days": null,
+        "sector": "Engenharia",
+        "status": "Ativado"
+      },
+      {
+        "client": "EXPRESSO TELECOM - TAUBATE",
+        "region": "Regional - São Paulo",
+        "remaining_days": null,
+        "sector": "Engenharia",
+        "status": "Ativado"
+      },
+      {
+        "client": "SITELBRA SISTEMA DE TELECOMUNICAÇÕES DO BRASIL",
+        "region": "Regional - Centro Oeste",
+        "remaining_days": null,
+        "sector": "Operação",
+        "status": "Ativado"
+      },
+      {
+        "client": "NORTE CONEXÂO",
+        "region": "Regional - Centro Oeste",
+        "remaining_days": null,
+        "sector": "Comercial B2B",
+        "status": "Aguardando BP"
+      },
+      {
+        "client": "BRASILTECPAR",
+        "region": "Regional - Montes Claros",
+        "remaining_days": null,
+        "sector": "Comercial B2B",
+        "status": "Pendencia Comercial"
+      },
+      {
+        "client": "IGN São José dos Campos",
+        "region": "Regional - São Paulo",
+        "remaining_days": null,
+        "sector": "Comercial B2B",
+        "status": "Aguardando BP"
+      },
+      {
+        "client": "IGN TAUBATÈ",
+        "region": "Regional - São Paulo",
+        "remaining_days": null,
+        "sector": "Comercial B2B",
+        "status": "Cancelada"
+      },
+      {
+        "client": "TELEON",
+        "region": "Regional - Centro Oeste",
+        "remaining_days": null,
+        "sector": "Projetos",
+        "status": "Ativado"
+      },
+      {
+        "client": "Norte Três Corações",
+        "region": "Engenharia - IP e Serviços",
+        "remaining_days": null,
+        "sector": "Engenharia",
+        "status": "Ativado"
+      },
+      {
+        "client": "FIBER NET LTDA - TRANSPORTE PTT - SÃO JOSE DO ALEGRE",
+        "region": "Engenharia - IP e Serviços",
+        "remaining_days": null,
+        "sector": "Engenharia",
+        "status": "Ativado"
+      },
+      {
+        "client": "GWG TELCO - TAUBATE",
+        "region": "Projetos",
+        "remaining_days": null,
+        "sector": "Comercial B2B",
+        "status": "Cancelada"
+      },
+      {
+        "client": "GWG TELCO - SJC X SP4",
+        "region": "Regional - São Paulo",
+        "remaining_days": null,
+        "sector": "Comercial B2B",
+        "status": "Cancelada"
+      },
+      {
+        "client": "R FRANCO ENGENHARIA - SÃO JOSÉ DOS CAMPOS",
+        "region": "Regional - São Paulo",
+        "remaining_days": null,
+        "sector": "Operação",
+        "status": "Inviabilidade Técnica"
+      },
+      {
+        "client": "HEAVEN SYSTEM - SJC - AQUARIUS",
+        "region": "Regional - São Paulo",
+        "remaining_days": null,
+        "sector": "Engenharia",
+        "status": "Ativado"
+      },
+      {
+        "client": "IGN – Teófilo Otoni - Last Mile",
+        "region": "Regional - Centro Oeste",
+        "remaining_days": null,
+        "sector": "Comercial B2B",
+        "status": "Ativado"
+      },
+      {
+        "client": "MOC AUTOMAÇÃO - MONTES CLAROS",
+        "region": "Projetos",
+        "remaining_days": null,
+        "sector": "Comercial B2B",
+        "status": "Aguardando BP"
+      },
+      {
+        "client": "brasil tecpar itauna",
+        "region": "Regional - Centro Oeste",
+        "remaining_days": null,
+        "sector": "Comercial B2B",
+        "status": "Pendencia Comercial"
+      },
+      {
+        "client": "UPIX VARGINHA",
+        "region": "Regional - Centro Oeste",
+        "remaining_days": null,
+        "sector": "Comercial B2B",
+        "status": "Pendencia Comercial"
+      },
+      {
+        "client": "Brasil Tecpar Montes Claros",
+        "region": "Regional - Montes Claros",
+        "remaining_days": null,
+        "sector": "Comercial B2B",
+        "status": "Aguardando BP"
+      },
+      {
+        "client": "GRIFE TRANSPORTES - MONTES CLAROS",
+        "region": "Projetos",
+        "remaining_days": null,
+        "sector": "Comercial B2B",
+        "status": "Aguardando BP"
+      },
+      {
+        "client": "TRC TELECOM LTDA - MONTES CLAROS",
+        "region": "Regional - Montes Claros",
+        "remaining_days": null,
+        "sector": "Comercial B2B",
+        "status": "Aguardando BP"
+      },
+      {
+        "client": "NETLC COMUNICACAO MULTIMIDIA LTDA",
+        "region": "Comercial B2B",
+        "remaining_days": null,
+        "sector": "Engenharia",
+        "status": "Ativado"
+      },
+      {
+        "client": "Newfiber - São Jose dos Salgados",
+        "region": "Comercial B2B",
+        "remaining_days": null,
+        "sector": "Engenharia",
+        "status": "Configuração"
+      },
+      {
+        "client": "8 NOVE TELECOMUNICACOES LTDA - TAUBATE",
+        "region": "Engenharia - IP e Serviços",
+        "remaining_days": null,
+        "sector": "Engenharia",
+        "status": "Ativado"
+      },
+      {
+        "client": "VP TELECOM - SINDICATO - TAUBATE",
+        "region": "Comercial B2B",
+        "remaining_days": null,
+        "sector": "Operação",
+        "status": "Inviabilidade Técnica"
+      },
+      {
+        "client": "GWG - L2L CAMARA X CRISTO - POÇOS DE CALDAS",
+        "region": "Comercial B2B",
+        "remaining_days": null,
+        "sector": "Comercial B2B",
+        "status": "Pendencia Comercial"
+      },
+      {
+        "client": "DOT A DOT -Tremembé - SP",
+        "region": "Projetos",
+        "remaining_days": null,
+        "sector": "Projetos",
+        "status": "Ativado"
+      },
+      {
+        "client": "AMIS ASSOCIACAO MINEIRA DE SUPERMERCADOS - DIVINÓPOLIS",
+        "region": "Regional - Centro Oeste",
+        "remaining_days": null,
+        "sector": "Comercial B2B",
+        "status": "Aguardando BP"
+      },
+      {
+        "client": "ufinet varginha",
+        "region": "Comercial B2B",
+        "remaining_days": null,
+        "sector": "Comercial B2B",
+        "status": "Pendencia Comercial"
+      },
+      {
+        "client": "GADATI EVENTOS LAVRAS (THULIO PADOVANI)",
+        "region": "Engenharia - Transmissão",
+        "remaining_days": null,
+        "sector": "Comercial B2B",
+        "status": "Aguardando BP"
+      },
+      {
+        "client": "RURAL TELECOM MAIS LTDA",
+        "region": "Regional - Sul Minas",
+        "remaining_days": null,
+        "sector": "Comercial B2B",
+        "status": "Ativado"
+      },
+      {
+        "client": "IGN - Paraisopolis",
+        "region": "Projetos",
+        "remaining_days": null,
+        "sector": "Engenharia",
+        "status": "Ativado"
+      },
+      {
+        "client": "GLOBAL JOBS NET - UPGRADE IP - VARGINHA",
+        "region": "Comercial B2B",
+        "remaining_days": null,
+        "sector": "Comercial B2B",
+        "status": "Aguardando BP"
+      },
+      {
+        "client": "PREFEITURA MUNICIPAL DE VARGINHA",
+        "region": "Projetos",
+        "remaining_days": null,
+        "sector": "Comercial B2B",
+        "status": "Aguardando BP"
+      },
+      {
+        "client": "DOT A DOT - POÇOS DE CALDAS",
+        "region": "Regional - Sul Minas",
+        "remaining_days": null,
+        "sector": "Comercial B2B",
+        "status": "Inviabilidade Técnica"
+      },
+      {
+        "client": "STA SERVIÇOS - RENATO - PTU",
+        "region": "Regional - Norte",
+        "remaining_days": null,
+        "sector": "Comercial B2B",
+        "status": "Aguardando BP"
+      },
+      {
+        "client": "RAFAEL HENRIQUE DE SOUSA",
+        "region": "Regional - Centro Oeste",
+        "remaining_days": null,
+        "sector": "Comercial B2B",
+        "status": "Pendencia Comercial"
+      },
+      {
+        "client": "CONDOMINIO JOSE BRANDAO I",
+        "region": "Regional - Centro Oeste",
+        "remaining_days": null,
+        "sector": "Comercial B2B",
+        "status": "Pendencia Comercial"
+      },
+      {
+        "client": "AVIVAR - INTERLIGAR GALPÃO - CARMO DO CAJURU",
+        "region": "Regional - Centro Oeste",
+        "remaining_days": null,
+        "sector": "Comercial B2B",
+        "status": "Aguardando BP"
+      },
+      {
+        "client": "ALGAR - 12576 - TAUBATE",
+        "region": "Regional - São Paulo",
+        "remaining_days": null,
+        "sector": "Comercial B2B",
+        "status": "Aguardando BP"
+      },
+      {
+        "client": "ALGAR 431842 PARACATU",
+        "region": "Regional - Norte",
+        "remaining_days": null,
+        "sector": "Comercial B2B",
+        "status": "Aguardando BP"
+      },
+      {
+        "client": "MOOV TELECOM - PTT - ITAJUBA",
+        "region": "Regional - Sul Minas",
+        "remaining_days": null,
+        "sector": "Comercial B2B",
+        "status": "Pendencia Comercial"
+      },
+      {
+        "client": "ufinet varginha - link 2",
+        "region": "Regional - Sul Minas",
+        "remaining_days": null,
+        "sector": "Comercial B2B",
+        "status": "Aguardando BP"
+      },
+      {
+        "client": "ALGAR - 12576 - TAUBATE Endereço 2",
+        "region": "Regional - São Paulo",
+        "remaining_days": null,
+        "sector": "Comercial B2B",
+        "status": "Aguardando BP"
+      },
+      {
+        "client": "FREITAS DA CRUZ SERV.DE COMUNICACAO LTDA",
+        "region": "Regional - Norte",
+        "remaining_days": null,
+        "sector": "Comercial B2B",
+        "status": "Aguardando BP"
+      },
+      {
+        "client": "DOT A DOT CAJURU",
+        "region": "Regional - Centro Oeste",
+        "remaining_days": null,
+        "sector": "Comercial B2B",
+        "status": "Aguardando BP"
+      },
+      {
+        "client": "DOT a DOT Juatuba SUPERMERCADO BH",
+        "region": "Regional - Centro Oeste",
+        "remaining_days": null,
+        "sector": "Comercial B2B",
+        "status": "Aguardando BP"
+      },
+      {
+        "client": "DOT A DOT SETE LAGOAS",
+        "region": "Regional - Centro Oeste",
+        "remaining_days": null,
+        "sector": "Comercial B2B",
+        "status": "Pendencia Comercial"
+      },
+      {
+        "client": "Material Elétrico e Hidráulico JOGS E MIGAS - Montes Claros",
+        "region": "Regional - Montes Claros",
+        "remaining_days": null,
+        "sector": "Comercial B2B",
+        "status": "Inviabilidade Técnica"
+      },
+      {
+        "client": "EUROFARMA (TRANSFERENCIA DE PONTO) MONTES CLAROS",
+        "region": "Regional - Montes Claros",
+        "remaining_days": null,
+        "sector": "Comercial B2B",
+        "status": "Pendencia Comercial"
+      },
+      {
+        "client": "ALGAR - 431340 - PINDA",
+        "region": "Regional - São Paulo",
+        "remaining_days": null,
+        "sector": "Operação",
+        "status": "Inviabilidade Técnica"
+      },
+      {
+        "client": "UFINET LORENA",
+        "region": "Engenharia - IP e Serviços",
+        "remaining_days": null,
+        "sector": "Engenharia",
+        "status": "Ativado"
+      },
+      {
+        "client": "ELETRONET - CARMO DO CAJURU",
+        "region": "Regional - Centro Oeste",
+        "remaining_days": null,
+        "sector": "Comercial B2B",
+        "status": "Aguardando BP"
+      },
+      {
+        "client": "ALGAR 421001 TAUBATE",
+        "region": "Regional - São Paulo",
+        "remaining_days": null,
+        "sector": "Comercial B2B",
+        "status": "Aguardando BP"
+      },
+      {
+        "client": "EXPRESSO TELECOM - L2L - METTRO - TAUBATE",
+        "region": "Engenharia - IP e Serviços",
+        "remaining_days": null,
+        "sector": "Comercial B2B",
+        "status": "Aguardando BP"
+      },
+      {
+        "client": "Microsete Taubate",
+        "region": "Projetos",
+        "remaining_days": null,
+        "sector": "Comercial B2B",
+        "status": "Aguardando BP"
+      },
+      {
+        "client": "American Tower COPASA em Juatuba",
+        "region": "Projetos",
+        "remaining_days": null,
+        "sector": "Comercial B2B",
+        "status": "Aguardando BP"
+      },
+      {
+        "client": "DISTRIBUIDORA NOVA GERAÇÃO - MONTES CLAROS",
+        "region": "Regional - Montes Claros",
+        "remaining_days": null,
+        "sector": "Engenharia",
+        "status": "Ativado"
+      },
+      {
+        "client": "HLVR EMPREENDIMENTOS - VARGINHA",
+        "region": "Regional - Sul Minas",
+        "remaining_days": null,
+        "sector": "Comercial B2B",
+        "status": "Pendencia Comercial"
+      },
+      {
+        "client": "Algar Lorena - 435259",
+        "region": "Regional - São Paulo",
+        "remaining_days": null,
+        "sector": "Comercial B2B",
+        "status": "Aguardando BP"
+      },
+      {
+        "client": "SPACEMAKER - SAO JOSE DOS CAMPOS",
+        "region": "Regional - São Paulo",
+        "remaining_days": null,
+        "sector": "Comercial B2B",
+        "status": "Aguardando BP"
+      },
+      {
+        "client": "HOSPITAL SÃO BENTO MENNI - DIVINOPOLIS",
+        "region": "Regional - Centro Oeste",
+        "remaining_days": null,
+        "sector": "Comercial B2B",
+        "status": "Pendencia Comercial"
+      },
+      {
+        "client": "SITELBRA PASSOS",
+        "region": "Regional - Sul Minas",
+        "remaining_days": null,
+        "sector": "Comercial B2B",
+        "status": "Aguardando BP"
+      },
+      {
+        "client": "VALDIR SARAIVA",
+        "region": "Regional - Montes Claros",
+        "remaining_days": null,
+        "sector": "Comercial B2B",
+        "status": "Aguardando BP"
+      },
+      {
+        "client": "Palácio dos Leilões - JUATUBA",
+        "region": "Regional - Centro Oeste",
+        "remaining_days": null,
+        "sector": "Comercial B2B",
+        "status": "Aguardando BP"
+      },
+      {
+        "client": "Entroncamento Master x Conecta",
+        "region": "Regional - Montes Claros",
+        "remaining_days": null,
+        "sector": "Comercial B2B",
+        "status": "Aguardando BP"
+      },
+      {
+        "client": "FIBER NET - PIRANGUINHO",
+        "region": "Regional - Sul Minas",
+        "remaining_days": null,
+        "sector": "Engenharia",
+        "status": "Ativado"
+      },
+      {
+        "client": "CLUBE SINDICATO DOS METALURGICOS - DIVINÓPOLIS",
+        "region": "Regional - Centro Oeste",
+        "remaining_days": null,
+        "sector": "Engenharia",
+        "status": "Aguardando BP"
+      },
+      {
+        "client": "FBR - JUATUBA - Ambev",
+        "region": "Regional - Centro Oeste",
+        "remaining_days": null,
+        "sector": "Comercial B2B",
+        "status": "Pendencia Comercial"
+      },
+      {
+        "client": "PLIN SOLUCOES DE PAGAMENTO LTDA",
+        "region": "Regional - Montes Claros",
+        "remaining_days": null,
+        "sector": "Operação",
+        "status": "Vistoria"
+      },
+      {
+        "client": "TINTANORTE DISTRIBUIDORS DE MATERIAIS",
+        "region": "Regional - Montes Claros",
+        "remaining_days": null,
+        "sector": "Comercial B2B",
+        "status": "Pendencia Comercial"
+      },
+      {
+        "client": "ALGAR - MASSIVA 12735 - SÃO SEBASTIAO DO PARAISO",
+        "region": "Regional - Sul Minas",
+        "remaining_days": null,
+        "sector": "Engenharia",
+        "status": "Estudo"
+      },
+      {
+        "client": "HOSPITAL OTORRINO CENTER LTDA - MONTES CLAROS",
+        "region": "Regional - Montes Claros",
+        "remaining_days": null,
+        "sector": "Projetos",
+        "status": "Estudo"
+      },
+      {
+        "client": "ADM PORTAS - MONTES CLAROS",
+        "region": "Regional - Montes Claros",
+        "remaining_days": null,
+        "sector": "Operação",
+        "status": "Aguardando BP"
+      },
+      {
+        "client": "CAMARA MUNICIPAL DE DIVINOPOLIS",
+        "region": "Regional - Centro Oeste",
+        "remaining_days": null,
+        "sector": "Comercial B2B",
+        "status": "Aguardando BP"
+      },
+      {
+        "client": "ELO SOLUÇÕES - BANCO DO NORDESTE - MONTES CLAROS",
+        "region": "Regional - Montes Claros",
+        "remaining_days": null,
+        "sector": "Comercial B2B",
+        "status": "Pendencia Comercial"
+      },
+      {
+        "client": "ATIVALOG - MIGRAÇÃO FIBRA - VARGINHA",
+        "region": "Regional - Sul Minas",
+        "remaining_days": null,
+        "sector": "Comercial B2B",
+        "status": "Pendencia Comercial"
+      },
+      {
+        "client": "PROWEL (Tuná Parque Aquático) - CAPITÓLIO",
+        "region": "Regional - Sul Minas",
+        "remaining_days": null,
+        "sector": "Engenharia",
+        "status": "Ativado"
+      },
+      {
+        "client": "COMNT UPGRAD - 10GBPS | MONTES CLAROS/MG",
+        "region": "Regional - Montes Claros",
+        "remaining_days": null,
+        "sector": "Engenharia",
+        "status": "Estudo"
+      },
+      {
+        "client": "ATIVA LOGISTICA | VARGINHA/MG",
+        "region": "Regional - Sul Minas",
+        "remaining_days": null,
+        "sector": "CD - Centro Distribuição",
+        "status": "Estoque B2B"
+      },
+      {
+        "client": "north poços de caldas",
+        "region": "Regional - Sul Minas",
+        "remaining_days": null,
+        "sector": "Comercial B2B",
+        "status": "Aguardando BP"
+      },
+      {
+        "client": "PAO DA ALMA - DIVINOPOLIS",
+        "region": "Regional - Centro Oeste",
+        "remaining_days": null,
+        "sector": "Comercial B2B",
+        "status": "Pendencia Comercial"
+      },
+      {
+        "client": "VERO - VERO INTERNET - VERO EMPRESAS - POUSO ALEGRE",
+        "region": "Regional - Sul Minas",
+        "remaining_days": null,
+        "sector": "Comercial B2B",
+        "status": "Pendencia Comercial"
+      },
+      {
+        "client": "MINISTERIO REDENCAO - DIVINÓPOLIS",
+        "region": "Regional - Centro Oeste",
+        "remaining_days": null,
+        "sector": "Comercial B2B",
+        "status": "Aguardando BP"
+      },
+      {
+        "client": "VIA AGRO COMERCIO REPRESENTACOES - DIVINÓPOLIS",
+        "region": "Regional - Centro Oeste",
+        "remaining_days": null,
+        "sector": "Comercial B2B",
+        "status": "Aguardando BP"
+      },
+      {
+        "client": "BRASIL PONTES ENGENHARIA E CONSTRUCOES - MONTES CLAROS",
+        "region": "Regional - Montes Claros",
+        "remaining_days": null,
+        "sector": "Comercial B2B",
+        "status": "Aguardando BP"
+      },
+      {
+        "client": "RX CONSTRUTORA - VARGINHA",
+        "region": "Regional - Sul Minas",
+        "remaining_days": null,
+        "sector": "Comercial B2B",
+        "status": "Aguardando BP"
+      },
+      {
+        "client": "LINK VALE - PINDAMONHANGABA",
+        "region": "Regional - São Paulo",
+        "remaining_days": null,
+        "sector": "Comercial B2B",
+        "status": "Aguardando BP"
+      },
+      {
+        "client": "MOBIPHONE - TAUBATE - TRANSFERENCIA DE ENDEREÇO",
+        "region": "Regional - São Paulo",
+        "remaining_days": -7,
+        "sector": "Projetos",
+        "status": "Estudo"
+      },
+      {
+        "client": "ULTRANET VARGINHA",
+        "region": "Regional - Sul Minas",
+        "remaining_days": null,
+        "sector": "Comercial B2B",
+        "status": "Aguardando BP"
+      },
+      {
+        "client": "UFINET TAUBATE",
+        "region": "Regional - São Paulo",
+        "remaining_days": null,
+        "sector": "Comercial B2B",
+        "status": "Aguardando BP"
+      },
+      {
+        "client": "ALGAR - 438687 - ITAUNA",
+        "region": "Regional - Centro Oeste",
+        "remaining_days": null,
+        "sector": "Comercial B2B",
+        "status": "Aguardando BP"
+      },
+      {
+        "client": "MOBIPHONE - TAUBATE - PONTO NOVO",
+        "region": "Regional - São Paulo",
+        "remaining_days": -1,
+        "sector": "Projetos",
+        "status": "Estudo"
+      },
+      {
+        "client": "W&W EVENTOS - MONTES CLAROS",
+        "region": "Regional - Montes Claros",
+        "remaining_days": -1,
+        "sector": "Operação",
+        "status": "Estudo"
+      },
+      {
+        "client": "AGAH MADEIRAS - PASSOS",
+        "region": "Regional - Sul Minas",
+        "remaining_days": 0,
+        "sector": "Operação",
+        "status": "Vistoria"
+      },
+      {
+        "client": "FIBRA APAGADA TUNA ( AO PARQUE PAUA )",
+        "region": "Regional - Sul Minas",
+        "remaining_days": 2,
+        "sector": "Operação",
+        "status": "Vistoria"
+      },
+      {
+        "client": "EXPOLAVRAS - LAVRAS",
+        "region": "Regional - Sul Minas",
+        "remaining_days": 2,
+        "sector": "Operação",
+        "status": "Vistoria"
+      }
+    ]
   },
   "financial": {
     "total_value": 1628926.32,
     "average_value": 13574.39,
     "highest_value": 132117.02,
     "lowest_value": 0,
-    "approved_value": 308582.26
+    "approved_value": 308582.26,
+    "highest_project": {
+      "client": "Palácio dos Leilões - JUATUBA",
+      "region": "Regional - Centro Oeste",
+      "remaining_days": null,
+      "sector": "Comercial B2B",
+      "value": 132117.02
+    },
+    "highest_approved_project": {
+      "client": "AVICOLA - CARMO DO CAJURU",
+      "region": "Regional - Centro Oeste",
+      "remaining_days": null,
+      "sector": "Engenharia",
+      "value": 79801.03
+    }
   },
   "status_by_region": {
-    "Concluída": {
-      "CD - Centro de Distruibuição": 1,
-      "Comercial B2B": 10,
-      "Engenharia - IP e Serviços": 9,
-      "Engenharia - Noc ": 1,
-      "Engenharia - Transmissão": 2,
-      "Projetos": 11,
-      "Regional - Centro Oeste": 38,
-      "Regional - Montes Claros": 33,
-      "Regional - Norte": 8,
-      "Regional - Sul Minas": 44,
-      "Regional - São Paulo": 25
+    "counts": {
+      "Concluída": {
+        "CD - Centro de Distruibuição": 1,
+        "Comercial B2B": 10,
+        "Engenharia - IP e Serviços": 9,
+        "Engenharia - Noc ": 1,
+        "Engenharia - Transmissão": 2,
+        "Projetos": 11,
+        "Regional - Centro Oeste": 38,
+        "Regional - Montes Claros": 33,
+        "Regional - Norte": 8,
+        "Regional - Sul Minas": 44,
+        "Regional - São Paulo": 25
+      },
+      "Em Andamento": {
+        "CD - Centro de Distruibuição": 0,
+        "Comercial B2B": 0,
+        "Engenharia - IP e Serviços": 0,
+        "Engenharia - Noc ": 0,
+        "Engenharia - Transmissão": 0,
+        "Projetos": 0,
+        "Regional - Centro Oeste": 0,
+        "Regional - Montes Claros": 1,
+        "Regional - Norte": 0,
+        "Regional - Sul Minas": 3,
+        "Regional - São Paulo": 2
+      }
     },
-    "Em Andamento": {
-      "CD - Centro de Distruibuição": 0,
-      "Comercial B2B": 0,
-      "Engenharia - IP e Serviços": 0,
-      "Engenharia - Noc ": 0,
-      "Engenharia - Transmissão": 0,
-      "Projetos": 0,
-      "Regional - Centro Oeste": 0,
-      "Regional - Montes Claros": 1,
-      "Regional - Norte": 0,
-      "Regional - Sul Minas": 3,
-      "Regional - São Paulo": 2
-    }
+    "items": [
+      {
+        "client": "IGN TELECOMUNICAÇÕES DO BRASIL LTDA",
+        "region": "Regional - Sul Minas",
+        "remaining_days": null,
+        "sector": "Operação",
+        "status": "Concluída"
+      },
+      {
+        "client": "Vistoria Brasiltecpar - TTE",
+        "region": "Regional - São Paulo",
+        "remaining_days": null,
+        "sector": "Comercial B2B",
+        "status": "Concluída"
+      },
+      {
+        "client": "Vistoria Netmig - PTU",
+        "region": "Regional - Norte",
+        "remaining_days": null,
+        "sector": "Comercial B2B",
+        "status": "Concluída"
+      },
+      {
+        "client": "Vistoria BrDigital - PÇS",
+        "region": "Regional - Sul Minas",
+        "remaining_days": null,
+        "sector": "Comercial B2B",
+        "status": "Concluída"
+      },
+      {
+        "client": "R N TINTAS E FERRAMENTAS LTDA",
+        "region": "Regional - Sul Minas",
+        "remaining_days": null,
+        "sector": "Operação",
+        "status": "Concluída"
+      },
+      {
+        "client": "FIBER 37 DIVINOPOLIS- VALE DO SOL",
+        "region": "Regional - Centro Oeste",
+        "remaining_days": null,
+        "sector": "Engenharia",
+        "status": "Concluída"
+      },
+      {
+        "client": "Vistoria Refinaria Henrique Lage - SJC",
+        "region": "Regional - São Paulo",
+        "remaining_days": null,
+        "sector": "Comercial B2B",
+        "status": "Concluída"
+      },
+      {
+        "client": "Vistoria TAURUS ACADEMIA - MCL",
+        "region": "Regional - Montes Claros",
+        "remaining_days": null,
+        "sector": "Comercial B2B",
+        "status": "Concluída"
+      },
+      {
+        "client": "MAGLIONI RIBEIRO & CIA LTDA",
+        "region": "Regional - Sul Minas",
+        "remaining_days": null,
+        "sector": "Engenharia",
+        "status": "Concluída"
+      },
+      {
+        "client": "KOYA FUSION CUISINE LTDA - MONTES CLAROS",
+        "region": "Regional - Montes Claros",
+        "remaining_days": null,
+        "sector": "Comercial B2B",
+        "status": "Concluída"
+      },
+      {
+        "client": "Algar - 383387 - POCOS DE CALDAS - Aguard. nova vistoria (Igor Raposo)",
+        "region": "Regional - Sul Minas",
+        "remaining_days": null,
+        "sector": "Comercial B2B",
+        "status": "Concluída"
+      },
+      {
+        "client": "ACADEMIA SAO JOAO MONTES CLAROS LTDA",
+        "region": "Regional - Montes Claros",
+        "remaining_days": null,
+        "sector": "Comercial B2B",
+        "status": "Concluída"
+      },
+      {
+        "client": "CAMA E CAFE HOSPEDAGEM - LAVRAS",
+        "region": "CD - Centro de Distruibuição",
+        "remaining_days": null,
+        "sector": "Engenharia",
+        "status": "Concluída"
+      },
+      {
+        "client": "EVENTO CHURRASCANDO 2026 - PARACATU MG",
+        "region": "Regional - Norte",
+        "remaining_days": null,
+        "sector": "Comercial B2B",
+        "status": "Concluída"
+      },
+      {
+        "client": "CEL CENTRAL ELETRICA LTDA",
+        "region": "Regional - Montes Claros",
+        "remaining_days": null,
+        "sector": "Engenharia",
+        "status": "Concluída"
+      },
+      {
+        "client": "SAMM TECNOLOGIA E TELECOMUNICACOES S.A.",
+        "region": "Regional - Sul Minas",
+        "remaining_days": null,
+        "sector": "Operação",
+        "status": "Concluída"
+      },
+      {
+        "client": "LA SUÍTE MOTEL - MONTES CLAROS",
+        "region": "Regional - Montes Claros",
+        "remaining_days": null,
+        "sector": "Comercial B2B",
+        "status": "Concluída"
+      },
+      {
+        "client": "RG TECH - PARA DE MINAS",
+        "region": "Regional - Centro Oeste",
+        "remaining_days": null,
+        "sector": "Comercial B2B",
+        "status": "Concluída"
+      },
+      {
+        "client": "TURANO - TRANSFERENCIA - MOC",
+        "region": "Comercial B2B",
+        "remaining_days": null,
+        "sector": "Comercial B2B",
+        "status": "Concluída"
+      },
+      {
+        "client": "UNIMED - VARGINHA",
+        "region": "Regional - Sul Minas",
+        "remaining_days": null,
+        "sector": "Operação",
+        "status": "Concluída"
+      },
+      {
+        "client": "ONE NET - TAUBATE",
+        "region": "Regional - São Paulo",
+        "remaining_days": null,
+        "sector": "Comercial B2B",
+        "status": "Concluída"
+      },
+      {
+        "client": "CEVA LOGISTICS LTDA",
+        "region": "Regional - Sul Minas",
+        "remaining_days": null,
+        "sector": "Engenharia",
+        "status": "Concluída"
+      },
+      {
+        "client": "ELAINE REIS BATISTA ME - PARACATU/MG",
+        "region": "Regional - Norte",
+        "remaining_days": null,
+        "sector": "Comercial B2B",
+        "status": "Concluída"
+      },
+      {
+        "client": "SLA 360 - MONTES CLAROS",
+        "region": "Regional - Montes Claros",
+        "remaining_days": null,
+        "sector": "Comercial B2B",
+        "status": "Concluída"
+      },
+      {
+        "client": "IGREJA BATISTA DA GRAÇA - TAUBATÉ",
+        "region": "Regional - São Paulo",
+        "remaining_days": null,
+        "sector": "Comercial B2B",
+        "status": "Concluída"
+      },
+      {
+        "client": "Norte conexão varginha",
+        "region": "Regional - Sul Minas",
+        "remaining_days": null,
+        "sector": "Comercial B2B",
+        "status": "Concluída"
+      },
+      {
+        "client": "CONDOMINIO DIAMOND II - MONTES CLAROS",
+        "region": "Regional - Montes Claros",
+        "remaining_days": null,
+        "sector": "Comercial B2B",
+        "status": "Concluída"
+      },
+      {
+        "client": "ASTRAL - UNIFI - MONTES CLAROS",
+        "region": "Regional - Montes Claros",
+        "remaining_days": null,
+        "sector": "Engenharia",
+        "status": "Concluída"
+      },
+      {
+        "client": "Lançamento Latwan - TTE - lançamento interno 18/05, solicitação do cliente..",
+        "region": "Regional - São Paulo",
+        "remaining_days": null,
+        "sector": "Operação",
+        "status": "Concluída"
+      },
+      {
+        "client": "Vistoria BrFibra - PSO",
+        "region": "Regional - Sul Minas",
+        "remaining_days": null,
+        "sector": "Operação",
+        "status": "Concluída"
+      },
+      {
+        "client": "Rede Minas e Rádio Inconfidência - Montes Claros",
+        "region": "Regional - Montes Claros",
+        "remaining_days": null,
+        "sector": "Comercial B2B",
+        "status": "Concluída"
+      },
+      {
+        "client": "AURA TELECOMUNICACOES E INFORMATICA LTDA - CAJURU",
+        "region": "Engenharia - IP e Serviços",
+        "remaining_days": null,
+        "sector": "Engenharia",
+        "status": "Concluída"
+      },
+      {
+        "client": "Fast Telekom - Paracatu",
+        "region": "Regional - Norte",
+        "remaining_days": null,
+        "sector": "Comercial B2B",
+        "status": "Concluída"
+      },
+      {
+        "client": "FRIGOLAVRAS - LAVRAS",
+        "region": "Regional - Sul Minas",
+        "remaining_days": null,
+        "sector": "Operação",
+        "status": "Concluída"
+      },
+      {
+        "client": "RRN HOTEL LTDA",
+        "region": "Regional - Centro Oeste",
+        "remaining_days": null,
+        "sector": "Operação",
+        "status": "Concluída"
+      },
+      {
+        "client": "SANTA MÔNICA LOCAÇÕES - MONTES CLAROS",
+        "region": "Regional - Montes Claros",
+        "remaining_days": null,
+        "sector": "Comercial B2B",
+        "status": "Concluída"
+      },
+      {
+        "client": "SUPERMIX CONCRETO S/A - MONTES CLAROS",
+        "region": "Engenharia - Transmissão",
+        "remaining_days": null,
+        "sector": "Comercial B2B",
+        "status": "Concluída"
+      },
+      {
+        "client": "HOTEL FATIMA - DIVINOPOLIS",
+        "region": "Regional - Centro Oeste",
+        "remaining_days": null,
+        "sector": "Operação",
+        "status": "Concluída"
+      },
+      {
+        "client": "AVICOLA - CARMO DO CAJURU",
+        "region": "Regional - Centro Oeste",
+        "remaining_days": null,
+        "sector": "Engenharia",
+        "status": "Concluída"
+      },
+      {
+        "client": "KNN IDIOMAS - MONTES CLAROS",
+        "region": "Regional - Montes Claros",
+        "remaining_days": null,
+        "sector": "Comercial B2B",
+        "status": "Concluída"
+      },
+      {
+        "client": "CONEXÃO FITNESS - DIVINÓPOLIS",
+        "region": "Regional - Centro Oeste",
+        "remaining_days": null,
+        "sector": "Comercial B2B",
+        "status": "Concluída"
+      },
+      {
+        "client": "BRINCA LOUMINOS/OKTOBERFEST - CAMPOS DO JORDÃO",
+        "region": "Regional - São Paulo",
+        "remaining_days": null,
+        "sector": "Engenharia",
+        "status": "Concluída"
+      },
+      {
+        "client": "Foco - Divinópolis",
+        "region": "Engenharia - Noc",
+        "remaining_days": null,
+        "sector": "Engenharia",
+        "status": "Concluída"
+      },
+      {
+        "client": "COMERCIO E REPRESENTACOES CECOTI LTDA",
+        "region": "Projetos",
+        "remaining_days": null,
+        "sector": "Engenharia",
+        "status": "Concluída"
+      },
+      {
+        "client": "SIR INFORMATICA",
+        "region": "Regional - São Paulo",
+        "remaining_days": null,
+        "sector": "Operação",
+        "status": "Concluída"
+      },
+      {
+        "client": "COLEGIO ANGLO - DIVINOPOLIS",
+        "region": "Regional - Centro Oeste",
+        "remaining_days": null,
+        "sector": "Comercial B2B",
+        "status": "Concluída"
+      },
+      {
+        "client": "BRDIGITAL",
+        "region": "Projetos",
+        "remaining_days": null,
+        "sector": "Comercial B2B",
+        "status": "Concluída"
+      },
+      {
+        "client": "VP TELECOM - TRANSPORTE L2L - TAUBATE",
+        "region": "Engenharia - IP e Serviços",
+        "remaining_days": null,
+        "sector": "Comercial B2B",
+        "status": "Concluída"
+      },
+      {
+        "client": "NAILAN METAIS - DIVINOPOLIS - CHORO",
+        "region": "Regional - Centro Oeste",
+        "remaining_days": null,
+        "sector": "Comercial B2B",
+        "status": "Concluída"
+      },
+      {
+        "client": "NAILAN METAIS - DIVINOPOLIS - CACOCO",
+        "region": "Regional - Centro Oeste",
+        "remaining_days": null,
+        "sector": "Comercial B2B",
+        "status": "Concluída"
+      },
+      {
+        "client": "ALGAR - 12311 - VARGINHA",
+        "region": "Regional - Sul Minas",
+        "remaining_days": null,
+        "sector": "Operação",
+        "status": "Concluída"
+      },
+      {
+        "client": "GRAND'DENIO HOTEL CANTINA - VARGINHA",
+        "region": "Regional - Sul Minas",
+        "remaining_days": null,
+        "sector": "Comercial B2B",
+        "status": "Concluída"
+      },
+      {
+        "client": "SAVASSI SÃO LUIZ LTDA - MONTES CLAROS",
+        "region": "Regional - Montes Claros",
+        "remaining_days": null,
+        "sector": "Comercial B2B",
+        "status": "Concluída"
+      },
+      {
+        "client": "GWG TELCO - CAMPOS DO JORDÃO",
+        "region": "Regional - São Paulo",
+        "remaining_days": null,
+        "sector": "Comercial B2B",
+        "status": "Concluída"
+      },
+      {
+        "client": "CLUBE DOS SERVIDORES MUNICIPAIS DE DIVIONOPOLIS",
+        "region": "Comercial B2B",
+        "remaining_days": null,
+        "sector": "Comercial B2B",
+        "status": "Concluída"
+      },
+      {
+        "client": "GOMES SOLUÇÕES CORPORATIVAS - MONTES CLAROS",
+        "region": "Regional - Montes Claros",
+        "remaining_days": null,
+        "sector": "Engenharia",
+        "status": "Concluída"
+      },
+      {
+        "client": "COMPUNET - SÃO JOSÉ DOS CAMPOS",
+        "region": "Comercial B2B",
+        "remaining_days": null,
+        "sector": "Comercial B2B",
+        "status": "Concluída"
+      },
+      {
+        "client": "ALTHAIA - POÇOS DE CALDAS",
+        "region": "Regional - Sul Minas",
+        "remaining_days": null,
+        "sector": "Comercial B2B",
+        "status": "Concluída"
+      },
+      {
+        "client": "POÇOSTEC - FILIAL - POÇOS DE CALDAS",
+        "region": "Regional - Sul Minas",
+        "remaining_days": null,
+        "sector": "Comercial B2B",
+        "status": "Concluída"
+      },
+      {
+        "client": "DANONE - LTDA -POÇOS DE CALDAS",
+        "region": "Regional - Sul Minas",
+        "remaining_days": null,
+        "sector": "Comercial B2B",
+        "status": "Concluída"
+      },
+      {
+        "client": "LAMESA - POÇOS DE CALDAS",
+        "region": "Regional - Sul Minas",
+        "remaining_days": null,
+        "sector": "Comercial B2B",
+        "status": "Concluída"
+      },
+      {
+        "client": "MYRALIS PHARMA DISTRIBUIDORA - POÇOS DE CALDAS",
+        "region": "Regional - Sul Minas",
+        "remaining_days": null,
+        "sector": "Comercial B2B",
+        "status": "Concluída"
+      },
+      {
+        "client": "THYSSENKRUPP BRASIL LTDA - POÇOS DE CALDAS",
+        "region": "Regional - Sul Minas",
+        "remaining_days": null,
+        "sector": "Comercial B2B",
+        "status": "Concluída"
+      },
+      {
+        "client": "PRADOLUX S.A - POÇOS DE CALDAS",
+        "region": "Regional - Sul Minas",
+        "remaining_days": null,
+        "sector": "Comercial B2B",
+        "status": "Concluída"
+      },
+      {
+        "client": "CAMPO VERDE ARMAZÉNS GERAIS LTDA - POÇOS DE CALDAS",
+        "region": "Regional - Sul Minas",
+        "remaining_days": null,
+        "sector": "Projetos",
+        "status": "Concluída"
+      },
+      {
+        "client": "PRESIDENTE HOTEL - POÇOS DE CALDAS",
+        "region": "Regional - Sul Minas",
+        "remaining_days": null,
+        "sector": "Operação",
+        "status": "Concluída"
+      },
+      {
+        "client": "PRINCIPE HOTEL - POÇOS DE CALDAS",
+        "region": "Regional - Sul Minas",
+        "remaining_days": null,
+        "sector": "Operação",
+        "status": "Concluída"
+      },
+      {
+        "client": "NORTH HOTEL - AMPLIAÇÃO 12 UNIFI - MONTES CLAROS",
+        "region": "Regional - Montes Claros",
+        "remaining_days": null,
+        "sector": "Operação",
+        "status": "Concluída"
+      },
+      {
+        "client": "ufinet methues leme",
+        "region": "Regional - Centro Oeste",
+        "remaining_days": null,
+        "sector": "Comercial B2B",
+        "status": "Concluída"
+      },
+      {
+        "client": "ALGAR MERCADO LIVRE -Betim",
+        "region": "Regional - Centro Oeste",
+        "remaining_days": null,
+        "sector": "Engenharia",
+        "status": "Concluída"
+      },
+      {
+        "client": "MUNICIPIO DE TRES CORAÇÕES - CREAS RODOVIARIA",
+        "region": "Regional - Sul Minas",
+        "remaining_days": null,
+        "sector": "Comercial B2B",
+        "status": "Concluída"
+      },
+      {
+        "client": "EVENTO IP EXPOMONTES 2025 - BARES",
+        "region": "Regional - Montes Claros",
+        "remaining_days": null,
+        "sector": "Projetos",
+        "status": "Concluída"
+      },
+      {
+        "client": "CONCESSIONARIA ECOVIAS DAS GERAIS S.A.",
+        "region": "Regional - Montes Claros",
+        "remaining_days": null,
+        "sector": "Comercial B2B",
+        "status": "Concluída"
+      },
+      {
+        "client": "Tassi Transportes - POÇOS DE CALDAS",
+        "region": "Regional - Sul Minas",
+        "remaining_days": null,
+        "sector": "Comercial B2B",
+        "status": "Concluída"
+      },
+      {
+        "client": "SICREDI VANGUARDA Tremembé SP",
+        "region": "Regional - São Paulo",
+        "remaining_days": null,
+        "sector": "Comercial B2B",
+        "status": "Concluída"
+      },
+      {
+        "client": "MGNET",
+        "region": "Regional - Centro Oeste",
+        "remaining_days": null,
+        "sector": "Engenharia",
+        "status": "Concluída"
+      },
+      {
+        "client": "JW ATIVIDADES MEDICAS LTDA - PARACATU",
+        "region": "Regional - Norte",
+        "remaining_days": null,
+        "sector": "Comercial B2B",
+        "status": "Concluída"
+      },
+      {
+        "client": "UFLA - UPGRADE",
+        "region": "Regional - Sul Minas",
+        "remaining_days": null,
+        "sector": "Comercial B2B",
+        "status": "Concluída"
+      },
+      {
+        "client": "OSVALDO BATISTA VELOSO",
+        "region": "Engenharia - IP e Serviços",
+        "remaining_days": null,
+        "sector": "Comercial B2B",
+        "status": "Concluída"
+      },
+      {
+        "client": "IGN VARGINHA",
+        "region": "Projetos",
+        "remaining_days": null,
+        "sector": "Operação",
+        "status": "Concluída"
+      },
+      {
+        "client": "FIBER NET - IP TRANSITO - SÃO JOSE DO ALEGRE",
+        "region": "Regional - Sul Minas",
+        "remaining_days": null,
+        "sector": "Comercial B2B",
+        "status": "Concluída"
+      },
+      {
+        "client": "SEARA ALIMENTOS - PASSOS",
+        "region": "Comercial B2B",
+        "remaining_days": null,
+        "sector": "Comercial B2B",
+        "status": "Concluída"
+      },
+      {
+        "client": "BRASILTECPAR",
+        "region": "Regional - Montes Claros",
+        "remaining_days": null,
+        "sector": "Engenharia",
+        "status": "Concluída"
+      },
+      {
+        "client": "SICREDI Divinópolis",
+        "region": "Regional - Centro Oeste",
+        "remaining_days": null,
+        "sector": "Engenharia",
+        "status": "Concluída"
+      },
+      {
+        "client": "TRIAL R2NET CONTAGEM",
+        "region": "Regional - Centro Oeste",
+        "remaining_days": null,
+        "sector": "Operação",
+        "status": "Concluída"
+      },
+      {
+        "client": "CPX Distribuidora S.A. - Montes Claros",
+        "region": "Regional - Montes Claros",
+        "remaining_days": null,
+        "sector": "Comercial B2B",
+        "status": "Concluída"
+      },
+      {
+        "client": "intelle três corações",
+        "region": "Regional - Sul Minas",
+        "remaining_days": null,
+        "sector": "Comercial B2B",
+        "status": "Concluída"
+      },
+      {
+        "client": "8 NOVE TELECOMUNICACOES - CONECTE SLP - TAUBATE",
+        "region": "Regional - São Paulo",
+        "remaining_days": null,
+        "sector": "Projetos",
+        "status": "Concluída"
+      },
+      {
+        "client": "Orchest do Brasil LTDA",
+        "region": "Regional - São Paulo",
+        "remaining_days": null,
+        "sector": "Comercial B2B",
+        "status": "Concluída"
+      },
+      {
+        "client": "Fabrica De Rações JBS - Passos",
+        "region": "Regional - Sul Minas",
+        "remaining_days": null,
+        "sector": "Comercial B2B",
+        "status": "Concluída"
+      },
+      {
+        "client": "AVIVAR - ADM GAMELEIRA - CARMO DO CAJURU",
+        "region": "Regional - Centro Oeste",
+        "remaining_days": null,
+        "sector": "Comercial B2B",
+        "status": "Concluída"
+      },
+      {
+        "client": "EXPRESSO TELECOM - ALFREDO ROSENDO - UPGRADE L2L 2 GBPS",
+        "region": "Engenharia - IP e Serviços",
+        "remaining_days": null,
+        "sector": "Engenharia",
+        "status": "Concluída"
+      },
+      {
+        "client": "EXPRESSO TELECOM - TAUBATE",
+        "region": "Regional - São Paulo",
+        "remaining_days": null,
+        "sector": "Engenharia",
+        "status": "Concluída"
+      },
+      {
+        "client": "SITELBRA SISTEMA DE TELECOMUNICAÇÕES DO BRASIL",
+        "region": "Regional - Centro Oeste",
+        "remaining_days": null,
+        "sector": "Operação",
+        "status": "Concluída"
+      },
+      {
+        "client": "NORTE CONEXÂO",
+        "region": "Regional - Centro Oeste",
+        "remaining_days": null,
+        "sector": "Comercial B2B",
+        "status": "Concluída"
+      },
+      {
+        "client": "BRASILTECPAR",
+        "region": "Regional - Montes Claros",
+        "remaining_days": null,
+        "sector": "Comercial B2B",
+        "status": "Concluída"
+      },
+      {
+        "client": "IGN São José dos Campos",
+        "region": "Regional - São Paulo",
+        "remaining_days": null,
+        "sector": "Comercial B2B",
+        "status": "Concluída"
+      },
+      {
+        "client": "IGN TAUBATÈ",
+        "region": "Regional - São Paulo",
+        "remaining_days": null,
+        "sector": "Comercial B2B",
+        "status": "Concluída"
+      },
+      {
+        "client": "TELEON",
+        "region": "Regional - Centro Oeste",
+        "remaining_days": null,
+        "sector": "Projetos",
+        "status": "Concluída"
+      },
+      {
+        "client": "Norte Três Corações",
+        "region": "Engenharia - IP e Serviços",
+        "remaining_days": null,
+        "sector": "Engenharia",
+        "status": "Concluída"
+      },
+      {
+        "client": "FIBER NET LTDA - TRANSPORTE PTT - SÃO JOSE DO ALEGRE",
+        "region": "Engenharia - IP e Serviços",
+        "remaining_days": null,
+        "sector": "Engenharia",
+        "status": "Concluída"
+      },
+      {
+        "client": "GWG TELCO - TAUBATE",
+        "region": "Projetos",
+        "remaining_days": null,
+        "sector": "Comercial B2B",
+        "status": "Concluída"
+      },
+      {
+        "client": "GWG TELCO - SJC X SP4",
+        "region": "Regional - São Paulo",
+        "remaining_days": null,
+        "sector": "Comercial B2B",
+        "status": "Concluída"
+      },
+      {
+        "client": "R FRANCO ENGENHARIA - SÃO JOSÉ DOS CAMPOS",
+        "region": "Regional - São Paulo",
+        "remaining_days": null,
+        "sector": "Operação",
+        "status": "Concluída"
+      },
+      {
+        "client": "HEAVEN SYSTEM - SJC - AQUARIUS",
+        "region": "Regional - São Paulo",
+        "remaining_days": null,
+        "sector": "Engenharia",
+        "status": "Concluída"
+      },
+      {
+        "client": "IGN – Teófilo Otoni - Last Mile",
+        "region": "Regional - Centro Oeste",
+        "remaining_days": null,
+        "sector": "Comercial B2B",
+        "status": "Concluída"
+      },
+      {
+        "client": "MOC AUTOMAÇÃO - MONTES CLAROS",
+        "region": "Projetos",
+        "remaining_days": null,
+        "sector": "Comercial B2B",
+        "status": "Concluída"
+      },
+      {
+        "client": "brasil tecpar itauna",
+        "region": "Regional - Centro Oeste",
+        "remaining_days": null,
+        "sector": "Comercial B2B",
+        "status": "Concluída"
+      },
+      {
+        "client": "UPIX VARGINHA",
+        "region": "Regional - Centro Oeste",
+        "remaining_days": null,
+        "sector": "Comercial B2B",
+        "status": "Concluída"
+      },
+      {
+        "client": "Brasil Tecpar Montes Claros",
+        "region": "Regional - Montes Claros",
+        "remaining_days": null,
+        "sector": "Comercial B2B",
+        "status": "Concluída"
+      },
+      {
+        "client": "GRIFE TRANSPORTES - MONTES CLAROS",
+        "region": "Projetos",
+        "remaining_days": null,
+        "sector": "Comercial B2B",
+        "status": "Concluída"
+      },
+      {
+        "client": "TRC TELECOM LTDA - MONTES CLAROS",
+        "region": "Regional - Montes Claros",
+        "remaining_days": null,
+        "sector": "Comercial B2B",
+        "status": "Concluída"
+      },
+      {
+        "client": "NETLC COMUNICACAO MULTIMIDIA LTDA",
+        "region": "Comercial B2B",
+        "remaining_days": null,
+        "sector": "Engenharia",
+        "status": "Concluída"
+      },
+      {
+        "client": "Newfiber - São Jose dos Salgados",
+        "region": "Comercial B2B",
+        "remaining_days": null,
+        "sector": "Engenharia",
+        "status": "Concluída"
+      },
+      {
+        "client": "8 NOVE TELECOMUNICACOES LTDA - TAUBATE",
+        "region": "Engenharia - IP e Serviços",
+        "remaining_days": null,
+        "sector": "Engenharia",
+        "status": "Concluída"
+      },
+      {
+        "client": "VP TELECOM - SINDICATO - TAUBATE",
+        "region": "Comercial B2B",
+        "remaining_days": null,
+        "sector": "Operação",
+        "status": "Concluída"
+      },
+      {
+        "client": "GWG - L2L CAMARA X CRISTO - POÇOS DE CALDAS",
+        "region": "Comercial B2B",
+        "remaining_days": null,
+        "sector": "Comercial B2B",
+        "status": "Concluída"
+      },
+      {
+        "client": "DOT A DOT -Tremembé - SP",
+        "region": "Projetos",
+        "remaining_days": null,
+        "sector": "Projetos",
+        "status": "Concluída"
+      },
+      {
+        "client": "AMIS ASSOCIACAO MINEIRA DE SUPERMERCADOS - DIVINÓPOLIS",
+        "region": "Regional - Centro Oeste",
+        "remaining_days": null,
+        "sector": "Comercial B2B",
+        "status": "Concluída"
+      },
+      {
+        "client": "ufinet varginha",
+        "region": "Comercial B2B",
+        "remaining_days": null,
+        "sector": "Comercial B2B",
+        "status": "Concluída"
+      },
+      {
+        "client": "GADATI EVENTOS LAVRAS (THULIO PADOVANI)",
+        "region": "Engenharia - Transmissão",
+        "remaining_days": null,
+        "sector": "Comercial B2B",
+        "status": "Concluída"
+      },
+      {
+        "client": "RURAL TELECOM MAIS LTDA",
+        "region": "Regional - Sul Minas",
+        "remaining_days": null,
+        "sector": "Comercial B2B",
+        "status": "Concluída"
+      },
+      {
+        "client": "IGN - Paraisopolis",
+        "region": "Projetos",
+        "remaining_days": null,
+        "sector": "Engenharia",
+        "status": "Concluída"
+      },
+      {
+        "client": "GLOBAL JOBS NET - UPGRADE IP - VARGINHA",
+        "region": "Comercial B2B",
+        "remaining_days": null,
+        "sector": "Comercial B2B",
+        "status": "Concluída"
+      },
+      {
+        "client": "PREFEITURA MUNICIPAL DE VARGINHA",
+        "region": "Projetos",
+        "remaining_days": null,
+        "sector": "Comercial B2B",
+        "status": "Concluída"
+      },
+      {
+        "client": "DOT A DOT - POÇOS DE CALDAS",
+        "region": "Regional - Sul Minas",
+        "remaining_days": null,
+        "sector": "Comercial B2B",
+        "status": "Concluída"
+      },
+      {
+        "client": "STA SERVIÇOS - RENATO - PTU",
+        "region": "Regional - Norte",
+        "remaining_days": null,
+        "sector": "Comercial B2B",
+        "status": "Concluída"
+      },
+      {
+        "client": "RAFAEL HENRIQUE DE SOUSA",
+        "region": "Regional - Centro Oeste",
+        "remaining_days": null,
+        "sector": "Comercial B2B",
+        "status": "Concluída"
+      },
+      {
+        "client": "CONDOMINIO JOSE BRANDAO I",
+        "region": "Regional - Centro Oeste",
+        "remaining_days": null,
+        "sector": "Comercial B2B",
+        "status": "Concluída"
+      },
+      {
+        "client": "AVIVAR - INTERLIGAR GALPÃO - CARMO DO CAJURU",
+        "region": "Regional - Centro Oeste",
+        "remaining_days": null,
+        "sector": "Comercial B2B",
+        "status": "Concluída"
+      },
+      {
+        "client": "ALGAR - 12576 - TAUBATE",
+        "region": "Regional - São Paulo",
+        "remaining_days": null,
+        "sector": "Comercial B2B",
+        "status": "Concluída"
+      },
+      {
+        "client": "ALGAR 431842 PARACATU",
+        "region": "Regional - Norte",
+        "remaining_days": null,
+        "sector": "Comercial B2B",
+        "status": "Concluída"
+      },
+      {
+        "client": "MOOV TELECOM - PTT - ITAJUBA",
+        "region": "Regional - Sul Minas",
+        "remaining_days": null,
+        "sector": "Comercial B2B",
+        "status": "Concluída"
+      },
+      {
+        "client": "ufinet varginha - link 2",
+        "region": "Regional - Sul Minas",
+        "remaining_days": null,
+        "sector": "Comercial B2B",
+        "status": "Concluída"
+      },
+      {
+        "client": "ALGAR - 12576 - TAUBATE Endereço 2",
+        "region": "Regional - São Paulo",
+        "remaining_days": null,
+        "sector": "Comercial B2B",
+        "status": "Concluída"
+      },
+      {
+        "client": "FREITAS DA CRUZ SERV.DE COMUNICACAO LTDA",
+        "region": "Regional - Norte",
+        "remaining_days": null,
+        "sector": "Comercial B2B",
+        "status": "Concluída"
+      },
+      {
+        "client": "DOT A DOT CAJURU",
+        "region": "Regional - Centro Oeste",
+        "remaining_days": null,
+        "sector": "Comercial B2B",
+        "status": "Concluída"
+      },
+      {
+        "client": "DOT a DOT Juatuba SUPERMERCADO BH",
+        "region": "Regional - Centro Oeste",
+        "remaining_days": null,
+        "sector": "Comercial B2B",
+        "status": "Concluída"
+      },
+      {
+        "client": "DOT A DOT SETE LAGOAS",
+        "region": "Regional - Centro Oeste",
+        "remaining_days": null,
+        "sector": "Comercial B2B",
+        "status": "Concluída"
+      },
+      {
+        "client": "Material Elétrico e Hidráulico JOGS E MIGAS - Montes Claros",
+        "region": "Regional - Montes Claros",
+        "remaining_days": null,
+        "sector": "Comercial B2B",
+        "status": "Concluída"
+      },
+      {
+        "client": "EUROFARMA (TRANSFERENCIA DE PONTO) MONTES CLAROS",
+        "region": "Regional - Montes Claros",
+        "remaining_days": null,
+        "sector": "Comercial B2B",
+        "status": "Concluída"
+      },
+      {
+        "client": "ALGAR - 431340 - PINDA",
+        "region": "Regional - São Paulo",
+        "remaining_days": null,
+        "sector": "Operação",
+        "status": "Concluída"
+      },
+      {
+        "client": "UFINET LORENA",
+        "region": "Engenharia - IP e Serviços",
+        "remaining_days": null,
+        "sector": "Engenharia",
+        "status": "Concluída"
+      },
+      {
+        "client": "ELETRONET - CARMO DO CAJURU",
+        "region": "Regional - Centro Oeste",
+        "remaining_days": null,
+        "sector": "Comercial B2B",
+        "status": "Concluída"
+      },
+      {
+        "client": "ALGAR 421001 TAUBATE",
+        "region": "Regional - São Paulo",
+        "remaining_days": null,
+        "sector": "Comercial B2B",
+        "status": "Concluída"
+      },
+      {
+        "client": "EXPRESSO TELECOM - L2L - METTRO - TAUBATE",
+        "region": "Engenharia - IP e Serviços",
+        "remaining_days": null,
+        "sector": "Comercial B2B",
+        "status": "Concluída"
+      },
+      {
+        "client": "Microsete Taubate",
+        "region": "Projetos",
+        "remaining_days": null,
+        "sector": "Comercial B2B",
+        "status": "Concluída"
+      },
+      {
+        "client": "American Tower COPASA em Juatuba",
+        "region": "Projetos",
+        "remaining_days": null,
+        "sector": "Comercial B2B",
+        "status": "Concluída"
+      },
+      {
+        "client": "DISTRIBUIDORA NOVA GERAÇÃO - MONTES CLAROS",
+        "region": "Regional - Montes Claros",
+        "remaining_days": null,
+        "sector": "Engenharia",
+        "status": "Concluída"
+      },
+      {
+        "client": "HLVR EMPREENDIMENTOS - VARGINHA",
+        "region": "Regional - Sul Minas",
+        "remaining_days": null,
+        "sector": "Comercial B2B",
+        "status": "Concluída"
+      },
+      {
+        "client": "Algar Lorena - 435259",
+        "region": "Regional - São Paulo",
+        "remaining_days": null,
+        "sector": "Comercial B2B",
+        "status": "Concluída"
+      },
+      {
+        "client": "SPACEMAKER - SAO JOSE DOS CAMPOS",
+        "region": "Regional - São Paulo",
+        "remaining_days": null,
+        "sector": "Comercial B2B",
+        "status": "Concluída"
+      },
+      {
+        "client": "HOSPITAL SÃO BENTO MENNI - DIVINOPOLIS",
+        "region": "Regional - Centro Oeste",
+        "remaining_days": null,
+        "sector": "Comercial B2B",
+        "status": "Concluída"
+      },
+      {
+        "client": "SITELBRA PASSOS",
+        "region": "Regional - Sul Minas",
+        "remaining_days": null,
+        "sector": "Comercial B2B",
+        "status": "Concluída"
+      },
+      {
+        "client": "VALDIR SARAIVA",
+        "region": "Regional - Montes Claros",
+        "remaining_days": null,
+        "sector": "Comercial B2B",
+        "status": "Concluída"
+      },
+      {
+        "client": "Palácio dos Leilões - JUATUBA",
+        "region": "Regional - Centro Oeste",
+        "remaining_days": null,
+        "sector": "Comercial B2B",
+        "status": "Concluída"
+      },
+      {
+        "client": "Entroncamento Master x Conecta",
+        "region": "Regional - Montes Claros",
+        "remaining_days": null,
+        "sector": "Comercial B2B",
+        "status": "Concluída"
+      },
+      {
+        "client": "FIBER NET - PIRANGUINHO",
+        "region": "Regional - Sul Minas",
+        "remaining_days": null,
+        "sector": "Engenharia",
+        "status": "Concluída"
+      },
+      {
+        "client": "CLUBE SINDICATO DOS METALURGICOS - DIVINÓPOLIS",
+        "region": "Regional - Centro Oeste",
+        "remaining_days": null,
+        "sector": "Engenharia",
+        "status": "Concluída"
+      },
+      {
+        "client": "FBR - JUATUBA - Ambev",
+        "region": "Regional - Centro Oeste",
+        "remaining_days": null,
+        "sector": "Comercial B2B",
+        "status": "Concluída"
+      },
+      {
+        "client": "PLIN SOLUCOES DE PAGAMENTO LTDA",
+        "region": "Regional - Montes Claros",
+        "remaining_days": null,
+        "sector": "Operação",
+        "status": "Concluída"
+      },
+      {
+        "client": "TINTANORTE DISTRIBUIDORS DE MATERIAIS",
+        "region": "Regional - Montes Claros",
+        "remaining_days": null,
+        "sector": "Comercial B2B",
+        "status": "Concluída"
+      },
+      {
+        "client": "ALGAR - MASSIVA 12735 - SÃO SEBASTIAO DO PARAISO",
+        "region": "Regional - Sul Minas",
+        "remaining_days": null,
+        "sector": "Engenharia",
+        "status": "Concluída"
+      },
+      {
+        "client": "HOSPITAL OTORRINO CENTER LTDA - MONTES CLAROS",
+        "region": "Regional - Montes Claros",
+        "remaining_days": null,
+        "sector": "Projetos",
+        "status": "Concluída"
+      },
+      {
+        "client": "ADM PORTAS - MONTES CLAROS",
+        "region": "Regional - Montes Claros",
+        "remaining_days": null,
+        "sector": "Operação",
+        "status": "Concluída"
+      },
+      {
+        "client": "CAMARA MUNICIPAL DE DIVINOPOLIS",
+        "region": "Regional - Centro Oeste",
+        "remaining_days": null,
+        "sector": "Comercial B2B",
+        "status": "Concluída"
+      },
+      {
+        "client": "ELO SOLUÇÕES - BANCO DO NORDESTE - MONTES CLAROS",
+        "region": "Regional - Montes Claros",
+        "remaining_days": null,
+        "sector": "Comercial B2B",
+        "status": "Concluída"
+      },
+      {
+        "client": "ATIVALOG - MIGRAÇÃO FIBRA - VARGINHA",
+        "region": "Regional - Sul Minas",
+        "remaining_days": null,
+        "sector": "Comercial B2B",
+        "status": "Concluída"
+      },
+      {
+        "client": "PROWEL (Tuná Parque Aquático) - CAPITÓLIO",
+        "region": "Regional - Sul Minas",
+        "remaining_days": null,
+        "sector": "Engenharia",
+        "status": "Concluída"
+      },
+      {
+        "client": "COMNT UPGRAD - 10GBPS | MONTES CLAROS/MG",
+        "region": "Regional - Montes Claros",
+        "remaining_days": null,
+        "sector": "Engenharia",
+        "status": "Concluída"
+      },
+      {
+        "client": "ATIVA LOGISTICA | VARGINHA/MG",
+        "region": "Regional - Sul Minas",
+        "remaining_days": null,
+        "sector": "CD - Centro Distribuição",
+        "status": "Concluída"
+      },
+      {
+        "client": "north poços de caldas",
+        "region": "Regional - Sul Minas",
+        "remaining_days": null,
+        "sector": "Comercial B2B",
+        "status": "Concluída"
+      },
+      {
+        "client": "PAO DA ALMA - DIVINOPOLIS",
+        "region": "Regional - Centro Oeste",
+        "remaining_days": null,
+        "sector": "Comercial B2B",
+        "status": "Concluída"
+      },
+      {
+        "client": "VERO - VERO INTERNET - VERO EMPRESAS - POUSO ALEGRE",
+        "region": "Regional - Sul Minas",
+        "remaining_days": null,
+        "sector": "Comercial B2B",
+        "status": "Concluída"
+      },
+      {
+        "client": "MINISTERIO REDENCAO - DIVINÓPOLIS",
+        "region": "Regional - Centro Oeste",
+        "remaining_days": null,
+        "sector": "Comercial B2B",
+        "status": "Concluída"
+      },
+      {
+        "client": "VIA AGRO COMERCIO REPRESENTACOES - DIVINÓPOLIS",
+        "region": "Regional - Centro Oeste",
+        "remaining_days": null,
+        "sector": "Comercial B2B",
+        "status": "Concluída"
+      },
+      {
+        "client": "BRASIL PONTES ENGENHARIA E CONSTRUCOES - MONTES CLAROS",
+        "region": "Regional - Montes Claros",
+        "remaining_days": null,
+        "sector": "Comercial B2B",
+        "status": "Concluída"
+      },
+      {
+        "client": "RX CONSTRUTORA - VARGINHA",
+        "region": "Regional - Sul Minas",
+        "remaining_days": null,
+        "sector": "Comercial B2B",
+        "status": "Concluída"
+      },
+      {
+        "client": "LINK VALE - PINDAMONHANGABA",
+        "region": "Regional - São Paulo",
+        "remaining_days": null,
+        "sector": "Comercial B2B",
+        "status": "Concluída"
+      },
+      {
+        "client": "MOBIPHONE - TAUBATE - TRANSFERENCIA DE ENDEREÇO",
+        "region": "Regional - São Paulo",
+        "remaining_days": -7,
+        "sector": "Projetos",
+        "status": "Em Andamento"
+      },
+      {
+        "client": "ULTRANET VARGINHA",
+        "region": "Regional - Sul Minas",
+        "remaining_days": null,
+        "sector": "Comercial B2B",
+        "status": "Concluída"
+      },
+      {
+        "client": "UFINET TAUBATE",
+        "region": "Regional - São Paulo",
+        "remaining_days": null,
+        "sector": "Comercial B2B",
+        "status": "Concluída"
+      },
+      {
+        "client": "ALGAR - 438687 - ITAUNA",
+        "region": "Regional - Centro Oeste",
+        "remaining_days": null,
+        "sector": "Comercial B2B",
+        "status": "Concluída"
+      },
+      {
+        "client": "MOBIPHONE - TAUBATE - PONTO NOVO",
+        "region": "Regional - São Paulo",
+        "remaining_days": -1,
+        "sector": "Projetos",
+        "status": "Em Andamento"
+      },
+      {
+        "client": "W&W EVENTOS - MONTES CLAROS",
+        "region": "Regional - Montes Claros",
+        "remaining_days": -1,
+        "sector": "Operação",
+        "status": "Em Andamento"
+      },
+      {
+        "client": "AGAH MADEIRAS - PASSOS",
+        "region": "Regional - Sul Minas",
+        "remaining_days": 0,
+        "sector": "Operação",
+        "status": "Em Andamento"
+      },
+      {
+        "client": "FIBRA APAGADA TUNA ( AO PARQUE PAUA )",
+        "region": "Regional - Sul Minas",
+        "remaining_days": 2,
+        "sector": "Operação",
+        "status": "Em Andamento"
+      },
+      {
+        "client": "EXPOLAVRAS - LAVRAS",
+        "region": "Regional - Sul Minas",
+        "remaining_days": 2,
+        "sector": "Operação",
+        "status": "Em Andamento"
+      }
+    ]
   },
   "priority_by_requester": {
     "Alta": {
@@ -93,1336 +2747,2656 @@
     }
   },
   "projects_by_month": {
-    "2026-02": 1,
-    "2026-04": 9,
-    "2026-05": 30,
-    "2026-06": 56,
-    "2026-07": 50,
-    "2026-08": 25,
-    "2026-09": 17
+    "counts": {
+      "2026-02": 1,
+      "2026-04": 9,
+      "2026-05": 30,
+      "2026-06": 56,
+      "2026-07": 50,
+      "2026-08": 25,
+      "2026-09": 17
+    },
+    "items": [
+      {
+        "client": "IGN TELECOMUNICAÇÕES DO BRASIL LTDA",
+        "region": "Regional - Sul Minas",
+        "remaining_days": null,
+        "sector": "Operação",
+        "month": "2026-05"
+      },
+      {
+        "client": "Vistoria Brasiltecpar - TTE",
+        "region": "Regional - São Paulo",
+        "remaining_days": null,
+        "sector": "Comercial B2B",
+        "month": "2026-04"
+      },
+      {
+        "client": "Vistoria Netmig - PTU",
+        "region": "Regional - Norte",
+        "remaining_days": null,
+        "sector": "Comercial B2B",
+        "month": "2026-04"
+      },
+      {
+        "client": "Vistoria BrDigital - PÇS",
+        "region": "Regional - Sul Minas",
+        "remaining_days": null,
+        "sector": "Comercial B2B",
+        "month": "2026-04"
+      },
+      {
+        "client": "R N TINTAS E FERRAMENTAS LTDA",
+        "region": "Regional - Sul Minas",
+        "remaining_days": null,
+        "sector": "Operação",
+        "month": "2026-05"
+      },
+      {
+        "client": "FIBER 37 DIVINOPOLIS- VALE DO SOL",
+        "region": "Regional - Centro Oeste",
+        "remaining_days": null,
+        "sector": "Engenharia",
+        "month": "2026-05"
+      },
+      {
+        "client": "Vistoria Refinaria Henrique Lage - SJC",
+        "region": "Regional - São Paulo",
+        "remaining_days": null,
+        "sector": "Comercial B2B",
+        "month": "2026-04"
+      },
+      {
+        "client": "Vistoria TAURUS ACADEMIA - MCL",
+        "region": "Regional - Montes Claros",
+        "remaining_days": null,
+        "sector": "Comercial B2B",
+        "month": "2026-04"
+      },
+      {
+        "client": "MAGLIONI RIBEIRO & CIA LTDA",
+        "region": "Regional - Sul Minas",
+        "remaining_days": null,
+        "sector": "Engenharia",
+        "month": "2026-06"
+      },
+      {
+        "client": "KOYA FUSION CUISINE LTDA - MONTES CLAROS",
+        "region": "Regional - Montes Claros",
+        "remaining_days": null,
+        "sector": "Comercial B2B",
+        "month": "2026-05"
+      },
+      {
+        "client": "Algar - 383387 - POCOS DE CALDAS - Aguard. nova vistoria (Igor Raposo)",
+        "region": "Regional - Sul Minas",
+        "remaining_days": null,
+        "sector": "Comercial B2B",
+        "month": "2026-05"
+      },
+      {
+        "client": "ACADEMIA SAO JOAO MONTES CLAROS LTDA",
+        "region": "Regional - Montes Claros",
+        "remaining_days": null,
+        "sector": "Comercial B2B",
+        "month": "2026-04"
+      },
+      {
+        "client": "CAMA E CAFE HOSPEDAGEM - LAVRAS",
+        "region": "CD - Centro de Distruibuição",
+        "remaining_days": null,
+        "sector": "Engenharia",
+        "month": "2026-05"
+      },
+      {
+        "client": "EVENTO CHURRASCANDO 2026 - PARACATU MG",
+        "region": "Regional - Norte",
+        "remaining_days": null,
+        "sector": "Comercial B2B",
+        "month": "2026-05"
+      },
+      {
+        "client": "CEL CENTRAL ELETRICA LTDA",
+        "region": "Regional - Montes Claros",
+        "remaining_days": null,
+        "sector": "Engenharia",
+        "month": "2026-05"
+      },
+      {
+        "client": "SAMM TECNOLOGIA E TELECOMUNICACOES S.A.",
+        "region": "Regional - Sul Minas",
+        "remaining_days": null,
+        "sector": "Operação",
+        "month": "2026-05"
+      },
+      {
+        "client": "LA SUÍTE MOTEL - MONTES CLAROS",
+        "region": "Regional - Montes Claros",
+        "remaining_days": null,
+        "sector": "Comercial B2B",
+        "month": "2026-05"
+      },
+      {
+        "client": "RG TECH - PARA DE MINAS",
+        "region": "Regional - Centro Oeste",
+        "remaining_days": null,
+        "sector": "Comercial B2B",
+        "month": "2026-05"
+      },
+      {
+        "client": "TURANO - TRANSFERENCIA - MOC",
+        "region": "Comercial B2B",
+        "remaining_days": null,
+        "sector": "Comercial B2B",
+        "month": "2026-05"
+      },
+      {
+        "client": "UNIMED - VARGINHA",
+        "region": "Regional - Sul Minas",
+        "remaining_days": null,
+        "sector": "Operação",
+        "month": "2026-05"
+      },
+      {
+        "client": "ONE NET - TAUBATE",
+        "region": "Regional - São Paulo",
+        "remaining_days": null,
+        "sector": "Comercial B2B",
+        "month": "2026-05"
+      },
+      {
+        "client": "CEVA LOGISTICS LTDA",
+        "region": "Regional - Sul Minas",
+        "remaining_days": null,
+        "sector": "Engenharia",
+        "month": "2026-05"
+      },
+      {
+        "client": "ELAINE REIS BATISTA ME - PARACATU/MG",
+        "region": "Regional - Norte",
+        "remaining_days": null,
+        "sector": "Comercial B2B",
+        "month": "2026-05"
+      },
+      {
+        "client": "SLA 360 - MONTES CLAROS",
+        "region": "Regional - Montes Claros",
+        "remaining_days": null,
+        "sector": "Comercial B2B",
+        "month": "2026-05"
+      },
+      {
+        "client": "IGREJA BATISTA DA GRAÇA - TAUBATÉ",
+        "region": "Regional - São Paulo",
+        "remaining_days": null,
+        "sector": "Comercial B2B",
+        "month": "2026-05"
+      },
+      {
+        "client": "Norte conexão varginha",
+        "region": "Regional - Sul Minas",
+        "remaining_days": null,
+        "sector": "Comercial B2B",
+        "month": "2026-05"
+      },
+      {
+        "client": "CONDOMINIO DIAMOND II - MONTES CLAROS",
+        "region": "Regional - Montes Claros",
+        "remaining_days": null,
+        "sector": "Comercial B2B",
+        "month": "2026-04"
+      },
+      {
+        "client": "ASTRAL - UNIFI - MONTES CLAROS",
+        "region": "Regional - Montes Claros",
+        "remaining_days": null,
+        "sector": "Engenharia",
+        "month": "2026-05"
+      },
+      {
+        "client": "Lançamento Latwan - TTE - lançamento interno 18/05, solicitação do cliente..",
+        "region": "Regional - São Paulo",
+        "remaining_days": null,
+        "sector": "Operação",
+        "month": "2026-04"
+      },
+      {
+        "client": "Vistoria BrFibra - PSO",
+        "region": "Regional - Sul Minas",
+        "remaining_days": null,
+        "sector": "Operação",
+        "month": "2026-05"
+      },
+      {
+        "client": "Rede Minas e Rádio Inconfidência - Montes Claros",
+        "region": "Regional - Montes Claros",
+        "remaining_days": null,
+        "sector": "Comercial B2B",
+        "month": "2026-05"
+      },
+      {
+        "client": "AURA TELECOMUNICACOES E INFORMATICA LTDA - CAJURU",
+        "region": "Engenharia - IP e Serviços",
+        "remaining_days": null,
+        "sector": "Engenharia",
+        "month": "2026-05"
+      },
+      {
+        "client": "Fast Telekom - Paracatu",
+        "region": "Regional - Norte",
+        "remaining_days": null,
+        "sector": "Comercial B2B",
+        "month": "2026-05"
+      },
+      {
+        "client": "FRIGOLAVRAS - LAVRAS",
+        "region": "Regional - Sul Minas",
+        "remaining_days": null,
+        "sector": "Operação",
+        "month": "2026-05"
+      },
+      {
+        "client": "RRN HOTEL LTDA",
+        "region": "Regional - Centro Oeste",
+        "remaining_days": null,
+        "sector": "Operação",
+        "month": "2026-04"
+      },
+      {
+        "client": "SANTA MÔNICA LOCAÇÕES - MONTES CLAROS",
+        "region": "Regional - Montes Claros",
+        "remaining_days": null,
+        "sector": "Comercial B2B",
+        "month": "2026-05"
+      },
+      {
+        "client": "SUPERMIX CONCRETO S/A - MONTES CLAROS",
+        "region": "Engenharia - Transmissão",
+        "remaining_days": null,
+        "sector": "Comercial B2B",
+        "month": "2026-05"
+      },
+      {
+        "client": "HOTEL FATIMA - DIVINOPOLIS",
+        "region": "Regional - Centro Oeste",
+        "remaining_days": null,
+        "sector": "Operação",
+        "month": "2026-05"
+      },
+      {
+        "client": "AVICOLA - CARMO DO CAJURU",
+        "region": "Regional - Centro Oeste",
+        "remaining_days": null,
+        "sector": "Engenharia",
+        "month": "2026-02"
+      },
+      {
+        "client": "KNN IDIOMAS - MONTES CLAROS",
+        "region": "Regional - Montes Claros",
+        "remaining_days": null,
+        "sector": "Comercial B2B",
+        "month": "2026-06"
+      },
+      {
+        "client": "CONEXÃO FITNESS - DIVINÓPOLIS",
+        "region": "Regional - Centro Oeste",
+        "remaining_days": null,
+        "sector": "Comercial B2B",
+        "month": "2026-06"
+      },
+      {
+        "client": "BRINCA LOUMINOS/OKTOBERFEST - CAMPOS DO JORDÃO",
+        "region": "Regional - São Paulo",
+        "remaining_days": null,
+        "sector": "Engenharia",
+        "month": "2026-06"
+      },
+      {
+        "client": "Foco - Divinópolis",
+        "region": "Engenharia - Noc",
+        "remaining_days": null,
+        "sector": "Engenharia",
+        "month": "2026-06"
+      },
+      {
+        "client": "COMERCIO E REPRESENTACOES CECOTI LTDA",
+        "region": "Projetos",
+        "remaining_days": null,
+        "sector": "Engenharia",
+        "month": "2026-06"
+      },
+      {
+        "client": "SIR INFORMATICA",
+        "region": "Regional - São Paulo",
+        "remaining_days": null,
+        "sector": "Operação",
+        "month": "2026-05"
+      },
+      {
+        "client": "COLEGIO ANGLO - DIVINOPOLIS",
+        "region": "Regional - Centro Oeste",
+        "remaining_days": null,
+        "sector": "Comercial B2B",
+        "month": "2026-06"
+      },
+      {
+        "client": "BRDIGITAL",
+        "region": "Projetos",
+        "remaining_days": null,
+        "sector": "Comercial B2B",
+        "month": "2026-06"
+      },
+      {
+        "client": "VP TELECOM - TRANSPORTE L2L - TAUBATE",
+        "region": "Engenharia - IP e Serviços",
+        "remaining_days": null,
+        "sector": "Comercial B2B",
+        "month": "2026-06"
+      },
+      {
+        "client": "NAILAN METAIS - DIVINOPOLIS - CHORO",
+        "region": "Regional - Centro Oeste",
+        "remaining_days": null,
+        "sector": "Comercial B2B",
+        "month": "2026-06"
+      },
+      {
+        "client": "NAILAN METAIS - DIVINOPOLIS - CACOCO",
+        "region": "Regional - Centro Oeste",
+        "remaining_days": null,
+        "sector": "Comercial B2B",
+        "month": "2026-06"
+      },
+      {
+        "client": "ALGAR - 12311 - VARGINHA",
+        "region": "Regional - Sul Minas",
+        "remaining_days": null,
+        "sector": "Operação",
+        "month": "2026-06"
+      },
+      {
+        "client": "GRAND'DENIO HOTEL CANTINA - VARGINHA",
+        "region": "Regional - Sul Minas",
+        "remaining_days": null,
+        "sector": "Comercial B2B",
+        "month": "2026-06"
+      },
+      {
+        "client": "SAVASSI SÃO LUIZ LTDA - MONTES CLAROS",
+        "region": "Regional - Montes Claros",
+        "remaining_days": null,
+        "sector": "Comercial B2B",
+        "month": "2026-06"
+      },
+      {
+        "client": "GWG TELCO - CAMPOS DO JORDÃO",
+        "region": "Regional - São Paulo",
+        "remaining_days": null,
+        "sector": "Comercial B2B",
+        "month": "2026-06"
+      },
+      {
+        "client": "CLUBE DOS SERVIDORES MUNICIPAIS DE DIVIONOPOLIS",
+        "region": "Comercial B2B",
+        "remaining_days": null,
+        "sector": "Comercial B2B",
+        "month": "2026-06"
+      },
+      {
+        "client": "GOMES SOLUÇÕES CORPORATIVAS - MONTES CLAROS",
+        "region": "Regional - Montes Claros",
+        "remaining_days": null,
+        "sector": "Engenharia",
+        "month": "2026-05"
+      },
+      {
+        "client": "COMPUNET - SÃO JOSÉ DOS CAMPOS",
+        "region": "Comercial B2B",
+        "remaining_days": null,
+        "sector": "Comercial B2B",
+        "month": "2026-06"
+      },
+      {
+        "client": "ALTHAIA - POÇOS DE CALDAS",
+        "region": "Regional - Sul Minas",
+        "remaining_days": null,
+        "sector": "Comercial B2B",
+        "month": "2026-06"
+      },
+      {
+        "client": "POÇOSTEC - FILIAL - POÇOS DE CALDAS",
+        "region": "Regional - Sul Minas",
+        "remaining_days": null,
+        "sector": "Comercial B2B",
+        "month": "2026-06"
+      },
+      {
+        "client": "DANONE - LTDA -POÇOS DE CALDAS",
+        "region": "Regional - Sul Minas",
+        "remaining_days": null,
+        "sector": "Comercial B2B",
+        "month": "2026-06"
+      },
+      {
+        "client": "LAMESA - POÇOS DE CALDAS",
+        "region": "Regional - Sul Minas",
+        "remaining_days": null,
+        "sector": "Comercial B2B",
+        "month": "2026-06"
+      },
+      {
+        "client": "MYRALIS PHARMA DISTRIBUIDORA - POÇOS DE CALDAS",
+        "region": "Regional - Sul Minas",
+        "remaining_days": null,
+        "sector": "Comercial B2B",
+        "month": "2026-06"
+      },
+      {
+        "client": "THYSSENKRUPP BRASIL LTDA - POÇOS DE CALDAS",
+        "region": "Regional - Sul Minas",
+        "remaining_days": null,
+        "sector": "Comercial B2B",
+        "month": "2026-06"
+      },
+      {
+        "client": "PRADOLUX S.A - POÇOS DE CALDAS",
+        "region": "Regional - Sul Minas",
+        "remaining_days": null,
+        "sector": "Comercial B2B",
+        "month": "2026-06"
+      },
+      {
+        "client": "CAMPO VERDE ARMAZÉNS GERAIS LTDA - POÇOS DE CALDAS",
+        "region": "Regional - Sul Minas",
+        "remaining_days": null,
+        "sector": "Projetos",
+        "month": "2026-06"
+      },
+      {
+        "client": "PRESIDENTE HOTEL - POÇOS DE CALDAS",
+        "region": "Regional - Sul Minas",
+        "remaining_days": null,
+        "sector": "Operação",
+        "month": "2026-06"
+      },
+      {
+        "client": "PRINCIPE HOTEL - POÇOS DE CALDAS",
+        "region": "Regional - Sul Minas",
+        "remaining_days": null,
+        "sector": "Operação",
+        "month": "2026-06"
+      },
+      {
+        "client": "NORTH HOTEL - AMPLIAÇÃO 12 UNIFI - MONTES CLAROS",
+        "region": "Regional - Montes Claros",
+        "remaining_days": null,
+        "sector": "Operação",
+        "month": "2026-06"
+      },
+      {
+        "client": "ufinet methues leme",
+        "region": "Regional - Centro Oeste",
+        "remaining_days": null,
+        "sector": "Comercial B2B",
+        "month": "2026-06"
+      },
+      {
+        "client": "ALGAR MERCADO LIVRE -Betim",
+        "region": "Regional - Centro Oeste",
+        "remaining_days": null,
+        "sector": "Engenharia",
+        "month": "2026-06"
+      },
+      {
+        "client": "MUNICIPIO DE TRES CORAÇÕES - CREAS RODOVIARIA",
+        "region": "Regional - Sul Minas",
+        "remaining_days": null,
+        "sector": "Comercial B2B",
+        "month": "2026-06"
+      },
+      {
+        "client": "EVENTO IP EXPOMONTES 2025 - BARES",
+        "region": "Regional - Montes Claros",
+        "remaining_days": null,
+        "sector": "Projetos",
+        "month": "2026-06"
+      },
+      {
+        "client": "CONCESSIONARIA ECOVIAS DAS GERAIS S.A.",
+        "region": "Regional - Montes Claros",
+        "remaining_days": null,
+        "sector": "Comercial B2B",
+        "month": "2026-06"
+      },
+      {
+        "client": "Tassi Transportes - POÇOS DE CALDAS",
+        "region": "Regional - Sul Minas",
+        "remaining_days": null,
+        "sector": "Comercial B2B",
+        "month": "2026-06"
+      },
+      {
+        "client": "SICREDI VANGUARDA Tremembé SP",
+        "region": "Regional - São Paulo",
+        "remaining_days": null,
+        "sector": "Comercial B2B",
+        "month": "2026-06"
+      },
+      {
+        "client": "MGNET",
+        "region": "Regional - Centro Oeste",
+        "remaining_days": null,
+        "sector": "Engenharia",
+        "month": "2026-06"
+      },
+      {
+        "client": "JW ATIVIDADES MEDICAS LTDA - PARACATU",
+        "region": "Regional - Norte",
+        "remaining_days": null,
+        "sector": "Comercial B2B",
+        "month": "2026-06"
+      },
+      {
+        "client": "UFLA - UPGRADE",
+        "region": "Regional - Sul Minas",
+        "remaining_days": null,
+        "sector": "Comercial B2B",
+        "month": "2026-06"
+      },
+      {
+        "client": "OSVALDO BATISTA VELOSO",
+        "region": "Engenharia - IP e Serviços",
+        "remaining_days": null,
+        "sector": "Comercial B2B",
+        "month": "2026-06"
+      },
+      {
+        "client": "IGN VARGINHA",
+        "region": "Projetos",
+        "remaining_days": null,
+        "sector": "Operação",
+        "month": "2026-06"
+      },
+      {
+        "client": "FIBER NET - IP TRANSITO - SÃO JOSE DO ALEGRE",
+        "region": "Regional - Sul Minas",
+        "remaining_days": null,
+        "sector": "Comercial B2B",
+        "month": "2026-06"
+      },
+      {
+        "client": "SEARA ALIMENTOS - PASSOS",
+        "region": "Comercial B2B",
+        "remaining_days": null,
+        "sector": "Comercial B2B",
+        "month": "2026-06"
+      },
+      {
+        "client": "BRASILTECPAR",
+        "region": "Regional - Montes Claros",
+        "remaining_days": null,
+        "sector": "Engenharia",
+        "month": "2026-06"
+      },
+      {
+        "client": "SICREDI Divinópolis",
+        "region": "Regional - Centro Oeste",
+        "remaining_days": null,
+        "sector": "Engenharia",
+        "month": "2026-06"
+      },
+      {
+        "client": "TRIAL R2NET CONTAGEM",
+        "region": "Regional - Centro Oeste",
+        "remaining_days": null,
+        "sector": "Operação",
+        "month": "2026-06"
+      },
+      {
+        "client": "CPX Distribuidora S.A. - Montes Claros",
+        "region": "Regional - Montes Claros",
+        "remaining_days": null,
+        "sector": "Comercial B2B",
+        "month": "2026-06"
+      },
+      {
+        "client": "intelle três corações",
+        "region": "Regional - Sul Minas",
+        "remaining_days": null,
+        "sector": "Comercial B2B",
+        "month": "2026-06"
+      },
+      {
+        "client": "8 NOVE TELECOMUNICACOES - CONECTE SLP - TAUBATE",
+        "region": "Regional - São Paulo",
+        "remaining_days": null,
+        "sector": "Projetos",
+        "month": "2026-06"
+      },
+      {
+        "client": "Orchest do Brasil LTDA",
+        "region": "Regional - São Paulo",
+        "remaining_days": null,
+        "sector": "Comercial B2B",
+        "month": "2026-06"
+      },
+      {
+        "client": "Fabrica De Rações JBS - Passos",
+        "region": "Regional - Sul Minas",
+        "remaining_days": null,
+        "sector": "Comercial B2B",
+        "month": "2026-06"
+      },
+      {
+        "client": "AVIVAR - ADM GAMELEIRA - CARMO DO CAJURU",
+        "region": "Regional - Centro Oeste",
+        "remaining_days": null,
+        "sector": "Comercial B2B",
+        "month": "2026-06"
+      },
+      {
+        "client": "EXPRESSO TELECOM - ALFREDO ROSENDO - UPGRADE L2L 2 GBPS",
+        "region": "Engenharia - IP e Serviços",
+        "remaining_days": null,
+        "sector": "Engenharia",
+        "month": "2026-06"
+      },
+      {
+        "client": "EXPRESSO TELECOM - TAUBATE",
+        "region": "Regional - São Paulo",
+        "remaining_days": null,
+        "sector": "Engenharia",
+        "month": "2026-06"
+      },
+      {
+        "client": "SITELBRA SISTEMA DE TELECOMUNICAÇÕES DO BRASIL",
+        "region": "Regional - Centro Oeste",
+        "remaining_days": null,
+        "sector": "Operação",
+        "month": "2026-06"
+      },
+      {
+        "client": "NORTE CONEXÂO",
+        "region": "Regional - Centro Oeste",
+        "remaining_days": null,
+        "sector": "Comercial B2B",
+        "month": "2026-06"
+      },
+      {
+        "client": "BRASILTECPAR",
+        "region": "Regional - Montes Claros",
+        "remaining_days": null,
+        "sector": "Comercial B2B",
+        "month": "2026-06"
+      },
+      {
+        "client": "IGN São José dos Campos",
+        "region": "Regional - São Paulo",
+        "remaining_days": null,
+        "sector": "Comercial B2B",
+        "month": "2026-07"
+      },
+      {
+        "client": "IGN TAUBATÈ",
+        "region": "Regional - São Paulo",
+        "remaining_days": null,
+        "sector": "Comercial B2B",
+        "month": "2026-07"
+      },
+      {
+        "client": "TELEON",
+        "region": "Regional - Centro Oeste",
+        "remaining_days": null,
+        "sector": "Projetos",
+        "month": "2026-07"
+      },
+      {
+        "client": "Norte Três Corações",
+        "region": "Engenharia - IP e Serviços",
+        "remaining_days": null,
+        "sector": "Engenharia",
+        "month": "2026-07"
+      },
+      {
+        "client": "FIBER NET LTDA - TRANSPORTE PTT - SÃO JOSE DO ALEGRE",
+        "region": "Engenharia - IP e Serviços",
+        "remaining_days": null,
+        "sector": "Engenharia",
+        "month": "2026-07"
+      },
+      {
+        "client": "GWG TELCO - TAUBATE",
+        "region": "Projetos",
+        "remaining_days": null,
+        "sector": "Comercial B2B",
+        "month": "2026-07"
+      },
+      {
+        "client": "GWG TELCO - SJC X SP4",
+        "region": "Regional - São Paulo",
+        "remaining_days": null,
+        "sector": "Comercial B2B",
+        "month": "2026-07"
+      },
+      {
+        "client": "R FRANCO ENGENHARIA - SÃO JOSÉ DOS CAMPOS",
+        "region": "Regional - São Paulo",
+        "remaining_days": null,
+        "sector": "Operação",
+        "month": "2026-07"
+      },
+      {
+        "client": "HEAVEN SYSTEM - SJC - AQUARIUS",
+        "region": "Regional - São Paulo",
+        "remaining_days": null,
+        "sector": "Engenharia",
+        "month": "2026-07"
+      },
+      {
+        "client": "IGN – Teófilo Otoni - Last Mile",
+        "region": "Regional - Centro Oeste",
+        "remaining_days": null,
+        "sector": "Comercial B2B",
+        "month": "2026-07"
+      },
+      {
+        "client": "MOC AUTOMAÇÃO - MONTES CLAROS",
+        "region": "Projetos",
+        "remaining_days": null,
+        "sector": "Comercial B2B",
+        "month": "2026-07"
+      },
+      {
+        "client": "brasil tecpar itauna",
+        "region": "Regional - Centro Oeste",
+        "remaining_days": null,
+        "sector": "Comercial B2B",
+        "month": "2026-07"
+      },
+      {
+        "client": "UPIX VARGINHA",
+        "region": "Regional - Centro Oeste",
+        "remaining_days": null,
+        "sector": "Comercial B2B",
+        "month": "2026-07"
+      },
+      {
+        "client": "Brasil Tecpar Montes Claros",
+        "region": "Regional - Montes Claros",
+        "remaining_days": null,
+        "sector": "Comercial B2B",
+        "month": "2026-07"
+      },
+      {
+        "client": "GRIFE TRANSPORTES - MONTES CLAROS",
+        "region": "Projetos",
+        "remaining_days": null,
+        "sector": "Comercial B2B",
+        "month": "2026-07"
+      },
+      {
+        "client": "TRC TELECOM LTDA - MONTES CLAROS",
+        "region": "Regional - Montes Claros",
+        "remaining_days": null,
+        "sector": "Comercial B2B",
+        "month": "2026-07"
+      },
+      {
+        "client": "NETLC COMUNICACAO MULTIMIDIA LTDA",
+        "region": "Comercial B2B",
+        "remaining_days": null,
+        "sector": "Engenharia",
+        "month": "2026-07"
+      },
+      {
+        "client": "Newfiber - São Jose dos Salgados",
+        "region": "Comercial B2B",
+        "remaining_days": null,
+        "sector": "Engenharia",
+        "month": "2026-07"
+      },
+      {
+        "client": "8 NOVE TELECOMUNICACOES LTDA - TAUBATE",
+        "region": "Engenharia - IP e Serviços",
+        "remaining_days": null,
+        "sector": "Engenharia",
+        "month": "2026-07"
+      },
+      {
+        "client": "VP TELECOM - SINDICATO - TAUBATE",
+        "region": "Comercial B2B",
+        "remaining_days": null,
+        "sector": "Operação",
+        "month": "2026-07"
+      },
+      {
+        "client": "GWG - L2L CAMARA X CRISTO - POÇOS DE CALDAS",
+        "region": "Comercial B2B",
+        "remaining_days": null,
+        "sector": "Comercial B2B",
+        "month": "2026-07"
+      },
+      {
+        "client": "DOT A DOT -Tremembé - SP",
+        "region": "Projetos",
+        "remaining_days": null,
+        "sector": "Projetos",
+        "month": "2026-07"
+      },
+      {
+        "client": "AMIS ASSOCIACAO MINEIRA DE SUPERMERCADOS - DIVINÓPOLIS",
+        "region": "Regional - Centro Oeste",
+        "remaining_days": null,
+        "sector": "Comercial B2B",
+        "month": "2026-07"
+      },
+      {
+        "client": "ufinet varginha",
+        "region": "Comercial B2B",
+        "remaining_days": null,
+        "sector": "Comercial B2B",
+        "month": "2026-07"
+      },
+      {
+        "client": "GADATI EVENTOS LAVRAS (THULIO PADOVANI)",
+        "region": "Engenharia - Transmissão",
+        "remaining_days": null,
+        "sector": "Comercial B2B",
+        "month": "2026-07"
+      },
+      {
+        "client": "RURAL TELECOM MAIS LTDA",
+        "region": "Regional - Sul Minas",
+        "remaining_days": null,
+        "sector": "Comercial B2B",
+        "month": "2026-07"
+      },
+      {
+        "client": "IGN - Paraisopolis",
+        "region": "Projetos",
+        "remaining_days": null,
+        "sector": "Engenharia",
+        "month": "2026-07"
+      },
+      {
+        "client": "GLOBAL JOBS NET - UPGRADE IP - VARGINHA",
+        "region": "Comercial B2B",
+        "remaining_days": null,
+        "sector": "Comercial B2B",
+        "month": "2026-07"
+      },
+      {
+        "client": "PREFEITURA MUNICIPAL DE VARGINHA",
+        "region": "Projetos",
+        "remaining_days": null,
+        "sector": "Comercial B2B",
+        "month": "2026-07"
+      },
+      {
+        "client": "DOT A DOT - POÇOS DE CALDAS",
+        "region": "Regional - Sul Minas",
+        "remaining_days": null,
+        "sector": "Comercial B2B",
+        "month": "2026-07"
+      },
+      {
+        "client": "STA SERVIÇOS - RENATO - PTU",
+        "region": "Regional - Norte",
+        "remaining_days": null,
+        "sector": "Comercial B2B",
+        "month": "2026-07"
+      },
+      {
+        "client": "RAFAEL HENRIQUE DE SOUSA",
+        "region": "Regional - Centro Oeste",
+        "remaining_days": null,
+        "sector": "Comercial B2B",
+        "month": "2026-07"
+      },
+      {
+        "client": "CONDOMINIO JOSE BRANDAO I",
+        "region": "Regional - Centro Oeste",
+        "remaining_days": null,
+        "sector": "Comercial B2B",
+        "month": "2026-07"
+      },
+      {
+        "client": "AVIVAR - INTERLIGAR GALPÃO - CARMO DO CAJURU",
+        "region": "Regional - Centro Oeste",
+        "remaining_days": null,
+        "sector": "Comercial B2B",
+        "month": "2026-07"
+      },
+      {
+        "client": "ALGAR - 12576 - TAUBATE",
+        "region": "Regional - São Paulo",
+        "remaining_days": null,
+        "sector": "Comercial B2B",
+        "month": "2026-07"
+      },
+      {
+        "client": "ALGAR 431842 PARACATU",
+        "region": "Regional - Norte",
+        "remaining_days": null,
+        "sector": "Comercial B2B",
+        "month": "2026-07"
+      },
+      {
+        "client": "MOOV TELECOM - PTT - ITAJUBA",
+        "region": "Regional - Sul Minas",
+        "remaining_days": null,
+        "sector": "Comercial B2B",
+        "month": "2026-07"
+      },
+      {
+        "client": "ufinet varginha - link 2",
+        "region": "Regional - Sul Minas",
+        "remaining_days": null,
+        "sector": "Comercial B2B",
+        "month": "2026-07"
+      },
+      {
+        "client": "ALGAR - 12576 - TAUBATE Endereço 2",
+        "region": "Regional - São Paulo",
+        "remaining_days": null,
+        "sector": "Comercial B2B",
+        "month": "2026-07"
+      },
+      {
+        "client": "FREITAS DA CRUZ SERV.DE COMUNICACAO LTDA",
+        "region": "Regional - Norte",
+        "remaining_days": null,
+        "sector": "Comercial B2B",
+        "month": "2026-07"
+      },
+      {
+        "client": "DOT A DOT CAJURU",
+        "region": "Regional - Centro Oeste",
+        "remaining_days": null,
+        "sector": "Comercial B2B",
+        "month": "2026-07"
+      },
+      {
+        "client": "DOT a DOT Juatuba SUPERMERCADO BH",
+        "region": "Regional - Centro Oeste",
+        "remaining_days": null,
+        "sector": "Comercial B2B",
+        "month": "2026-07"
+      },
+      {
+        "client": "DOT A DOT SETE LAGOAS",
+        "region": "Regional - Centro Oeste",
+        "remaining_days": null,
+        "sector": "Comercial B2B",
+        "month": "2026-07"
+      },
+      {
+        "client": "Material Elétrico e Hidráulico JOGS E MIGAS - Montes Claros",
+        "region": "Regional - Montes Claros",
+        "remaining_days": null,
+        "sector": "Comercial B2B",
+        "month": "2026-07"
+      },
+      {
+        "client": "EUROFARMA (TRANSFERENCIA DE PONTO) MONTES CLAROS",
+        "region": "Regional - Montes Claros",
+        "remaining_days": null,
+        "sector": "Comercial B2B",
+        "month": "2026-07"
+      },
+      {
+        "client": "ALGAR - 431340 - PINDA",
+        "region": "Regional - São Paulo",
+        "remaining_days": null,
+        "sector": "Operação",
+        "month": "2026-07"
+      },
+      {
+        "client": "UFINET LORENA",
+        "region": "Engenharia - IP e Serviços",
+        "remaining_days": null,
+        "sector": "Engenharia",
+        "month": "2026-07"
+      },
+      {
+        "client": "ELETRONET - CARMO DO CAJURU",
+        "region": "Regional - Centro Oeste",
+        "remaining_days": null,
+        "sector": "Comercial B2B",
+        "month": "2026-07"
+      },
+      {
+        "client": "ALGAR 421001 TAUBATE",
+        "region": "Regional - São Paulo",
+        "remaining_days": null,
+        "sector": "Comercial B2B",
+        "month": "2026-07"
+      },
+      {
+        "client": "EXPRESSO TELECOM - L2L - METTRO - TAUBATE",
+        "region": "Engenharia - IP e Serviços",
+        "remaining_days": null,
+        "sector": "Comercial B2B",
+        "month": "2026-07"
+      },
+      {
+        "client": "Microsete Taubate",
+        "region": "Projetos",
+        "remaining_days": null,
+        "sector": "Comercial B2B",
+        "month": "2026-08"
+      },
+      {
+        "client": "American Tower COPASA em Juatuba",
+        "region": "Projetos",
+        "remaining_days": null,
+        "sector": "Comercial B2B",
+        "month": "2026-08"
+      },
+      {
+        "client": "DISTRIBUIDORA NOVA GERAÇÃO - MONTES CLAROS",
+        "region": "Regional - Montes Claros",
+        "remaining_days": null,
+        "sector": "Engenharia",
+        "month": "2026-08"
+      },
+      {
+        "client": "HLVR EMPREENDIMENTOS - VARGINHA",
+        "region": "Regional - Sul Minas",
+        "remaining_days": null,
+        "sector": "Comercial B2B",
+        "month": "2026-08"
+      },
+      {
+        "client": "Algar Lorena - 435259",
+        "region": "Regional - São Paulo",
+        "remaining_days": null,
+        "sector": "Comercial B2B",
+        "month": "2026-08"
+      },
+      {
+        "client": "SPACEMAKER - SAO JOSE DOS CAMPOS",
+        "region": "Regional - São Paulo",
+        "remaining_days": null,
+        "sector": "Comercial B2B",
+        "month": "2026-08"
+      },
+      {
+        "client": "HOSPITAL SÃO BENTO MENNI - DIVINOPOLIS",
+        "region": "Regional - Centro Oeste",
+        "remaining_days": null,
+        "sector": "Comercial B2B",
+        "month": "2026-08"
+      },
+      {
+        "client": "SITELBRA PASSOS",
+        "region": "Regional - Sul Minas",
+        "remaining_days": null,
+        "sector": "Comercial B2B",
+        "month": "2026-08"
+      },
+      {
+        "client": "VALDIR SARAIVA",
+        "region": "Regional - Montes Claros",
+        "remaining_days": null,
+        "sector": "Comercial B2B",
+        "month": "2026-08"
+      },
+      {
+        "client": "Palácio dos Leilões - JUATUBA",
+        "region": "Regional - Centro Oeste",
+        "remaining_days": null,
+        "sector": "Comercial B2B",
+        "month": "2026-08"
+      },
+      {
+        "client": "Entroncamento Master x Conecta",
+        "region": "Regional - Montes Claros",
+        "remaining_days": null,
+        "sector": "Comercial B2B",
+        "month": "2026-08"
+      },
+      {
+        "client": "FIBER NET - PIRANGUINHO",
+        "region": "Regional - Sul Minas",
+        "remaining_days": null,
+        "sector": "Engenharia",
+        "month": "2026-08"
+      },
+      {
+        "client": "CLUBE SINDICATO DOS METALURGICOS - DIVINÓPOLIS",
+        "region": "Regional - Centro Oeste",
+        "remaining_days": null,
+        "sector": "Engenharia",
+        "month": "2026-08"
+      },
+      {
+        "client": "FBR - JUATUBA - Ambev",
+        "region": "Regional - Centro Oeste",
+        "remaining_days": null,
+        "sector": "Comercial B2B",
+        "month": "2026-09"
+      },
+      {
+        "client": "PLIN SOLUCOES DE PAGAMENTO LTDA",
+        "region": "Regional - Montes Claros",
+        "remaining_days": null,
+        "sector": "Operação",
+        "month": "2026-08"
+      },
+      {
+        "client": "TINTANORTE DISTRIBUIDORS DE MATERIAIS",
+        "region": "Regional - Montes Claros",
+        "remaining_days": null,
+        "sector": "Comercial B2B",
+        "month": "2026-08"
+      },
+      {
+        "client": "ALGAR - MASSIVA 12735 - SÃO SEBASTIAO DO PARAISO",
+        "region": "Regional - Sul Minas",
+        "remaining_days": null,
+        "sector": "Engenharia",
+        "month": "2026-08"
+      },
+      {
+        "client": "HOSPITAL OTORRINO CENTER LTDA - MONTES CLAROS",
+        "region": "Regional - Montes Claros",
+        "remaining_days": null,
+        "sector": "Projetos",
+        "month": "2026-08"
+      },
+      {
+        "client": "ADM PORTAS - MONTES CLAROS",
+        "region": "Regional - Montes Claros",
+        "remaining_days": null,
+        "sector": "Operação",
+        "month": "2026-08"
+      },
+      {
+        "client": "CAMARA MUNICIPAL DE DIVINOPOLIS",
+        "region": "Regional - Centro Oeste",
+        "remaining_days": null,
+        "sector": "Comercial B2B",
+        "month": "2026-08"
+      },
+      {
+        "client": "ELO SOLUÇÕES - BANCO DO NORDESTE - MONTES CLAROS",
+        "region": "Regional - Montes Claros",
+        "remaining_days": null,
+        "sector": "Comercial B2B",
+        "month": "2026-08"
+      },
+      {
+        "client": "ATIVALOG - MIGRAÇÃO FIBRA - VARGINHA",
+        "region": "Regional - Sul Minas",
+        "remaining_days": null,
+        "sector": "Comercial B2B",
+        "month": "2026-08"
+      },
+      {
+        "client": "PROWEL (Tuná Parque Aquático) - CAPITÓLIO",
+        "region": "Regional - Sul Minas",
+        "remaining_days": null,
+        "sector": "Engenharia",
+        "month": "2026-08"
+      },
+      {
+        "client": "COMNT UPGRAD - 10GBPS | MONTES CLAROS/MG",
+        "region": "Regional - Montes Claros",
+        "remaining_days": null,
+        "sector": "Engenharia",
+        "month": "2026-08"
+      },
+      {
+        "client": "ATIVA LOGISTICA | VARGINHA/MG",
+        "region": "Regional - Sul Minas",
+        "remaining_days": null,
+        "sector": "CD - Centro Distribuição",
+        "month": "2026-08"
+      },
+      {
+        "client": "north poços de caldas",
+        "region": "Regional - Sul Minas",
+        "remaining_days": null,
+        "sector": "Comercial B2B",
+        "month": "2026-08"
+      },
+      {
+        "client": "PAO DA ALMA - DIVINOPOLIS",
+        "region": "Regional - Centro Oeste",
+        "remaining_days": null,
+        "sector": "Comercial B2B",
+        "month": "2026-09"
+      },
+      {
+        "client": "VERO - VERO INTERNET - VERO EMPRESAS - POUSO ALEGRE",
+        "region": "Regional - Sul Minas",
+        "remaining_days": null,
+        "sector": "Comercial B2B",
+        "month": "2026-09"
+      },
+      {
+        "client": "MINISTERIO REDENCAO - DIVINÓPOLIS",
+        "region": "Regional - Centro Oeste",
+        "remaining_days": null,
+        "sector": "Comercial B2B",
+        "month": "2026-09"
+      },
+      {
+        "client": "VIA AGRO COMERCIO REPRESENTACOES - DIVINÓPOLIS",
+        "region": "Regional - Centro Oeste",
+        "remaining_days": null,
+        "sector": "Comercial B2B",
+        "month": "2026-09"
+      },
+      {
+        "client": "BRASIL PONTES ENGENHARIA E CONSTRUCOES - MONTES CLAROS",
+        "region": "Regional - Montes Claros",
+        "remaining_days": null,
+        "sector": "Comercial B2B",
+        "month": "2026-09"
+      },
+      {
+        "client": "RX CONSTRUTORA - VARGINHA",
+        "region": "Regional - Sul Minas",
+        "remaining_days": null,
+        "sector": "Comercial B2B",
+        "month": "2026-09"
+      },
+      {
+        "client": "LINK VALE - PINDAMONHANGABA",
+        "region": "Regional - São Paulo",
+        "remaining_days": null,
+        "sector": "Comercial B2B",
+        "month": "2026-09"
+      },
+      {
+        "client": "MOBIPHONE - TAUBATE - TRANSFERENCIA DE ENDEREÇO",
+        "region": "Regional - São Paulo",
+        "remaining_days": -7,
+        "sector": "Projetos",
+        "month": "2026-09"
+      },
+      {
+        "client": "ULTRANET VARGINHA",
+        "region": "Regional - Sul Minas",
+        "remaining_days": null,
+        "sector": "Comercial B2B",
+        "month": "2026-09"
+      },
+      {
+        "client": "UFINET TAUBATE",
+        "region": "Regional - São Paulo",
+        "remaining_days": null,
+        "sector": "Comercial B2B",
+        "month": "2026-09"
+      },
+      {
+        "client": "ALGAR - 438687 - ITAUNA",
+        "region": "Regional - Centro Oeste",
+        "remaining_days": null,
+        "sector": "Comercial B2B",
+        "month": "2026-09"
+      },
+      {
+        "client": "MOBIPHONE - TAUBATE - PONTO NOVO",
+        "region": "Regional - São Paulo",
+        "remaining_days": -1,
+        "sector": "Projetos",
+        "month": "2026-09"
+      },
+      {
+        "client": "W&W EVENTOS - MONTES CLAROS",
+        "region": "Regional - Montes Claros",
+        "remaining_days": -1,
+        "sector": "Operação",
+        "month": "2026-09"
+      },
+      {
+        "client": "AGAH MADEIRAS - PASSOS",
+        "region": "Regional - Sul Minas",
+        "remaining_days": 0,
+        "sector": "Operação",
+        "month": "2026-09"
+      },
+      {
+        "client": "FIBRA APAGADA TUNA ( AO PARQUE PAUA )",
+        "region": "Regional - Sul Minas",
+        "remaining_days": 2,
+        "sector": "Operação",
+        "month": "2026-09"
+      },
+      {
+        "client": "EXPOLAVRAS - LAVRAS",
+        "region": "Regional - Sul Minas",
+        "remaining_days": 2,
+        "sector": "Operação",
+        "month": "2026-09"
+      }
+    ]
   },
   "deadline": {
     "counts": {
       "Concluido": 182,
-      "Urgente": 5,
-      "Atrasada": 1
+      "Atrasada": 3,
+      "Urgente": 3
     },
     "items": [
       {
-        "deadline": "Concluido",
         "client": "IGN TELECOMUNICAÇÕES DO BRASIL LTDA",
         "region": "Regional - Sul Minas",
         "remaining_days": null,
-        "sector": "Operação"
+        "sector": "Operação",
+        "deadline": "Concluido"
       },
       {
-        "deadline": "Concluido",
         "client": "Vistoria Brasiltecpar - TTE",
         "region": "Regional - São Paulo",
         "remaining_days": null,
-        "sector": "Comercial B2B"
+        "sector": "Comercial B2B",
+        "deadline": "Concluido"
       },
       {
-        "deadline": "Concluido",
         "client": "Vistoria Netmig - PTU",
         "region": "Regional - Norte",
         "remaining_days": null,
-        "sector": "Comercial B2B"
+        "sector": "Comercial B2B",
+        "deadline": "Concluido"
       },
       {
-        "deadline": "Concluido",
         "client": "Vistoria BrDigital - PÇS",
         "region": "Regional - Sul Minas",
         "remaining_days": null,
-        "sector": "Comercial B2B"
+        "sector": "Comercial B2B",
+        "deadline": "Concluido"
       },
       {
-        "deadline": "Concluido",
         "client": "R N TINTAS E FERRAMENTAS LTDA",
         "region": "Regional - Sul Minas",
         "remaining_days": null,
-        "sector": "Operação"
+        "sector": "Operação",
+        "deadline": "Concluido"
       },
       {
-        "deadline": "Concluido",
         "client": "FIBER 37 DIVINOPOLIS- VALE DO SOL",
         "region": "Regional - Centro Oeste",
         "remaining_days": null,
-        "sector": "Engenharia"
+        "sector": "Engenharia",
+        "deadline": "Concluido"
       },
       {
-        "deadline": "Concluido",
         "client": "Vistoria Refinaria Henrique Lage - SJC",
         "region": "Regional - São Paulo",
         "remaining_days": null,
-        "sector": "Comercial B2B"
+        "sector": "Comercial B2B",
+        "deadline": "Concluido"
       },
       {
-        "deadline": "Concluido",
         "client": "Vistoria TAURUS ACADEMIA - MCL",
         "region": "Regional - Montes Claros",
         "remaining_days": null,
-        "sector": "Comercial B2B"
+        "sector": "Comercial B2B",
+        "deadline": "Concluido"
       },
       {
-        "deadline": "Concluido",
         "client": "MAGLIONI RIBEIRO & CIA LTDA",
         "region": "Regional - Sul Minas",
         "remaining_days": null,
-        "sector": "Engenharia"
+        "sector": "Engenharia",
+        "deadline": "Concluido"
       },
       {
-        "deadline": "Concluido",
         "client": "KOYA FUSION CUISINE LTDA - MONTES CLAROS",
         "region": "Regional - Montes Claros",
         "remaining_days": null,
-        "sector": "Comercial B2B"
+        "sector": "Comercial B2B",
+        "deadline": "Concluido"
       },
       {
-        "deadline": "Concluido",
         "client": "Algar - 383387 - POCOS DE CALDAS - Aguard. nova vistoria (Igor Raposo)",
         "region": "Regional - Sul Minas",
         "remaining_days": null,
-        "sector": "Comercial B2B"
+        "sector": "Comercial B2B",
+        "deadline": "Concluido"
       },
       {
-        "deadline": "Concluido",
         "client": "ACADEMIA SAO JOAO MONTES CLAROS LTDA",
         "region": "Regional - Montes Claros",
         "remaining_days": null,
-        "sector": "Comercial B2B"
+        "sector": "Comercial B2B",
+        "deadline": "Concluido"
       },
       {
-        "deadline": "Concluido",
         "client": "CAMA E CAFE HOSPEDAGEM - LAVRAS",
         "region": "CD - Centro de Distruibuição",
         "remaining_days": null,
-        "sector": "Engenharia"
+        "sector": "Engenharia",
+        "deadline": "Concluido"
       },
       {
-        "deadline": "Concluido",
         "client": "EVENTO CHURRASCANDO 2026 - PARACATU MG",
         "region": "Regional - Norte",
         "remaining_days": null,
-        "sector": "Comercial B2B"
+        "sector": "Comercial B2B",
+        "deadline": "Concluido"
       },
       {
-        "deadline": "Concluido",
         "client": "CEL CENTRAL ELETRICA LTDA",
         "region": "Regional - Montes Claros",
         "remaining_days": null,
-        "sector": "Engenharia"
+        "sector": "Engenharia",
+        "deadline": "Concluido"
       },
       {
-        "deadline": "Concluido",
         "client": "SAMM TECNOLOGIA E TELECOMUNICACOES S.A.",
         "region": "Regional - Sul Minas",
         "remaining_days": null,
-        "sector": "Operação"
+        "sector": "Operação",
+        "deadline": "Concluido"
       },
       {
-        "deadline": "Concluido",
         "client": "LA SUÍTE MOTEL - MONTES CLAROS",
         "region": "Regional - Montes Claros",
         "remaining_days": null,
-        "sector": "Comercial B2B"
+        "sector": "Comercial B2B",
+        "deadline": "Concluido"
       },
       {
-        "deadline": "Concluido",
         "client": "RG TECH - PARA DE MINAS",
         "region": "Regional - Centro Oeste",
         "remaining_days": null,
-        "sector": "Comercial B2B"
+        "sector": "Comercial B2B",
+        "deadline": "Concluido"
       },
       {
-        "deadline": "Concluido",
         "client": "TURANO - TRANSFERENCIA - MOC",
         "region": "Comercial B2B",
         "remaining_days": null,
-        "sector": "Comercial B2B"
+        "sector": "Comercial B2B",
+        "deadline": "Concluido"
       },
       {
-        "deadline": "Concluido",
         "client": "UNIMED - VARGINHA",
         "region": "Regional - Sul Minas",
         "remaining_days": null,
-        "sector": "Operação"
+        "sector": "Operação",
+        "deadline": "Concluido"
       },
       {
-        "deadline": "Concluido",
         "client": "ONE NET - TAUBATE",
         "region": "Regional - São Paulo",
         "remaining_days": null,
-        "sector": "Comercial B2B"
+        "sector": "Comercial B2B",
+        "deadline": "Concluido"
       },
       {
-        "deadline": "Concluido",
         "client": "CEVA LOGISTICS LTDA",
         "region": "Regional - Sul Minas",
         "remaining_days": null,
-        "sector": "Engenharia"
+        "sector": "Engenharia",
+        "deadline": "Concluido"
       },
       {
-        "deadline": "Concluido",
         "client": "ELAINE REIS BATISTA ME - PARACATU/MG",
         "region": "Regional - Norte",
         "remaining_days": null,
-        "sector": "Comercial B2B"
+        "sector": "Comercial B2B",
+        "deadline": "Concluido"
       },
       {
-        "deadline": "Concluido",
         "client": "SLA 360 - MONTES CLAROS",
         "region": "Regional - Montes Claros",
         "remaining_days": null,
-        "sector": "Comercial B2B"
+        "sector": "Comercial B2B",
+        "deadline": "Concluido"
       },
       {
-        "deadline": "Concluido",
         "client": "IGREJA BATISTA DA GRAÇA - TAUBATÉ",
         "region": "Regional - São Paulo",
         "remaining_days": null,
-        "sector": "Comercial B2B"
+        "sector": "Comercial B2B",
+        "deadline": "Concluido"
       },
       {
-        "deadline": "Concluido",
         "client": "Norte conexão varginha",
         "region": "Regional - Sul Minas",
         "remaining_days": null,
-        "sector": "Comercial B2B"
+        "sector": "Comercial B2B",
+        "deadline": "Concluido"
       },
       {
-        "deadline": "Concluido",
         "client": "CONDOMINIO DIAMOND II - MONTES CLAROS",
         "region": "Regional - Montes Claros",
         "remaining_days": null,
-        "sector": "Comercial B2B"
+        "sector": "Comercial B2B",
+        "deadline": "Concluido"
       },
       {
-        "deadline": "Concluido",
         "client": "ASTRAL - UNIFI - MONTES CLAROS",
         "region": "Regional - Montes Claros",
         "remaining_days": null,
-        "sector": "Engenharia"
+        "sector": "Engenharia",
+        "deadline": "Concluido"
       },
       {
-        "deadline": "Concluido",
         "client": "Lançamento Latwan - TTE - lançamento interno 18/05, solicitação do cliente..",
         "region": "Regional - São Paulo",
         "remaining_days": null,
-        "sector": "Operação"
+        "sector": "Operação",
+        "deadline": "Concluido"
       },
       {
-        "deadline": "Concluido",
         "client": "Vistoria BrFibra - PSO",
         "region": "Regional - Sul Minas",
         "remaining_days": null,
-        "sector": "Operação"
+        "sector": "Operação",
+        "deadline": "Concluido"
       },
       {
-        "deadline": "Concluido",
         "client": "Rede Minas e Rádio Inconfidência - Montes Claros",
         "region": "Regional - Montes Claros",
         "remaining_days": null,
-        "sector": "Comercial B2B"
+        "sector": "Comercial B2B",
+        "deadline": "Concluido"
       },
       {
-        "deadline": "Concluido",
         "client": "AURA TELECOMUNICACOES E INFORMATICA LTDA - CAJURU",
         "region": "Engenharia - IP e Serviços",
         "remaining_days": null,
-        "sector": "Engenharia"
+        "sector": "Engenharia",
+        "deadline": "Concluido"
       },
       {
-        "deadline": "Concluido",
         "client": "Fast Telekom - Paracatu",
         "region": "Regional - Norte",
         "remaining_days": null,
-        "sector": "Comercial B2B"
+        "sector": "Comercial B2B",
+        "deadline": "Concluido"
       },
       {
-        "deadline": "Concluido",
         "client": "FRIGOLAVRAS - LAVRAS",
         "region": "Regional - Sul Minas",
         "remaining_days": null,
-        "sector": "Operação"
+        "sector": "Operação",
+        "deadline": "Concluido"
       },
       {
-        "deadline": "Concluido",
         "client": "RRN HOTEL LTDA",
         "region": "Regional - Centro Oeste",
         "remaining_days": null,
-        "sector": "Operação"
+        "sector": "Operação",
+        "deadline": "Concluido"
       },
       {
-        "deadline": "Concluido",
         "client": "SANTA MÔNICA LOCAÇÕES - MONTES CLAROS",
         "region": "Regional - Montes Claros",
         "remaining_days": null,
-        "sector": "Comercial B2B"
+        "sector": "Comercial B2B",
+        "deadline": "Concluido"
       },
       {
-        "deadline": "Concluido",
         "client": "SUPERMIX CONCRETO S/A - MONTES CLAROS",
         "region": "Engenharia - Transmissão",
         "remaining_days": null,
-        "sector": "Comercial B2B"
+        "sector": "Comercial B2B",
+        "deadline": "Concluido"
       },
       {
-        "deadline": "Concluido",
         "client": "HOTEL FATIMA - DIVINOPOLIS",
         "region": "Regional - Centro Oeste",
         "remaining_days": null,
-        "sector": "Operação"
+        "sector": "Operação",
+        "deadline": "Concluido"
       },
       {
-        "deadline": "Concluido",
         "client": "AVICOLA - CARMO DO CAJURU",
         "region": "Regional - Centro Oeste",
         "remaining_days": null,
-        "sector": "Engenharia"
+        "sector": "Engenharia",
+        "deadline": "Concluido"
       },
       {
-        "deadline": "Concluido",
         "client": "KNN IDIOMAS - MONTES CLAROS",
         "region": "Regional - Montes Claros",
         "remaining_days": null,
-        "sector": "Comercial B2B"
+        "sector": "Comercial B2B",
+        "deadline": "Concluido"
       },
       {
-        "deadline": "Concluido",
         "client": "CONEXÃO FITNESS - DIVINÓPOLIS",
         "region": "Regional - Centro Oeste",
         "remaining_days": null,
-        "sector": "Comercial B2B"
+        "sector": "Comercial B2B",
+        "deadline": "Concluido"
       },
       {
-        "deadline": "Concluido",
         "client": "BRINCA LOUMINOS/OKTOBERFEST - CAMPOS DO JORDÃO",
         "region": "Regional - São Paulo",
         "remaining_days": null,
-        "sector": "Engenharia"
+        "sector": "Engenharia",
+        "deadline": "Concluido"
       },
       {
-        "deadline": "Concluido",
         "client": "Foco - Divinópolis",
         "region": "Engenharia - Noc",
         "remaining_days": null,
-        "sector": "Engenharia"
+        "sector": "Engenharia",
+        "deadline": "Concluido"
       },
       {
-        "deadline": "Concluido",
         "client": "COMERCIO E REPRESENTACOES CECOTI LTDA",
         "region": "Projetos",
         "remaining_days": null,
-        "sector": "Engenharia"
+        "sector": "Engenharia",
+        "deadline": "Concluido"
       },
       {
-        "deadline": "Concluido",
         "client": "SIR INFORMATICA",
         "region": "Regional - São Paulo",
         "remaining_days": null,
-        "sector": "Operação"
+        "sector": "Operação",
+        "deadline": "Concluido"
       },
       {
-        "deadline": "Concluido",
         "client": "COLEGIO ANGLO - DIVINOPOLIS",
         "region": "Regional - Centro Oeste",
         "remaining_days": null,
-        "sector": "Comercial B2B"
+        "sector": "Comercial B2B",
+        "deadline": "Concluido"
       },
       {
-        "deadline": "Concluido",
         "client": "BRDIGITAL",
         "region": "Projetos",
         "remaining_days": null,
-        "sector": "Comercial B2B"
+        "sector": "Comercial B2B",
+        "deadline": "Concluido"
       },
       {
-        "deadline": "Concluido",
         "client": "VP TELECOM - TRANSPORTE L2L - TAUBATE",
         "region": "Engenharia - IP e Serviços",
         "remaining_days": null,
-        "sector": "Comercial B2B"
+        "sector": "Comercial B2B",
+        "deadline": "Concluido"
       },
       {
-        "deadline": "Concluido",
         "client": "NAILAN METAIS - DIVINOPOLIS - CHORO",
         "region": "Regional - Centro Oeste",
         "remaining_days": null,
-        "sector": "Comercial B2B"
+        "sector": "Comercial B2B",
+        "deadline": "Concluido"
       },
       {
-        "deadline": "Concluido",
         "client": "NAILAN METAIS - DIVINOPOLIS - CACOCO",
         "region": "Regional - Centro Oeste",
         "remaining_days": null,
-        "sector": "Comercial B2B"
+        "sector": "Comercial B2B",
+        "deadline": "Concluido"
       },
       {
-        "deadline": "Concluido",
         "client": "ALGAR - 12311 - VARGINHA",
         "region": "Regional - Sul Minas",
         "remaining_days": null,
-        "sector": "Operação"
+        "sector": "Operação",
+        "deadline": "Concluido"
       },
       {
-        "deadline": "Concluido",
         "client": "GRAND'DENIO HOTEL CANTINA - VARGINHA",
         "region": "Regional - Sul Minas",
         "remaining_days": null,
-        "sector": "Comercial B2B"
+        "sector": "Comercial B2B",
+        "deadline": "Concluido"
       },
       {
-        "deadline": "Concluido",
         "client": "SAVASSI SÃO LUIZ LTDA - MONTES CLAROS",
         "region": "Regional - Montes Claros",
         "remaining_days": null,
-        "sector": "Comercial B2B"
+        "sector": "Comercial B2B",
+        "deadline": "Concluido"
       },
       {
-        "deadline": "Concluido",
         "client": "GWG TELCO - CAMPOS DO JORDÃO",
         "region": "Regional - São Paulo",
         "remaining_days": null,
-        "sector": "Comercial B2B"
+        "sector": "Comercial B2B",
+        "deadline": "Concluido"
       },
       {
-        "deadline": "Concluido",
         "client": "CLUBE DOS SERVIDORES MUNICIPAIS DE DIVIONOPOLIS",
         "region": "Comercial B2B",
         "remaining_days": null,
-        "sector": "Comercial B2B"
+        "sector": "Comercial B2B",
+        "deadline": "Concluido"
       },
       {
-        "deadline": "Concluido",
         "client": "GOMES SOLUÇÕES CORPORATIVAS - MONTES CLAROS",
         "region": "Regional - Montes Claros",
         "remaining_days": null,
-        "sector": "Engenharia"
+        "sector": "Engenharia",
+        "deadline": "Concluido"
       },
       {
-        "deadline": "Concluido",
         "client": "COMPUNET - SÃO JOSÉ DOS CAMPOS",
         "region": "Comercial B2B",
         "remaining_days": null,
-        "sector": "Comercial B2B"
+        "sector": "Comercial B2B",
+        "deadline": "Concluido"
       },
       {
-        "deadline": "Concluido",
         "client": "ALTHAIA - POÇOS DE CALDAS",
         "region": "Regional - Sul Minas",
         "remaining_days": null,
-        "sector": "Comercial B2B"
+        "sector": "Comercial B2B",
+        "deadline": "Concluido"
       },
       {
-        "deadline": "Concluido",
         "client": "POÇOSTEC - FILIAL - POÇOS DE CALDAS",
         "region": "Regional - Sul Minas",
         "remaining_days": null,
-        "sector": "Comercial B2B"
+        "sector": "Comercial B2B",
+        "deadline": "Concluido"
       },
       {
-        "deadline": "Concluido",
         "client": "DANONE - LTDA -POÇOS DE CALDAS",
         "region": "Regional - Sul Minas",
         "remaining_days": null,
-        "sector": "Comercial B2B"
+        "sector": "Comercial B2B",
+        "deadline": "Concluido"
       },
       {
-        "deadline": "Concluido",
         "client": "LAMESA - POÇOS DE CALDAS",
         "region": "Regional - Sul Minas",
         "remaining_days": null,
-        "sector": "Comercial B2B"
+        "sector": "Comercial B2B",
+        "deadline": "Concluido"
       },
       {
-        "deadline": "Concluido",
         "client": "MYRALIS PHARMA DISTRIBUIDORA - POÇOS DE CALDAS",
         "region": "Regional - Sul Minas",
         "remaining_days": null,
-        "sector": "Comercial B2B"
+        "sector": "Comercial B2B",
+        "deadline": "Concluido"
       },
       {
-        "deadline": "Concluido",
         "client": "THYSSENKRUPP BRASIL LTDA - POÇOS DE CALDAS",
         "region": "Regional - Sul Minas",
         "remaining_days": null,
-        "sector": "Comercial B2B"
+        "sector": "Comercial B2B",
+        "deadline": "Concluido"
       },
       {
-        "deadline": "Concluido",
         "client": "PRADOLUX S.A - POÇOS DE CALDAS",
         "region": "Regional - Sul Minas",
         "remaining_days": null,
-        "sector": "Comercial B2B"
+        "sector": "Comercial B2B",
+        "deadline": "Concluido"
       },
       {
-        "deadline": "Concluido",
         "client": "CAMPO VERDE ARMAZÉNS GERAIS LTDA - POÇOS DE CALDAS",
         "region": "Regional - Sul Minas",
         "remaining_days": null,
-        "sector": "Projetos"
+        "sector": "Projetos",
+        "deadline": "Concluido"
       },
       {
-        "deadline": "Concluido",
         "client": "PRESIDENTE HOTEL - POÇOS DE CALDAS",
         "region": "Regional - Sul Minas",
         "remaining_days": null,
-        "sector": "Operação"
+        "sector": "Operação",
+        "deadline": "Concluido"
       },
       {
-        "deadline": "Concluido",
         "client": "PRINCIPE HOTEL - POÇOS DE CALDAS",
         "region": "Regional - Sul Minas",
         "remaining_days": null,
-        "sector": "Operação"
+        "sector": "Operação",
+        "deadline": "Concluido"
       },
       {
-        "deadline": "Concluido",
         "client": "NORTH HOTEL - AMPLIAÇÃO 12 UNIFI - MONTES CLAROS",
         "region": "Regional - Montes Claros",
         "remaining_days": null,
-        "sector": "Operação"
+        "sector": "Operação",
+        "deadline": "Concluido"
       },
       {
-        "deadline": "Concluido",
         "client": "ufinet methues leme",
         "region": "Regional - Centro Oeste",
         "remaining_days": null,
-        "sector": "Comercial B2B"
+        "sector": "Comercial B2B",
+        "deadline": "Concluido"
       },
       {
-        "deadline": "Concluido",
         "client": "ALGAR MERCADO LIVRE -Betim",
         "region": "Regional - Centro Oeste",
         "remaining_days": null,
-        "sector": "Engenharia"
+        "sector": "Engenharia",
+        "deadline": "Concluido"
       },
       {
-        "deadline": "Concluido",
         "client": "MUNICIPIO DE TRES CORAÇÕES - CREAS RODOVIARIA",
         "region": "Regional - Sul Minas",
         "remaining_days": null,
-        "sector": "Comercial B2B"
+        "sector": "Comercial B2B",
+        "deadline": "Concluido"
       },
       {
-        "deadline": "Concluido",
         "client": "EVENTO IP EXPOMONTES 2025 - BARES",
         "region": "Regional - Montes Claros",
         "remaining_days": null,
-        "sector": "Projetos"
+        "sector": "Projetos",
+        "deadline": "Concluido"
       },
       {
-        "deadline": "Concluido",
         "client": "CONCESSIONARIA ECOVIAS DAS GERAIS S.A.",
         "region": "Regional - Montes Claros",
         "remaining_days": null,
-        "sector": "Comercial B2B"
+        "sector": "Comercial B2B",
+        "deadline": "Concluido"
       },
       {
-        "deadline": "Concluido",
         "client": "Tassi Transportes - POÇOS DE CALDAS",
         "region": "Regional - Sul Minas",
         "remaining_days": null,
-        "sector": "Comercial B2B"
+        "sector": "Comercial B2B",
+        "deadline": "Concluido"
       },
       {
-        "deadline": "Concluido",
         "client": "SICREDI VANGUARDA Tremembé SP",
         "region": "Regional - São Paulo",
         "remaining_days": null,
-        "sector": "Comercial B2B"
+        "sector": "Comercial B2B",
+        "deadline": "Concluido"
       },
       {
-        "deadline": "Concluido",
         "client": "MGNET",
         "region": "Regional - Centro Oeste",
         "remaining_days": null,
-        "sector": "Engenharia"
+        "sector": "Engenharia",
+        "deadline": "Concluido"
       },
       {
-        "deadline": "Concluido",
         "client": "JW ATIVIDADES MEDICAS LTDA - PARACATU",
         "region": "Regional - Norte",
         "remaining_days": null,
-        "sector": "Comercial B2B"
+        "sector": "Comercial B2B",
+        "deadline": "Concluido"
       },
       {
-        "deadline": "Concluido",
         "client": "UFLA - UPGRADE",
         "region": "Regional - Sul Minas",
         "remaining_days": null,
-        "sector": "Comercial B2B"
+        "sector": "Comercial B2B",
+        "deadline": "Concluido"
       },
       {
-        "deadline": "Concluido",
         "client": "OSVALDO BATISTA VELOSO",
         "region": "Engenharia - IP e Serviços",
         "remaining_days": null,
-        "sector": "Comercial B2B"
+        "sector": "Comercial B2B",
+        "deadline": "Concluido"
       },
       {
-        "deadline": "Concluido",
         "client": "IGN VARGINHA",
         "region": "Projetos",
         "remaining_days": null,
-        "sector": "Operação"
+        "sector": "Operação",
+        "deadline": "Concluido"
       },
       {
-        "deadline": "Concluido",
         "client": "FIBER NET - IP TRANSITO - SÃO JOSE DO ALEGRE",
         "region": "Regional - Sul Minas",
         "remaining_days": null,
-        "sector": "Comercial B2B"
+        "sector": "Comercial B2B",
+        "deadline": "Concluido"
       },
       {
-        "deadline": "Concluido",
         "client": "SEARA ALIMENTOS - PASSOS",
         "region": "Comercial B2B",
         "remaining_days": null,
-        "sector": "Comercial B2B"
+        "sector": "Comercial B2B",
+        "deadline": "Concluido"
       },
       {
-        "deadline": "Concluido",
         "client": "BRASILTECPAR",
         "region": "Regional - Montes Claros",
         "remaining_days": null,
-        "sector": "Engenharia"
+        "sector": "Engenharia",
+        "deadline": "Concluido"
       },
       {
-        "deadline": "Concluido",
         "client": "SICREDI Divinópolis",
         "region": "Regional - Centro Oeste",
         "remaining_days": null,
-        "sector": "Engenharia"
+        "sector": "Engenharia",
+        "deadline": "Concluido"
       },
       {
-        "deadline": "Concluido",
         "client": "TRIAL R2NET CONTAGEM",
         "region": "Regional - Centro Oeste",
         "remaining_days": null,
-        "sector": "Operação"
+        "sector": "Operação",
+        "deadline": "Concluido"
       },
       {
-        "deadline": "Concluido",
         "client": "CPX Distribuidora S.A. - Montes Claros",
         "region": "Regional - Montes Claros",
         "remaining_days": null,
-        "sector": "Comercial B2B"
+        "sector": "Comercial B2B",
+        "deadline": "Concluido"
       },
       {
-        "deadline": "Concluido",
         "client": "intelle três corações",
         "region": "Regional - Sul Minas",
         "remaining_days": null,
-        "sector": "Comercial B2B"
+        "sector": "Comercial B2B",
+        "deadline": "Concluido"
       },
       {
-        "deadline": "Concluido",
         "client": "8 NOVE TELECOMUNICACOES - CONECTE SLP - TAUBATE",
         "region": "Regional - São Paulo",
         "remaining_days": null,
-        "sector": "Projetos"
+        "sector": "Projetos",
+        "deadline": "Concluido"
       },
       {
-        "deadline": "Concluido",
         "client": "Orchest do Brasil LTDA",
         "region": "Regional - São Paulo",
         "remaining_days": null,
-        "sector": "Comercial B2B"
+        "sector": "Comercial B2B",
+        "deadline": "Concluido"
       },
       {
-        "deadline": "Concluido",
         "client": "Fabrica De Rações JBS - Passos",
         "region": "Regional - Sul Minas",
         "remaining_days": null,
-        "sector": "Comercial B2B"
+        "sector": "Comercial B2B",
+        "deadline": "Concluido"
       },
       {
-        "deadline": "Concluido",
         "client": "AVIVAR - ADM GAMELEIRA - CARMO DO CAJURU",
         "region": "Regional - Centro Oeste",
         "remaining_days": null,
-        "sector": "Comercial B2B"
+        "sector": "Comercial B2B",
+        "deadline": "Concluido"
       },
       {
-        "deadline": "Concluido",
         "client": "EXPRESSO TELECOM - ALFREDO ROSENDO - UPGRADE L2L 2 GBPS",
         "region": "Engenharia - IP e Serviços",
         "remaining_days": null,
-        "sector": "Engenharia"
+        "sector": "Engenharia",
+        "deadline": "Concluido"
       },
       {
-        "deadline": "Concluido",
         "client": "EXPRESSO TELECOM - TAUBATE",
         "region": "Regional - São Paulo",
         "remaining_days": null,
-        "sector": "Engenharia"
+        "sector": "Engenharia",
+        "deadline": "Concluido"
       },
       {
-        "deadline": "Concluido",
         "client": "SITELBRA SISTEMA DE TELECOMUNICAÇÕES DO BRASIL",
         "region": "Regional - Centro Oeste",
         "remaining_days": null,
-        "sector": "Operação"
+        "sector": "Operação",
+        "deadline": "Concluido"
       },
       {
-        "deadline": "Concluido",
         "client": "NORTE CONEXÂO",
         "region": "Regional - Centro Oeste",
         "remaining_days": null,
-        "sector": "Comercial B2B"
+        "sector": "Comercial B2B",
+        "deadline": "Concluido"
       },
       {
-        "deadline": "Concluido",
         "client": "BRASILTECPAR",
         "region": "Regional - Montes Claros",
         "remaining_days": null,
-        "sector": "Comercial B2B"
+        "sector": "Comercial B2B",
+        "deadline": "Concluido"
       },
       {
-        "deadline": "Concluido",
         "client": "IGN São José dos Campos",
         "region": "Regional - São Paulo",
         "remaining_days": null,
-        "sector": "Comercial B2B"
+        "sector": "Comercial B2B",
+        "deadline": "Concluido"
       },
       {
-        "deadline": "Concluido",
         "client": "IGN TAUBATÈ",
         "region": "Regional - São Paulo",
         "remaining_days": null,
-        "sector": "Comercial B2B"
+        "sector": "Comercial B2B",
+        "deadline": "Concluido"
       },
       {
-        "deadline": "Concluido",
         "client": "TELEON",
         "region": "Regional - Centro Oeste",
         "remaining_days": null,
-        "sector": "Projetos"
+        "sector": "Projetos",
+        "deadline": "Concluido"
       },
       {
-        "deadline": "Concluido",
         "client": "Norte Três Corações",
         "region": "Engenharia - IP e Serviços",
         "remaining_days": null,
-        "sector": "Engenharia"
+        "sector": "Engenharia",
+        "deadline": "Concluido"
       },
       {
-        "deadline": "Concluido",
         "client": "FIBER NET LTDA - TRANSPORTE PTT - SÃO JOSE DO ALEGRE",
         "region": "Engenharia - IP e Serviços",
         "remaining_days": null,
-        "sector": "Engenharia"
+        "sector": "Engenharia",
+        "deadline": "Concluido"
       },
       {
-        "deadline": "Concluido",
         "client": "GWG TELCO - TAUBATE",
         "region": "Projetos",
         "remaining_days": null,
-        "sector": "Comercial B2B"
+        "sector": "Comercial B2B",
+        "deadline": "Concluido"
       },
       {
-        "deadline": "Concluido",
         "client": "GWG TELCO - SJC X SP4",
         "region": "Regional - São Paulo",
         "remaining_days": null,
-        "sector": "Comercial B2B"
+        "sector": "Comercial B2B",
+        "deadline": "Concluido"
       },
       {
-        "deadline": "Concluido",
         "client": "R FRANCO ENGENHARIA - SÃO JOSÉ DOS CAMPOS",
         "region": "Regional - São Paulo",
         "remaining_days": null,
-        "sector": "Operação"
+        "sector": "Operação",
+        "deadline": "Concluido"
       },
       {
-        "deadline": "Concluido",
         "client": "HEAVEN SYSTEM - SJC - AQUARIUS",
         "region": "Regional - São Paulo",
         "remaining_days": null,
-        "sector": "Engenharia"
+        "sector": "Engenharia",
+        "deadline": "Concluido"
       },
       {
-        "deadline": "Concluido",
         "client": "IGN – Teófilo Otoni - Last Mile",
         "region": "Regional - Centro Oeste",
         "remaining_days": null,
-        "sector": "Comercial B2B"
+        "sector": "Comercial B2B",
+        "deadline": "Concluido"
       },
       {
-        "deadline": "Concluido",
         "client": "MOC AUTOMAÇÃO - MONTES CLAROS",
         "region": "Projetos",
         "remaining_days": null,
-        "sector": "Comercial B2B"
+        "sector": "Comercial B2B",
+        "deadline": "Concluido"
       },
       {
-        "deadline": "Concluido",
         "client": "brasil tecpar itauna",
         "region": "Regional - Centro Oeste",
         "remaining_days": null,
-        "sector": "Comercial B2B"
+        "sector": "Comercial B2B",
+        "deadline": "Concluido"
       },
       {
-        "deadline": "Concluido",
         "client": "UPIX VARGINHA",
         "region": "Regional - Centro Oeste",
         "remaining_days": null,
-        "sector": "Comercial B2B"
+        "sector": "Comercial B2B",
+        "deadline": "Concluido"
       },
       {
-        "deadline": "Concluido",
         "client": "Brasil Tecpar Montes Claros",
         "region": "Regional - Montes Claros",
         "remaining_days": null,
-        "sector": "Comercial B2B"
+        "sector": "Comercial B2B",
+        "deadline": "Concluido"
       },
       {
-        "deadline": "Concluido",
         "client": "GRIFE TRANSPORTES - MONTES CLAROS",
         "region": "Projetos",
         "remaining_days": null,
-        "sector": "Comercial B2B"
+        "sector": "Comercial B2B",
+        "deadline": "Concluido"
       },
       {
-        "deadline": "Concluido",
         "client": "TRC TELECOM LTDA - MONTES CLAROS",
         "region": "Regional - Montes Claros",
         "remaining_days": null,
-        "sector": "Comercial B2B"
+        "sector": "Comercial B2B",
+        "deadline": "Concluido"
       },
       {
-        "deadline": "Concluido",
         "client": "NETLC COMUNICACAO MULTIMIDIA LTDA",
         "region": "Comercial B2B",
         "remaining_days": null,
-        "sector": "Engenharia"
+        "sector": "Engenharia",
+        "deadline": "Concluido"
       },
       {
-        "deadline": "Concluido",
         "client": "Newfiber - São Jose dos Salgados",
         "region": "Comercial B2B",
         "remaining_days": null,
-        "sector": "Engenharia"
+        "sector": "Engenharia",
+        "deadline": "Concluido"
       },
       {
-        "deadline": "Concluido",
         "client": "8 NOVE TELECOMUNICACOES LTDA - TAUBATE",
         "region": "Engenharia - IP e Serviços",
         "remaining_days": null,
-        "sector": "Engenharia"
+        "sector": "Engenharia",
+        "deadline": "Concluido"
       },
       {
-        "deadline": "Concluido",
         "client": "VP TELECOM - SINDICATO - TAUBATE",
         "region": "Comercial B2B",
         "remaining_days": null,
-        "sector": "Operação"
+        "sector": "Operação",
+        "deadline": "Concluido"
       },
       {
-        "deadline": "Concluido",
         "client": "GWG - L2L CAMARA X CRISTO - POÇOS DE CALDAS",
         "region": "Comercial B2B",
         "remaining_days": null,
-        "sector": "Comercial B2B"
+        "sector": "Comercial B2B",
+        "deadline": "Concluido"
       },
       {
-        "deadline": "Concluido",
         "client": "DOT A DOT -Tremembé - SP",
         "region": "Projetos",
         "remaining_days": null,
-        "sector": "Projetos"
+        "sector": "Projetos",
+        "deadline": "Concluido"
       },
       {
-        "deadline": "Concluido",
         "client": "AMIS ASSOCIACAO MINEIRA DE SUPERMERCADOS - DIVINÓPOLIS",
         "region": "Regional - Centro Oeste",
         "remaining_days": null,
-        "sector": "Comercial B2B"
+        "sector": "Comercial B2B",
+        "deadline": "Concluido"
       },
       {
-        "deadline": "Concluido",
         "client": "ufinet varginha",
         "region": "Comercial B2B",
         "remaining_days": null,
-        "sector": "Comercial B2B"
+        "sector": "Comercial B2B",
+        "deadline": "Concluido"
       },
       {
-        "deadline": "Concluido",
         "client": "GADATI EVENTOS LAVRAS (THULIO PADOVANI)",
         "region": "Engenharia - Transmissão",
         "remaining_days": null,
-        "sector": "Comercial B2B"
+        "sector": "Comercial B2B",
+        "deadline": "Concluido"
       },
       {
-        "deadline": "Concluido",
         "client": "RURAL TELECOM MAIS LTDA",
         "region": "Regional - Sul Minas",
         "remaining_days": null,
-        "sector": "Comercial B2B"
+        "sector": "Comercial B2B",
+        "deadline": "Concluido"
       },
       {
-        "deadline": "Concluido",
         "client": "IGN - Paraisopolis",
         "region": "Projetos",
         "remaining_days": null,
-        "sector": "Engenharia"
+        "sector": "Engenharia",
+        "deadline": "Concluido"
       },
       {
-        "deadline": "Concluido",
         "client": "GLOBAL JOBS NET - UPGRADE IP - VARGINHA",
         "region": "Comercial B2B",
         "remaining_days": null,
-        "sector": "Comercial B2B"
+        "sector": "Comercial B2B",
+        "deadline": "Concluido"
       },
       {
-        "deadline": "Concluido",
         "client": "PREFEITURA MUNICIPAL DE VARGINHA",
         "region": "Projetos",
         "remaining_days": null,
-        "sector": "Comercial B2B"
+        "sector": "Comercial B2B",
+        "deadline": "Concluido"
       },
       {
-        "deadline": "Concluido",
         "client": "DOT A DOT - POÇOS DE CALDAS",
         "region": "Regional - Sul Minas",
         "remaining_days": null,
-        "sector": "Comercial B2B"
+        "sector": "Comercial B2B",
+        "deadline": "Concluido"
       },
       {
-        "deadline": "Concluido",
         "client": "STA SERVIÇOS - RENATO - PTU",
         "region": "Regional - Norte",
         "remaining_days": null,
-        "sector": "Comercial B2B"
+        "sector": "Comercial B2B",
+        "deadline": "Concluido"
       },
       {
-        "deadline": "Concluido",
         "client": "RAFAEL HENRIQUE DE SOUSA",
         "region": "Regional - Centro Oeste",
         "remaining_days": null,
-        "sector": "Comercial B2B"
+        "sector": "Comercial B2B",
+        "deadline": "Concluido"
       },
       {
-        "deadline": "Concluido",
         "client": "CONDOMINIO JOSE BRANDAO I",
         "region": "Regional - Centro Oeste",
         "remaining_days": null,
-        "sector": "Comercial B2B"
+        "sector": "Comercial B2B",
+        "deadline": "Concluido"
       },
       {
-        "deadline": "Concluido",
         "client": "AVIVAR - INTERLIGAR GALPÃO - CARMO DO CAJURU",
         "region": "Regional - Centro Oeste",
         "remaining_days": null,
-        "sector": "Comercial B2B"
+        "sector": "Comercial B2B",
+        "deadline": "Concluido"
       },
       {
-        "deadline": "Concluido",
         "client": "ALGAR - 12576 - TAUBATE",
         "region": "Regional - São Paulo",
         "remaining_days": null,
-        "sector": "Comercial B2B"
+        "sector": "Comercial B2B",
+        "deadline": "Concluido"
       },
       {
-        "deadline": "Concluido",
         "client": "ALGAR 431842 PARACATU",
         "region": "Regional - Norte",
         "remaining_days": null,
-        "sector": "Comercial B2B"
+        "sector": "Comercial B2B",
+        "deadline": "Concluido"
       },
       {
-        "deadline": "Concluido",
         "client": "MOOV TELECOM - PTT - ITAJUBA",
         "region": "Regional - Sul Minas",
         "remaining_days": null,
-        "sector": "Comercial B2B"
+        "sector": "Comercial B2B",
+        "deadline": "Concluido"
       },
       {
-        "deadline": "Concluido",
         "client": "ufinet varginha - link 2",
         "region": "Regional - Sul Minas",
         "remaining_days": null,
-        "sector": "Comercial B2B"
+        "sector": "Comercial B2B",
+        "deadline": "Concluido"
       },
       {
-        "deadline": "Concluido",
         "client": "ALGAR - 12576 - TAUBATE Endereço 2",
         "region": "Regional - São Paulo",
         "remaining_days": null,
-        "sector": "Comercial B2B"
+        "sector": "Comercial B2B",
+        "deadline": "Concluido"
       },
       {
-        "deadline": "Concluido",
         "client": "FREITAS DA CRUZ SERV.DE COMUNICACAO LTDA",
         "region": "Regional - Norte",
         "remaining_days": null,
-        "sector": "Comercial B2B"
+        "sector": "Comercial B2B",
+        "deadline": "Concluido"
       },
       {
-        "deadline": "Concluido",
         "client": "DOT A DOT CAJURU",
         "region": "Regional - Centro Oeste",
         "remaining_days": null,
-        "sector": "Comercial B2B"
+        "sector": "Comercial B2B",
+        "deadline": "Concluido"
       },
       {
-        "deadline": "Concluido",
         "client": "DOT a DOT Juatuba SUPERMERCADO BH",
         "region": "Regional - Centro Oeste",
         "remaining_days": null,
-        "sector": "Comercial B2B"
+        "sector": "Comercial B2B",
+        "deadline": "Concluido"
       },
       {
-        "deadline": "Concluido",
         "client": "DOT A DOT SETE LAGOAS",
         "region": "Regional - Centro Oeste",
         "remaining_days": null,
-        "sector": "Comercial B2B"
+        "sector": "Comercial B2B",
+        "deadline": "Concluido"
       },
       {
-        "deadline": "Concluido",
         "client": "Material Elétrico e Hidráulico JOGS E MIGAS - Montes Claros",
         "region": "Regional - Montes Claros",
         "remaining_days": null,
-        "sector": "Comercial B2B"
+        "sector": "Comercial B2B",
+        "deadline": "Concluido"
       },
       {
-        "deadline": "Concluido",
         "client": "EUROFARMA (TRANSFERENCIA DE PONTO) MONTES CLAROS",
         "region": "Regional - Montes Claros",
         "remaining_days": null,
-        "sector": "Comercial B2B"
+        "sector": "Comercial B2B",
+        "deadline": "Concluido"
       },
       {
-        "deadline": "Concluido",
         "client": "ALGAR - 431340 - PINDA",
         "region": "Regional - São Paulo",
         "remaining_days": null,
-        "sector": "Operação"
+        "sector": "Operação",
+        "deadline": "Concluido"
       },
       {
-        "deadline": "Concluido",
         "client": "UFINET LORENA",
         "region": "Engenharia - IP e Serviços",
         "remaining_days": null,
-        "sector": "Engenharia"
+        "sector": "Engenharia",
+        "deadline": "Concluido"
       },
       {
-        "deadline": "Concluido",
         "client": "ELETRONET - CARMO DO CAJURU",
         "region": "Regional - Centro Oeste",
         "remaining_days": null,
-        "sector": "Comercial B2B"
+        "sector": "Comercial B2B",
+        "deadline": "Concluido"
       },
       {
-        "deadline": "Concluido",
         "client": "ALGAR 421001 TAUBATE",
         "region": "Regional - São Paulo",
         "remaining_days": null,
-        "sector": "Comercial B2B"
+        "sector": "Comercial B2B",
+        "deadline": "Concluido"
       },
       {
-        "deadline": "Concluido",
         "client": "EXPRESSO TELECOM - L2L - METTRO - TAUBATE",
         "region": "Engenharia - IP e Serviços",
         "remaining_days": null,
-        "sector": "Comercial B2B"
+        "sector": "Comercial B2B",
+        "deadline": "Concluido"
       },
       {
-        "deadline": "Concluido",
         "client": "Microsete Taubate",
         "region": "Projetos",
         "remaining_days": null,
-        "sector": "Comercial B2B"
+        "sector": "Comercial B2B",
+        "deadline": "Concluido"
       },
       {
-        "deadline": "Concluido",
         "client": "American Tower COPASA em Juatuba",
         "region": "Projetos",
         "remaining_days": null,
-        "sector": "Comercial B2B"
+        "sector": "Comercial B2B",
+        "deadline": "Concluido"
       },
       {
-        "deadline": "Concluido",
         "client": "DISTRIBUIDORA NOVA GERAÇÃO - MONTES CLAROS",
         "region": "Regional - Montes Claros",
         "remaining_days": null,
-        "sector": "Operação"
+        "sector": "Engenharia",
+        "deadline": "Concluido"
       },
       {
-        "deadline": "Concluido",
         "client": "HLVR EMPREENDIMENTOS - VARGINHA",
         "region": "Regional - Sul Minas",
         "remaining_days": null,
-        "sector": "Comercial B2B"
+        "sector": "Comercial B2B",
+        "deadline": "Concluido"
       },
       {
-        "deadline": "Concluido",
         "client": "Algar Lorena - 435259",
         "region": "Regional - São Paulo",
         "remaining_days": null,
-        "sector": "Comercial B2B"
+        "sector": "Comercial B2B",
+        "deadline": "Concluido"
       },
       {
-        "deadline": "Concluido",
         "client": "SPACEMAKER - SAO JOSE DOS CAMPOS",
         "region": "Regional - São Paulo",
         "remaining_days": null,
-        "sector": "Comercial B2B"
+        "sector": "Comercial B2B",
+        "deadline": "Concluido"
       },
       {
-        "deadline": "Concluido",
         "client": "HOSPITAL SÃO BENTO MENNI - DIVINOPOLIS",
         "region": "Regional - Centro Oeste",
         "remaining_days": null,
-        "sector": "Comercial B2B"
+        "sector": "Comercial B2B",
+        "deadline": "Concluido"
       },
       {
-        "deadline": "Concluido",
         "client": "SITELBRA PASSOS",
         "region": "Regional - Sul Minas",
         "remaining_days": null,
-        "sector": "Comercial B2B"
+        "sector": "Comercial B2B",
+        "deadline": "Concluido"
       },
       {
-        "deadline": "Concluido",
         "client": "VALDIR SARAIVA",
         "region": "Regional - Montes Claros",
         "remaining_days": null,
-        "sector": "Comercial B2B"
+        "sector": "Comercial B2B",
+        "deadline": "Concluido"
       },
       {
-        "deadline": "Concluido",
         "client": "Palácio dos Leilões - JUATUBA",
         "region": "Regional - Centro Oeste",
         "remaining_days": null,
-        "sector": "Comercial B2B"
+        "sector": "Comercial B2B",
+        "deadline": "Concluido"
       },
       {
-        "deadline": "Concluido",
         "client": "Entroncamento Master x Conecta",
         "region": "Regional - Montes Claros",
         "remaining_days": null,
-        "sector": "Comercial B2B"
+        "sector": "Comercial B2B",
+        "deadline": "Concluido"
       },
       {
-        "deadline": "Concluido",
         "client": "FIBER NET - PIRANGUINHO",
         "region": "Regional - Sul Minas",
         "remaining_days": null,
-        "sector": "Engenharia"
+        "sector": "Engenharia",
+        "deadline": "Concluido"
       },
       {
-        "deadline": "Concluido",
         "client": "CLUBE SINDICATO DOS METALURGICOS - DIVINÓPOLIS",
         "region": "Regional - Centro Oeste",
         "remaining_days": null,
-        "sector": "Engenharia"
+        "sector": "Engenharia",
+        "deadline": "Concluido"
       },
       {
-        "deadline": "Concluido",
         "client": "FBR - JUATUBA - Ambev",
         "region": "Regional - Centro Oeste",
         "remaining_days": null,
-        "sector": "Operação"
+        "sector": "Comercial B2B",
+        "deadline": "Concluido"
       },
       {
-        "deadline": "Concluido",
         "client": "PLIN SOLUCOES DE PAGAMENTO LTDA",
         "region": "Regional - Montes Claros",
         "remaining_days": null,
-        "sector": "Operação"
+        "sector": "Operação",
+        "deadline": "Concluido"
       },
       {
-        "deadline": "Concluido",
         "client": "TINTANORTE DISTRIBUIDORS DE MATERIAIS",
         "region": "Regional - Montes Claros",
         "remaining_days": null,
-        "sector": "Comercial B2B"
+        "sector": "Comercial B2B",
+        "deadline": "Concluido"
       },
       {
-        "deadline": "Concluido",
         "client": "ALGAR - MASSIVA 12735 - SÃO SEBASTIAO DO PARAISO",
         "region": "Regional - Sul Minas",
         "remaining_days": null,
-        "sector": "Engenharia"
+        "sector": "Engenharia",
+        "deadline": "Concluido"
       },
       {
-        "deadline": "Concluido",
         "client": "HOSPITAL OTORRINO CENTER LTDA - MONTES CLAROS",
         "region": "Regional - Montes Claros",
         "remaining_days": null,
-        "sector": "Projetos"
+        "sector": "Projetos",
+        "deadline": "Concluido"
       },
       {
-        "deadline": "Concluido",
         "client": "ADM PORTAS - MONTES CLAROS",
         "region": "Regional - Montes Claros",
         "remaining_days": null,
-        "sector": "Operação"
+        "sector": "Operação",
+        "deadline": "Concluido"
       },
       {
-        "deadline": "Concluido",
         "client": "CAMARA MUNICIPAL DE DIVINOPOLIS",
         "region": "Regional - Centro Oeste",
         "remaining_days": null,
-        "sector": "Comercial B2B"
+        "sector": "Comercial B2B",
+        "deadline": "Concluido"
       },
       {
-        "deadline": "Concluido",
         "client": "ELO SOLUÇÕES - BANCO DO NORDESTE - MONTES CLAROS",
         "region": "Regional - Montes Claros",
         "remaining_days": null,
-        "sector": "Comercial B2B"
+        "sector": "Comercial B2B",
+        "deadline": "Concluido"
       },
       {
-        "deadline": "Concluido",
         "client": "ATIVALOG - MIGRAÇÃO FIBRA - VARGINHA",
         "region": "Regional - Sul Minas",
         "remaining_days": null,
-        "sector": "Comercial B2B"
+        "sector": "Comercial B2B",
+        "deadline": "Concluido"
       },
       {
-        "deadline": "Concluido",
         "client": "PROWEL (Tuná Parque Aquático) - CAPITÓLIO",
         "region": "Regional - Sul Minas",
         "remaining_days": null,
-        "sector": "CD - Centro Distribuição"
+        "sector": "Engenharia",
+        "deadline": "Concluido"
       },
       {
-        "deadline": "Concluido",
         "client": "COMNT UPGRAD - 10GBPS | MONTES CLAROS/MG",
         "region": "Regional - Montes Claros",
         "remaining_days": null,
-        "sector": "Engenharia"
+        "sector": "Engenharia",
+        "deadline": "Concluido"
       },
       {
-        "deadline": "Concluido",
         "client": "ATIVA LOGISTICA | VARGINHA/MG",
         "region": "Regional - Sul Minas",
         "remaining_days": null,
-        "sector": "CD - Centro Distribuição"
+        "sector": "CD - Centro Distribuição",
+        "deadline": "Concluido"
       },
       {
-        "deadline": "Concluido",
         "client": "north poços de caldas",
         "region": "Regional - Sul Minas",
         "remaining_days": null,
-        "sector": "Comercial B2B"
+        "sector": "Comercial B2B",
+        "deadline": "Concluido"
       },
       {
-        "deadline": "Concluido",
         "client": "PAO DA ALMA - DIVINOPOLIS",
         "region": "Regional - Centro Oeste",
         "remaining_days": null,
-        "sector": "Comercial B2B"
+        "sector": "Comercial B2B",
+        "deadline": "Concluido"
       },
       {
-        "deadline": "Concluido",
         "client": "VERO - VERO INTERNET - VERO EMPRESAS - POUSO ALEGRE",
         "region": "Regional - Sul Minas",
         "remaining_days": null,
-        "sector": "Comercial B2B"
+        "sector": "Comercial B2B",
+        "deadline": "Concluido"
       },
       {
-        "deadline": "Concluido",
         "client": "MINISTERIO REDENCAO - DIVINÓPOLIS",
         "region": "Regional - Centro Oeste",
         "remaining_days": null,
-        "sector": "Comercial B2B"
+        "sector": "Comercial B2B",
+        "deadline": "Concluido"
       },
       {
-        "deadline": "Concluido",
         "client": "VIA AGRO COMERCIO REPRESENTACOES - DIVINÓPOLIS",
         "region": "Regional - Centro Oeste",
         "remaining_days": null,
-        "sector": "Comercial B2B"
+        "sector": "Comercial B2B",
+        "deadline": "Concluido"
       },
       {
-        "deadline": "Concluido",
         "client": "BRASIL PONTES ENGENHARIA E CONSTRUCOES - MONTES CLAROS",
         "region": "Regional - Montes Claros",
         "remaining_days": null,
-        "sector": "Comercial B2B"
+        "sector": "Comercial B2B",
+        "deadline": "Concluido"
       },
       {
-        "deadline": "Concluido",
         "client": "RX CONSTRUTORA - VARGINHA",
         "region": "Regional - Sul Minas",
         "remaining_days": null,
-        "sector": "Comercial B2B"
+        "sector": "Comercial B2B",
+        "deadline": "Concluido"
       },
       {
-        "deadline": "Concluido",
         "client": "LINK VALE - PINDAMONHANGABA",
         "region": "Regional - São Paulo",
         "remaining_days": null,
-        "sector": "Comercial B2B"
+        "sector": "Comercial B2B",
+        "deadline": "Concluido"
       },
       {
-        "deadline": "Atrasada",
         "client": "MOBIPHONE - TAUBATE - TRANSFERENCIA DE ENDEREÇO",
         "region": "Regional - São Paulo",
-        "remaining_days": -6,
-        "sector": "Projetos"
+        "remaining_days": -7,
+        "sector": "Projetos",
+        "deadline": "Atrasada"
       },
       {
-        "deadline": "Concluido",
         "client": "ULTRANET VARGINHA",
         "region": "Regional - Sul Minas",
         "remaining_days": null,
-        "sector": "Comercial B2B"
+        "sector": "Comercial B2B",
+        "deadline": "Concluido"
       },
       {
-        "deadline": "Concluido",
         "client": "UFINET TAUBATE",
         "region": "Regional - São Paulo",
         "remaining_days": null,
-        "sector": "Comercial B2B"
+        "sector": "Comercial B2B",
+        "deadline": "Concluido"
       },
       {
-        "deadline": "Concluido",
         "client": "ALGAR - 438687 - ITAUNA",
         "region": "Regional - Centro Oeste",
         "remaining_days": null,
-        "sector": "Comercial B2B"
+        "sector": "Comercial B2B",
+        "deadline": "Concluido"
       },
       {
-        "deadline": "Urgente",
         "client": "MOBIPHONE - TAUBATE - PONTO NOVO",
         "region": "Regional - São Paulo",
-        "remaining_days": 0,
-        "sector": "Projetos"
+        "remaining_days": -1,
+        "sector": "Projetos",
+        "deadline": "Atrasada"
       },
       {
-        "deadline": "Urgente",
         "client": "W&W EVENTOS - MONTES CLAROS",
         "region": "Regional - Montes Claros",
-        "remaining_days": 0,
-        "sector": "Operação"
+        "remaining_days": -1,
+        "sector": "Operação",
+        "deadline": "Atrasada"
       },
       {
-        "deadline": "Urgente",
         "client": "AGAH MADEIRAS - PASSOS",
         "region": "Regional - Sul Minas",
-        "remaining_days": 1,
-        "sector": "Operação"
+        "remaining_days": 0,
+        "sector": "Operação",
+        "deadline": "Urgente"
       },
       {
-        "deadline": "Urgente",
         "client": "FIBRA APAGADA TUNA ( AO PARQUE PAUA )",
         "region": "Regional - Sul Minas",
-        "remaining_days": 3,
-        "sector": "Projetos"
+        "remaining_days": 2,
+        "sector": "Operação",
+        "deadline": "Urgente"
       },
       {
-        "deadline": "Urgente",
         "client": "EXPOLAVRAS - LAVRAS",
         "region": "Regional - Sul Minas",
-        "remaining_days": 3,
-        "sector": "Operação"
+        "remaining_days": 2,
+        "sector": "Operação",
+        "deadline": "Urgente"
       }
     ]
   }

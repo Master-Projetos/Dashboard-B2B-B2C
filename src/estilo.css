@@ -70,7 +70,7 @@ body {
   height: 100dvh;
   padding: var(--espaco);
   display: grid;
-  grid-template-rows: auto auto minmax(0, 1fr);
+  grid-template-rows: auto minmax(0, 1fr); /* cabeçalho + tela ativa */
   gap: var(--espaco);
 }
 
@@ -106,12 +106,41 @@ body {
   white-space: nowrap;
 }
 
+.abas {
+  display: flex;
+  gap: 4px;
+  padding: 3px;
+  background: var(--superficie);
+  border: 1px solid var(--borda);
+  border-radius: 999px;
+  box-shadow: var(--sombra);
+}
+
+.aba {
+  border: none;
+  background: transparent;
+  color: var(--texto-suave);
+  font: inherit;
+  font-size: var(--fonte-detalhe);
+  font-weight: 650;
+  letter-spacing: 0.5px;
+  padding: clamp(3px, 0.5vh, 6px) clamp(10px, 1vw, 16px);
+  border-radius: 999px;
+  cursor: pointer;
+}
+
+.aba.ativa {
+  background: var(--serie-1);
+  color: #ffffff;
+}
+
 .prazos {
   display: flex;
   gap: 8px;
   margin-left: auto;
   flex-wrap: wrap;
   justify-content: flex-end;
+  min-height: 1px;
 }
 
 .prazo {
@@ -221,12 +250,39 @@ body {
 
 /* ===== Gráficos ===== */
 
+/* Cada tela ocupa a linha flexível do painel e se organiza internamente. */
+.tela {
+  min-height: 0;
+  display: grid;
+  grid-template-rows: auto minmax(0, 1fr);
+  gap: var(--espaco);
+}
+
+.tela[hidden] {
+  display: none;
+}
+
 .grade-graficos {
   display: grid;
-  grid-template-columns: 1.25fr 1fr 1fr;
-  grid-template-rows: repeat(2, minmax(0, 1fr));
   gap: var(--espaco);
   min-height: 0;
+}
+
+/* B2B: quatro gráficos em 2x2. */
+.grade-b2b {
+  grid-template-columns: 1.15fr 1fr;
+  grid-template-rows: repeat(2, minmax(0, 1fr));
+}
+
+/* B2C: a lista de cidades é alta e ocupa a coluna inteira; os dois gráficos
+   por regional dividem a outra. */
+.grade-b2c {
+  grid-template-columns: 1.1fr 1fr;
+  grid-template-rows: repeat(2, minmax(0, 1fr));
+}
+
+.cartao-alto {
+  grid-row: span 2;
 }
 
 .cartao {
@@ -268,17 +324,29 @@ body {
   padding: 0 12px;
 }
 
-/* ===== Detalhes de prazo (sobreposto) ===== */
+/* ===== Detalhes dos projetos (sobreposto) ===== */
 
-.prazo.clicavel {
+.prazo.clicavel,
+.indicador.clicavel {
   cursor: pointer;
 }
 
-.prazo.clicavel:hover {
+.prazo.clicavel:hover,
+.indicador.clicavel:hover {
   border-color: var(--texto-suave);
 }
 
-#detalhesDePrazo {
+.tabela-de-prazos .coluna-valor {
+  font-variant-numeric: tabular-nums;
+  white-space: nowrap;
+}
+
+.tabela-de-prazos .coluna-destaque {
+  color: var(--texto-suave);
+  white-space: nowrap;
+}
+
+#detalhes {
   position: fixed;
   inset: 0;
   z-index: 50;
@@ -289,7 +357,7 @@ body {
   padding: 4vh 4vw;
 }
 
-#detalhesDePrazo[hidden] {
+#detalhes[hidden] {
   display: none;
 }
 

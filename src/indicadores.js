@@ -1,11 +1,13 @@
 import { CORES } from "./tema.js";
 import { formatarNumero, formatarMoeda, formatarMoedaCompacta, formatarPorcentagem } from "./formatadores.js";
-import { obterContagensDePrazo, temDetalhesDePrazo } from "./prazos.js";
-import { abrirDetalhesDePrazo } from "./detalhes-de-prazo.js";
+import { DIMENSOES, obterContagens, obterItens, temDetalhes } from "./dados-b2b.js";
+import { abrirDetalhes } from "./detalhes.js";
 
-function montarIndicador({ rotulo, valor, detalhe, realce, aguardando }) {
+function montarIndicador({ rotulo, valor, detalhe, realce, aguardando, clicavel, acao }) {
   return `
-    <div class="indicador${aguardando ? " aguardando" : ""}" style="--realce: ${realce}">
+    <div class="indicador${aguardando ? " aguardando" : ""}${clicavel ? " clicavel" : ""}"
+         ${clicavel ? `data-acao="${acao}" title="Ver os projetos"` : ""}
+         style="--realce: ${realce}">
       <div class="rotulo">${rotulo}</div>
       <div class="valor">${valor}</div>
       <div class="detalhe">${detalhe}</div>
@@ -13,97 +15,159 @@ function montarIndicador({ rotulo, valor, detalhe, realce, aguardando }) {
   `;
 }
 
-// Sem os dados de viabilidade os quatro primeiros cartões viram espaço
-// reservado: a grade de 6 colunas continua igual, sem esticar os outros.
-function indicadoresDeViabilidadeVazios() {
-  return ["Portas", "Portas livres", "Ocupação", "Cobertura"].map((rotulo) => ({
+function escreverIndicadores(idDoContainer, indicadores) {
+  document.getElementById(idDoContainer).innerHTML = indicadores.map(montarIndicador).join("");
+}
+
+// Sem dados, os cartões viram espaço reservado: a grade não estica e fica claro
+// que o número está por vir, em vez de sumir da tela.
+function indicadoresVazios(rotulos, detalhe) {
+  return rotulos.map((rotulo) => ({
     rotulo,
     valor: "—",
-    detalhe: "aguardando relatório",
+    detalhe,
     realce: "transparent",
     aguardando: true,
   }));
 }
 
-export function desenharIndicadores(b2b, viabilidade) {
-  const indicadores = [];
+const ROTULOS_B2B = ["Projetos B2B", "Concluídos", "Valor total", "Valor aprovado", "Ticket médio", "Maior projeto"];
+const ROTULOS_B2C = ["Portas", "Portas livres", "Ocupação", "Cobertura", "Equipamentos", "Em atendimento"];
 
-  if (!viabilidade) {
-    indicadores.push(...indicadoresDeViabilidadeVazios());
-  }
-
-  if (viabilidade) {
-    const { totais, cidades, regioes } = viabilidade;
-    const ocupacao = (totais.ocupadas / totais.portas) * 100;
-
-    indicadores.push(
-      {
-        rotulo: "Portas",
-        valor: formatarNumero(totais.portas),
-        detalhe: `${formatarNumero(totais.equipamentos)} equipamentos`,
-        realce: CORES.serie1,
-      },
-      {
-        rotulo: "Portas livres",
-        valor: formatarNumero(totais.livres),
-        detalhe: `${formatarNumero(totais.atendimentoCliente)} em atendimento`,
-        realce: CORES.serie3,
-      },
-      {
-        rotulo: "Ocupação",
-        valor: formatarPorcentagem(ocupacao),
-        detalhe: `${formatarNumero(totais.ocupadas)} portas ocupadas`,
-        realce: CORES.serie3,
-      },
-      {
-        rotulo: "Cobertura",
-        valor: formatarNumero(cidades.length),
-        detalhe: `cidades em ${regioes.length} regionais`,
-        realce: CORES.serie1,
-      },
-    );
-  }
-
+export function desenharIndicadoresB2b(b2b) {
   if (!b2b) {
-    indicadores.push(
-      { rotulo: "Projetos B2B", valor: "—", detalhe: "aguardando dados", realce: "transparent", aguardando: true },
-      { rotulo: "Valor total", valor: "—", detalhe: "aguardando dados", realce: "transparent", aguardando: true },
-    );
+    escreverIndicadores("indicadoresB2b", indicadoresVazios(ROTULOS_B2B, "aguardando dados"));
+    return;
   }
 
-  if (b2b) {
-    const totalDeProjetos = Object.values(b2b.priority).reduce((soma, valor) => soma + valor, 0);
+  const totalDeProjetos = Object.values(b2b.priority).reduce((soma, valor) => soma + valor, 0);
+  const contagens = obterContagens(b2b, DIMENSOES.prazo);
+  const destaques = destaquesFinanceiros(b2b);
 
-    indicadores.push(
-      {
-        rotulo: "Projetos B2B",
-        valor: formatarNumero(totalDeProjetos),
-        detalhe: `${formatarNumero(obterContagensDePrazo(b2b).Concluido ?? 0)} concluídos`,
-        realce: CORES.serie2,
-      },
-      {
-        rotulo: "Valor total",
-        valor: formatarMoedaCompacta(b2b.financial.total_value),
-        detalhe: formatarMoeda(b2b.financial.total_value),
-        realce: CORES.serie2,
-      },
-    );
+  escreverIndicadores("indicadoresB2b", [
+    {
+      rotulo: "Projetos B2B",
+      valor: formatarNumero(totalDeProjetos),
+      detalhe: `${formatarNumero(contagens.Urgente ?? 0)} urgentes`,
+      realce: CORES.serie2,
+    },
+    {
+      rotulo: "Concluídos",
+      valor: formatarNumero(contagens.Concluido ?? 0),
+      detalhe: `${formatarNumero(contagens.Atrasada ?? 0)} atrasados`,
+      realce: CORES.serie2,
+    },
+    {
+      rotulo: "Valor total",
+      valor: formatarMoedaCompacta(b2b.financial.total_value),
+      detalhe: formatarMoeda(b2b.financial.total_value),
+      realce: CORES.serie1,
+    },
+    {
+      rotulo: "Valor aprovado",
+      valor: formatarMoedaCompacta(b2b.financial.approved_value),
+      detalhe: formatarMoeda(b2b.financial.approved_value),
+      realce: CORES.serie1,
+    },
+    {
+      rotulo: "Ticket médio",
+      valor: formatarMoedaCompacta(b2b.financial.average_value),
+      detalhe: formatarMoeda(b2b.financial.average_value),
+      realce: CORES.serie1,
+    },
+    {
+      rotulo: "Maior projeto",
+      valor: formatarMoedaCompacta(b2b.financial.highest_value),
+      // Com o cliente à mostra o cartão já responde "qual é" antes do clique.
+      detalhe: destaques.length ? destaques[0].client : formatarMoeda(b2b.financial.highest_value),
+      realce: CORES.serie1,
+      clicavel: destaques.length > 0,
+      acao: "maiores-projetos",
+    },
+  ]);
+
+  const cartaoDoMaiorProjeto = document.querySelector('[data-acao="maiores-projetos"]');
+  if (cartaoDoMaiorProjeto) {
+    cartaoDoMaiorProjeto.onclick = () => abrirDetalhes("Maiores projetos", destaques);
+  }
+}
+
+// A API destaca o maior projeto e o maior já aprovado; juntos eles explicam a
+// diferença entre "valor total" e "valor aprovado" nos cartões ao lado.
+function destaquesFinanceiros(b2b) {
+  const { highest_project: maior, highest_approved_project: maiorAprovado } = b2b.financial ?? {};
+
+  return [
+    maior && { ...maior, destaque: "Maior valor" },
+    maiorAprovado && { ...maiorAprovado, destaque: "Maior aprovado" },
+  ].filter(Boolean);
+}
+
+export function desenharIndicadoresB2c(viabilidade) {
+  if (!viabilidade) {
+    escreverIndicadores("indicadoresB2c", indicadoresVazios(ROTULOS_B2C, "aguardando relatório"));
+    return;
   }
 
-  document.getElementById("indicadores").innerHTML = indicadores.map(montarIndicador).join("");
+  const { totais, cidades, regioes } = viabilidade;
+  const ocupacao = (totais.ocupadas / totais.portas) * 100;
+
+  escreverIndicadores("indicadoresB2c", [
+    {
+      rotulo: "Portas",
+      valor: formatarNumero(totais.portas),
+      detalhe: `em ${formatarNumero(regioes.length)} regionais`,
+      realce: CORES.serie1,
+    },
+    {
+      rotulo: "Portas livres",
+      valor: formatarNumero(totais.livres),
+      detalhe: `${formatarPorcentagem((totais.livres / totais.portas) * 100)} do total`,
+      realce: CORES.serie3,
+    },
+    {
+      rotulo: "Ocupação",
+      valor: formatarPorcentagem(ocupacao),
+      detalhe: `${formatarNumero(totais.ocupadas)} portas ocupadas`,
+      realce: CORES.serie3,
+    },
+    {
+      rotulo: "Cobertura",
+      valor: formatarNumero(cidades.length),
+      detalhe: "cidades atendidas",
+      realce: CORES.serie1,
+    },
+    {
+      rotulo: "Equipamentos",
+      valor: formatarNumero(totais.equipamentos),
+      detalhe: `${formatarNumero(viabilidade.quantidadeDeCtos ?? 0)} CTOs`,
+      realce: CORES.serie1,
+    },
+    {
+      rotulo: "Em atendimento",
+      valor: formatarNumero(totais.atendimentoCliente),
+      detalhe: `${formatarNumero(totais.bloqueadas)} bloqueadas`,
+      realce: CORES.serie2,
+    },
+  ]);
 }
 
 export function desenharPrazos(b2b) {
-  const contagens = obterContagensDePrazo(b2b);
-  const clicavel = temDetalhesDePrazo(b2b);
+  const container = document.getElementById("prazos");
+
+  if (!b2b) {
+    container.innerHTML = "";
+    return;
+  }
+
+  const contagens = obterContagens(b2b, DIMENSOES.prazo);
+  const clicavel = temDetalhes(b2b, DIMENSOES.prazo);
 
   const prazos = [
     { tipo: "Concluido", rotulo: "Concluídos", cor: CORES.statusBom },
     { tipo: "Urgente", rotulo: "Urgentes", cor: CORES.statusAtencao },
     { tipo: "Atrasada", rotulo: "Atrasados", cor: CORES.statusCritico },
   ];
-
-  const container = document.getElementById("prazos");
 
   container.innerHTML = prazos
     .map(({ tipo, rotulo, cor }) => {
@@ -118,7 +182,13 @@ export function desenharPrazos(b2b) {
 
   if (!clicavel) return;
 
+  const titulos = { Concluido: "Projetos concluídos", Urgente: "Projetos urgentes", Atrasada: "Projetos atrasados" };
+
   container.querySelectorAll(".prazo").forEach((chip) => {
-    chip.onclick = () => abrirDetalhesDePrazo(b2b, chip.dataset.prazo);
+    const tipo = chip.dataset.prazo;
+    chip.onclick = () => {
+      const itens = obterItens(b2b, DIMENSOES.prazo).filter((item) => item.deadline === tipo);
+      abrirDetalhes(titulos[tipo] ?? tipo, itens);
+    };
   });
 }

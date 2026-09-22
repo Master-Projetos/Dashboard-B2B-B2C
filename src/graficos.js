@@ -5,6 +5,8 @@ import { CanvasRenderer } from "echarts/renderers";
 
 import { CORES, FONTE, eixoDeCategoria, eixoDeValor, dicaDeContexto, estiloDeTextoSuave, tamanhoDeFonteDoGrafico } from "./tema.js";
 import { formatarNumero, formatarMes } from "./formatadores.js";
+import { DIMENSOES, obterContagens, obterItens } from "./dados-b2b.js";
+import { abrirDetalhes } from "./detalhes.js";
 
 echarts.use([BarChart, LineChart, GridComponent, TooltipComponent, LegendComponent, GraphicComponent, CanvasRenderer]);
 
@@ -70,25 +72,50 @@ function rotuloDeValor(opcoesExtras = {}) {
   };
 }
 
+// O ECharts tem dois canais de clique — na série (`on`) e na área toda
+// (`getZr().on`). Os dois precisam ser limpos ao redesenhar, senão o handler
+// anterior continua ativo.
+function limparCliques(instancia) {
+  instancia.off("click");
+  instancia.getZr().off("click");
+}
+
+// Clique na faixa inteira (a coluna ou a linha do eixo), não só na barra: um
+// status com 1 projeto contra 86 renderiza poucos pixels e seria impossível de
+// acertar. `eixo` diz em qual coordenada está a categoria.
+function aoClicarNaFaixa(instancia, eixo, aoEscolher) {
+  limparCliques(instancia);
+
+  instancia.getZr().on("click", (evento) => {
+    const posicao = instancia.convertFromPixel({ seriesIndex: 0 }, [evento.offsetX, evento.offsetY]);
+    const indice = Math.round(eixo === "x" ? posicao[0] : posicao[1]);
+    if (indice >= 0) aoEscolher(indice);
+  });
+}
+
+const DICA_DE_CLIQUE = '<span style="opacity:.7">clique para ver os projetos</span>';
+
 // ===== Projetos por mês =====
 
 export function desenharProjetosPorMes(b2b) {
-  const meses = Object.keys(b2b.projects_by_month).sort();
-  const valores = meses.map((mes) => b2b.projects_by_month[mes]);
+  const contagens = obterContagens(b2b, DIMENSOES.mes);
+  const meses = Object.keys(contagens).sort();
+  const valores = meses.map((mes) => contagens[mes]);
 
   const maiorValor = Math.max(...valores);
   const indiceDoPico = valores.indexOf(maiorValor);
   const indiceDoUltimo = valores.length - 1;
   const indicesDestacados = new Set([indiceDoPico, indiceDoUltimo]);
 
-  desenhar("graficoProjetosPorMes", {
+  const instancia = desenhar("graficoProjetosPorMes", {
     grid: { top: 26, right: 18, bottom: 22, left: 34 },
     // Gatilho por eixo (e não por ponto): a área de acerto é a coluna inteira,
     // então não é preciso acertar a bolinha no pixel.
     tooltip: dicaDeContexto({
       trigger: "axis",
       axisPointer: { type: "line", lineStyle: { color: CORES.eixo, width: 1 } },
-      formatter: ([ponto]) => `${ponto.axisValue}<br/><b>${formatarNumero(ponto.value)}</b> projetos`,
+      formatter: ([ponto]) =>
+        `${ponto.axisValue}<br/><b>${formatarNumero(ponto.value)}</b> projetos<br/>${DICA_DE_CLIQUE}`,
     }),
     xAxis: eixoDeCategoria({ data: meses.map(formatarMes), boundaryGap: false }),
     yAxis: eixoDeValor({ minInterval: 1 }),
@@ -116,40 +143,70 @@ export function desenharProjetosPorMes(b2b) {
       }),
     }],
   });
+
+  aoClicarNaFaixa(instancia, "x", (indice) => {
+    const mes = meses[indice];
+    if (!mes) return;
+
+    const itens = obterItens(b2b, DIMENSOES.mes).filter((item) => item.month === mes);
+    abrirDetalhes(`Projetos de ${formatarMes(mes)}`, itens);
+  });
 }
 
 // ===== Status dos projetos =====
 
 // Status com pouquíssimos projetos viram "Outros": 12 barras não cabem legíveis.
-function agruparStatusMenores(status, minimoParaAparecer = 3) {
-  const ordenados = Object.entries(status).sort(([, a], [, b]) => a - b);
-  const relevantes = ordenados.filter(([, valor]) => valor >= minimoParaAparecer);
-  const restante = ordenados
-    .filter(([, valor]) => valor < minimoParaAparecer)
-    .reduce((soma, [, valor]) => soma + valor, 0);
+// Cada barra guarda os status que ela representa, para o clique saber quais
+// projetos listar — "Outros" reúne vários.
+function agruparStatusMenores(contagens, minimoParaAparecer = 3) {
+  const ordenados = Object.entries(contagens).sort(([, a], [, b]) => a - b);
 
-  return restante > 0 ? [["Outros", restante], ...relevantes] : relevantes;
+  const relevantes = ordenados
+    .filter(([, valor]) => valor >= minimoParaAparecer)
+    .map(([nome, valor]) => ({ nome, valor, statusReunidos: [nome] }));
+
+  const menores = ordenados.filter(([, valor]) => valor < minimoParaAparecer);
+  if (menores.length === 0) return relevantes;
+
+  return [
+    {
+      nome: "Outros",
+      valor: menores.reduce((soma, [, valor]) => soma + valor, 0),
+      statusReunidos: menores.map(([nome]) => nome),
+    },
+    ...relevantes,
+  ];
 }
 
 export function desenharStatus(b2b) {
-  const status = agruparStatusMenores(b2b.status);
+  const status = agruparStatusMenores(obterContagens(b2b, DIMENSOES.status));
 
-  desenhar("graficoStatus", {
+  const instancia = desenhar("graficoStatus", {
     grid: { top: 6, right: 46, bottom: 4, left: 4, containLabel: true },
     tooltip: dicaDeContexto({
       trigger: "axis",
       axisPointer: { type: "shadow", shadowStyle: { color: "rgba(255,255,255,0.04)" } },
-      formatter: ([ponto]) => `${ponto.name}<br/><b>${formatarNumero(ponto.value)}</b> projetos`,
+      formatter: ([ponto]) =>
+        `${ponto.name}<br/><b>${formatarNumero(ponto.value)}</b> projetos<br/>${DICA_DE_CLIQUE}`,
     }),
     xAxis: eixoDeValor({ show: false }),
-    yAxis: eixoDeCategoria({ data: status.map(([nome]) => nome), axisLine: { show: false } }),
+    yAxis: eixoDeCategoria({ data: status.map((faixa) => faixa.nome), axisLine: { show: false } }),
     series: [{
       type: "bar",
-      data: status.map(([, valor]) => valor),
+      cursor: "pointer",
+      data: status.map((faixa) => faixa.valor),
       barMaxWidth: 16,
       itemStyle: { color: CORES.serie1, borderRadius: [0, 4, 4, 0] },
       label: rotuloDeValor({ position: "right", distance: 6 }),
     }],
+  });
+
+  aoClicarNaFaixa(instancia, "y", (indice) => {
+    const faixa = status[indice];
+    if (!faixa) return;
+
+    const itens = obterItens(b2b, DIMENSOES.status).filter((item) => faixa.statusReunidos.includes(item.status));
+    abrirDetalhes(`Status: ${faixa.nome}`, itens);
   });
 }
 
@@ -165,14 +222,6 @@ function escreverTituloDaPrioridade(texto) {
   document.getElementById("tituloPrioridade").textContent = texto;
 }
 
-// O ECharts tem dois canais de clique — na série (`on`) e na área toda
-// (`getZr().on`). Os dois precisam ser limpos ao trocar de visão, senão o
-// handler da visão anterior continua ativo.
-function limparCliques(instancia) {
-  instancia.off("click");
-  instancia.getZr().off("click");
-}
-
 function desenharSolicitantesDaPrioridade(b2b, prioridade) {
   const porSolicitante = b2b.priority_by_requester[prioridade] ?? {};
 
@@ -180,7 +229,7 @@ function desenharSolicitantesDaPrioridade(b2b, prioridade) {
     .filter(([, quantidade]) => quantidade > 0)
     .sort(([, a], [, b]) => a - b);
 
-  escreverTituloDaPrioridade(`${prioridade} · solicitantes (B2B) — clique para voltar`);
+  escreverTituloDaPrioridade(`${prioridade} · solicitantes — clique para voltar`);
 
   if (solicitantes.length === 0) {
     mostrarAvisoNoGrafico("graficoPrioridade", `Nenhum solicitante em ${prioridade} — clique para voltar`);
@@ -214,6 +263,7 @@ function desenharSolicitantesDaPrioridade(b2b, prioridade) {
     prioridadeAberta = null;
     desenharPrioridade(b2b);
   });
+
 }
 
 export function desenharPrioridade(b2b) {
@@ -222,7 +272,7 @@ export function desenharPrioridade(b2b) {
     return;
   }
 
-  escreverTituloDaPrioridade("Prioridade (B2B)");
+  escreverTituloDaPrioridade("Prioridade");
   document.getElementById("graficoPrioridade").onclick = null; // deixado pelo caso sem solicitantes
   const prioridades = ORDEM_DE_PRIORIDADE.filter((nome) => nome in b2b.priority);
 
@@ -254,14 +304,8 @@ export function desenharPrioridade(b2b) {
     }],
   });
 
-  limparCliques(instancia);
-
-  // Clique na COLUNA, não na barra: "Atividade Crítica" tem 2 projetos contra
-  // 148 da "Baixa", então sua barra teria poucos pixels de altura e seria
-  // impossível de acertar.
-  instancia.getZr().on("click", (evento) => {
-    const [indice] = instancia.convertFromPixel({ seriesIndex: 0 }, [evento.offsetX, evento.offsetY]);
-    const nome = prioridades[Math.round(indice)];
+  aoClicarNaFaixa(instancia, "x", (indice) => {
+    const nome = prioridades[indice];
     if (!nome) return;
 
     prioridadeAberta = nome;
@@ -341,6 +385,41 @@ export function desenharCidades(viabilidade, quantidade = 8) {
   });
 }
 
+// ===== Ocupação por regional =====
+
+export function desenharOcupacaoPorRegional(viabilidade) {
+  const regioes = [...viabilidade.regioes]
+    .map((regiao) => ({ ...regiao, ocupacao: (regiao.ocupadas / regiao.portas) * 100 }))
+    .sort((a, b) => a.ocupacao - b.ocupacao);
+
+  desenhar("graficoOcupacao", {
+    grid: { top: 6, right: 48, bottom: 4, left: 4, containLabel: true },
+    tooltip: dicaDeContexto({
+      trigger: "axis",
+      axisPointer: { type: "shadow", shadowStyle: { color: "rgba(128, 128, 128, 0.12)" } },
+      formatter: ([ponto]) => {
+        const regiao = regioes[ponto.dataIndex];
+        return `${regiao.nome}<br/><b>${ponto.value.toFixed(1).replace(".", ",")}%</b> ocupadas<br/>${formatarNumero(regiao.ocupadas)} de ${formatarNumero(regiao.portas)}`;
+      },
+    }),
+    xAxis: eixoDeValor({ show: false, max: 100 }),
+    yAxis: eixoDeCategoria({ data: regioes.map((regiao) => regiao.nome), axisLine: { show: false } }),
+    series: [{
+      type: "bar",
+      data: regioes.map((regiao) => Number(regiao.ocupacao.toFixed(1))),
+      barMaxWidth: 22,
+      itemStyle: { color: CORES.serie1, borderRadius: [0, 4, 4, 0] },
+      showBackground: true,
+      backgroundStyle: { color: "rgba(128, 128, 128, 0.07)", borderRadius: [0, 4, 4, 0] },
+      label: rotuloDeValor({
+        position: "right",
+        distance: 6,
+        formatter: ({ value }) => `${String(value).replace(".", ",")}%`,
+      }),
+    }],
+  });
+}
+
 // ===== Status por equipe =====
 
 function encurtarNomeDaEquipe(nome) {
@@ -348,12 +427,16 @@ function encurtarNomeDaEquipe(nome) {
 }
 
 export function desenharStatusPorEquipe(b2b, quantidade = 8) {
-  const concluidas = b2b.status_by_region["Concluída"] ?? {};
-  const emAndamento = b2b.status_by_region["Em Andamento"] ?? {};
+  const porEquipe = obterContagens(b2b, DIMENSOES.equipe);
+  const concluidas = porEquipe["Concluída"] ?? {};
+  const emAndamento = porEquipe["Em Andamento"] ?? {};
 
+  // O nome completo fica guardado: é por ele que os projetos são filtrados no
+  // clique, já que o eixo mostra a versão encurtada.
   const equipes = [...new Set([...Object.keys(concluidas), ...Object.keys(emAndamento)])]
     .map((nome) => ({
       nome: encurtarNomeDaEquipe(nome),
+      nomeCompleto: nome,
       concluidas: concluidas[nome] ?? 0,
       emAndamento: emAndamento[nome] ?? 0,
     }))
@@ -365,11 +448,15 @@ export function desenharStatusPorEquipe(b2b, quantidade = 8) {
     { rotulo: "Em andamento", chave: "emAndamento", cor: CORES.serie2 },
   ];
 
-  desenhar("graficoStatusPorEquipe", {
+  const instancia = desenhar("graficoStatusPorEquipe", {
     grid: { top: 6, right: 40, bottom: 26, left: 4, containLabel: true },
     tooltip: dicaDeContexto({
       trigger: "axis",
       axisPointer: { type: "shadow", shadowStyle: { color: "rgba(255,255,255,0.04)" } },
+      formatter: (pontos) => {
+        const linhas = pontos.map((p) => `${p.marker} ${p.seriesName}: <b>${formatarNumero(p.value)}</b>`);
+        return `${pontos[0].axisValue}<br/>${linhas.join("<br/>")}<br/>${DICA_DE_CLIQUE}`;
+      },
     }),
     legend: legendaInferior(),
     xAxis: eixoDeValor({ minInterval: 1 }),
@@ -378,6 +465,7 @@ export function desenharStatusPorEquipe(b2b, quantidade = 8) {
       name: rotulo,
       type: "bar",
       stack: "equipes",
+      cursor: "pointer",
       data: equipes.map((equipe) => equipe[chave]),
       barMaxWidth: 18,
       itemStyle: { color: cor, borderColor: CORES.superficie, borderWidth: 1 },
@@ -389,6 +477,14 @@ export function desenharStatusPorEquipe(b2b, quantidade = 8) {
           })
         : { show: false },
     })),
+  });
+
+  aoClicarNaFaixa(instancia, "y", (indice) => {
+    const equipe = equipes[indice];
+    if (!equipe) return;
+
+    const itens = obterItens(b2b, DIMENSOES.equipe).filter((item) => item.region === equipe.nomeCompleto);
+    abrirDetalhes(`Equipe: ${equipe.nome}`, itens);
   });
 }
 
