@@ -15,8 +15,7 @@ export const REGIONAIS = [
 const NIVEIS = {
   critical: { rotulo: "Crítico", classe: "nivel-critico", ordem: 0 },
   alert: { rotulo: "Alerta", classe: "nivel-alerta", ordem: 1 },
-  semMinimo: { rotulo: "Sem mínimo cadastrado", classe: "nivel-sem-minimo", ordem: 2 },
-  ok: { rotulo: "Normal", classe: "nivel-normal", ordem: 3 },
+  ok: { rotulo: "Normal", classe: "nivel-normal", ordem: 2 },
 };
 
 // ===== Leitura do que a API manda =====
@@ -25,17 +24,16 @@ const NIVEIS = {
 //   { site, code, description, unit, min_stock, safe_stock, balance, alert,
 //     critical_alert, total }
 //
-// `alert` e `critical_alert` vêm nulos quando o item não tem mínimo
-// cadastrado — aí não dá para dizer que está bem, só que não dá para julgar.
-// Mínimo ZERO é diferente de mínimo ausente: o item tem parâmetro, ele é zero,
-// e a API julga normalmente. Quem manda é o par de booleanos, não o mínimo.
+// `alert` e `critical_alert` vêm nulos quando o item não tem mínimo cadastrado.
+// Nesse caso o mínimo vale zero, e qualquer saldo o atende: a linha é normal.
+// O que falta segue dito na dica da célula, para ninguém achar que o item foi
+// conferido quando na verdade não há parâmetro.
 // Esta é a única função que conhece esse formato; o resto da tela trabalha
 // sobre { itens: [{ nome, codigo, unidade, porRegional: { SIGLA: {...} } }] }.
 
 function nivelDaLinha(linha) {
   if (linha.critical_alert) return "critical";
   if (linha.alert) return "alert";
-  if (linha.alert === null || linha.alert === undefined) return "semMinimo";
   return "ok";
 }
 
@@ -67,16 +65,17 @@ export function normalizarEstoque(bruto) {
         nome: linha.description ?? codigo,
         unidade: linha.unit ?? "",
         // O mínimo é do item, não da regional: nos 31 itens ele vem igual nas
-        // cinco. Se algum dia divergir, a coluna mostra o do primeiro e o
-        // valor de cada regional continua na dica da célula.
-        minimo: linha.min_stock ?? null,
+        // cinco. Sem mínimo cadastrado, vale zero.
+        minimo: linha.min_stock ?? 0,
+        minimoCadastrado: linha.min_stock !== null && linha.min_stock !== undefined,
         porRegional: {},
       });
     }
 
     porCodigo.get(codigo).porRegional[sigla] = {
       quantidade: Number(linha.balance ?? 0),
-      minimo: linha.min_stock ?? null,
+      minimo: linha.min_stock ?? 0,
+      minimoCadastrado: linha.min_stock !== null && linha.min_stock !== undefined,
       seguro: linha.safe_stock ?? null,
       nivel: nivelDaLinha(linha),
     };
@@ -113,7 +112,6 @@ export function contarNiveis(estoque) {
   return {
     critical: contarNivel(niveis, "critical"),
     alert: contarNivel(niveis, "alert"),
-    semMinimo: contarNivel(niveis, "semMinimo"),
     ok: contarNivel(niveis, "ok"),
   };
 }
@@ -172,9 +170,9 @@ function escapar(texto) {
 }
 
 function descreverCelula(dados, nome) {
-  if (!dados) return `${nome}: sem dado`;
+  if (!dados) return `${nome} — regional não informada pela API`;
 
-  const minimo = dados.minimo === null ? "sem mínimo" : `mínimo ${formatarNumero(dados.minimo)}`;
+  const minimo = dados.minimoCadastrado ? `mínimo ${formatarNumero(dados.minimo)}` : "sem mínimo cadastrado";
   const seguro = dados.seguro === null ? "" : ` · seguro ${formatarNumero(dados.seguro)}`;
   return `${nome} — ${NIVEIS[dados.nivel].rotulo}
 saldo ${formatarNumero(dados.quantidade)} · ${minimo}${seguro}`;
@@ -197,12 +195,14 @@ export function desenharTabelaDeEstoque(estoque) {
     .map((item) => {
       const celulas = REGIONAIS.map(({ sigla, nome }) => {
         const dados = celula(item, sigla);
-        const classe = dados ? NIVEIS[dados.nivel].classe : "nivel-sem-dado";
-        const texto = dados ? formatarNumero(dados.quantidade) : "—";
+        // Regional que a API não devolveu conta como zero — é o que ela
+        // significa no estoque, e um traço só faria a coluna parecer quebrada.
+        const classe = dados ? NIVEIS[dados.nivel].classe : "nivel-normal";
+        const texto = formatarNumero(dados?.quantidade ?? 0);
         return `<td class="${classe}" title="${escapar(descreverCelula(dados, nome))}">${texto}</td>`;
       }).join("");
 
-      const minimo = item.minimo === null ? "—" : formatarNumero(item.minimo);
+      const minimo = formatarNumero(item.minimo);
 
       return `
         <tr>
