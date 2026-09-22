@@ -1,4 +1,4 @@
-import { descreverPrazo } from "./dados-b2b.js";
+import { descreverPrazo, grupoDoProjeto } from "./dados-b2b.js";
 import { formatarMoeda } from "./formatadores.js";
 
 // Painel sobreposto com os projetos por trás de um número do painel — uma barra
@@ -12,8 +12,30 @@ function escapar(texto) {
 
 const semPrazo = (item) => item.remaining_days === null || item.remaining_days === undefined;
 
-// Verde concluído, vermelho atrasado, amarelo o que ainda está correndo.
+// O prazo sozinho dizia "Concluído" para 184 dos 188 projetos, inclusive os
+// cancelados e os que estão só esperando outro setor. Com o status na mão, a
+// coluna conta a mesma história do gráfico de status.
+function descreverSituacao(item) {
+  if (item.status) {
+    const grupo = grupoDoProjeto(item);
+    if (grupo === "cancelado") return "Cancelado";
+    if (grupo === "entregue") return "Esperando setor responsável";
+    if (grupo === "ativado") return "Concluído";
+  }
+
+  return descreverPrazo(item.remaining_days);
+}
+
+// Verde concluído, vermelho atrasado, amarelo o que está correndo ou parado
+// com outro setor; cancelado fica neutro, não é falha de prazo.
 function classeDoPrazo(item) {
+  if (item.status) {
+    const grupo = grupoDoProjeto(item);
+    if (grupo === "cancelado") return "prazo-cancelado";
+    if (grupo === "entregue") return "prazo-em-aberto";
+    if (grupo === "ativado") return "prazo-concluido";
+  }
+
   if (semPrazo(item)) return "prazo-concluido";
   return item.remaining_days < 0 ? "prazo-atrasado" : "prazo-em-aberto";
 }
@@ -35,7 +57,7 @@ const COLUNAS = [
     classe: () => "coluna-valor",
     ler: (item) => (item.value === undefined ? undefined : formatarMoeda(item.value)),
   },
-  { titulo: "Prazo", classe: classeDoPrazo, ler: (item) => descreverPrazo(item.remaining_days), sempre: true },
+  { titulo: "Situação", classe: classeDoPrazo, ler: descreverSituacao, sempre: true },
 ];
 
 function colunasPara(itens) {

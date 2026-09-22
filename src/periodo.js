@@ -1,4 +1,4 @@
-import { DIMENSOES, obterItens } from "./dados-b2b.js";
+import { DIMENSOES, obterContagens, obterItens } from "./dados-b2b.js";
 
 // Filtro de período do B2B.
 //
@@ -177,8 +177,20 @@ export function aplicarPeriodo(b2b, periodo) {
   // médio mudaria de método conforme o filtro estivesse ligado ou não.
   const financial = recortarFinanceiro(b2b.financial, visiveis);
 
-  // As contagens, essas sim, ficam como vieram quando ninguém é excluído.
-  if (visiveis.length === projetos.length) return { ...b2b, financial };
+  // Sem recorte as contagens ficam como vieram da API, mas os itens vão unidos
+  // do mesmo jeito: assim toda tabela de detalhe tem status, prazo e mês na
+  // mesma linha, e a coluna de situação pode ser igual em todas.
+  if (visiveis.length === projetos.length) {
+    return {
+      ...b2b,
+      financial,
+      status: { counts: obterContagens(b2b, DIMENSOES.status), items: visiveis },
+      status_by_region: { counts: obterContagens(b2b, DIMENSOES.equipe), items: visiveis },
+      projects_by_month: { counts: obterContagens(b2b, DIMENSOES.mes), items: visiveis },
+      deadline: { counts: obterContagens(b2b, DIMENSOES.prazo), items: visiveis },
+      priority_by_requester: { counts: obterContagens(b2b, DIMENSOES.prioridade), items: visiveis },
+    };
+  }
 
   return {
     ...b2b,

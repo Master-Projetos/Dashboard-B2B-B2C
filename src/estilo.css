@@ -789,6 +789,12 @@ body {
   font-weight: 600;
 }
 
+/* Cancelado não é falha de prazo: fica neutro, sem cor de alerta. */
+.tabela-de-prazos .prazo-cancelado {
+  color: var(--texto-suave);
+  font-weight: 550;
+}
+
 .tabela-de-prazos .prazo-atrasado {
   color: var(--status-critico);
   font-weight: 650;
