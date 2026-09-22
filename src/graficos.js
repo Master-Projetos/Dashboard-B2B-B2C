@@ -5,7 +5,7 @@ import { CanvasRenderer } from "echarts/renderers";
 
 import { CORES, FONTE, eixoDeCategoria, eixoDeValor, dicaDeContexto, estiloDeTextoSuave, tamanhoDeFonteDoGrafico } from "./tema.js";
 import { formatarNumero, formatarMes } from "./formatadores.js";
-import { DIMENSOES, GRUPOS_DE_STATUS, ROTULOS_DE_EQUIPE, grupoDoStatus, obterContagens, obterItens } from "./dados-b2b.js";
+import { DIMENSOES, GRUPOS_DE_STATUS, ROTULOS_DE_EQUIPE, grupoDoProjeto, obterContagens, obterItens } from "./dados-b2b.js";
 import { abrirDetalhes } from "./detalhes.js";
 
 echarts.use([BarChart, LineChart, GridComponent, TooltipComponent, LegendComponent, GraphicComponent, CanvasRenderer]);
@@ -166,21 +166,21 @@ export function desenharProjetosPorMes(b2b) {
 
 // ===== Status dos projetos =====
 
+const CORES_DOS_GRUPOS = {
+  andamento: "serie1",
+  entregue: "serie2",
+  ativado: "serie3",
+  cancelado: "statusCritico",
+};
+
 export function desenharStatus(b2b) {
-  const contagens = obterContagens(b2b, DIMENSOES.status);
   const itens = obterItens(b2b, DIMENSOES.status);
 
-  // O verde é o mesmo da tela B2C (serie3): mais fechado que o verde puro dos
-  // marcadores e melhor ao lado do azul da série.
-  const cores = { andamento: CORES.serie1, concluido: CORES.serie3, cancelado: CORES.statusCritico };
-
+  // O grupo depende do prazo além do status, então a contagem sai dos itens,
+  // não do bloco `counts` da API.
   const grupos = GRUPOS_DE_STATUS.map((grupo) => ({
     ...grupo,
-    // Conta pelos status que a API mandou de fato, não pela lista fixa: um
-    // status novo entra em "Em andamento" por grupoDoStatus.
-    quantidade: Object.entries(contagens)
-      .filter(([status]) => grupoDoStatus(status).id === grupo.id)
-      .reduce((soma, [, valor]) => soma + valor, 0),
+    projetos: itens.filter((item) => grupoDoProjeto(item) === grupo.id),
   })).reverse(); // o eixo cresce de baixo para cima
 
   const instancia = desenhar("graficoStatus", {
@@ -190,22 +190,34 @@ export function desenharStatus(b2b) {
       axisPointer: { type: "shadow", shadowStyle: { color: "rgba(128, 128, 128, 0.12)" } },
       formatter: ([ponto]) => {
         const grupo = grupos[ponto.dataIndex];
-        const detalhe = Object.entries(contagens)
-          .filter(([status]) => grupoDoStatus(status).id === grupo.id)
+
+        const porStatus = {};
+        for (const projeto of grupo.projetos) porStatus[projeto.status] = (porStatus[projeto.status] ?? 0) + 1;
+
+        const detalhe = Object.entries(porStatus)
           .sort(([, a], [, b]) => b - a)
           .map(([status, valor]) => `${status}: ${formatarNumero(valor)}`)
           .join("<br/>");
 
-        return `<b>${grupo.rotulo}</b> — ${formatarNumero(ponto.value)} projetos<br/>${detalhe}<br/>${DICA_DE_CLIQUE}`;
+        return `<b>${grupo.rotulo}</b> — ${formatarNumero(ponto.value)} projetos
+          <br/><span style="opacity:.7">${grupo.detalhe}</span>
+          ${detalhe ? `<br/>${detalhe}` : ""}<br/>${DICA_DE_CLIQUE}`;
       },
     }),
     xAxis: eixoDeValor({ show: false }),
-    yAxis: eixoDeCategoria({ data: grupos.map((grupo) => grupo.rotulo), axisLine: { show: false } }),
+    yAxis: eixoDeCategoria({
+      data: grupos.map((grupo) => grupo.rotulo),
+      axisLine: { show: false },
+      axisLabel: { ...estiloDeTextoSuave(), width: 110, overflow: "break" },
+    }),
     series: [{
       type: "bar",
       cursor: "pointer",
-      data: grupos.map((grupo) => ({ value: grupo.quantidade, itemStyle: { color: cores[grupo.id], borderRadius: [0, 4, 4, 0] } })),
-      barMaxWidth: 34,
+      data: grupos.map((grupo) => ({
+        value: grupo.projetos.length,
+        itemStyle: { color: CORES[CORES_DOS_GRUPOS[grupo.id]], borderRadius: [0, 4, 4, 0] },
+      })),
+      barMaxWidth: 28,
       showBackground: true,
       backgroundStyle: { color: "rgba(128, 128, 128, 0.07)", borderRadius: [0, 4, 4, 0] },
       label: rotuloDeValor({ position: "right", distance: 6, color: CORES.textoPrimario }),
@@ -214,9 +226,7 @@ export function desenharStatus(b2b) {
 
   aoClicarNaFaixa(instancia, "y", (indice) => {
     const grupo = grupos[indice];
-    if (!grupo) return;
-
-    abrirDetalhes(`Status: ${grupo.rotulo}`, itens.filter((item) => grupoDoStatus(item.status).id === grupo.id));
+    if (grupo) abrirDetalhes(`Status: ${grupo.rotulo}`, grupo.projetos);
   });
 }
 

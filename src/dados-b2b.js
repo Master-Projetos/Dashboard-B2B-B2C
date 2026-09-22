@@ -35,23 +35,26 @@ export const ROTULOS_DE_PRAZO = {
   Atrasada: "Atrasados",
 };
 
-// A API manda doze status operacionais. No gráfico eles viram três situações,
-// que é como se fala do projeto: ou está andando, ou entregou, ou morreu.
-// "Ativado" é a entrega; inviabilidade técnica e BP não aprovado são fins de
-// linha, então contam como cancelado. Status novo que a API inventar cai em
-// "Em andamento": existe, não entregou e não morreu.
+// A API manda doze status operacionais. No gráfico eles viram quatro
+// situações, que é como se fala do projeto.
+//
+// A diferença que importa: prazo "Concluido" quer dizer que a etapa da
+// Projetos fechou. Se o status ainda não é "Ativado", o projeto não está
+// parado conosco — está com outro setor. Sem essa separação o painel dizia
+// "130 em andamento" quando só 4 dependiam da gente.
+const STATUS_CANCELADOS = ["Cancelada", "Inviabilidade Técnica", "BP - Não Aprovado"];
+
 export const GRUPOS_DE_STATUS = [
-  {
-    id: "andamento",
-    rotulo: "Em andamento",
-    status: ["Aguardando BP", "Pendencia Comercial", "Estudo", "Estudo Técnico", "Vistoria", "Configuração", "Execução", "Estoque B2B"],
-  },
-  { id: "concluido", rotulo: "Concluído", status: ["Ativado"] },
-  { id: "cancelado", rotulo: "Cancelado", status: ["Cancelada", "Inviabilidade Técnica", "BP - Não Aprovado"] },
+  { id: "andamento", rotulo: "Em andamento", detalhe: "etapa da Projetos aberta" },
+  { id: "entregue", rotulo: "Concluído pela Projetos", detalhe: "aguardando outro setor" },
+  { id: "ativado", rotulo: "Concluído", detalhe: "ativado para o cliente" },
+  { id: "cancelado", rotulo: "Cancelado", detalhe: "fim de linha" },
 ];
 
-export function grupoDoStatus(status) {
-  return GRUPOS_DE_STATUS.find((grupo) => grupo.status.includes(status)) ?? GRUPOS_DE_STATUS[0];
+export function grupoDoProjeto(item) {
+  if (STATUS_CANCELADOS.includes(item.status)) return "cancelado";
+  if (item.status === "Ativado") return "ativado";
+  return item.deadline === "Concluido" ? "entregue" : "andamento";
 }
 
 export const ROTULOS_DE_EQUIPE = {
