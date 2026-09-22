@@ -183,6 +183,16 @@ body {
   background-repeat: no-repeat;
 }
 
+/* A lista aberta é desenhada pelo sistema: dá para mandar fonte e cor, o
+   resto ele decide. Sem isto ela herda o tamanho miúdo do rótulo fechado. */
+.periodo select option {
+  font-size: clamp(13px, 1.7vh, 16px);
+  font-weight: 600;
+  padding: 8px 12px;
+  background: var(--superficie);
+  color: var(--texto-primario);
+}
+
 .periodo select:hover {
   border-color: var(--texto-suave);
 }
@@ -220,6 +230,20 @@ body {
   color: var(--texto-primario);
   border-color: var(--texto-suave);
   background: var(--superficie);
+}
+
+/* No escuro o botão vazado sumia contra o fundo da página. Preenchido com a
+   cor de superfície ele volta a parecer botão, sem roubar a atenção da aba
+   ativa, que é a única coisa azul do cabeçalho. */
+:root[data-tema="escuro"] .periodo button {
+  color: var(--texto-primario);
+  background: var(--superficie);
+  border-color: rgba(255, 255, 255, 0.22);
+}
+
+:root[data-tema="escuro"] .periodo button:hover {
+  background: var(--superficie-topo);
+  border-color: var(--texto-secundario);
 }
 
 .periodo button[hidden] {
