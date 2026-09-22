@@ -56,6 +56,9 @@ export function desenharIndicadoresB2b(b2b) {
   const destaques = destaquesFinanceiros(b2b);
   const itensEmAberto = obterItens(b2b, DIMENSOES.prazo).filter((item) => item.deadline !== "Concluido");
   const aprovados = b2b.financial?.approved_projects ?? [];
+  // Com período escolhido, os números de dinheiro continuam sendo os do total:
+  // a API só manda valor nos projetos aprovados, e nenhum deles traz data.
+  const avisoDoFinanceiro = b2b.financeiroNaoFiltrado ? " · período todo" : "";
   const prazosEmAberto = (contagens.Urgente ?? 0) + (contagens.Atrasada ?? 0);
 
   escreverIndicadores("indicadoresB2b", [
@@ -78,7 +81,7 @@ export function desenharIndicadoresB2b(b2b) {
     {
       rotulo: "Valor total",
       valor: formatarMoedaCompacta(b2b.financial.total_value),
-      detalhe: formatarMoeda(b2b.financial.total_value),
+      detalhe: formatarMoeda(b2b.financial.total_value) + avisoDoFinanceiro,
       realce: CORES.serie1,
     },
     {
@@ -86,9 +89,9 @@ export function desenharIndicadoresB2b(b2b) {
       valor: formatarMoedaCompacta(b2b.financial.approved_value),
       // A lista soma exatamente o approved_value, então a contagem cabe aqui
       // sem tirar o valor exato de vista.
-      detalhe: aprovados.length
+      detalhe: (aprovados.length
         ? `${formatarNumero(aprovados.length)} projetos · ${formatarMoeda(b2b.financial.approved_value)}`
-        : formatarMoeda(b2b.financial.approved_value),
+        : formatarMoeda(b2b.financial.approved_value)) + avisoDoFinanceiro,
       realce: CORES.serie1,
       clicavel: aprovados.length > 0,
       acao: "projetos-aprovados",
@@ -96,14 +99,14 @@ export function desenharIndicadoresB2b(b2b) {
     {
       rotulo: "Ticket médio",
       valor: formatarMoedaCompacta(b2b.financial.average_value),
-      detalhe: formatarMoeda(b2b.financial.average_value),
+      detalhe: formatarMoeda(b2b.financial.average_value) + avisoDoFinanceiro,
       realce: CORES.serie1,
     },
     {
       rotulo: "Maior projeto",
       valor: formatarMoedaCompacta(b2b.financial.highest_value),
       // Com o cliente à mostra o cartão já responde "qual é" antes do clique.
-      detalhe: destaques.length ? destaques[0].client : formatarMoeda(b2b.financial.highest_value),
+      detalhe: (destaques.length ? destaques[0].client : formatarMoeda(b2b.financial.highest_value)) + avisoDoFinanceiro,
       realce: CORES.serie1,
       clicavel: destaques.length > 0,
       acao: "maiores-projetos",

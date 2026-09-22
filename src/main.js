@@ -17,6 +17,7 @@ import {
 import { formatarHorario, formatarDataCurta } from "./formatadores.js";
 import { restaurarTemaSalvo, alternarTema } from "./tema.js";
 import { iniciarNavegacao, telaVisivel } from "./navegacao.js";
+import { aplicarPeriodo, ehPeriodoVazio, faixaDeDatas } from "./periodo.js";
 
 const INTERVALO_ATUALIZACAO_B2B_MS = 60 * 1000; // rota rápida: recarregada a cada minuto
 const INTERVALO_VERIFICACAO_VIABILIDADE_MS = 30 * 60 * 1000; // rota lenta: o cache de 48h fica no servidor
@@ -26,6 +27,7 @@ const GRAFICOS_DE_B2C = ["graficoCidades", "graficoPortasPorRegional", "graficoO
 
 let dadosB2b = null;
 let dadosViabilidade = null;
+let periodo = { inicio: "", fim: "" };
 
 function escreverStatus(idDoElemento, texto) {
   document.getElementById(idDoElemento).textContent = texto;
@@ -40,19 +42,73 @@ function avisarNosGraficos(identificadores, mensagem) {
 // está visível — e é redesenhada ao voltar para ela.
 
 function desenharTelaB2b() {
-  desenharPrazos(dadosB2b);
-  desenharIndicadoresB2b(dadosB2b);
+  // Tudo na tela B2B lê o recorte do período; sem período escolhido, é o
+  // próprio dado da API, sem cópia nem recontagem.
+  const b2b = aplicarPeriodo(dadosB2b, periodo);
 
-  if (!dadosB2b) {
+  desenharPrazos(b2b);
+  desenharIndicadoresB2b(b2b);
+
+  if (!b2b) {
     avisarNosGraficos(GRAFICOS_DE_B2B, "Sem dados de projetos ainda — tentando novamente");
     return;
   }
 
-  desenharProjetosPorMes(dadosB2b);
-  desenharStatus(dadosB2b);
-  desenharPrioridade(dadosB2b);
-  desenharStatusPorEquipe(dadosB2b);
+  if (!obterContagensDePrioridade(b2b)) {
+    avisarNosGraficos(GRAFICOS_DE_B2B, "Nenhum projeto neste período");
+    return;
+  }
+
+  desenharProjetosPorMes(b2b);
+  desenharStatus(b2b);
+  desenharPrioridade(b2b);
+  desenharStatusPorEquipe(b2b);
 }
+
+function obterContagensDePrioridade(b2b) {
+  return Object.values(b2b.priority ?? {}).some((quantidade) => quantidade > 0);
+}
+
+// ===== Controle de período =====
+
+const campoDeInicio = document.getElementById("periodoInicio");
+const campoDeFim = document.getElementById("periodoFim");
+const botaoDeLimpar = document.getElementById("limparPeriodo");
+
+function atualizarControleDePeriodo() {
+  const container = document.getElementById("periodo");
+  container.hidden = telaVisivel() !== "b2b" || !dadosB2b;
+  botaoDeLimpar.hidden = ehPeriodoVazio(periodo);
+
+  // Fora da faixa não existe projeto nenhum para achar.
+  const faixa = dadosB2b && faixaDeDatas(dadosB2b);
+  for (const campo of [campoDeInicio, campoDeFim]) {
+    campo.min = faixa?.primeiro ?? "";
+    campo.max = faixa?.ultimo ?? "";
+  }
+}
+
+function lerPeriodoDosCampos() {
+  // Datas invertidas não devolveriam nada; trocar é o que a pessoa quis dizer.
+  const [inicio, fim] = [campoDeInicio.value, campoDeFim.value];
+  return inicio && fim && inicio > fim ? { inicio: fim, fim: inicio } : { inicio, fim };
+}
+
+function aoMudarPeriodo() {
+  periodo = lerPeriodoDosCampos();
+  campoDeInicio.value = periodo.inicio;
+  campoDeFim.value = periodo.fim;
+  desenharTelaVisivel();
+}
+
+campoDeInicio.addEventListener("change", aoMudarPeriodo);
+campoDeFim.addEventListener("change", aoMudarPeriodo);
+
+botaoDeLimpar.addEventListener("click", () => {
+  campoDeInicio.value = "";
+  campoDeFim.value = "";
+  aoMudarPeriodo();
+});
 
 function desenharTelaB2c() {
   desenharPrazos(null); // os prazos são do B2B; não aparecem nesta tela
@@ -69,6 +125,7 @@ function desenharTelaB2c() {
 }
 
 function desenharTelaVisivel() {
+  atualizarControleDePeriodo(); // o seletor é do B2B; some na outra tela
   if (telaVisivel() === "b2c") desenharTelaB2c();
   else desenharTelaB2b();
 }

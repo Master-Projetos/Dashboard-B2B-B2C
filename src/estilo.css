@@ -140,6 +140,51 @@ body {
   color: #ffffff;
 }
 
+.periodo {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  font-size: var(--fonte-detalhe);
+  color: var(--texto-suave);
+  white-space: nowrap;
+}
+
+.periodo[hidden] {
+  display: none;
+}
+
+.periodo input {
+  font: inherit;
+  font-size: var(--fonte-detalhe);
+  color: var(--texto-primario);
+  background: var(--superficie);
+  border: 1px solid var(--borda);
+  border-radius: 8px;
+  padding: clamp(3px, 0.5vh, 5px) 6px;
+  box-shadow: var(--sombra);
+}
+
+.periodo input:focus {
+  outline: 2px solid var(--serie-1);
+  outline-offset: 1px;
+}
+
+.periodo button {
+  font: inherit;
+  font-size: var(--fonte-detalhe);
+  color: var(--texto-secundario);
+  background: transparent;
+  border: none;
+  border-radius: 8px;
+  padding: 2px 6px;
+  cursor: pointer;
+  text-decoration: underline;
+}
+
+.periodo button[hidden] {
+  display: none;
+}
+
 .prazos {
   display: flex;
   gap: 8px;

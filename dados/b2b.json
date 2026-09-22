@@ -1223,7 +1223,7 @@
       {
         "deadline": "Concluido",
         "client": "GADATI EVENTOS LAVRAS (THULIO PADOVANI)",
-        "requester": null,
+        "requester": "Thulio Padovani",
         "priority": "Baixa",
         "region": "Engenharia - Transmissão",
         "remaining_days": null,
@@ -3504,7 +3504,7 @@
       {
         "deadline": "Concluido",
         "client": "GADATI EVENTOS LAVRAS (THULIO PADOVANI)",
-        "requester": null,
+        "requester": "Thulio Padovani",
         "priority": "Baixa",
         "region": "Engenharia - Transmissão",
         "remaining_days": null,
@@ -4192,6 +4192,7 @@
         "Lorrany Rodrigues": 0,
         "Michel Dias": 5,
         "Pedro Cardoso": 1,
+        "Thulio Padovani": 0,
         "Tiago Miranda": 0
       },
       "Atividade Crítica": {
@@ -4201,6 +4202,7 @@
         "Lorrany Rodrigues": 0,
         "Michel Dias": 0,
         "Pedro Cardoso": 0,
+        "Thulio Padovani": 0,
         "Tiago Miranda": 0
       },
       "Baixa": {
@@ -4210,6 +4212,7 @@
         "Lorrany Rodrigues": 16,
         "Michel Dias": 18,
         "Pedro Cardoso": 9,
+        "Thulio Padovani": 1,
         "Tiago Miranda": 19
       },
       "Média": {
@@ -4219,6 +4222,7 @@
         "Lorrany Rodrigues": 1,
         "Michel Dias": 3,
         "Pedro Cardoso": 1,
+        "Thulio Padovani": 0,
         "Tiago Miranda": 2
       }
     },
@@ -5306,7 +5310,7 @@
       {
         "deadline": "Concluido",
         "client": "GADATI EVENTOS LAVRAS (THULIO PADOVANI)",
-        "requester": null,
+        "requester": "Thulio Padovani",
         "priority": "Baixa",
         "region": "Engenharia - Transmissão",
         "remaining_days": null,
@@ -7131,7 +7135,7 @@
       {
         "deadline": "Concluido",
         "client": "GADATI EVENTOS LAVRAS (THULIO PADOVANI)",
-        "requester": null,
+        "requester": "Thulio Padovani",
         "priority": "Baixa",
         "region": "Engenharia - Transmissão",
         "remaining_days": null,
@@ -8900,7 +8904,7 @@
       {
         "deadline": "Concluido",
         "client": "GADATI EVENTOS LAVRAS (THULIO PADOVANI)",
-        "requester": null,
+        "requester": "Thulio Padovani",
         "priority": "Baixa",
         "region": "Engenharia - Transmissão",
         "remaining_days": null,
