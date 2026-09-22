@@ -55,6 +55,7 @@ export function desenharIndicadoresB2b(b2b) {
   const contagens = obterContagens(b2b, DIMENSOES.prazo);
   const destaques = destaquesFinanceiros(b2b);
   const itensEmAberto = obterItens(b2b, DIMENSOES.prazo).filter((item) => item.deadline !== "Concluido");
+  const aprovados = b2b.financial?.approved_projects ?? [];
   const prazosEmAberto = (contagens.Urgente ?? 0) + (contagens.Atrasada ?? 0);
 
   escreverIndicadores("indicadoresB2b", [
@@ -83,8 +84,14 @@ export function desenharIndicadoresB2b(b2b) {
     {
       rotulo: "Valor aprovado",
       valor: formatarMoedaCompacta(b2b.financial.approved_value),
-      detalhe: formatarMoeda(b2b.financial.approved_value),
+      // A lista soma exatamente o approved_value, então a contagem cabe aqui
+      // sem tirar o valor exato de vista.
+      detalhe: aprovados.length
+        ? `${formatarNumero(aprovados.length)} projetos · ${formatarMoeda(b2b.financial.approved_value)}`
+        : formatarMoeda(b2b.financial.approved_value),
       realce: CORES.serie1,
+      clicavel: aprovados.length > 0,
+      acao: "projetos-aprovados",
     },
     {
       rotulo: "Ticket médio",
@@ -105,6 +112,7 @@ export function desenharIndicadoresB2b(b2b) {
 
   ligarCliques("indicadoresB2b", {
     "prazos-em-aberto": () => abrirDetalhes("Prazos em aberto", itensEmAberto),
+    "projetos-aprovados": () => abrirDetalhes("Projetos aprovados", aprovados),
     "maiores-projetos": () => abrirDetalhes("Maiores projetos", destaques),
   });
 }
