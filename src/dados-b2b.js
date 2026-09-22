@@ -46,7 +46,7 @@ const STATUS_CANCELADOS = ["Cancelada", "Inviabilidade Técnica", "BP - Não Apr
 
 export const GRUPOS_DE_STATUS = [
   { id: "andamento", rotulo: "Em andamento", detalhe: "etapa da Projetos aberta" },
-  { id: "entregue", rotulo: "Concluído pela Projetos", detalhe: "aguardando outro setor" },
+  { id: "entregue", rotulo: "Demandas do setor finalizadas", detalhe: "aguardando outro setor" },
   { id: "ativado", rotulo: "Concluído", detalhe: "ativado para o cliente" },
   { id: "cancelado", rotulo: "Cancelado", detalhe: "fim de linha" },
 ];

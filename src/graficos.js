@@ -208,7 +208,7 @@ export function desenharStatus(b2b) {
     yAxis: eixoDeCategoria({
       data: grupos.map((grupo) => grupo.rotulo),
       axisLine: { show: false },
-      axisLabel: { ...estiloDeTextoSuave(), width: 110, overflow: "break" },
+      axisLabel: { ...estiloDeTextoSuave(), width: 132, overflow: "break", lineHeight: 15 },
     }),
     series: [{
       type: "bar",
