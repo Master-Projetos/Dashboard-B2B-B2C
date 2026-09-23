@@ -53,6 +53,13 @@ const TEMA_PADRAO = "claro";
 // tema é atualizar estes valores e mandar redesenhar.
 export const CORES = { ...PALETAS[TEMA_PADRAO], ...CORES_DE_ESTADO };
 
+// As listas de cor por categoria (status, prioridade, prazo) aceitam o nome de
+// uma cor da paleta ("lilas", que acompanha o tema) ou um hex direto
+// ("#9b7fd6", igual nos dois temas).
+export function corDe(nomeOuHex) {
+  return CORES[nomeOuHex] ?? nomeOuHex;
+}
+
 let temaAtual = TEMA_PADRAO;
 
 export function nomeDoTemaAtual() {

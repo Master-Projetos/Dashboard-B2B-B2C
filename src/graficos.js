@@ -3,7 +3,7 @@ import { BarChart, LineChart } from "echarts/charts";
 import { GridComponent, TooltipComponent, LegendComponent, GraphicComponent } from "echarts/components";
 import { CanvasRenderer } from "echarts/renderers";
 
-import { CORES, FONTE, eixoDeCategoria, eixoDeValor, dicaDeContexto, estiloDeTextoSuave, tamanhoDeFonteDoGrafico } from "./tema.js";
+import { CORES, FONTE, corDe, eixoDeCategoria, eixoDeValor, dicaDeContexto, estiloDeTextoSuave, tamanhoDeFonteDoGrafico } from "./tema.js";
 import { formatarNumero, formatarMes } from "./formatadores.js";
 import { DIMENSOES, obterContagens, obterItens } from "./dados-b2b.js";
 import { abrirDetalhes } from "./detalhes.js";
@@ -169,6 +169,7 @@ export function desenharProjetosPorMes(b2b) {
 // Coluna status da rota status_by_region: Concluída ou Em Andamento. Vale para
 // os dois gráficos de status. Os itens unidos pelo filtro de período guardam
 // esse valor em grupoDaEquipe, porque status ali é o status real.
+// cor: nome da paleta (tema.js) ou hex direto, como "#9b7fd6".
 const FAIXAS_CONHECIDAS = [
   { chave: "Não Iniciada", rotulo: "Não iniciada", cor: "serie1" },
   { chave: "Em Andamento", rotulo: "Em andamento", cor: "statusAtencao" },
@@ -215,7 +216,7 @@ export function desenharStatus(b2b) {
       cursor: "pointer",
       data: faixas.map((faixa) => ({
         value: faixa.quantidade,
-        itemStyle: { color: CORES[faixa.cor], borderRadius: [0, 4, 4, 0] },
+        itemStyle: { color: corDe(faixa.cor), borderRadius: [0, 4, 4, 0] },
       })),
       barMaxWidth: 34,
       showBackground: true,
@@ -237,6 +238,7 @@ export function desenharStatus(b2b) {
 
 // Um status real por barra (Aguardando BP, Estudo...), como vem da rota de
 // status — o modelo antigo, com o detalhe que o gráfico de cima agrupa.
+// cor: nome da paleta (tema.js) ou hex direto, como "#9b7fd6".
 const CORES_DO_STATUS = {
   "Aguardando BP": "lilas",
   "Cancelada": "statusCritico",
@@ -266,7 +268,7 @@ export function desenharProjetosPorStatus(b2b) {
       cursor: "pointer",
       data: statusOrdenados.map(([status, quantidade]) => ({
         value: quantidade,
-        itemStyle: { color: CORES[CORES_DO_STATUS[status] ?? "serie1"], borderRadius: [0, 4, 4, 0] },
+        itemStyle: { color: corDe(CORES_DO_STATUS[status] ?? "serie1"), borderRadius: [0, 4, 4, 0] },
       })),
       barMaxWidth: 16,
       showBackground: true,
@@ -287,6 +289,7 @@ const ORDEM_DE_PRIORIDADE = ["Baixa", "Média", "Alta", "Atividade Crítica"];
 
 // Cada prioridade tem cor própria em vez de tons de um azul só: crítica em
 // vermelho, alta em amarelo, média em lilás e baixa em verde.
+// cor: nome da paleta (tema.js) ou hex direto, como "#9b7fd6".
 const CORES_DA_PRIORIDADE = {
   "Baixa": "serie3",
   "Média": "lilas",
@@ -393,7 +396,7 @@ export function desenharPrioridade(b2b) {
       cursor: "pointer",
       data: prioridades.map((nome) => ({
         value: b2b.priority[nome],
-        itemStyle: { color: CORES[CORES_DA_PRIORIDADE[nome] ?? "serie1"], borderRadius: [4, 4, 0, 0] },
+        itemStyle: { color: corDe(CORES_DA_PRIORIDADE[nome] ?? "serie1"), borderRadius: [4, 4, 0, 0] },
       })),
       barMaxWidth: 54,
       // A faixa de fundo mostra que a coluna inteira é clicável.
@@ -622,7 +625,7 @@ export function desenharStatusPorEquipe(b2b, quantidade = 8) {
       cursor: "pointer",
       data: equipes.map((equipe) => equipe[chave]),
       barMaxWidth: 18,
-      itemStyle: { color: CORES[cor], borderColor: CORES.superficie, borderWidth: 1 },
+      itemStyle: { color: corDe(cor), borderColor: CORES.superficie, borderWidth: 1 },
       label: indice === faixas.length - 1
         ? rotuloDeValor({
             position: "right",

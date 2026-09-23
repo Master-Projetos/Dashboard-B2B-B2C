@@ -1,4 +1,4 @@
-import { CORES } from "./tema.js";
+import { CORES, corDe } from "./tema.js";
 import { formatarNumero, formatarMoeda, formatarMoedaCompacta, formatarPorcentagem } from "./formatadores.js";
 import { DIMENSOES, ROTULOS_DE_PRAZO, obterContagens, obterItens, temDetalhes } from "./dados-b2b.js";
 import { abrirDetalhes } from "./detalhes.js";
@@ -209,13 +209,14 @@ export function desenharPrazos(b2b) {
   const prazos = [
     // Mesmo verde da barra "Concluído" ao lado: dois verdes diferentes para a
     // mesma coisa, na mesma tela, pareceria erro.
-    { tipo: "Concluido", cor: CORES.serie3 },
-    { tipo: "Urgente", cor: CORES.statusAtencao },
-    { tipo: "Atrasada", cor: CORES.serie2 },
+    // Nome da paleta (tema.js) ou hex direto, como "#fab219".
+    { tipo: "Concluido", cor: "serie3" },
+    { tipo: "Urgente", cor: "statusAtencao" },
+    { tipo: "Atrasada", cor: "serie2" },
   ];
   // Tipo de prazo novo vira chip com o nome que veio.
   for (const tipo of Object.keys(contagens)) {
-    if (!prazos.some((prazo) => prazo.tipo === tipo)) prazos.push({ tipo, cor: CORES.serie1 });
+    if (!prazos.some((prazo) => prazo.tipo === tipo)) prazos.push({ tipo, cor: "serie1" });
   }
 
   container.innerHTML = prazos
@@ -226,7 +227,7 @@ export function desenharPrazos(b2b) {
         ? `class="prazo clicavel" data-prazo="${tipo}" title="Ver os projetos"`
         : `class="prazo"`;
 
-      return `<span ${atributos} style="--marcador: ${cor}"><strong>${valor}</strong> ${rotulo}</span>`;
+      return `<span ${atributos} style="--marcador: ${corDe(cor)}"><strong>${valor}</strong> ${rotulo}</span>`;
     })
     .join("");
 
