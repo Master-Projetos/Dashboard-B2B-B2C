@@ -35,21 +35,12 @@ export const ROTULOS_DE_PRAZO = {
   Atrasada: "Atrasados",
 };
 
-// A API manda doze status operacionais. No gráfico eles viram quatro
-// situações, que é como se fala do projeto.
+// Situação do projeto na tabela de detalhes (os gráficos usam o status real).
 //
 // A diferença que importa: prazo "Concluido" quer dizer que a etapa da
 // Projetos fechou. Se o status ainda não é "Ativado", o projeto não está
-// parado conosco — está com outro setor. Sem essa separação o painel dizia
-// "130 em andamento" quando só 4 dependiam da gente.
+// parado conosco — está com outro setor.
 const STATUS_CANCELADOS = ["Cancelada", "Inviabilidade Técnica", "BP - Não Aprovado"];
-
-export const GRUPOS_DE_STATUS = [
-  { id: "andamento", rotulo: "Em andamento", detalhe: "etapa da Projetos aberta" },
-  { id: "entregue", rotulo: "Demandas do setor finalizadas", detalhe: "aguardando outro setor" },
-  { id: "ativado", rotulo: "Concluído", detalhe: "ativado para o cliente" },
-  { id: "cancelado", rotulo: "Cancelado", detalhe: "fim de linha" },
-];
 
 export function grupoDoProjeto(item) {
   if (STATUS_CANCELADOS.includes(item.status)) return "cancelado";
