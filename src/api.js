@@ -38,3 +38,7 @@ export function buscarViabilidade() {
 export function buscarEstoque() {
   return buscarComTentativas("/api/estoque");
 }
+
+export function buscarReposicao() {
+  return buscarComTentativas("/api/reposicao");
+}

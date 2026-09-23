@@ -185,6 +185,29 @@ export function abrirDetalhes(titulo, itensRecebidos, { filtrarPorSolicitante = 
   };
 }
 
+// Mesmo painel sobreposto, para conteúdo que não é lista de projetos (o
+// calendário de reposição do estoque). Fecha do mesmo jeito: ✕, Esc ou clique
+// fora da caixa.
+export function abrirConteudo(titulo, corpoHtml) {
+  const painel = document.getElementById("detalhes");
+
+  painel.innerHTML = `
+    <div class="caixa-de-detalhes" role="dialog" aria-label="${escapar(titulo)}">
+      <header>
+        <h2>${escapar(titulo)}</h2>
+        <button type="button" class="fechar-detalhes" aria-label="Fechar">✕</button>
+      </header>
+      <div class="corpo-de-detalhes">${corpoHtml}</div>
+    </div>
+  `;
+
+  painel.hidden = false;
+  painel.querySelector(".fechar-detalhes").onclick = fechar;
+  painel.onclick = (evento) => {
+    if (evento.target === painel) fechar();
+  };
+}
+
 document.addEventListener("keydown", (evento) => {
   if (evento.key === "Escape") fechar();
 });

@@ -743,6 +743,19 @@ body {
   border-color: var(--texto-suave);
 }
 
+/* Sigla do estoque ao lado do nome da região no calendário de reposição, para
+   ligar "LAV/VGA/PSO" à coluna LAV da grade. */
+.sigla-da-regiao {
+  display: inline-block;
+  margin-left: 6px;
+  padding: 0 6px;
+  border-radius: 999px;
+  background: var(--plano-pagina);
+  color: var(--texto-secundario);
+  font-size: 0.82em;
+  font-weight: 650;
+}
+
 .tabela-de-prazos .coluna-data {
   font-variant-numeric: tabular-nums;
   white-space: nowrap;
