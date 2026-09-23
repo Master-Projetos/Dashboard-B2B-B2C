@@ -211,7 +211,7 @@ export function desenharPrazos(b2b) {
     // mesma coisa, na mesma tela, pareceria erro.
     { tipo: "Concluido", cor: CORES.serie3 },
     { tipo: "Urgente", cor: CORES.statusAtencao },
-    { tipo: "Atrasada", cor: CORES.statusCritico },
+    { tipo: "Atrasada", cor: CORES.serie2 },
   ];
   // Tipo de prazo novo vira chip com o nome que veio.
   for (const tipo of Object.keys(contagens)) {

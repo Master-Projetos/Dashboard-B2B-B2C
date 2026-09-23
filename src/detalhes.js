@@ -35,8 +35,7 @@ function descreverSituacao(item) {
 }
 
 // Mesmas cores dos gráficos de status: verde concluído, azul parado com outro
-// setor, amarelo o que está correndo, vermelho atrasado; cancelado fica neutro,
-// não é falha de prazo.
+// setor, amarelo o que está correndo, laranja atrasado, vermelho cancelado.
 function classeDoPrazo(item) {
   if (item.status) {
     const grupo = grupoDoProjeto(item);

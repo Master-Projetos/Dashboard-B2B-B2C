@@ -172,7 +172,10 @@ export function desenharProjetosPorMes(b2b) {
 const FAIXAS_CONHECIDAS = [
   { chave: "Não Iniciada", rotulo: "Não iniciada", cor: "serie1" },
   { chave: "Em Andamento", rotulo: "Em andamento", cor: "statusAtencao" },
+  { chave: "Atrasada", rotulo: "Atrasada", cor: "serie2" },
+  { chave: "Aguardando BP", rotulo: "Aguardando BP", cor: "lilas" },
   { chave: "Concluída", rotulo: "Concluída", cor: "serie3" },
+  { chave: "Cancelada", rotulo: "Cancelada", cor: "statusCritico" },
 ];
 
 // Status que a API passar a mandar sem estar na lista entram assim mesmo, com
