@@ -237,6 +237,15 @@ export function desenharStatus(b2b) {
 
 const ORDEM_DE_PRIORIDADE = ["Baixa", "Média", "Alta", "Atividade Crítica"];
 
+// Cada prioridade tem cor própria em vez de tons de um azul só: crítica em
+// vermelho, alta em amarelo, média em lilás e baixa em verde.
+const CORES_DA_PRIORIDADE = {
+  "Baixa": "serie3",
+  "Média": "lilas",
+  "Alta": "statusAtencao",
+  "Atividade Crítica": "statusCritico",
+};
+
 // A API passou a mandar os projetos de cada prioridade, com o solicitante em
 // cada linha. Antes o clique trocava o gráfico por uma barra de solicitantes e
 // o clique seguinte voltava — dois significados para o mesmo gesto, diferente
@@ -330,9 +339,9 @@ export function desenharPrioridade(b2b) {
     series: [{
       type: "bar",
       cursor: "pointer",
-      data: prioridades.map((nome, indice) => ({
+      data: prioridades.map((nome) => ({
         value: b2b.priority[nome],
-        itemStyle: { color: CORES.rampaPrioridade[indice], borderRadius: [4, 4, 0, 0] },
+        itemStyle: { color: CORES[CORES_DA_PRIORIDADE[nome]], borderRadius: [4, 4, 0, 0] },
       })),
       barMaxWidth: 54,
       // A faixa de fundo mostra que a coluna inteira é clicável.

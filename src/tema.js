@@ -7,7 +7,7 @@ const PALETAS = {
     serie1: "#2a78d6",
     serie2: "#eb6834",
     serie3: "#17a06f", // um passo mais escuro que o padrão, para cruzar 3:1 no branco
-    rampaPrioridade: ["#86b6ef", "#5598e7", "#2a78d6", "#1c5cab"],
+    lilas: "#9b7fd6", // prioridade média; 3,3:1 sobre branco
     gradienteArea: ["rgba(42, 120, 214, 0.28)", "rgba(42, 120, 214, 0.02)"],
 
     superficie: "#ffffff",
@@ -24,7 +24,7 @@ const PALETAS = {
     serie1: "#3987e5",
     serie2: "#d95926",
     serie3: "#199e70",
-    rampaPrioridade: ["#184f95", "#2a78d6", "#5598e7", "#86b6ef"],
+    lilas: "#a88be0",
     gradienteArea: ["rgba(57, 135, 229, 0.38)", "rgba(57, 135, 229, 0.02)"],
 
     superficie: "#151a24",
