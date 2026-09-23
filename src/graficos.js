@@ -169,10 +169,22 @@ export function desenharProjetosPorMes(b2b) {
 // Coluna status da rota status_by_region: Concluída ou Em Andamento. Vale para
 // os dois gráficos de status. Os itens unidos pelo filtro de período guardam
 // esse valor em grupoDaEquipe, porque status ali é o status real.
-const FAIXAS_DE_STATUS = [
+const FAIXAS_CONHECIDAS = [
+  { chave: "Não Iniciada", rotulo: "Não iniciada", cor: "serie1" },
   { chave: "Em Andamento", rotulo: "Em andamento", cor: "statusAtencao" },
   { chave: "Concluída", rotulo: "Concluída", cor: "serie3" },
 ];
+
+// Status que a API passar a mandar sem estar na lista entram assim mesmo, com
+// o nome que vieram — sumir com eles faria o total não bater.
+function faixasDeStatus(porStatus) {
+  const novas = Object.keys(porStatus)
+    .filter((chave) => !FAIXAS_CONHECIDAS.some((faixa) => faixa.chave === chave))
+    .map((chave) => ({ chave, rotulo: chave, cor: "lilas" }));
+
+  return [...FAIXAS_CONHECIDAS, ...novas].filter(({ chave }) =>
+    Object.values(porStatus[chave] ?? {}).some((quantidade) => quantidade > 0));
+}
 
 const statusDaEquipe = (item) => item.grupoDaEquipe ?? item.status;
 
@@ -181,7 +193,7 @@ const statusDaEquipe = (item) => item.grupoDaEquipe ?? item.status;
 // finalizadas, cancelado...) ficam na tabela de detalhes.
 export function desenharStatus(b2b) {
   const porStatus = obterContagens(b2b, DIMENSOES.equipe);
-  const faixas = FAIXAS_DE_STATUS.map((faixa) => ({
+  const faixas = faixasDeStatus(porStatus).map((faixa) => ({
     ...faixa,
     quantidade: Object.values(porStatus[faixa.chave] ?? {}).reduce((soma, valor) => soma + valor, 0),
   }));
@@ -515,14 +527,15 @@ function encurtarNomeDaEquipe(nome) {
 
 export function desenharStatusPorEquipe(b2b, quantidade = 8) {
   const porStatus = obterContagens(b2b, DIMENSOES.equipe);
+  const faixas = faixasDeStatus(porStatus);
 
   // O nome completo fica guardado: é por ele que os projetos são filtrados no
   // clique, já que o eixo mostra a versão encurtada.
-  const nomes = new Set(FAIXAS_DE_STATUS.flatMap(({ chave }) => Object.keys(porStatus[chave] ?? {})));
+  const nomes = new Set(faixas.flatMap(({ chave }) => Object.keys(porStatus[chave] ?? {})));
   const equipes = [...nomes]
     .map((nome) => {
       const equipe = { nome: encurtarNomeDaEquipe(nome), nomeCompleto: nome, total: 0 };
-      for (const { chave } of FAIXAS_DE_STATUS) {
+      for (const { chave } of faixas) {
         equipe[chave] = porStatus[chave]?.[nome] ?? 0;
         equipe.total += equipe[chave];
       }
@@ -547,7 +560,7 @@ export function desenharStatusPorEquipe(b2b, quantidade = 8) {
     legend: legendaInferior(),
     xAxis: eixoDeValor({ minInterval: 1 }),
     yAxis: eixoDeCategoria({ data: equipes.map((equipe) => equipe.nome), axisLine: { show: false } }),
-    series: FAIXAS_DE_STATUS.map(({ chave, rotulo, cor }, indice) => ({
+    series: faixas.map(({ chave, rotulo, cor }, indice) => ({
       name: rotulo,
       type: "bar",
       stack: "equipes",
@@ -555,7 +568,7 @@ export function desenharStatusPorEquipe(b2b, quantidade = 8) {
       data: equipes.map((equipe) => equipe[chave]),
       barMaxWidth: 18,
       itemStyle: { color: CORES[cor], borderColor: CORES.superficie, borderWidth: 1 },
-      label: indice === FAIXAS_DE_STATUS.length - 1
+      label: indice === faixas.length - 1
         ? rotuloDeValor({
             position: "right",
             distance: 6,
