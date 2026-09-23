@@ -200,6 +200,11 @@ body {
   padding: var(--recheio-vertical) var(--recheio-lateral);
   box-shadow: var(--sombra);
   cursor: pointer;
+  /* Sem isto o navegador dimensiona o seletor com folga de menos de 1px sobre
+     o mês mais largo: basta outra fonte ou zoom na máquina de quem olha para o
+     "mai/26" entrar embaixo da seta. 5em dá cerca de um terço de sobra sobre o
+     mês mais largo, o bastante para outra fonte de sistema. */
+  min-width: calc(5em + var(--recheio-lateral) * 2 + 12px);
   /* A seta nativa varia demais entre navegadores; esta é sempre a mesma. */
   appearance: none;
   padding-right: calc(var(--recheio-lateral) + 12px);
