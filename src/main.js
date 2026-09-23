@@ -173,8 +173,9 @@ seletorDeRegional.innerHTML = `<option value="">Todas</option>${REGIONAIS.map(
   ({ sigla, nome }) => `<option value="${sigla}">${sigla} · ${nome}</option>`,
 ).join("")}`;
 
-// Níveis ligados nos botões; vazio = todos.
-const niveisEscolhidos = new Set();
+// Níveis ligados nos botões. Começam todos ligados: a tela abre mostrando
+// tudo, e quem quer recortar desliga o que não interessa.
+const niveisEscolhidos = new Set(["critical", "alert", "ok"]);
 
 seletorDeRegional.addEventListener("change", () => desenharTelaVisivel());
 
@@ -191,9 +192,7 @@ document.getElementById("nivelDoEstoque").addEventListener("click", (evento) => 
 });
 
 function atualizarFiltroDeRegional() {
-  const noEstoque = telaVisivel() === "estoque";
-  document.getElementById("filtrosDoEstoque").hidden = !noEstoque;
-  document.getElementById("atualizacaoEstoque").hidden = !noEstoque;
+  document.getElementById("filtrosDoEstoque").hidden = telaVisivel() !== "estoque";
 }
 
 function desenharTelaEstoque() {

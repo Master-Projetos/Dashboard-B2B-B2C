@@ -97,6 +97,39 @@ export function normalizarEstoque(bruto, siglaFiltrada = "") {
   return { itens: [...porCodigo.values()], regionais, regionaisComDados, filtrada: Boolean(siglaFiltrada) };
 }
 
+// ===== Ciclo de atualização =====
+//
+// O estoque é atualizado na origem a cada 15 dias, a partir de 22/09/2026. O
+// painel conta os ciclos a partir dessa data para saber qual foi a última e
+// qual é a próxima, sem ninguém precisar mexer aqui a cada quinzena.
+const PRIMEIRA_ATUALIZACAO = Date.UTC(2026, 8, 22);
+const DIAS_ENTRE_ATUALIZACOES = 15;
+const UM_DIA_MS = 24 * 60 * 60 * 1000;
+
+// Conta em dias de calendário do lugar onde o painel está aberto: meia-noite
+// local vira meia-noite UTC, para a diferença sair sempre em dias inteiros.
+function hojeEmDias(agora) {
+  return Date.UTC(agora.getFullYear(), agora.getMonth(), agora.getDate());
+}
+
+export function cicloDeAtualizacao(agora = new Date()) {
+  const hoje = hojeEmDias(agora);
+  const ciclos = Math.max(0, Math.floor((hoje - PRIMEIRA_ATUALIZACAO) / UM_DIA_MS / DIAS_ENTRE_ATUALIZACOES));
+
+  const ultima = PRIMEIRA_ATUALIZACAO + ciclos * DIAS_ENTRE_ATUALIZACOES * UM_DIA_MS;
+  const proxima = ultima + DIAS_ENTRE_ATUALIZACOES * UM_DIA_MS;
+
+  return {
+    ultima: new Date(ultima),
+    proxima: new Date(proxima),
+    faltam: Math.round((proxima - hoje) / UM_DIA_MS),
+    atualizadoHoje: ultima === hoje,
+  };
+}
+
+const diaEMes = (data) =>
+  `${String(data.getUTCDate()).padStart(2, "0")}/${String(data.getUTCMonth() + 1).padStart(2, "0")}`;
+
 // ===== Contas da tela =====
 
 // Célula ausente é regional sem dado para o item — não é "normal", e não pode
@@ -255,8 +288,9 @@ function temNivel(item, nivel, regionais) {
 
 const DESCRICAO_DO_NIVEL = { critical: "crítico", alert: "em alerta", ok: "normal" };
 
-// `niveis` é o conjunto de níveis ligados no filtro; vazio mostra todos.
-export function desenharTabelaDeEstoque(estoque, niveis = new Set()) {
+// `niveis` é o conjunto de níveis ligados nos botões. Os três ligados é a
+// tabela inteira; nenhum ligado não mostra nada.
+export function desenharTabelaDeEstoque(estoque, niveis = new Set(Object.keys(NIVEIS))) {
   const alvo = document.getElementById("tabelaDeEstoque");
 
   if (!estoque.itens.length) {
@@ -264,7 +298,12 @@ export function desenharTabelaDeEstoque(estoque, niveis = new Set()) {
     return;
   }
 
-  const filtrando = niveis.size > 0;
+  if (!niveis.size) {
+    alvo.innerHTML = `<p class="aviso">Ligue ao menos um nível para ver os itens</p>`;
+    return;
+  }
+
+  const filtrando = niveis.size < Object.keys(NIVEIS).length;
   const itens = itensOrdenados(estoque).filter(
     (item) => !filtrando || [...niveis].some((nivel) => temNivel(item, nivel, estoque.regionais)),
   );
@@ -339,6 +378,8 @@ export function desenharIndicadoresDeEstoque(estoque) {
   const vazio = estoque.itens.length === 0;
   const comDados = estoque.regionaisComDados ?? [];
 
+  const ciclo = cicloDeAtualizacao();
+
   const cartoes = [
     {
       rotulo: "Críticos",
@@ -387,13 +428,28 @@ export function desenharIndicadoresDeEstoque(estoque) {
         },
   ];
 
+  // A data vale mesmo sem dado da API: é do calendário, não do estoque.
+  cartoes.push({
+    rotulo: "Próxima atualização",
+    valor: diaEMes(ciclo.proxima),
+    detalhe: ciclo.atualizadoHoje
+      ? `atualizado hoje · a cada ${DIAS_ENTRE_ATUALIZACOES} dias`
+      : `em ${ciclo.faltam} ${ciclo.faltam === 1 ? "dia" : "dias"} · última em ${diaEMes(ciclo.ultima)}`,
+    realce: CORES.serie1,
+    texto: true,
+    semprePreenchido: true,
+  });
+
   document.getElementById("indicadoresEstoque").innerHTML = cartoes
-    .map(({ rotulo, valor, detalhe, realce, texto }) => `
-      <div class="indicador${vazio ? " aguardando" : ""}" style="--realce: ${realce}">
-        <div class="rotulo">${rotulo}</div>
-        <div class="valor">${vazio ? "—" : texto ? escapar(valor) : formatarNumero(valor)}</div>
-        <div class="detalhe">${vazio ? "aguardando a rota de estoque" : escapar(detalhe)}</div>
-      </div>
-    `)
+    .map(({ rotulo, valor, detalhe, realce, texto, semprePreenchido }) => {
+      const esperando = vazio && !semprePreenchido;
+      return `
+        <div class="indicador${esperando ? " aguardando" : ""}" style="--realce: ${realce}">
+          <div class="rotulo">${rotulo}</div>
+          <div class="valor">${esperando ? "—" : texto ? escapar(valor) : formatarNumero(valor)}</div>
+          <div class="detalhe">${esperando ? "aguardando a rota de estoque" : escapar(detalhe)}</div>
+        </div>
+      `;
+    })
     .join("");
 }
