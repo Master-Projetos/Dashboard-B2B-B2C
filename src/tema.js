@@ -56,18 +56,18 @@ export const CORES = { ...PALETAS[TEMA_PADRAO], ...CORES_DE_ESTADO };
 // Cor de cada barra do gráfico "Projetos por status". Status que não estiver
 // aqui sai em azul (serie1). Vale nome da paleta ou hex.
 export const CORES_DOS_STATUS = {
-  "Aguardando BP": "#2a78d6",
-  "Ativado": "#2a78d6",
-  "Pendencia Comercial": "#2a78d6",
-  "Inviabilidade Técnica": "#2a78d6",
-  "Configuração": "#2a78d6",
-  "Estudo": "#2a78d6",
+  "Aguardando BP": "#d95926",
+  Ativado: "#199e70",
+  "Pendencia Comercial": "#fab219",
+  "Inviabilidade Técnica": "#d03b3b",
+  Configuração: "#2a78d6",
+  Estudo: "#2a78d6",
   "Estudo Técnico": "#2a78d6",
-  "Vistoria": "#2a78d6",
-  "Execução": "#2a78d6",
-  "Estoque B2B": "#2a78d6",
-  "BP - Não Aprovado": "#2a78d6",
-  "Cancelada": "#d03b3b",
+  Vistoria: "#2a78d6",
+  Execução: "#2a78d6",
+  "Estoque B2B": "#fab219",
+  "BP - Não Aprovado": "#d03b3b",
+  Cancelada: "#d03b3b",
 };
 
 // As listas de cor por categoria (status, prioridade, prazo) aceitam o nome de
