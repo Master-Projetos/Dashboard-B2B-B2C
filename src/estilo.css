@@ -577,6 +577,12 @@ body {
   cursor: pointer;
 }
 
+/* Célula de outro nível quando há filtro: vazia e sem cor, para só o nível
+   escolhido aparecer. */
+.grade-de-estoque .celula-fora-do-filtro {
+  background: none;
+}
+
 /* A célula aberta fica marcada para se saber de onde a caixa saiu. */
 .grade-de-estoque .celula-aberta {
   outline: 2px solid var(--serie-1);

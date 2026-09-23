@@ -245,7 +245,17 @@ document.addEventListener("keydown", (evento) => {
   if (evento.key === "Escape") fecharDica();
 });
 
-export function desenharTabelaDeEstoque(estoque) {
+// O filtro de nível escolhe quais itens entram na tabela — basta uma regional
+// visível naquele nível — e, dentro da linha, só as células daquele nível
+// mostram número. As outras ficam vazias: filtrando "Críticos", ver ao lado
+// uma regional normal só atrapalha a leitura.
+function temNivel(item, nivel, regionais) {
+  return regionais.some(({ sigla }) => celula(item, sigla)?.nivel === nivel);
+}
+
+const DESCRICAO_DO_NIVEL = { critical: "crítico", alert: "em alerta", ok: "normal" };
+
+export function desenharTabelaDeEstoque(estoque, nivelFiltrado = "") {
   const alvo = document.getElementById("tabelaDeEstoque");
 
   if (!estoque.itens.length) {
@@ -253,7 +263,14 @@ export function desenharTabelaDeEstoque(estoque) {
     return;
   }
 
-  const itens = itensOrdenados(estoque);
+  const itens = itensOrdenados(estoque).filter(
+    (item) => !nivelFiltrado || temNivel(item, nivelFiltrado, estoque.regionais),
+  );
+
+  if (!itens.length) {
+    alvo.innerHTML = `<p class="aviso">Nenhum item ${DESCRICAO_DO_NIVEL[nivelFiltrado]}${estoque.filtrada ? " nesta regional" : ""}</p>`;
+    return;
+  }
 
   // As colunas são as regionais visíveis: com filtro, uma só — e as outras não
   // podem aparecer como zero, que é como regional sem dado é mostrada.
@@ -264,6 +281,9 @@ export function desenharTabelaDeEstoque(estoque) {
     .map((item) => {
       const celulas = estoque.regionais.map(({ sigla, nome }) => {
         const dados = celula(item, sigla);
+        const nivelDaCelula = dados?.nivel ?? "ok";
+        if (nivelFiltrado && nivelDaCelula !== nivelFiltrado) return `<td class="celula-fora-do-filtro"></td>`;
+
         // Regional que a API não devolveu conta como zero — é o que ela
         // significa no estoque, e um traço só faria a coluna parecer quebrada.
         const classe = dados ? NIVEIS[dados.nivel].classe : "nivel-normal";

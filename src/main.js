@@ -173,10 +173,13 @@ seletorDeRegional.innerHTML = `<option value="">Todas</option>${REGIONAIS.map(
   ({ sigla, nome }) => `<option value="${sigla}">${sigla} · ${nome}</option>`,
 ).join("")}`;
 
+const seletorDeNivel = document.getElementById("nivelDoEstoque");
+
 seletorDeRegional.addEventListener("change", () => desenharTelaVisivel());
+seletorDeNivel.addEventListener("change", () => desenharTelaVisivel());
 
 function atualizarFiltroDeRegional() {
-  document.getElementById("filtroDeRegional").hidden = telaVisivel() !== "estoque";
+  document.getElementById("filtrosDoEstoque").hidden = telaVisivel() !== "estoque";
 }
 
 function desenharTelaEstoque() {
@@ -184,7 +187,7 @@ function desenharTelaEstoque() {
   const estoque = normalizarEstoque(dadosDeEstoque, seletorDeRegional.value);
 
   desenharIndicadoresDeEstoque(estoque);
-  desenharTabelaDeEstoque(estoque);
+  desenharTabelaDeEstoque(estoque, seletorDeNivel.value);
 
   if (!estoque.itens.length) {
     mostrarAvisoNoGrafico("graficoEstoquePorRegional", "Estoque ainda não publicado pela API");

@@ -477,6 +477,10 @@ export function desenharEstoquePorRegional(porRegional) {
   const maiorTotal = Math.max(1, ...regionais.map((r) => r.criticos + r.alertas + r.normais));
 
   desenhar("graficoEstoquePorRegional", {
+    // Barra empilhada crescendo do zero mostra buracos entre as faixas no meio
+    // da animação, e a tela redesenha a cada minuto e a cada filtro: parecia
+    // defeito. Sem animação, as faixas já nascem coladas.
+    animation: false,
     grid: { top: 6, right: 10, bottom: 26, left: 4, containLabel: true },
     tooltip: dicaDeContexto({
       trigger: "axis",

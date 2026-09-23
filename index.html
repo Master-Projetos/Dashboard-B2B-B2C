@@ -27,9 +27,16 @@
         <button type="button" id="limparPeriodo" hidden>limpar</button>
       </div>
 
-      <div id="filtroDeRegional" class="controles-do-cabecalho" hidden>
+      <div id="filtrosDoEstoque" class="controles-do-cabecalho" hidden>
         <label for="regionalDoEstoque">Regional</label>
         <select id="regionalDoEstoque"></select>
+        <label for="nivelDoEstoque">Nível</label>
+        <select id="nivelDoEstoque">
+          <option value="">Todos</option>
+          <option value="critical">Críticos</option>
+          <option value="alert">Em alerta</option>
+          <option value="ok">Normais</option>
+        </select>
       </div>
 
       <div id="prazos" class="prazos"></div>
