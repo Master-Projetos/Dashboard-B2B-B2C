@@ -743,6 +743,11 @@ body {
   border-color: var(--texto-suave);
 }
 
+.tabela-de-prazos .coluna-data {
+  font-variant-numeric: tabular-nums;
+  white-space: nowrap;
+}
+
 .tabela-de-prazos .coluna-valor {
   font-variant-numeric: tabular-nums;
   white-space: nowrap;
@@ -773,7 +778,7 @@ body {
   border: 1px solid var(--borda);
   border-radius: var(--raio);
   box-shadow: 0 12px 40px rgba(0, 0, 0, 0.3);
-  width: min(880px, 100%);
+  width: min(1120px, 100%); /* duas colunas de data a mais */
   max-height: 100%;
   display: flex;
   flex-direction: column;

@@ -12,6 +12,14 @@ function escapar(texto) {
 
 const semPrazo = (item) => item.remaining_days === null || item.remaining_days === undefined;
 
+// "2026-09-22" → "22/09/26". Sem data, devolve undefined para a coluna sumir
+// quando nenhum item da lista tiver aquela data.
+function formatarData(texto) {
+  if (!/^\d{4}-\d{2}-\d{2}/.test(texto ?? "")) return undefined;
+  const [ano, mes, dia] = texto.slice(0, 10).split("-");
+  return `${dia}/${mes}/${ano.slice(2)}`;
+}
+
 // O prazo sozinho dizia "Concluído" para 184 dos 188 projetos, inclusive os
 // cancelados e os que estão só esperando outro setor. Com o status na mão, a
 // coluna conta a mesma história do gráfico de status.
@@ -50,6 +58,10 @@ const COLUNAS = [
   { titulo: "Solicitante", ler: (item) => item.requester },
   { titulo: "Regional", ler: (item) => String(item.region ?? "").replace("Regional - ", ""), sempre: true },
   { titulo: "Setor", ler: (item) => item.sector, sempre: true },
+  // Fim é o fim previsto da etapa: para quem ainda tem prazo aberto, é a data
+  // do prazo que a coluna Situação conta em dias.
+  { titulo: "Início", classe: () => "coluna-data", ler: (item) => formatarData(item.start_date) },
+  { titulo: "Fim", classe: () => "coluna-data", ler: (item) => formatarData(item.end_date) },
   // O gráfico agrupa os doze status em três; aqui aparece o status real, que
   // é o que some ao agrupar.
   { titulo: "Status", ler: (item) => item.status },
