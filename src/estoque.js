@@ -102,34 +102,53 @@ function descreverJanela(janela) {
   return janela.inicio === janela.fim ? diaEMesTexto(janela.inicio) : `${diaEMesTexto(janela.inicio)} a ${diaEMesTexto(janela.fim)}`;
 }
 
-// Cartão "Próxima reposição": a mais próxima de todas as regiões, ou da
-// regional escolhida no filtro.
-function cartaoDeReposicao(reposicao, estoque) {
-  const base = { rotulo: "Próxima reposição", realce: CORES.serie3, texto: true, semprePreenchido: true, acao: "calendario-de-reposicao" };
-  if (!reposicao?.length) return { ...base, valor: "—", detalhe: "calendário ainda não carregado", acao: null };
+// Lista embaixo do gráfico por regional: a próxima janela de cada região, da
+// mais próxima para a mais distante; sem data marcada vai para o fim. Com uma
+// regional no filtro, só ela — igual ao resto da tela.
+export function desenharReposicao(reposicao, estoque) {
+  const alvo = document.getElementById("listaDeReposicao");
+  const cartao = document.getElementById("cartaoDeReposicao");
+
+  if (!reposicao?.length) {
+    alvo.innerHTML = `<p class="aviso">Calendário ainda não carregado</p>`;
+    cartao.onclick = null;
+    return;
+  }
+
+  cartao.onclick = () => abrirCalendarioDeReposicao(reposicao);
 
   const hoje = hojeLocal();
   const siglaFiltrada = estoque.filtrada ? estoque.regionais[0].sigla : null;
   const regioes = siglaFiltrada ? reposicao.filter((regiao) => regiao.sigla === siglaFiltrada) : reposicao;
 
-  if (siglaFiltrada && !regioes.length) {
-    return { ...base, valor: "—", detalhe: `sem calendário para ${siglaFiltrada}` };
+  if (!regioes.length) {
+    alvo.innerHTML = `<p class="aviso">Sem calendário de reposição para ${siglaFiltrada}</p>`;
+    return;
   }
 
-  const janela = proximaJanela(regioes, hoje);
-  if (!janela) {
-    // Sem data marcada, mas a planilha pode dizer "A DEFINIR" num mês à frente.
-    const aDefinir = regioes.some((regiao) => regiao.meses.some((mes) => /definir/i.test(mes.texto ?? "")));
-    return { ...base, valor: aDefinir ? "A definir" : "—", detalhe: aDefinir ? "data ainda não marcada" : "nenhuma agendada" };
-  }
+  const linhas = regioes
+    .map((regiao) => {
+      const janela = proximaJanela([regiao], hoje);
+      const aDefinir = !janela && regiao.meses.some((mes) => /definir/i.test(mes.texto ?? ""));
+      return { regiao, janela, aDefinir };
+    })
+    .sort((uma, outra) => (uma.janela?.inicio ?? "9999").localeCompare(outra.janela?.inicio ?? "9999"));
 
-  const faltam = diasAte(janela.inicio, hoje);
-  const quando = faltam <= 0 ? "acontecendo agora" : `em ${faltam} ${faltam === 1 ? "dia" : "dias"}`;
-  return {
-    ...base,
-    valor: descreverJanela(janela),
-    detalhe: siglaFiltrada ? quando : `${janela.regiao.sigla ?? janela.regiao.nome} · ${quando}`,
-  };
+  const primeira = linhas.find((linha) => linha.janela)?.janela;
+
+  alvo.innerHTML = `<div class="lista-de-reposicao">${linhas
+    .map(({ regiao, janela, aDefinir }) => {
+      const nome = escapar(regiao.sigla ?? regiao.nome);
+      const titulo = escapar(regiao.nome);
+      if (!janela) {
+        return `<span class="regiao" title="${titulo}">${nome}</span><span class="sem-data">${aDefinir ? "a definir" : "sem data"}</span><span></span>`;
+      }
+      const faltam = diasAte(janela.inicio, hoje);
+      const falta = faltam <= 0 ? "agora" : `em ${faltam} ${faltam === 1 ? "dia" : "dias"}`;
+      const destaque = janela === primeira ? " proxima" : "";
+      return `<span class="regiao" title="${titulo}">${nome}</span><span class="quando${destaque}">${descreverJanela(janela)}</span><span class="falta">${falta}</span>`;
+    })
+    .join("")}</div>`;
 }
 
 function abrirCalendarioDeReposicao(reposicao) {
@@ -477,7 +496,7 @@ export function desenharTabelaDeEstoque(estoque, niveis = new Set(Object.keys(NI
 
 // Azul para o que é só contagem, amarelo/laranja/vermelho conforme a gravidade.
 // Verde fica reservado à tela B2C.
-export function desenharIndicadoresDeEstoque(estoque, reposicao = []) {
+export function desenharIndicadoresDeEstoque(estoque) {
   const contagem = contarNiveis(estoque);
   const porRegional = contarPorRegional(estoque);
   const pior = [...porRegional].sort((um, outro) => outro.criticos - um.criticos || outro.alertas - um.alertas)[0];
@@ -547,15 +566,11 @@ export function desenharIndicadoresDeEstoque(estoque, reposicao = []) {
     semprePreenchido: true,
   });
 
-  cartoes.push(cartaoDeReposicao(reposicao, estoque));
-
-  const container = document.getElementById("indicadoresEstoque");
-  container.innerHTML = cartoes
-    .map(({ rotulo, valor, detalhe, realce, texto, semprePreenchido, acao }) => {
+  document.getElementById("indicadoresEstoque").innerHTML = cartoes
+    .map(({ rotulo, valor, detalhe, realce, texto, semprePreenchido }) => {
       const esperando = vazio && !semprePreenchido;
-      const clicavel = acao ? ` clicavel" data-acao="${acao}" title="Ver o calendário` : "";
       return `
-        <div class="indicador${esperando ? " aguardando" : ""}${clicavel}" style="--realce: ${realce}">
+        <div class="indicador${esperando ? " aguardando" : ""}" style="--realce: ${realce}">
           <div class="rotulo">${rotulo}</div>
           <div class="valor">${esperando ? "—" : texto ? escapar(valor) : formatarNumero(valor)}</div>
           <div class="detalhe">${esperando ? "aguardando a rota de estoque" : escapar(detalhe)}</div>
@@ -563,7 +578,4 @@ export function desenharIndicadoresDeEstoque(estoque, reposicao = []) {
       `;
     })
     .join("");
-
-  const cartaoDoCalendario = container.querySelector('[data-acao="calendario-de-reposicao"]');
-  if (cartaoDoCalendario) cartaoDoCalendario.onclick = () => abrirCalendarioDeReposicao(reposicao);
 }

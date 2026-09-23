@@ -525,9 +525,61 @@ body {
    fica na coluna estreita ao lado. */
 .grade-estoque {
   /* O resumo por regional são cinco barras: não precisa de um terço da tela.
-     O espaço vai para a lista, que é o que se lê de longe. */
-  grid-template-columns: minmax(0, 1fr) clamp(200px, 19vw, 300px);
-  grid-template-rows: minmax(0, 1fr);
+     O espaço vai para a lista, que é o que se lê de longe. Na coluna estreita,
+     o gráfico em cima e as próximas reposições embaixo. */
+  grid-template-columns: minmax(0, 1fr) clamp(220px, 20vw, 320px);
+  grid-template-rows: minmax(0, 1fr) auto;
+}
+
+.grade-estoque > .cartao:first-child {
+  grid-row: span 2;
+}
+
+.cartao-de-reposicao {
+  cursor: pointer;
+}
+
+.cartao-de-reposicao:hover {
+  border-color: var(--texto-suave);
+}
+
+.lista-de-reposicao {
+  display: grid;
+  grid-template-columns: auto 1fr auto;
+  gap: clamp(3px, 0.6vh, 7px) 8px;
+  align-items: baseline;
+  font-size: clamp(11px, 1.35vh, 15px);
+}
+
+.lista-de-reposicao .regiao {
+  font-weight: 700;
+  color: var(--texto-primario);
+  white-space: nowrap;
+}
+
+.lista-de-reposicao .quando {
+  font-variant-numeric: tabular-nums;
+  font-weight: 650;
+  color: var(--texto-primario);
+  white-space: nowrap;
+}
+
+.lista-de-reposicao .falta {
+  color: var(--texto-suave);
+  font-size: 0.9em;
+  white-space: nowrap;
+  text-align: right;
+}
+
+/* A mais próxima de todas ganha destaque: é a que vale acompanhar. */
+.lista-de-reposicao .proxima {
+  color: var(--texto-concluido);
+}
+
+.lista-de-reposicao .sem-data {
+  color: var(--texto-suave);
+  font-weight: 550;
+  font-style: italic;
 }
 
 /* A página não rola, mas a lista de itens pode ser longa: a rolagem vive

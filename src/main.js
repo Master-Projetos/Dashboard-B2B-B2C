@@ -26,6 +26,7 @@ import {
   contarPorRegional,
   desenharIndicadoresDeEstoque,
   desenharTabelaDeEstoque,
+  desenharReposicao,
 } from "./estoque.js";
 
 const INTERVALO_ATUALIZACAO_B2B_MS = 60 * 1000; // rota rápida: recarregada a cada minuto
@@ -207,7 +208,8 @@ function desenharTelaEstoque() {
   desenharPrazos(null); // os prazos são do B2B
   const estoque = normalizarEstoque(dadosDeEstoque, seletorDeRegional.value);
 
-  desenharIndicadoresDeEstoque(estoque, normalizarReposicao(dadosDeReposicao));
+  desenharIndicadoresDeEstoque(estoque);
+  desenharReposicao(normalizarReposicao(dadosDeReposicao), estoque);
   desenharTabelaDeEstoque(estoque, niveisEscolhidos);
 
   if (!estoque.itens.length) {
