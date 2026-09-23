@@ -14,6 +14,7 @@
   --texto-suave: #7b7a75;
 
   --serie-1: #2a78d6;
+  --serie-3: #17a06f;
   --status-bom: #0ca30c;
   /* Tons próprios para texto: os --status-* são calibrados como marcador e
      ficam fracos demais em texto miúdo sobre branco (o âmbar dá 1,8:1). */
@@ -56,6 +57,7 @@
   --texto-suave: #8b93a3;
 
   --serie-1: #3987e5;
+  --serie-3: #199e70;
   --texto-concluido: #3fbf5f;
   --texto-em-aberto: #fab219;
 
@@ -237,7 +239,64 @@ body {
 
 /* Mesma pílula dos seletores ao lado, só que discreta: é uma saída, não uma
    escolha. O ✕ vem do CSS para o botão não depender de fonte de ícone. */
-.controles-do-cabecalho button {
+/* Rótulo que não é <label>: o grupo de botões de nível não é um campo só. */
+.rotulo-de-grupo {
+  color: var(--texto-suave);
+}
+
+/* Nível do estoque: botões liga/desliga, dá para escolher mais de um. Nenhum
+   ligado = todos. Botão cresce com o próprio texto, então não corta como o
+   seletor cortava "Em alerta". */
+.alternadores-de-nivel {
+  display: flex;
+  gap: 4px;
+}
+
+.alternadores-de-nivel button {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font: inherit;
+  font-size: var(--fonte-detalhe);
+  font-weight: 650;
+  letter-spacing: 0.5px;
+  color: var(--texto-suave);
+  background: transparent;
+  border: 1px solid var(--borda);
+  border-radius: 999px;
+  padding: var(--recheio-vertical) calc(var(--recheio-lateral) - 4px);
+  cursor: pointer;
+  white-space: nowrap;
+}
+
+.alternadores-de-nivel button::before {
+  content: "";
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  background: var(--marcador);
+  opacity: 0.55;
+}
+
+.alternadores-de-nivel button:hover {
+  color: var(--texto-primario);
+  border-color: var(--texto-suave);
+}
+
+/* Ligado: preenchido como os outros controles do cabeçalho, com o contorno na
+   cor do nível para se ver de longe o que está filtrando. */
+.alternadores-de-nivel button[aria-pressed="true"] {
+  color: var(--texto-primario);
+  background: var(--superficie);
+  border-color: var(--marcador);
+  box-shadow: var(--sombra), inset 0 0 0 1px var(--marcador);
+}
+
+.alternadores-de-nivel button[aria-pressed="true"]::before {
+  opacity: 1;
+}
+
+.controles-do-cabecalho .botao-limpar {
   display: flex;
   align-items: center;
   gap: 5px;
@@ -253,13 +312,13 @@ body {
   cursor: pointer;
 }
 
-.controles-do-cabecalho button::before {
+.controles-do-cabecalho .botao-limpar::before {
   content: "✕";
   font-size: 0.85em;
   line-height: 1;
 }
 
-.controles-do-cabecalho button:hover {
+.controles-do-cabecalho .botao-limpar:hover {
   color: var(--texto-primario);
   border-color: var(--texto-suave);
   background: var(--superficie);
@@ -268,18 +327,18 @@ body {
 /* No escuro o botão vazado sumia contra o fundo da página. Preenchido com a
    cor de superfície ele volta a parecer botão, sem roubar a atenção da aba
    ativa, que é a única coisa azul do cabeçalho. */
-:root[data-tema="escuro"] .controles-do-cabecalho button {
+:root[data-tema="escuro"] .controles-do-cabecalho .botao-limpar {
   color: var(--texto-primario);
   background: var(--superficie);
   border-color: rgba(255, 255, 255, 0.22);
 }
 
-:root[data-tema="escuro"] .controles-do-cabecalho button:hover {
+:root[data-tema="escuro"] .controles-do-cabecalho .botao-limpar:hover {
   background: var(--superficie-topo);
   border-color: var(--texto-secundario);
 }
 
-.controles-do-cabecalho button[hidden] {
+.controles-do-cabecalho .botao-limpar[hidden] {
   display: none;
 }
 

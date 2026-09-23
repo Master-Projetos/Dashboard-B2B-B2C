@@ -2,23 +2,23 @@
   "summary": {
     "total_items": 31,
     "total_sites": 5,
-    "alert_rows": 102,
-    "critical_alert_rows": 92
+    "alert_rows": 99,
+    "critical_alert_rows": 72
   },
   "alerts_by_site": {
     "alert": {
       "CD": 0,
-      "LAV": 3,
-      "MOC": 1,
-      "TAU": 1,
-      "UNA": 5
+      "LAV": 5,
+      "MOC": 9,
+      "TAU": 5,
+      "UNA": 8
     },
     "critical_alert": {
       "CD": 2,
-      "LAV": 20,
-      "MOC": 25,
-      "TAU": 25,
-      "UNA": 20
+      "LAV": 17,
+      "MOC": 17,
+      "TAU": 21,
+      "UNA": 15
     },
     "no_minimum": {
       "CD": 2,
@@ -29,10 +29,10 @@
     },
     "ok": {
       "CD": 27,
-      "LAV": 6,
+      "LAV": 7,
       "MOC": 3,
       "TAU": 3,
-      "UNA": 4
+      "UNA": 6
     }
   },
   "items": [
@@ -453,7 +453,7 @@
       "safe_stock": 3,
       "balance": 2,
       "alert": true,
-      "critical_alert": true,
+      "critical_alert": false,
       "total": 11
     },
     {
@@ -477,7 +477,7 @@
       "safe_stock": 13,
       "balance": 10,
       "alert": true,
-      "critical_alert": true,
+      "critical_alert": false,
       "total": 189
     },
     {
@@ -692,7 +692,7 @@
       "min_stock": 3,
       "safe_stock": 4,
       "balance": 4,
-      "alert": true,
+      "alert": false,
       "critical_alert": false,
       "total": 20
     },
@@ -753,7 +753,7 @@
       "safe_stock": 72,
       "balance": 55,
       "alert": true,
-      "critical_alert": true,
+      "critical_alert": false,
       "total": 283
     },
     {
@@ -933,7 +933,7 @@
       "safe_stock": 0,
       "balance": 0,
       "alert": true,
-      "critical_alert": true,
+      "critical_alert": false,
       "total": 133
     },
     {
@@ -957,7 +957,7 @@
       "safe_stock": 4,
       "balance": 3,
       "alert": true,
-      "critical_alert": true,
+      "critical_alert": false,
       "total": 17
     },
     {
@@ -969,7 +969,7 @@
       "safe_stock": 3,
       "balance": 2,
       "alert": true,
-      "critical_alert": true,
+      "critical_alert": false,
       "total": 9
     },
     {
@@ -1089,7 +1089,7 @@
       "safe_stock": 3,
       "balance": 2,
       "alert": true,
-      "critical_alert": true,
+      "critical_alert": false,
       "total": 28
     },
     {
@@ -1196,7 +1196,7 @@
       "min_stock": 2,
       "safe_stock": 3,
       "balance": 3,
-      "alert": true,
+      "alert": false,
       "critical_alert": false,
       "total": 11
     },
@@ -1220,7 +1220,7 @@
       "min_stock": 10,
       "safe_stock": 13,
       "balance": 13,
-      "alert": true,
+      "alert": false,
       "critical_alert": false,
       "total": 189
     },
@@ -1257,7 +1257,7 @@
       "safe_stock": 3900,
       "balance": 3000,
       "alert": true,
-      "critical_alert": true,
+      "critical_alert": false,
       "total": 23917
     },
     {
@@ -1269,7 +1269,7 @@
       "safe_stock": 106,
       "balance": 81,
       "alert": true,
-      "critical_alert": true,
+      "critical_alert": false,
       "total": 369
     },
     {
@@ -1377,7 +1377,7 @@
       "safe_stock": 2,
       "balance": 1,
       "alert": true,
-      "critical_alert": true,
+      "critical_alert": false,
       "total": 7
     },
     {
@@ -1461,7 +1461,7 @@
       "safe_stock": 3,
       "balance": 2,
       "alert": true,
-      "critical_alert": true,
+      "critical_alert": false,
       "total": 28
     },
     {
@@ -1473,7 +1473,7 @@
       "safe_stock": 3,
       "balance": 2,
       "alert": true,
-      "critical_alert": true,
+      "critical_alert": false,
       "total": 16
     },
     {
@@ -1569,7 +1569,7 @@
       "safe_stock": 3,
       "balance": 2,
       "alert": true,
-      "critical_alert": true,
+      "critical_alert": false,
       "total": 11
     },
     {
@@ -1593,7 +1593,7 @@
       "safe_stock": 13,
       "balance": 10,
       "alert": true,
-      "critical_alert": true,
+      "critical_alert": false,
       "total": 189
     },
     {
@@ -1605,7 +1605,7 @@
       "safe_stock": 175,
       "balance": 134,
       "alert": true,
-      "critical_alert": true,
+      "critical_alert": false,
       "total": 758
     },
     {
@@ -1749,7 +1749,7 @@
       "safe_stock": 2,
       "balance": 1,
       "alert": true,
-      "critical_alert": true,
+      "critical_alert": false,
       "total": 7
     },
     {
@@ -1761,7 +1761,7 @@
       "safe_stock": 372,
       "balance": 286,
       "alert": true,
-      "critical_alert": true,
+      "critical_alert": false,
       "total": 9890
     },
     {
@@ -1785,7 +1785,7 @@
       "safe_stock": 312,
       "balance": 240,
       "alert": true,
-      "critical_alert": true,
+      "critical_alert": false,
       "total": 1591
     },
     {
@@ -1845,7 +1845,7 @@
       "safe_stock": 3,
       "balance": 2,
       "alert": true,
-      "critical_alert": true,
+      "critical_alert": false,
       "total": 16
     },
     {
@@ -1869,7 +1869,7 @@
       "safe_stock": 72,
       "balance": 55,
       "alert": true,
-      "critical_alert": true,
+      "critical_alert": false,
       "total": 283
     },
     {

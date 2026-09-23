@@ -173,13 +173,27 @@ seletorDeRegional.innerHTML = `<option value="">Todas</option>${REGIONAIS.map(
   ({ sigla, nome }) => `<option value="${sigla}">${sigla} · ${nome}</option>`,
 ).join("")}`;
 
-const seletorDeNivel = document.getElementById("nivelDoEstoque");
+// Níveis ligados nos botões; vazio = todos.
+const niveisEscolhidos = new Set();
 
 seletorDeRegional.addEventListener("change", () => desenharTelaVisivel());
-seletorDeNivel.addEventListener("change", () => desenharTelaVisivel());
+
+document.getElementById("nivelDoEstoque").addEventListener("click", (evento) => {
+  const botao = evento.target.closest("button[data-nivel]");
+  if (!botao) return;
+
+  const nivel = botao.dataset.nivel;
+  if (niveisEscolhidos.has(nivel)) niveisEscolhidos.delete(nivel);
+  else niveisEscolhidos.add(nivel);
+
+  botao.setAttribute("aria-pressed", String(niveisEscolhidos.has(nivel)));
+  desenharTelaVisivel();
+});
 
 function atualizarFiltroDeRegional() {
-  document.getElementById("filtrosDoEstoque").hidden = telaVisivel() !== "estoque";
+  const noEstoque = telaVisivel() === "estoque";
+  document.getElementById("filtrosDoEstoque").hidden = !noEstoque;
+  document.getElementById("atualizacaoEstoque").hidden = !noEstoque;
 }
 
 function desenharTelaEstoque() {
@@ -187,7 +201,7 @@ function desenharTelaEstoque() {
   const estoque = normalizarEstoque(dadosDeEstoque, seletorDeRegional.value);
 
   desenharIndicadoresDeEstoque(estoque);
-  desenharTabelaDeEstoque(estoque, seletorDeNivel.value);
+  desenharTabelaDeEstoque(estoque, niveisEscolhidos);
 
   if (!estoque.itens.length) {
     mostrarAvisoNoGrafico("graficoEstoquePorRegional", "Estoque ainda não publicado pela API");

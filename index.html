@@ -24,19 +24,18 @@
         <select id="periodoInicio"></select>
         <label for="periodoFim">até</label>
         <select id="periodoFim"></select>
-        <button type="button" id="limparPeriodo" hidden>limpar</button>
+        <button type="button" id="limparPeriodo" class="botao-limpar" hidden>limpar</button>
       </div>
 
       <div id="filtrosDoEstoque" class="controles-do-cabecalho" hidden>
         <label for="regionalDoEstoque">Regional</label>
         <select id="regionalDoEstoque"></select>
-        <label for="nivelDoEstoque">Nível</label>
-        <select id="nivelDoEstoque">
-          <option value="">Todos</option>
-          <option value="critical">Críticos</option>
-          <option value="alert">Em alerta</option>
-          <option value="ok">Normais</option>
-        </select>
+        <span class="rotulo-de-grupo" id="rotuloDoNivel">Nível</span>
+        <div id="nivelDoEstoque" class="alternadores-de-nivel" role="group" aria-labelledby="rotuloDoNivel">
+          <button type="button" data-nivel="critical" aria-pressed="false" style="--marcador: var(--status-critico)">Críticos</button>
+          <button type="button" data-nivel="alert" aria-pressed="false" style="--marcador: var(--status-atencao)">Em alerta</button>
+          <button type="button" data-nivel="ok" aria-pressed="false" style="--marcador: var(--serie-3)">Normais</button>
+        </div>
       </div>
 
       <div id="prazos" class="prazos"></div>
@@ -44,6 +43,7 @@
       <div class="atualizacoes">
         <span id="atualizacaoB2b">B2B —</span>
         <span id="atualizacaoViabilidade">Viabilidade —</span>
+        <span id="atualizacaoEstoque" hidden>Estoque: dados atualizados a cada 15 dias</span>
       </div>
     </header>
 

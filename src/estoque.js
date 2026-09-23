@@ -255,7 +255,8 @@ function temNivel(item, nivel, regionais) {
 
 const DESCRICAO_DO_NIVEL = { critical: "crítico", alert: "em alerta", ok: "normal" };
 
-export function desenharTabelaDeEstoque(estoque, nivelFiltrado = "") {
+// `niveis` é o conjunto de níveis ligados no filtro; vazio mostra todos.
+export function desenharTabelaDeEstoque(estoque, niveis = new Set()) {
   const alvo = document.getElementById("tabelaDeEstoque");
 
   if (!estoque.itens.length) {
@@ -263,12 +264,14 @@ export function desenharTabelaDeEstoque(estoque, nivelFiltrado = "") {
     return;
   }
 
+  const filtrando = niveis.size > 0;
   const itens = itensOrdenados(estoque).filter(
-    (item) => !nivelFiltrado || temNivel(item, nivelFiltrado, estoque.regionais),
+    (item) => !filtrando || [...niveis].some((nivel) => temNivel(item, nivel, estoque.regionais)),
   );
 
   if (!itens.length) {
-    alvo.innerHTML = `<p class="aviso">Nenhum item ${DESCRICAO_DO_NIVEL[nivelFiltrado]}${estoque.filtrada ? " nesta regional" : ""}</p>`;
+    const descricao = [...niveis].map((nivel) => DESCRICAO_DO_NIVEL[nivel]).join(" ou ");
+    alvo.innerHTML = `<p class="aviso">Nenhum item ${descricao}${estoque.filtrada ? " nesta regional" : ""}</p>`;
     return;
   }
 
@@ -282,7 +285,7 @@ export function desenharTabelaDeEstoque(estoque, nivelFiltrado = "") {
       const celulas = estoque.regionais.map(({ sigla, nome }) => {
         const dados = celula(item, sigla);
         const nivelDaCelula = dados?.nivel ?? "ok";
-        if (nivelFiltrado && nivelDaCelula !== nivelFiltrado) return `<td class="celula-fora-do-filtro"></td>`;
+        if (filtrando && !niveis.has(nivelDaCelula)) return `<td class="celula-fora-do-filtro"></td>`;
 
         // Regional que a API não devolveu conta como zero — é o que ela
         // significa no estoque, e um traço só faria a coluna parecer quebrada.
