@@ -6,13 +6,13 @@
 // sozinho numa TV nunca para nela.
 export const TELAS = [
   { id: "b2b", titulo: "Projetos B2B", rotulo: "B2B", entraNoRodizio: true },
-  { id: "estoque", titulo: "Estoque", rotulo: "Estoque", entraNoRodizio: false },
+  { id: "estoque", titulo: "Estoque", rotulo: "Estoque", entraNoRodizio: true },
   { id: "b2c", titulo: "Viabilidade B2C", rotulo: "B2C", entraNoRodizio: true },
 ];
 
 const TELAS_DO_RODIZIO = TELAS.filter((tela) => tela.entraNoRodizio);
 
-const INTERVALO_DE_RODIZIO_MS = 5 * 60 * 1000;
+const INTERVALO_DE_RODIZIO_MS = 2 * 60 * 1000;
 
 let telaAtual = TELAS[0].id;
 let aoTrocarDeTela = () => {};
