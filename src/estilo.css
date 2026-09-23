@@ -553,12 +553,20 @@ body {
    três de status, um embaixo do outro. */
 .grade-b2b {
   grid-template-columns: 1.15fr 1fr;
-  grid-template-rows: repeat(6, minmax(0, 1fr));
+  /* Coluna da direita em doze partes: status menor, por-status maior — os
+     dois somam a mesma altura que antes, só a divisão entre eles mudou. */
+  grid-template-rows: repeat(12, minmax(0, 1fr));
   grid-template-areas:
     "mes status"
     "mes status"
+    "mes status"
+    "mes por-status"
+    "mes por-status"
     "mes por-status"
     "prioridade por-status"
+    "prioridade por-status"
+    "prioridade equipe"
+    "prioridade equipe"
     "prioridade equipe"
     "prioridade equipe";
 }

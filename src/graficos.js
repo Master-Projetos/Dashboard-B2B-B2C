@@ -203,13 +203,16 @@ export function desenharStatus(b2b) {
   }));
 
   const instancia = desenhar("graficoStatus", {
-    grid: { top: 6, right: 52, bottom: 4, left: 4, containLabel: true },
+    // Mesmo estilo do gráfico de status por equipe — eixo com números e grade
+    // visível — só que sem legenda: aqui cada barra já é uma cor diferente, uma
+    // fileira de bolinhas embaixo só repetiria o que a barra já diz.
+    grid: { top: 6, right: 52, bottom: 20, left: 4, containLabel: true },
     tooltip: dicaDeContexto({
       trigger: "axis",
       axisPointer: { type: "shadow", shadowStyle: { color: "rgba(128, 128, 128, 0.12)" } },
       formatter: ([ponto]) => `<b>${ponto.name}</b> — ${formatarNumero(ponto.value)} projetos<br/>${DICA_DE_CLIQUE}`,
     }),
-    xAxis: eixoDeValor({ show: false }),
+    xAxis: eixoDeValor({ minInterval: 1 }),
     yAxis: eixoDeCategoria({ data: faixas.map((faixa) => faixa.rotulo), axisLine: { show: false } }),
     series: [{
       type: "bar",
@@ -219,8 +222,6 @@ export function desenharStatus(b2b) {
         itemStyle: { color: corDe(faixa.cor), borderRadius: [0, 4, 4, 0] },
       })),
       barMaxWidth: 34,
-      showBackground: true,
-      backgroundStyle: { color: "rgba(128, 128, 128, 0.07)", borderRadius: [0, 4, 4, 0] },
       label: rotuloDeValor({ position: "right", distance: 6, color: CORES.textoPrimario }),
     }],
   });
