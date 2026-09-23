@@ -69,6 +69,8 @@ function registrarAtividade() {
 function rodar() {
   const atual = TELAS_DO_RODIZIO.findIndex((tela) => tela.id === telaAtual);
   const proxima = TELAS_DO_RODIZIO[(atual + 1) % TELAS_DO_RODIZIO.length];
+  // Se alguém rolou até o rodapé e saiu, o rodízio volta a mostrar o painel.
+  window.scrollTo({ top: 0 });
   irParaTela(proxima.id);
 }
 

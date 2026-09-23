@@ -78,9 +78,33 @@
   box-sizing: border-box;
 }
 
+/* O painel ocupa a tela exata; a página rola só o bastante para chegar ao
+   rodapé, que fica logo abaixo. Na TV ninguém rola e ele nunca aparece. */
 html, body {
   height: 100%;
-  overflow: hidden;
+}
+
+body {
+  overflow-x: hidden;
+}
+
+/* A página rola, mas a barra fica escondida: na TV ela apareceria sempre na
+   lateral, estreitando o painel, por causa de um rodapé que quase ninguém vê.
+   Roda do mouse, toque e teclado continuam rolando. */
+html {
+  scrollbar-width: none;
+}
+
+html::-webkit-scrollbar {
+  display: none;
+}
+
+#rodape {
+  padding: clamp(12px, 2vh, 22px) var(--espaco);
+  text-align: center;
+  font-size: var(--fonte-detalhe);
+  color: var(--texto-suave);
+  border-top: 1px solid var(--borda);
 }
 
 body {
@@ -588,6 +612,9 @@ body {
   flex: 1;
   min-height: 0;
   overflow-y: auto;
+  /* Ao chegar no fim da lista, a rolagem não passa para a página — senão o
+     painel inteiro subia junto e mostrava o rodapé no meio da leitura. */
+  overscroll-behavior: contain;
 }
 
 .grade-de-estoque {
@@ -917,6 +944,7 @@ body {
    acima do cabeçalho fixo enquanto rolam. */
 .corpo-de-detalhes {
   overflow-y: auto;
+  overscroll-behavior: contain;
   padding: 0 18px 16px;
 }
 
