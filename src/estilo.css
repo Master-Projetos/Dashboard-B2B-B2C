@@ -106,8 +106,10 @@ body {
   gap: clamp(10px, 1.6vw, 22px);
 }
 
+/* A caixa segue o tema: com a logo sem fundo, não há mais branco para
+   esconder. */
 .marca {
-  background: #ffffff;
+  background: var(--superficie);
   border: 1px solid var(--borda);
   border-radius: var(--raio);
   padding: clamp(4px, 0.7vh, 8px) clamp(8px, 1vw, 14px);
@@ -120,6 +122,22 @@ body {
 .marca img {
   height: var(--altura-logo);
   width: auto;
+  display: block;
+}
+
+/* No escuro entra uma versão da logo com o azul clareado: o pé das letras é
+   um azul fechado que sobre fundo escuro ficava em 2,2:1 e parecia apagado.
+   Um filtro de brilho na imagem inteira resolvia o azul mas estourava o
+   amarelo para limão; a versão própria só mexe no azul. */
+.marca .logo-escura {
+  display: none;
+}
+
+:root[data-tema="escuro"] .marca .logo-clara {
+  display: none;
+}
+
+:root[data-tema="escuro"] .marca .logo-escura {
   display: block;
 }
 
