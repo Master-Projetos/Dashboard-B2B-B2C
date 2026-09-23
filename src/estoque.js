@@ -130,6 +130,7 @@ export function contarPorRegional(estoque) {
       nome,
       criticos: contarNivel(niveis, "critical"),
       alertas: contarNivel(niveis, "alert"),
+      normais: contarNivel(niveis, "ok"),
     };
   });
 }

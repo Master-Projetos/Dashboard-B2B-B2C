@@ -465,13 +465,19 @@ export function desenharOcupacaoPorRegional(viabilidade) {
 export function desenharEstoquePorRegional(porRegional) {
   const regionais = [...porRegional].reverse(); // o eixo cresce de baixo para cima
 
+  // Com o verde, cada barra soma todos os itens da regional e as cinco ficam
+  // do mesmo comprimento: a leitura vira proporção — quanto de cada regional
+  // está em falta, no limite ou em ordem. O número vai dentro de cada faixa.
   const faixas = [
-    { rotulo: "Críticos", chave: "criticos", cor: CORES.statusCritico },
-    { rotulo: "Em alerta", chave: "alertas", cor: CORES.statusAtencao },
+    { rotulo: "Críticos", chave: "criticos", cor: CORES.statusCritico, texto: "#ffffff" },
+    { rotulo: "Em alerta", chave: "alertas", cor: CORES.statusAtencao, texto: "#1f1a0a" },
+    { rotulo: "Normais", chave: "normais", cor: CORES.serie3, texto: "#ffffff" },
   ];
 
+  const maiorTotal = Math.max(1, ...regionais.map((r) => r.criticos + r.alertas + r.normais));
+
   desenhar("graficoEstoquePorRegional", {
-    grid: { top: 6, right: 34, bottom: 26, left: 4, containLabel: true },
+    grid: { top: 6, right: 10, bottom: 26, left: 4, containLabel: true },
     tooltip: dicaDeContexto({
       trigger: "axis",
       axisPointer: { type: "shadow", shadowStyle: { color: "rgba(128, 128, 128, 0.12)" } },
@@ -482,25 +488,20 @@ export function desenharEstoquePorRegional(porRegional) {
       },
     }),
     legend: legendaInferior(),
-    xAxis: eixoDeValor({ minInterval: 1 }),
+    xAxis: eixoDeValor({ show: false, max: maiorTotal }),
     yAxis: eixoDeCategoria({ data: regionais.map((regional) => regional.sigla), axisLine: { show: false } }),
-    series: faixas.map(({ rotulo, chave, cor }, indice) => ({
+    series: faixas.map(({ rotulo, chave, cor, texto }) => ({
       name: rotulo,
       type: "bar",
       stack: "estoque",
       data: regionais.map((regional) => regional[chave]),
-      barMaxWidth: 22,
+      barMaxWidth: 26,
       itemStyle: { color: cor, borderColor: CORES.superficie, borderWidth: 1 },
-      label: indice === faixas.length - 1
-        ? rotuloDeValor({
-            position: "right",
-            distance: 6,
-            formatter: ({ dataIndex }) => {
-              const total = regionais[dataIndex].criticos + regionais[dataIndex].alertas;
-              return total ? formatarNumero(total) : "";
-            },
-          })
-        : { show: false },
+      label: rotuloDeValor({
+        position: "inside",
+        color: texto,
+        formatter: ({ value }) => (value ? formatarNumero(value) : ""),
+      }),
     })),
   });
 }

@@ -14,9 +14,17 @@ const TELAS_DO_RODIZIO = TELAS.filter((tela) => tela.entraNoRodizio);
 
 const INTERVALO_DE_RODIZIO_MS = 2 * 60 * 1000;
 
+// O rodízio só liga depois de 10 minutos sem ninguém mexer: com gente usando o
+// painel, trocar de tela sozinho no meio de uma leitura atrapalha. Qualquer
+// toque, clique, tecla, rolagem ou movimento de mouse zera a contagem.
+const TEMPO_OCIOSO_MS = 10 * 60 * 1000;
+const VERIFICACAO_MS = 5 * 1000;
+const EVENTOS_DE_ATIVIDADE = ["pointerdown", "pointermove", "keydown", "wheel", "touchstart"];
+
 let telaAtual = TELAS[0].id;
 let aoTrocarDeTela = () => {};
-let temporizadorDoRodizio = null;
+let ultimaAtividade = Date.now();
+let ultimaTroca = Date.now();
 
 function indiceDaTela(id) {
   const indice = TELAS.findIndex((tela) => tela.id === id);
@@ -52,11 +60,8 @@ function mostrarTela(id) {
   desenharAbas();
 }
 
-// O rodízio reinicia a cada troca manual, para a tela escolhida não sumir
-// logo em seguida.
-function reiniciarRodizio() {
-  clearInterval(temporizadorDoRodizio);
-  temporizadorDoRodizio = setInterval(rodar, INTERVALO_DE_RODIZIO_MS);
+function registrarAtividade() {
+  ultimaAtividade = Date.now();
 }
 
 // O rodízio anda só entre as telas que participam dele. Estando numa tela de
@@ -64,19 +69,28 @@ function reiniciarRodizio() {
 function rodar() {
   const atual = TELAS_DO_RODIZIO.findIndex((tela) => tela.id === telaAtual);
   const proxima = TELAS_DO_RODIZIO[(atual + 1) % TELAS_DO_RODIZIO.length];
-  irParaTela(proxima.id, { reiniciarContagem: false });
+  irParaTela(proxima.id);
 }
 
-export function irParaTela(id, { reiniciarContagem = true } = {}) {
+// Conferido a cada poucos segundos em vez de um temporizador de 2 minutos: a
+// condição depende de dois relógios (atividade e última troca), e um só
+// intervalo fixo erraria o momento em que o painel fica ocioso.
+function verificarRodizio() {
+  const agora = Date.now();
+  if (agora - ultimaAtividade < TEMPO_OCIOSO_MS) return;
+  if (agora - ultimaTroca < INTERVALO_DE_RODIZIO_MS) return;
+  rodar();
+}
+
+export function irParaTela(id) {
   telaAtual = TELAS.some((tela) => tela.id === id) ? id : TELAS[0].id;
+  ultimaTroca = Date.now();
 
   if (window.location.hash !== `#/${telaAtual}`) {
     window.location.hash = `#/${telaAtual}`;
   }
 
   mostrarTela(telaAtual);
-  if (reiniciarContagem) reiniciarRodizio();
-
   aoTrocarDeTela(telaAtual);
 }
 
@@ -100,6 +114,11 @@ export function iniciarNavegacao(aoTrocar) {
 
   // Abrir ou compartilhar a URL de uma tela específica leva direto a ela.
   window.addEventListener("hashchange", () => irParaTela(lerTelaDoEndereco()));
+
+  for (const evento of EVENTOS_DE_ATIVIDADE) {
+    document.addEventListener(evento, registrarAtividade, { passive: true });
+  }
+  setInterval(verificarRodizio, VERIFICACAO_MS);
 
   irParaTela(lerTelaDoEndereco());
 }
