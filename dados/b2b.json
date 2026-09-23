@@ -1,6 +1,6 @@
 {
   "priority": {
-    "Baixa": 148,
+    "Baixa": 150,
     "Alta": 20,
     "Média": 18,
     "Atividade Crítica": 2
@@ -11,10 +11,10 @@
       "Ativado": 42,
       "Pendencia Comercial": 28,
       "Inviabilidade Técnica": 10,
+      "Estudo": 6,
       "Configuração": 5,
       "Cancelada": 5,
-      "Estudo": 5,
-      "Vistoria": 4,
+      "Vistoria": 5,
       "BP - Não Aprovado": 1,
       "Estudo Técnico": 1,
       "Estoque B2B": 1
@@ -2176,7 +2176,7 @@
         "region": "Regional - São Paulo",
         "start_date": "2026-09-10",
         "end_date": "2026-09-15",
-        "remaining_days": -7,
+        "remaining_days": -8,
         "sector": "Projetos",
         "status": "Estudo"
       },
@@ -2224,7 +2224,7 @@
         "region": "Regional - São Paulo",
         "start_date": "2026-09-16",
         "end_date": "2026-09-21",
-        "remaining_days": -1,
+        "remaining_days": -2,
         "sector": "Projetos",
         "status": "Estudo"
       },
@@ -2260,7 +2260,7 @@
         "region": "Regional - Sul Minas",
         "start_date": "2026-09-21",
         "end_date": "2026-09-24",
-        "remaining_days": 2,
+        "remaining_days": 1,
         "sector": "Operação",
         "status": "Vistoria"
       },
@@ -2272,6 +2272,30 @@
         "region": "Regional - Sul Minas",
         "start_date": "2026-09-21",
         "end_date": "2026-09-24",
+        "remaining_days": 1,
+        "sector": "Operação",
+        "status": "Vistoria"
+      },
+      {
+        "deadline": "Urgente",
+        "client": "UPIX GUARATINGUETA",
+        "requester": "Igor Raposo",
+        "priority": "Baixa",
+        "region": "Regional - São Paulo",
+        "start_date": "2026-09-22",
+        "end_date": "2026-09-25",
+        "remaining_days": 2,
+        "sector": "Projetos",
+        "status": "Estudo"
+      },
+      {
+        "deadline": "Urgente",
+        "client": "RG SERVICOS EM TENOLOGIA - MATEUS LEME - TRANSFERÊNCIA DE ENDEREÇO",
+        "requester": "Igor Barreto",
+        "priority": "Baixa",
+        "region": "Regional - Centro Oeste",
+        "start_date": "2026-09-22",
+        "end_date": "2026-09-25",
         "remaining_days": 2,
         "sector": "Operação",
         "status": "Vistoria"
@@ -3775,11 +3799,11 @@
         "Engenharia - Noc ": 0,
         "Engenharia - Transmissão": 0,
         "Projetos": 0,
-        "Regional - Centro Oeste": 0,
+        "Regional - Centro Oeste": 1,
         "Regional - Montes Claros": 0,
         "Regional - Norte": 0,
         "Regional - Sul Minas": 2,
-        "Regional - São Paulo": 2
+        "Regional - São Paulo": 3
       }
     },
     "items": [
@@ -5939,7 +5963,7 @@
         "region": "Regional - São Paulo",
         "start_date": "2026-09-10",
         "end_date": "2026-09-15",
-        "remaining_days": -7,
+        "remaining_days": -8,
         "sector": "Projetos",
         "status": "Em Andamento"
       },
@@ -5987,7 +6011,7 @@
         "region": "Regional - São Paulo",
         "start_date": "2026-09-16",
         "end_date": "2026-09-21",
-        "remaining_days": -1,
+        "remaining_days": -2,
         "sector": "Projetos",
         "status": "Em Andamento"
       },
@@ -6023,7 +6047,7 @@
         "region": "Regional - Sul Minas",
         "start_date": "2026-09-21",
         "end_date": "2026-09-24",
-        "remaining_days": 2,
+        "remaining_days": 1,
         "sector": "Operação",
         "status": "Em Andamento"
       },
@@ -6035,6 +6059,30 @@
         "region": "Regional - Sul Minas",
         "start_date": "2026-09-21",
         "end_date": "2026-09-24",
+        "remaining_days": 1,
+        "sector": "Operação",
+        "status": "Em Andamento"
+      },
+      {
+        "deadline": "Urgente",
+        "client": "UPIX GUARATINGUETA",
+        "requester": "Igor Raposo",
+        "priority": "Baixa",
+        "region": "Regional - São Paulo",
+        "start_date": "2026-09-22",
+        "end_date": "2026-09-25",
+        "remaining_days": 2,
+        "sector": "Projetos",
+        "status": "Em Andamento"
+      },
+      {
+        "deadline": "Urgente",
+        "client": "RG SERVICOS EM TENOLOGIA - MATEUS LEME - TRANSFERÊNCIA DE ENDEREÇO",
+        "requester": "Igor Barreto",
+        "priority": "Baixa",
+        "region": "Regional - Centro Oeste",
+        "start_date": "2026-09-22",
+        "end_date": "2026-09-25",
         "remaining_days": 2,
         "sector": "Operação",
         "status": "Em Andamento"
@@ -6065,8 +6113,8 @@
       },
       "Baixa": {
         "Christopher Kurt": 15,
-        "Igor Barreto": 24,
-        "Igor Raposo": 46,
+        "Igor Barreto": 25,
+        "Igor Raposo": 47,
         "Lorrany Rodrigues": 16,
         "Michel Dias": 18,
         "Pedro Cardoso": 9,
@@ -8062,7 +8110,7 @@
         "region": "Regional - São Paulo",
         "start_date": "2026-09-10",
         "end_date": "2026-09-15",
-        "remaining_days": -7,
+        "remaining_days": -8,
         "sector": "Projetos"
       },
       {
@@ -8106,7 +8154,7 @@
         "region": "Regional - São Paulo",
         "start_date": "2026-09-16",
         "end_date": "2026-09-21",
-        "remaining_days": -1,
+        "remaining_days": -2,
         "sector": "Projetos"
       },
       {
@@ -8139,7 +8187,7 @@
         "region": "Regional - Sul Minas",
         "start_date": "2026-09-21",
         "end_date": "2026-09-24",
-        "remaining_days": 2,
+        "remaining_days": 1,
         "sector": "Operação"
       },
       {
@@ -8150,6 +8198,28 @@
         "region": "Regional - Sul Minas",
         "start_date": "2026-09-21",
         "end_date": "2026-09-24",
+        "remaining_days": 1,
+        "sector": "Operação"
+      },
+      {
+        "deadline": "Urgente",
+        "client": "UPIX GUARATINGUETA",
+        "requester": "Igor Raposo",
+        "priority": "Baixa",
+        "region": "Regional - São Paulo",
+        "start_date": "2026-09-22",
+        "end_date": "2026-09-25",
+        "remaining_days": 2,
+        "sector": "Projetos"
+      },
+      {
+        "deadline": "Urgente",
+        "client": "RG SERVICOS EM TENOLOGIA - MATEUS LEME - TRANSFERÊNCIA DE ENDEREÇO",
+        "requester": "Igor Barreto",
+        "priority": "Baixa",
+        "region": "Regional - Centro Oeste",
+        "start_date": "2026-09-22",
+        "end_date": "2026-09-25",
         "remaining_days": 2,
         "sector": "Operação"
       }
@@ -8163,7 +8233,7 @@
       "2026-06": 56,
       "2026-07": 50,
       "2026-08": 25,
-      "2026-09": 17
+      "2026-09": 19
     },
     "items": [
       {
@@ -10322,7 +10392,7 @@
         "region": "Regional - São Paulo",
         "start_date": "2026-09-10",
         "end_date": "2026-09-15",
-        "remaining_days": -7,
+        "remaining_days": -8,
         "sector": "Projetos",
         "month": "2026-09"
       },
@@ -10370,7 +10440,7 @@
         "region": "Regional - São Paulo",
         "start_date": "2026-09-16",
         "end_date": "2026-09-21",
-        "remaining_days": -1,
+        "remaining_days": -2,
         "sector": "Projetos",
         "month": "2026-09"
       },
@@ -10406,7 +10476,7 @@
         "region": "Regional - Sul Minas",
         "start_date": "2026-09-21",
         "end_date": "2026-09-24",
-        "remaining_days": 2,
+        "remaining_days": 1,
         "sector": "Operação",
         "month": "2026-09"
       },
@@ -10418,6 +10488,30 @@
         "region": "Regional - Sul Minas",
         "start_date": "2026-09-21",
         "end_date": "2026-09-24",
+        "remaining_days": 1,
+        "sector": "Operação",
+        "month": "2026-09"
+      },
+      {
+        "deadline": "Urgente",
+        "client": "UPIX GUARATINGUETA",
+        "requester": "Igor Raposo",
+        "priority": "Baixa",
+        "region": "Regional - São Paulo",
+        "start_date": "2026-09-22",
+        "end_date": "2026-09-25",
+        "remaining_days": 2,
+        "sector": "Projetos",
+        "month": "2026-09"
+      },
+      {
+        "deadline": "Urgente",
+        "client": "RG SERVICOS EM TENOLOGIA - MATEUS LEME - TRANSFERÊNCIA DE ENDEREÇO",
+        "requester": "Igor Barreto",
+        "priority": "Baixa",
+        "region": "Regional - Centro Oeste",
+        "start_date": "2026-09-22",
+        "end_date": "2026-09-25",
         "remaining_days": 2,
         "sector": "Operação",
         "month": "2026-09"
@@ -10427,8 +10521,8 @@
   "deadline": {
     "counts": {
       "Concluido": 184,
-      "Atrasada": 2,
-      "Urgente": 2
+      "Urgente": 4,
+      "Atrasada": 2
     },
     "items": [
       {
@@ -12408,7 +12502,7 @@
         "region": "Regional - São Paulo",
         "start_date": "2026-09-10",
         "end_date": "2026-09-15",
-        "remaining_days": -7,
+        "remaining_days": -8,
         "sector": "Projetos"
       },
       {
@@ -12452,7 +12546,7 @@
         "region": "Regional - São Paulo",
         "start_date": "2026-09-16",
         "end_date": "2026-09-21",
-        "remaining_days": -1,
+        "remaining_days": -2,
         "sector": "Projetos"
       },
       {
@@ -12485,7 +12579,7 @@
         "region": "Regional - Sul Minas",
         "start_date": "2026-09-21",
         "end_date": "2026-09-24",
-        "remaining_days": 2,
+        "remaining_days": 1,
         "sector": "Operação"
       },
       {
@@ -12496,6 +12590,28 @@
         "region": "Regional - Sul Minas",
         "start_date": "2026-09-21",
         "end_date": "2026-09-24",
+        "remaining_days": 1,
+        "sector": "Operação"
+      },
+      {
+        "deadline": "Urgente",
+        "client": "UPIX GUARATINGUETA",
+        "requester": "Igor Raposo",
+        "priority": "Baixa",
+        "region": "Regional - São Paulo",
+        "start_date": "2026-09-22",
+        "end_date": "2026-09-25",
+        "remaining_days": 2,
+        "sector": "Projetos"
+      },
+      {
+        "deadline": "Urgente",
+        "client": "RG SERVICOS EM TENOLOGIA - MATEUS LEME - TRANSFERÊNCIA DE ENDEREÇO",
+        "requester": "Igor Barreto",
+        "priority": "Baixa",
+        "region": "Regional - Centro Oeste",
+        "start_date": "2026-09-22",
+        "end_date": "2026-09-25",
         "remaining_days": 2,
         "sector": "Operação"
       }

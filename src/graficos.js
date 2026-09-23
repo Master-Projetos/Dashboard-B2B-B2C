@@ -5,7 +5,7 @@ import { CanvasRenderer } from "echarts/renderers";
 
 import { CORES, FONTE, eixoDeCategoria, eixoDeValor, dicaDeContexto, estiloDeTextoSuave, tamanhoDeFonteDoGrafico } from "./tema.js";
 import { formatarNumero, formatarMes } from "./formatadores.js";
-import { DIMENSOES, GRUPOS_DE_STATUS, ROTULOS_DE_EQUIPE, grupoDoProjeto, obterContagens, obterItens } from "./dados-b2b.js";
+import { DIMENSOES, GRUPOS_DE_STATUS, grupoDoProjeto, obterContagens, obterItens } from "./dados-b2b.js";
 import { abrirDetalhes } from "./detalhes.js";
 
 echarts.use([BarChart, LineChart, GridComponent, TooltipComponent, LegendComponent, GraphicComponent, CanvasRenderer]);
@@ -516,38 +516,48 @@ function encurtarNomeDaEquipe(nome) {
   return nome.trim().replace("Regional - ", "").replace("Engenharia - ", "Eng. ").replace("CD - ", "");
 }
 
+// As mesmas quatro situações do gráfico de status, agora por equipe. O par
+// Concluída/Em Andamento da API dizia só se o prazo estava fechado — e a
+// grande maioria "concluída" era, na verdade, demanda nossa entregue parada em
+// outro setor. Os itens de status trazem região, status e prazo juntos, então
+// a conta sai deles.
 export function desenharStatusPorEquipe(b2b, quantidade = 8) {
-  const porEquipe = obterContagens(b2b, DIMENSOES.equipe);
-  const concluidas = porEquipe["Concluída"] ?? {};
-  const emAndamento = porEquipe["Em Andamento"] ?? {};
+  const itens = obterItens(b2b, DIMENSOES.status);
 
-  // O nome completo fica guardado: é por ele que os projetos são filtrados no
-  // clique, já que o eixo mostra a versão encurtada.
-  const equipes = [...new Set([...Object.keys(concluidas), ...Object.keys(emAndamento)])]
-    .map((nome) => ({
-      nome: encurtarNomeDaEquipe(nome),
-      nomeCompleto: nome,
-      concluidas: concluidas[nome] ?? 0,
-      emAndamento: emAndamento[nome] ?? 0,
-    }))
-    .sort((a, b) => a.concluidas + a.emAndamento - (b.concluidas + b.emAndamento))
-    .slice(-quantidade);
+  const porEquipe = new Map();
+  for (const item of itens) {
+    if (!porEquipe.has(item.region)) {
+      porEquipe.set(item.region, { nome: encurtarNomeDaEquipe(item.region), nomeCompleto: item.region, total: 0 });
+    }
+    const equipe = porEquipe.get(item.region);
+    const grupo = grupoDoProjeto(item);
+    equipe[grupo] = (equipe[grupo] ?? 0) + 1;
+    equipe.total += 1;
+  }
 
-  const faixas = [
-    { rotulo: ROTULOS_DE_EQUIPE["Concluída"], chave: "concluidas", cor: CORES.serie1 },
-    { rotulo: ROTULOS_DE_EQUIPE["Em Andamento"], chave: "emAndamento", cor: CORES.serie2 },
-  ];
+  // As maiores equipes, da menor para a maior porque o eixo cresce para cima.
+  const equipes = [...porEquipe.values()].sort((a, b) => a.total - b.total).slice(-quantidade);
+
+  const faixas = GRUPOS_DE_STATUS.map((grupo) => ({
+    rotulo: grupo.rotulo,
+    chave: grupo.id,
+    cor: CORES[CORES_DOS_GRUPOS[grupo.id]],
+  }));
 
   const instancia = desenhar("graficoStatusPorEquipe", {
-    grid: { top: 6, right: 40, bottom: 26, left: 4, containLabel: true },
+    grid: { top: 6, right: 40, bottom: 44, left: 4, containLabel: true },
     tooltip: dicaDeContexto({
       trigger: "axis",
       axisPointer: { type: "shadow", shadowStyle: { color: "rgba(255,255,255,0.04)" } },
       formatter: (pontos) => {
-        const linhas = pontos.map((p) => `${p.marker} ${p.seriesName}: <b>${formatarNumero(p.value)}</b>`);
+        const linhas = pontos
+          .filter((p) => p.value)
+          .map((p) => `${p.marker} ${p.seriesName}: <b>${formatarNumero(p.value)}</b>`);
         return `${pontos[0].axisValue}<br/>${linhas.join("<br/>")}<br/>${DICA_DE_CLIQUE}`;
       },
     }),
+    // Quatro nomes, um deles longo: a legenda pode quebrar em duas linhas, daí
+    // a folga maior embaixo do gráfico.
     legend: legendaInferior(),
     xAxis: eixoDeValor({ minInterval: 1 }),
     yAxis: eixoDeCategoria({ data: equipes.map((equipe) => equipe.nome), axisLine: { show: false } }),
@@ -556,14 +566,14 @@ export function desenharStatusPorEquipe(b2b, quantidade = 8) {
       type: "bar",
       stack: "equipes",
       cursor: "pointer",
-      data: equipes.map((equipe) => equipe[chave]),
+      data: equipes.map((equipe) => equipe[chave] ?? 0),
       barMaxWidth: 18,
       itemStyle: { color: cor, borderColor: CORES.superficie, borderWidth: 1 },
       label: indice === faixas.length - 1
         ? rotuloDeValor({
             position: "right",
             distance: 6,
-            formatter: ({ dataIndex }) => formatarNumero(equipes[dataIndex].concluidas + equipes[dataIndex].emAndamento),
+            formatter: ({ dataIndex }) => formatarNumero(equipes[dataIndex].total),
           })
         : { show: false },
     })),
@@ -573,8 +583,7 @@ export function desenharStatusPorEquipe(b2b, quantidade = 8) {
     const equipe = equipes[indice];
     if (!equipe) return;
 
-    const itens = obterItens(b2b, DIMENSOES.equipe).filter((item) => item.region === equipe.nomeCompleto);
-    abrirDetalhes(`Equipe: ${equipe.nome}`, itens);
+    abrirDetalhes(`Equipe: ${equipe.nome}`, itens.filter((item) => item.region === equipe.nomeCompleto));
   });
 }
 

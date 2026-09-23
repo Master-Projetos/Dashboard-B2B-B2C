@@ -57,10 +57,6 @@ export function grupoDoProjeto(item) {
   return item.deadline === "Concluido" ? "entregue" : "andamento";
 }
 
-export const ROTULOS_DE_EQUIPE = {
-  "Concluída": "Concluídas",
-  "Em Andamento": "Em andamento",
-};
 
 // remaining_days: 0 = vence hoje, positivo = dias restantes, negativo = atraso.
 // Sem dia nenhum, está concluído — um traço deixaria quem não conhece a base

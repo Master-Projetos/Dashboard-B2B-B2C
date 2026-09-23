@@ -236,9 +236,24 @@ function restaurarDoArmazenamento() {
 
 // ===== Atualizações =====
 
+// O snapshot que a rota devolve quando a origem falha é o gravado no último
+// deploy. Se já há dado na mão — da visita anterior ou do minuto anterior —
+// ele é mais novo que o snapshot, e trocar faria o painel andar para trás.
+function ehRecuo(resposta, dadoAtual) {
+  return resposta?.origem === "snapshot" && Boolean(dadoAtual);
+}
+
 async function atualizarB2b() {
   try {
-    dadosB2b = await buscarB2b();
+    const resposta = await buscarB2b();
+
+    if (ehRecuo(resposta, dadosB2b)) {
+      const salvo = carregarDados("b2b");
+      escreverStatus("atualizacaoB2b", `B2B sem conexão · dados de ${salvo ? formatarHorario(salvo.salvoEm) : "—"}`);
+      return;
+    }
+
+    dadosB2b = resposta;
     salvarDados("b2b", dadosB2b);
 
     desenharTelaVisivel();
@@ -264,7 +279,10 @@ async function atualizarB2b() {
 // A rota de estoque é rápida e não tem cache: recarregada junto com o B2B.
 async function atualizarEstoque() {
   try {
-    dadosDeEstoque = await buscarEstoque();
+    const resposta = await buscarEstoque();
+    if (ehRecuo(resposta, dadosDeEstoque)) return;
+
+    dadosDeEstoque = resposta;
     salvarDados("estoque", dadosDeEstoque);
   } catch (erro) {
     // Falha de rede não apaga o que já está na tela.
