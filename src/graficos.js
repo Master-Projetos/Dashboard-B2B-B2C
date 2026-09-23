@@ -317,7 +317,11 @@ export function desenharPrioridade(b2b) {
   escreverTituloDaPrioridade("Prioridade");
   document.getElementById("graficoPrioridade").onclick = null; // deixado pelo caso sem solicitantes
 
-  const prioridades = ORDEM_DE_PRIORIDADE.filter((nome) => nome in b2b.priority);
+  // Prioridade nova da API entra depois das conhecidas, em azul.
+  const prioridades = [
+    ...ORDEM_DE_PRIORIDADE.filter((nome) => nome in b2b.priority),
+    ...Object.keys(b2b.priority).filter((nome) => !ORDEM_DE_PRIORIDADE.includes(nome)),
+  ];
   const dica = temItens ? "clique para ver os projetos" : "clique para ver os solicitantes";
 
   const instancia = desenhar("graficoPrioridade", {
@@ -338,7 +342,7 @@ export function desenharPrioridade(b2b) {
       cursor: "pointer",
       data: prioridades.map((nome) => ({
         value: b2b.priority[nome],
-        itemStyle: { color: CORES[CORES_DA_PRIORIDADE[nome]], borderRadius: [4, 4, 0, 0] },
+        itemStyle: { color: CORES[CORES_DA_PRIORIDADE[nome] ?? "serie1"], borderRadius: [4, 4, 0, 0] },
       })),
       barMaxWidth: 54,
       // A faixa de fundo mostra que a coluna inteira é clicável.

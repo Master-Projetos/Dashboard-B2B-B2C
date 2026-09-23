@@ -20,7 +20,7 @@ import { restaurarTemaSalvo, alternarTema } from "./tema.js";
 import { iniciarNavegacao, telaVisivel } from "./navegacao.js";
 import { aplicarPeriodo, mesesDisponiveis, mesInicialPadrao, ultimoDiaDoMes } from "./periodo.js";
 import {
-  REGIONAIS,
+  regionaisDosDados,
   normalizarEstoque,
   normalizarReposicao,
   contarPorRegional,
@@ -176,11 +176,18 @@ function desenharTelaB2c() {
 
 const seletorDeRegional = document.getElementById("regionalDoEstoque");
 
-// As opções são fixas: as cinco regionais existem sempre, mesmo quando uma
-// delas ainda não mandou dado.
-seletorDeRegional.innerHTML = `<option value="">Todas</option>${REGIONAIS.map(
-  ({ sigla, nome }) => `<option value="${sigla}">${sigla} · ${nome}</option>`,
-).join("")}`;
+// As cinco regionais aparecem sempre, mesmo sem dado; uma regional nova que a
+// API mandar entra na lista a cada desenho.
+function preencherRegionais() {
+  const escolhida = seletorDeRegional.value;
+  seletorDeRegional.innerHTML = `<option value="">Todas</option>${regionaisDosDados(dadosDeEstoque).map(
+    ({ sigla, nome }) => `<option value="${sigla}">${sigla === nome ? sigla : `${sigla} · ${nome}`}</option>`,
+  ).join("")}`;
+  seletorDeRegional.value = escolhida;
+  if (seletorDeRegional.value !== escolhida) seletorDeRegional.value = "";
+}
+
+preencherRegionais();
 
 // Níveis ligados nos botões. Começam todos ligados: a tela abre mostrando
 // tudo, e quem quer recortar desliga o que não interessa.
@@ -206,6 +213,7 @@ function atualizarFiltroDeRegional() {
 
 function desenharTelaEstoque() {
   desenharPrazos(null); // os prazos são do B2B
+  preencherRegionais();
   const estoque = normalizarEstoque(dadosDeEstoque, seletorDeRegional.value);
 
   desenharIndicadoresDeEstoque(estoque);

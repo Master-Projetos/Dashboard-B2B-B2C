@@ -59,7 +59,10 @@ export function desenharIndicadoresB2b(b2b) {
   const maiorAprovado = b2b.financial?.highest_approved_project ?? null;
   const temValores = (b2b.financial?.total_value ?? 0) > 0;
   const valorNaoAprovado = (b2b.financial?.total_value ?? 0) - (b2b.financial?.approved_value ?? 0);
-  const prazosEmAberto = (contagens.Urgente ?? 0) + (contagens.Atrasada ?? 0);
+  // Tudo que não é Concluido está em aberto, inclusive um tipo novo da API.
+  const prazosEmAberto = Object.entries(contagens)
+    .filter(([tipo]) => tipo !== "Concluido")
+    .reduce((soma, [, quantidade]) => soma + quantidade, 0);
 
   escreverIndicadores("indicadoresB2b", [
     {
@@ -210,10 +213,14 @@ export function desenharPrazos(b2b) {
     { tipo: "Urgente", cor: CORES.statusAtencao },
     { tipo: "Atrasada", cor: CORES.statusCritico },
   ];
+  // Tipo de prazo novo vira chip com o nome que veio.
+  for (const tipo of Object.keys(contagens)) {
+    if (!prazos.some((prazo) => prazo.tipo === tipo)) prazos.push({ tipo, cor: CORES.serie1 });
+  }
 
   container.innerHTML = prazos
     .map(({ tipo, cor }) => {
-      const rotulo = ROTULOS_DE_PRAZO[tipo];
+      const rotulo = ROTULOS_DE_PRAZO[tipo] ?? tipo;
       const valor = formatarNumero(contagens[tipo] ?? 0);
       const atributos = clicavel
         ? `class="prazo clicavel" data-prazo="${tipo}" title="Ver os projetos"`

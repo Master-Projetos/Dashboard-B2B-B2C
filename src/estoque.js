@@ -49,6 +49,20 @@ function nivelDaLinha(linha) {
 const semAcento = (texto) =>
   String(texto ?? "").normalize("NFD").replace(/[̀-ͯ]/g, "").replace(/\s+/g, " ").trim().toUpperCase();
 
+// Regional que a API passar a mandar fora das cinco entra com o nome que
+// veio, depois delas — sumir com ela esconderia falta de estoque.
+export function regionaisDosDados(bruto) {
+  const novas = new Map();
+  for (const linha of bruto?.items ?? []) {
+    if (encontrarSigla(linha.site)) continue;
+    const sigla = semAcento(linha.site);
+    if (sigla && !novas.has(sigla)) novas.set(sigla, { sigla, nome: String(linha.site).trim() });
+  }
+  return [...REGIONAIS, ...novas.values()];
+}
+
+const siglaDaLinha = (linha) => encontrarSigla(linha.site) ?? semAcento(linha.site);
+
 function encontrarSigla(chave) {
   const texto = semAcento(chave);
   return REGIONAIS.find(
@@ -187,10 +201,11 @@ function abrirCalendarioDeReposicao(reposicao) {
 export function normalizarEstoque(bruto, siglaFiltrada = "") {
   const linhas = bruto?.items ?? [];
   const porCodigo = new Map();
-  const regionais = siglaFiltrada ? REGIONAIS.filter(({ sigla }) => sigla === siglaFiltrada) : REGIONAIS;
+  const todas = regionaisDosDados(bruto);
+  const regionais = siglaFiltrada ? todas.filter(({ sigla }) => sigla === siglaFiltrada) : todas;
 
   for (const linha of linhas) {
-    const sigla = encontrarSigla(linha.site);
+    const sigla = siglaDaLinha(linha);
     if (!sigla || !regionais.some((regional) => regional.sigla === sigla)) continue;
 
     const codigo = String(linha.code ?? linha.description ?? "");
@@ -265,7 +280,7 @@ function celula(item, sigla) {
 }
 
 function niveisDoItem(item) {
-  return REGIONAIS.map(({ sigla }) => celula(item, sigla)?.nivel).filter(Boolean);
+  return Object.values(item.porRegional).map((dados) => dados.nivel);
 }
 
 function piorNivelDoItem(item) {
