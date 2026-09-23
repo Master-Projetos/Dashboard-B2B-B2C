@@ -20,6 +20,7 @@
      ficam fracos demais em texto miúdo sobre branco (o âmbar dá 1,8:1). */
   --texto-concluido: #0c8a0c;
   --texto-em-aberto: #996a00;
+  --texto-outro-setor: #1f6cc8; /* o azul da série dá 4,4:1 no branco; este, 5,2:1 */
 
   /* Grade de estoque: divisória um pouco mais presente que a borda comum —
      são sete colunas de número lado a lado. */
@@ -60,6 +61,7 @@
   --serie-3: #199e70;
   --texto-concluido: #3fbf5f;
   --texto-em-aberto: #fab219;
+  --texto-outro-setor: #5b9cf0;
 
   /* No escuro o texto precisa ser mais claro que a cor do marcador, e o fundo
      mais discreto — tinta forte sobre fundo escuro vira borrão. */
@@ -885,6 +887,11 @@ body {
 .tabela-de-prazos .prazo-concluido {
   color: var(--texto-concluido);
   font-weight: 600;
+}
+
+.tabela-de-prazos .prazo-outro-setor {
+  color: var(--texto-outro-setor);
+  font-weight: 650;
 }
 
 /* Cancelado não é falha de prazo: fica neutro, sem cor de alerta. */

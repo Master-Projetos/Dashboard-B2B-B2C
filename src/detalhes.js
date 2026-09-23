@@ -26,13 +26,14 @@ function descreverSituacao(item) {
   return descreverPrazo(item.remaining_days);
 }
 
-// Verde concluído, vermelho atrasado, amarelo o que está correndo ou parado
-// com outro setor; cancelado fica neutro, não é falha de prazo.
+// Mesmas cores dos gráficos de status: verde concluído, azul parado com outro
+// setor, amarelo o que está correndo, vermelho atrasado; cancelado fica neutro,
+// não é falha de prazo.
 function classeDoPrazo(item) {
   if (item.status) {
     const grupo = grupoDoProjeto(item);
     if (grupo === "cancelado") return "prazo-cancelado";
-    if (grupo === "entregue") return "prazo-em-aberto";
+    if (grupo === "entregue") return "prazo-outro-setor";
     if (grupo === "ativado") return "prazo-concluido";
   }
 
