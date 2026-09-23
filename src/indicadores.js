@@ -42,7 +42,7 @@ function indicadoresVazios(rotulos, detalhe) {
   }));
 }
 
-const ROTULOS_B2B = ["Projetos B2B", "Prazos em aberto", "Valor total", "Valor aprovado", "Ticket médio", "Maior projeto"];
+const ROTULOS_B2B = ["Projetos B2B", "Prazos em aberto", "Valor total não aprovado", "Valor total aprovado", "Ticket médio", "Maior projeto"];
 const ROTULOS_B2C = ["Portas", "Portas livres", "Ocupação", "Cobertura", "Equipamentos", "Em atendimento"];
 
 export function desenharIndicadoresB2b(b2b) {
@@ -58,6 +58,7 @@ export function desenharIndicadoresB2b(b2b) {
   const destaques = destaquesFinanceiros(b2b);
   const maiorAprovado = b2b.financial?.highest_approved_project ?? null;
   const temValores = (b2b.financial?.total_value ?? 0) > 0;
+  const valorNaoAprovado = (b2b.financial?.total_value ?? 0) - (b2b.financial?.approved_value ?? 0);
   const prazosEmAberto = (contagens.Urgente ?? 0) + (contagens.Atrasada ?? 0);
 
   escreverIndicadores("indicadoresB2b", [
@@ -78,13 +79,16 @@ export function desenharIndicadoresB2b(b2b) {
       acao: "prazos-em-aberto",
     },
     {
-      rotulo: "Valor total",
-      valor: temValores ? formatarMoedaCompacta(b2b.financial.total_value) : "—",
-      detalhe: temValores ? formatarMoeda(b2b.financial.total_value) : "nenhum projeto com valor no período",
+      // O total geral é aprovado + não aprovado; fica no detalhe para não se perder.
+      rotulo: "Valor total não aprovado",
+      valor: temValores ? formatarMoedaCompacta(valorNaoAprovado) : "—",
+      detalhe: temValores
+        ? `${formatarMoeda(valorNaoAprovado)} · total geral ${formatarMoedaCompacta(b2b.financial.total_value)}`
+        : "nenhum projeto com valor no período",
       realce: CORES.serie1,
     },
     {
-      rotulo: "Valor aprovado",
+      rotulo: "Valor total aprovado",
       // "R$ 0" parece um total apurado; o traço deixa claro que não houve.
       valor: aprovados.length ? formatarMoedaCompacta(b2b.financial.approved_value) : "—",
       // A lista soma exatamente o approved_value, então a contagem cabe aqui
