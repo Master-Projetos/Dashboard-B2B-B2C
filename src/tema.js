@@ -53,6 +53,23 @@ const TEMA_PADRAO = "claro";
 // tema é atualizar estes valores e mandar redesenhar.
 export const CORES = { ...PALETAS[TEMA_PADRAO], ...CORES_DE_ESTADO };
 
+// Cor de cada barra do gráfico "Projetos por status". Status que não estiver
+// aqui sai em azul (serie1). Vale nome da paleta ou hex.
+export const CORES_DOS_STATUS = {
+  "Aguardando BP": "#2a78d6",
+  "Ativado": "#2a78d6",
+  "Pendencia Comercial": "#2a78d6",
+  "Inviabilidade Técnica": "#2a78d6",
+  "Configuração": "#2a78d6",
+  "Estudo": "#2a78d6",
+  "Estudo Técnico": "#2a78d6",
+  "Vistoria": "#2a78d6",
+  "Execução": "#2a78d6",
+  "Estoque B2B": "#2a78d6",
+  "BP - Não Aprovado": "#2a78d6",
+  "Cancelada": "#d03b3b",
+};
+
 // As listas de cor por categoria (status, prioridade, prazo) aceitam o nome de
 // uma cor da paleta ("lilas", que acompanha o tema) ou um hex direto
 // ("#9b7fd6", igual nos dois temas).

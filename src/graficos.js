@@ -3,7 +3,7 @@ import { BarChart, LineChart } from "echarts/charts";
 import { GridComponent, TooltipComponent, LegendComponent, GraphicComponent } from "echarts/components";
 import { CanvasRenderer } from "echarts/renderers";
 
-import { CORES, FONTE, corDe, eixoDeCategoria, eixoDeValor, dicaDeContexto, estiloDeTextoSuave, tamanhoDeFonteDoGrafico } from "./tema.js";
+import { CORES, CORES_DOS_STATUS, FONTE, corDe, eixoDeCategoria, eixoDeValor, dicaDeContexto, estiloDeTextoSuave, tamanhoDeFonteDoGrafico } from "./tema.js";
 import { formatarNumero, formatarMes } from "./formatadores.js";
 import { DIMENSOES, obterContagens, obterItens } from "./dados-b2b.js";
 import { abrirDetalhes } from "./detalhes.js";
@@ -238,11 +238,7 @@ export function desenharStatus(b2b) {
 
 // Um status real por barra (Aguardando BP, Estudo...), como vem da rota de
 // status — o modelo antigo, com o detalhe que o gráfico de cima agrupa.
-// cor: nome da paleta (tema.js) ou hex direto, como "#9b7fd6".
-const CORES_DO_STATUS = {
-  "Aguardando BP": "lilas",
-  "Cancelada": "statusCritico",
-};
+// As cores ficam em tema.js, em CORES_DOS_STATUS.
 
 export function desenharProjetosPorStatus(b2b) {
   const itens = obterItens(b2b, DIMENSOES.status);
@@ -268,7 +264,7 @@ export function desenharProjetosPorStatus(b2b) {
       cursor: "pointer",
       data: statusOrdenados.map(([status, quantidade]) => ({
         value: quantidade,
-        itemStyle: { color: corDe(CORES_DO_STATUS[status] ?? "serie1"), borderRadius: [0, 4, 4, 0] },
+        itemStyle: { color: corDe(CORES_DOS_STATUS[status] ?? "serie1"), borderRadius: [0, 4, 4, 0] },
       })),
       barMaxWidth: 16,
       showBackground: true,
