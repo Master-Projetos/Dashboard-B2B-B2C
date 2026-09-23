@@ -126,6 +126,16 @@ body {
   font-weight: 650;
   letter-spacing: -0.2px;
   white-space: nowrap;
+  /* Todos os títulos na mesma célula: a largura é sempre a do maior. */
+  display: grid;
+}
+
+#cabecalho h1 > span {
+  grid-area: 1 / 1;
+}
+
+#cabecalho h1 > .titulo-reservado {
+  visibility: hidden;
 }
 
 .abas {

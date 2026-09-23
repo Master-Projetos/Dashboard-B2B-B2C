@@ -43,7 +43,12 @@ function mostrarTela(id) {
     secao.hidden = secao.dataset.tela !== id;
   });
 
-  document.getElementById("tituloDaTela").textContent = TELAS[indiceDaTela(id)].titulo;
+  // Os três títulos ficam empilhados no mesmo lugar e só o da tela atual
+  // aparece. Assim o título tem sempre a largura do maior deles, e as abas ao
+  // lado não pulam quando "Estoque" vira "Viabilidade B2C".
+  document.getElementById("tituloDaTela").innerHTML = TELAS.map(({ id: idDaTela, titulo }) =>
+    idDaTela === id ? `<span>${titulo}</span>` : `<span class="titulo-reservado" aria-hidden="true">${titulo}</span>`
+  ).join("");
   desenharAbas();
 }
 
