@@ -167,12 +167,12 @@ export function desenharProjetosPorMes(b2b) {
 // ===== Status dos projetos =====
 
 // Vale para os dois gráficos que usam as situações (status e status por
-// equipe): parado com outro setor é verde — a parte da Projetos está feita —,
-// ativado é azul, em andamento é amarelo e cancelado é vermelho.
+// equipe): concluído é verde, parado com outro setor é azul, em andamento é
+// amarelo e cancelado é vermelho.
 const CORES_DOS_GRUPOS = {
   andamento: "statusAtencao",
-  entregue: "serie3",
-  ativado: "serie1",
+  entregue: "serie1",
+  ativado: "serie3",
   cancelado: "statusCritico",
 };
 
