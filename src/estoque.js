@@ -55,13 +55,17 @@ function encontrarSigla(chave) {
   )?.sigla;
 }
 
-export function normalizarEstoque(bruto) {
+// `siglaFiltrada` restringe a tela a uma regional: as linhas das outras nem
+// entram, e toda conta daí para frente — cartões, tabela, gráfico — já sai
+// só dela.
+export function normalizarEstoque(bruto, siglaFiltrada = "") {
   const linhas = bruto?.items ?? [];
   const porCodigo = new Map();
+  const regionais = siglaFiltrada ? REGIONAIS.filter(({ sigla }) => sigla === siglaFiltrada) : REGIONAIS;
 
   for (const linha of linhas) {
     const sigla = encontrarSigla(linha.site);
-    if (!sigla) continue;
+    if (!sigla || !regionais.some((regional) => regional.sigla === sigla)) continue;
 
     const codigo = String(linha.code ?? linha.description ?? "");
     if (!porCodigo.has(codigo)) {
@@ -86,11 +90,11 @@ export function normalizarEstoque(bruto) {
     };
   }
 
-  const regionaisComDados = REGIONAIS.filter(({ sigla }) =>
+  const regionaisComDados = regionais.filter(({ sigla }) =>
     [...porCodigo.values()].some((item) => item.porRegional[sigla]),
   );
 
-  return { itens: [...porCodigo.values()], regionaisComDados };
+  return { itens: [...porCodigo.values()], regionais, regionaisComDados, filtrada: Boolean(siglaFiltrada) };
 }
 
 // ===== Contas da tela =====
@@ -122,7 +126,7 @@ export function contarNiveis(estoque) {
 }
 
 export function contarPorRegional(estoque) {
-  return REGIONAIS.map(({ sigla, nome }) => {
+  return estoque.regionais.map(({ sigla, nome }) => {
     const niveis = estoque.itens.map((item) => celula(item, sigla)?.nivel).filter(Boolean);
 
     return {
@@ -251,12 +255,14 @@ export function desenharTabelaDeEstoque(estoque) {
 
   const itens = itensOrdenados(estoque);
 
-  const colunas = `<col class="coluna-unidade"><col class="coluna-item"><col class="coluna-minimo">${REGIONAIS.map(() => '<col class="coluna-regional">').join("")}`;
-  const cabecalho = REGIONAIS.map(({ sigla, nome }) => `<th title="${escapar(nome)}">${sigla}</th>`).join("");
+  // As colunas são as regionais visíveis: com filtro, uma só — e as outras não
+  // podem aparecer como zero, que é como regional sem dado é mostrada.
+  const colunas = `<col class="coluna-unidade"><col class="coluna-item"><col class="coluna-minimo">${estoque.regionais.map(() => '<col class="coluna-regional">').join("")}`;
+  const cabecalho = estoque.regionais.map(({ sigla, nome }) => `<th title="${escapar(nome)}">${sigla}</th>`).join("");
 
   const linhas = itens
     .map((item) => {
-      const celulas = REGIONAIS.map(({ sigla, nome }) => {
+      const celulas = estoque.regionais.map(({ sigla, nome }) => {
         const dados = celula(item, sigla);
         // Regional que a API não devolveu conta como zero — é o que ela
         // significa no estoque, e um traço só faria a coluna parecer quebrada.
@@ -335,17 +341,27 @@ export function desenharIndicadoresDeEstoque(estoque) {
       detalhe: "item · regional com folga",
       realce: CORES.serie1,
     },
-    {
-      rotulo: "Regional mais crítica",
-      valor: temAlerta ? pior.sigla : "—",
-      // Enquanto só uma regional manda dado, dizer isso é mais honesto do que
-      // apontar a "pior" de uma comparação que não existe.
-      detalhe: comDados.length < 2
-        ? `${comDados.length ? comDados[0].nome : "nenhuma regional"} · única com dados`
-        : temAlerta ? `${pior.nome} · ${formatarNumero(pior.criticos)} críticos` : "nenhuma em falta",
-      realce: CORES.statusCritico,
-      texto: true,
-    },
+    // Com uma regional escolhida, "a mais crítica" não compara nada: o cartão
+    // passa a dizer qual regional está na tela.
+    estoque.filtrada
+      ? {
+          rotulo: "Regional",
+          valor: estoque.regionais[0].sigla,
+          detalhe: `${estoque.regionais[0].nome} · ${formatarNumero(contagem.critical)} críticos`,
+          realce: CORES.serie1,
+          texto: true,
+        }
+      : {
+          rotulo: "Regional mais crítica",
+          valor: temAlerta ? pior.sigla : "—",
+          // Enquanto só uma regional manda dado, dizer isso é mais honesto do
+          // que apontar a "pior" de uma comparação que não existe.
+          detalhe: comDados.length < 2
+            ? `${comDados.length ? comDados[0].nome : "nenhuma regional"} · única com dados`
+            : temAlerta ? `${pior.nome} · ${formatarNumero(pior.criticos)} críticos` : "nenhuma em falta",
+          realce: CORES.statusCritico,
+          texto: true,
+        },
   ];
 
   document.getElementById("indicadoresEstoque").innerHTML = cartoes

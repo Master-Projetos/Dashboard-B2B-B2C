@@ -166,7 +166,7 @@ body {
   color: #ffffff;
 }
 
-.periodo {
+.controles-do-cabecalho {
   /* Mesmo tamanho das abas B2B/B2C: a aba tem o próprio recheio e o contêiner
      .abas ainda soma 3px de padding e 1px de borda de cada lado. Aqui o +3px
      cobre o padding do contêiner; o 1px restante é a borda do próprio
@@ -184,11 +184,11 @@ body {
   white-space: nowrap;
 }
 
-.periodo[hidden] {
+.controles-do-cabecalho[hidden] {
   display: none;
 }
 
-.periodo select {
+.controles-do-cabecalho select {
   font: inherit;
   font-size: var(--fonte-detalhe);
   font-weight: 650;
@@ -218,7 +218,7 @@ body {
 
 /* A lista aberta é desenhada pelo sistema: dá para mandar fonte e cor, o
    resto ele decide. Sem isto ela herda o tamanho miúdo do rótulo fechado. */
-.periodo select option {
+.controles-do-cabecalho select option {
   font-size: clamp(13px, 1.7vh, 16px);
   font-weight: 600;
   padding: 8px 12px;
@@ -226,18 +226,18 @@ body {
   color: var(--texto-primario);
 }
 
-.periodo select:hover {
+.controles-do-cabecalho select:hover {
   border-color: var(--texto-suave);
 }
 
-.periodo select:focus-visible {
+.controles-do-cabecalho select:focus-visible {
   outline: 2px solid var(--serie-1);
   outline-offset: 1px;
 }
 
 /* Mesma pílula dos seletores ao lado, só que discreta: é uma saída, não uma
    escolha. O ✕ vem do CSS para o botão não depender de fonte de ícone. */
-.periodo button {
+.controles-do-cabecalho button {
   display: flex;
   align-items: center;
   gap: 5px;
@@ -253,13 +253,13 @@ body {
   cursor: pointer;
 }
 
-.periodo button::before {
+.controles-do-cabecalho button::before {
   content: "✕";
   font-size: 0.85em;
   line-height: 1;
 }
 
-.periodo button:hover {
+.controles-do-cabecalho button:hover {
   color: var(--texto-primario);
   border-color: var(--texto-suave);
   background: var(--superficie);
@@ -268,18 +268,18 @@ body {
 /* No escuro o botão vazado sumia contra o fundo da página. Preenchido com a
    cor de superfície ele volta a parecer botão, sem roubar a atenção da aba
    ativa, que é a única coisa azul do cabeçalho. */
-:root[data-tema="escuro"] .periodo button {
+:root[data-tema="escuro"] .controles-do-cabecalho button {
   color: var(--texto-primario);
   background: var(--superficie);
   border-color: rgba(255, 255, 255, 0.22);
 }
 
-:root[data-tema="escuro"] .periodo button:hover {
+:root[data-tema="escuro"] .controles-do-cabecalho button:hover {
   background: var(--superficie-topo);
   border-color: var(--texto-secundario);
 }
 
-.periodo button[hidden] {
+.controles-do-cabecalho button[hidden] {
   display: none;
 }
 

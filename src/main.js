@@ -19,7 +19,7 @@ import { formatarHorario, formatarDataCurta, formatarMes } from "./formatadores.
 import { restaurarTemaSalvo, alternarTema } from "./tema.js";
 import { iniciarNavegacao, telaVisivel } from "./navegacao.js";
 import { aplicarPeriodo, mesesDisponiveis, mesInicialPadrao, ultimoDiaDoMes } from "./periodo.js";
-import { normalizarEstoque, contarPorRegional, desenharIndicadoresDeEstoque, desenharTabelaDeEstoque } from "./estoque.js";
+import { REGIONAIS, normalizarEstoque, contarPorRegional, desenharIndicadoresDeEstoque, desenharTabelaDeEstoque } from "./estoque.js";
 
 const INTERVALO_ATUALIZACAO_B2B_MS = 60 * 1000; // rota rápida: recarregada a cada minuto
 const INTERVALO_VERIFICACAO_VIABILIDADE_MS = 30 * 60 * 1000; // rota lenta: o cache de 48h fica no servidor
@@ -163,9 +163,25 @@ function desenharTelaB2c() {
   desenharOcupacaoPorRegional(dadosViabilidade);
 }
 
+// ===== Filtro de regional (tela de estoque) =====
+
+const seletorDeRegional = document.getElementById("regionalDoEstoque");
+
+// As opções são fixas: as cinco regionais existem sempre, mesmo quando uma
+// delas ainda não mandou dado.
+seletorDeRegional.innerHTML = `<option value="">Todas</option>${REGIONAIS.map(
+  ({ sigla, nome }) => `<option value="${sigla}">${sigla} · ${nome}</option>`,
+).join("")}`;
+
+seletorDeRegional.addEventListener("change", () => desenharTelaVisivel());
+
+function atualizarFiltroDeRegional() {
+  document.getElementById("filtroDeRegional").hidden = telaVisivel() !== "estoque";
+}
+
 function desenharTelaEstoque() {
   desenharPrazos(null); // os prazos são do B2B
-  const estoque = normalizarEstoque(dadosDeEstoque);
+  const estoque = normalizarEstoque(dadosDeEstoque, seletorDeRegional.value);
 
   desenharIndicadoresDeEstoque(estoque);
   desenharTabelaDeEstoque(estoque);
@@ -180,6 +196,7 @@ function desenharTelaEstoque() {
 
 function desenharTelaVisivel() {
   atualizarControleDePeriodo(); // o seletor é do B2B; some nas outras telas
+  atualizarFiltroDeRegional(); // e o de regional é só do estoque
 
   if (telaVisivel() === "b2c") desenharTelaB2c();
   else if (telaVisivel() === "estoque") desenharTelaEstoque();
