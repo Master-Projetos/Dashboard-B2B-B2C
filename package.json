@@ -1,6 +1,7 @@
 {
   "name": "master-projetos-painel",
   "private": true,
+  "license": "UNLICENSED",
   "type": "module",
   "scripts": {
     "dev": "vite",

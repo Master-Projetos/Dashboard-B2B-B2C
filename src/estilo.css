@@ -107,6 +107,13 @@ html::-webkit-scrollbar {
   border-top: 1px solid var(--borda);
 }
 
+#rodape .direitos {
+  display: block;
+  margin-top: 6px;
+  font-size: 0.9em;
+  opacity: 0.8;
+}
+
 /* Links do rodapé na cor do texto, sem o azul padrão; o sublinhado só aparece
    ao passar o mouse. */
 #rodape a {
