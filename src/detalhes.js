@@ -28,7 +28,7 @@ function descreverSituacao(item) {
     const grupo = grupoDoProjeto(item);
     if (grupo === "cancelado") return "Cancelado";
     if (grupo === "entregue") return "Esperando setor responsável";
-    if (grupo === "ativado") return "Concluído";
+    if (grupo === "ativado") return "Ativada";
   }
 
   return descreverPrazo(item.remaining_days);
