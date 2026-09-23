@@ -6,6 +6,7 @@ import { desenharIndicadoresB2b, desenharIndicadoresB2c, desenharPrazos } from "
 import {
   desenharProjetosPorMes,
   desenharStatus,
+  desenharProjetosPorStatus,
   desenharPrioridade,
   desenharStatusPorEquipe,
   desenharPortasPorRegional,
@@ -32,7 +33,7 @@ import {
 const INTERVALO_ATUALIZACAO_B2B_MS = 60 * 1000; // rota rápida: recarregada a cada minuto
 const INTERVALO_VERIFICACAO_VIABILIDADE_MS = 30 * 60 * 1000; // rota lenta: o cache de 48h fica no servidor
 
-const GRAFICOS_DE_B2B = ["graficoProjetosPorMes", "graficoStatus", "graficoPrioridade", "graficoStatusPorEquipe"];
+const GRAFICOS_DE_B2B = ["graficoProjetosPorMes", "graficoStatus", "graficoProjetosPorStatus", "graficoPrioridade", "graficoStatusPorEquipe"];
 const GRAFICOS_DE_B2C = ["graficoCidades", "graficoPortasPorRegional", "graficoOcupacao"];
 
 let dadosB2b = null;
@@ -73,6 +74,7 @@ function desenharTelaB2b() {
 
   desenharProjetosPorMes(b2b);
   desenharStatus(b2b);
+  desenharProjetosPorStatus(b2b);
   desenharPrioridade(b2b);
   desenharStatusPorEquipe(b2b);
 }

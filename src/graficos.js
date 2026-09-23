@@ -233,6 +233,54 @@ export function desenharStatus(b2b) {
   });
 }
 
+// ===== Projetos por status =====
+
+// Um status real por barra (Aguardando BP, Estudo...), como vem da rota de
+// status — o modelo antigo, com o detalhe que o gráfico de cima agrupa.
+const CORES_DO_STATUS = {
+  "Aguardando BP": "lilas",
+  "Cancelada": "statusCritico",
+};
+
+export function desenharProjetosPorStatus(b2b) {
+  const itens = obterItens(b2b, DIMENSOES.status);
+  const statusOrdenados = Object.entries(obterContagens(b2b, DIMENSOES.status))
+    .filter(([, quantidade]) => quantidade > 0)
+    .sort(([, a], [, b]) => a - b); // o eixo cresce de baixo para cima
+
+  const instancia = desenhar("graficoProjetosPorStatus", {
+    grid: { top: 4, right: 44, bottom: 4, left: 4, containLabel: true },
+    tooltip: dicaDeContexto({
+      trigger: "axis",
+      axisPointer: { type: "shadow", shadowStyle: { color: "rgba(128, 128, 128, 0.12)" } },
+      formatter: ([ponto]) => `<b>${ponto.name}</b> — ${formatarNumero(ponto.value)} projetos<br/>${DICA_DE_CLIQUE}`,
+    }),
+    xAxis: eixoDeValor({ show: false }),
+    yAxis: eixoDeCategoria({
+      data: statusOrdenados.map(([status]) => status),
+      axisLine: { show: false },
+      axisLabel: { ...estiloDeTextoSuave(), interval: 0, width: 132, overflow: "truncate" },
+    }),
+    series: [{
+      type: "bar",
+      cursor: "pointer",
+      data: statusOrdenados.map(([status, quantidade]) => ({
+        value: quantidade,
+        itemStyle: { color: CORES[CORES_DO_STATUS[status] ?? "serie1"], borderRadius: [0, 4, 4, 0] },
+      })),
+      barMaxWidth: 16,
+      showBackground: true,
+      backgroundStyle: { color: "rgba(128, 128, 128, 0.07)", borderRadius: [0, 4, 4, 0] },
+      label: rotuloDeValor({ position: "right", distance: 6, color: CORES.textoPrimario }),
+    }],
+  });
+
+  aoClicarNaFaixa(instancia, "y", (indice) => {
+    const [status] = statusOrdenados[indice] ?? [];
+    if (status) abrirDetalhes(`Status: ${status}`, itens.filter((item) => item.status === status));
+  });
+}
+
 // ===== Prioridade =====
 
 const ORDEM_DE_PRIORIDADE = ["Baixa", "Média", "Alta", "Atividade Crítica"];
