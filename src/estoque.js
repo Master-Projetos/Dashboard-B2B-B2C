@@ -19,6 +19,41 @@ const NIVEIS = {
   ok: { rotulo: "Normal", classe: "nivel-normal", ordem: 2 },
 };
 
+// Famílias de material do catálogo interno ("Cópia de TCX-LM-XXX-0000-00.xlsx",
+// aba MATERIAIS), na mesma ordem da planilha: ancoragem, cabo, fusão e por
+// fim o equipamento de data center. O código é o que não muda quando a API
+// reescreve a descrição — por isso o agrupamento parte dele, não do nome.
+// Um item novo que a API mandar sem estar em nenhuma lista cai em "Outros",
+// ao final, em vez de entrar num grupo errado por engano.
+const GRUPOS_DE_MATERIAL = [
+  {
+    nome: "Ancoragem",
+    codigos: ["993138", "993170", "993184", "993456", "993546", "995796"],
+  },
+  {
+    nome: "Cabos",
+    codigos: ["993339"],
+  },
+  {
+    nome: "Fusão",
+    codigos: ["993552", "999213"],
+  },
+  {
+    nome: "Data center",
+    codigos: [
+      "990801", "990987", "990988", "991084", "991085", "991445", "991706", "991949",
+      "992761", "993002", "993073", "993161", "993223", "993352", "993996", "993997",
+      "995838", "995971", "997174", "997984", "998222", "999485",
+    ],
+  },
+];
+
+const GRUPO_OUTROS = "Outros";
+
+function grupoDoCodigo(codigo) {
+  return GRUPOS_DE_MATERIAL.find((grupo) => grupo.codigos.includes(codigo))?.nome ?? GRUPO_OUTROS;
+}
+
 // ===== Leitura do que a API manda =====
 //
 // A rota devolve uma linha por item e regional:
@@ -339,11 +374,19 @@ export function itensParaAtencao(estoque) {
   return estoque.itens.filter(precisa);
 }
 
-// A tabela mostra o estoque inteiro, do mais grave ao normal. Esconder o que
-// está em ordem economizava três linhas e fazia a lista não bater com os 31
-// itens monitorados.
-export function itensOrdenados(estoque) {
-  return ordenarPorGravidade(estoque.itens);
+// A tabela mostra o estoque inteiro, do mais grave ao normal — mas separado
+// por família de material: ancoragem, cabo, fusão e data center têm cada um
+// sua faixa própria, e dentro dela o mais grave continua vindo primeiro.
+// Um grupo sem item nenhum (por causa do filtro de nível, por exemplo) não
+// aparece.
+export function itensAgrupados(estoque) {
+  const baldes = new Map([...GRUPOS_DE_MATERIAL.map(({ nome }) => nome), GRUPO_OUTROS].map((nome) => [nome, []]));
+
+  for (const item of estoque.itens) baldes.get(grupoDoCodigo(item.codigo)).push(item);
+
+  return [...baldes]
+    .map(([grupo, itens]) => ({ grupo, itens: ordenarPorGravidade(itens) }))
+    .filter(({ itens }) => itens.length > 0);
 }
 
 // ===== Desenho =====
@@ -445,11 +488,14 @@ export function desenharTabelaDeEstoque(estoque, niveis = new Set(Object.keys(NI
   }
 
   const filtrando = niveis.size < Object.keys(NIVEIS).length;
-  const itens = itensOrdenados(estoque).filter(
-    (item) => !filtrando || [...niveis].some((nivel) => temNivel(item, nivel, estoque.regionais)),
-  );
+  const passaNoFiltro = (item) =>
+    !filtrando || [...niveis].some((nivel) => temNivel(item, nivel, estoque.regionais));
 
-  if (!itens.length) {
+  const grupos = itensAgrupados(estoque)
+    .map(({ grupo, itens }) => ({ grupo, itens: itens.filter(passaNoFiltro) }))
+    .filter(({ itens }) => itens.length > 0);
+
+  if (!grupos.length) {
     const descricao = [...niveis].map((nivel) => DESCRICAO_DO_NIVEL[nivel]).join(" ou ");
     alvo.innerHTML = `<p class="aviso">Nenhum item ${descricao}${estoque.filtrada ? " nesta regional" : ""}</p>`;
     return;
@@ -457,35 +503,45 @@ export function desenharTabelaDeEstoque(estoque, niveis = new Set(Object.keys(NI
 
   // As colunas são as regionais visíveis: com filtro, uma só — e as outras não
   // podem aparecer como zero, que é como regional sem dado é mostrada.
+  const totalDeColunas = 3 + estoque.regionais.length;
   const colunas = `<col class="coluna-unidade"><col class="coluna-item"><col class="coluna-minimo">${estoque.regionais.map(() => '<col class="coluna-regional">').join("")}`;
   const cabecalho = estoque.regionais.map(({ sigla, nome }) => `<th title="${escapar(nome)}">${sigla}</th>`).join("");
 
-  const linhas = itens
-    .map((item) => {
-      const celulas = estoque.regionais.map(({ sigla, nome }) => {
-        const dados = celula(item, sigla);
-        const nivelDaCelula = dados?.nivel ?? "ok";
-        if (filtrando && !niveis.has(nivelDaCelula)) return `<td class="celula-fora-do-filtro"></td>`;
+  function montarLinhaDoItem(item) {
+    const celulas = estoque.regionais.map(({ sigla, nome }) => {
+      const dados = celula(item, sigla);
+      const nivelDaCelula = dados?.nivel ?? "ok";
+      if (filtrando && !niveis.has(nivelDaCelula)) return `<td class="celula-fora-do-filtro"></td>`;
 
-        // Regional que a API não devolveu conta como zero — é o que ela
-        // significa no estoque, e um traço só faria a coluna parecer quebrada.
-        const classe = dados ? NIVEIS[dados.nivel].classe : "nivel-normal";
-        const texto = formatarNumero(dados?.quantidade ?? 0);
-        const dica = escapar(montarDica(dados, nome, item));
-        return `<td class="${classe} celula-clicavel" title="${escapar(descreverCelula(dados, nome))}" data-dica="${dica}">${texto}</td>`;
-      }).join("");
+      // Regional que a API não devolveu conta como zero — é o que ela
+      // significa no estoque, e um traço só faria a coluna parecer quebrada.
+      const classe = dados ? NIVEIS[dados.nivel].classe : "nivel-normal";
+      const texto = formatarNumero(dados?.quantidade ?? 0);
+      const dica = escapar(montarDica(dados, nome, item));
+      return `<td class="${classe} celula-clicavel" title="${escapar(descreverCelula(dados, nome))}" data-dica="${dica}">${texto}</td>`;
+    }).join("");
 
-      const minimo = formatarNumero(item.minimo);
+    const minimo = formatarNumero(item.minimo);
 
-      return `
-        <tr>
-          <td class="coluna-da-unidade" title="Unidade de medida">${escapar(item.unidade || "—")}</td>
-          <th scope="row" title="${escapar(`${item.codigo} · ${item.nome}`)}">${escapar(item.nome)}</th>
-          <td class="coluna-do-minimo" title="Estoque mínimo">${minimo}</td>
-          ${celulas}
-        </tr>
-      `;
-    })
+    return `
+      <tr>
+        <td class="coluna-da-unidade" title="Unidade de medida">${escapar(item.unidade || "—")}</td>
+        <th scope="row" title="${escapar(`${item.codigo} · ${item.nome}`)}">${escapar(item.nome)}</th>
+        <td class="coluna-do-minimo" title="Estoque mínimo">${minimo}</td>
+        ${celulas}
+      </tr>
+    `;
+  }
+
+  // Uma linha inteira com o nome da família antes dos itens dela — a mesma
+  // divisão do catálogo interno (ancoragem, cabo, fusão, data center).
+  const linhas = grupos
+    .map(
+      ({ grupo, itens }) => `
+        <tr class="linha-de-grupo"><th colspan="${totalDeColunas}">${escapar(grupo)}</th></tr>
+        ${itens.map(montarLinhaDoItem).join("")}
+      `,
+    )
     .join("");
 
   alvo.onclick = (evento) => {
