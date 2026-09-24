@@ -538,7 +538,7 @@ export function desenharTabelaDeEstoque(estoque, niveis = new Set(Object.keys(NI
   const linhas = grupos
     .map(
       ({ grupo, itens }) => `
-        <tr class="linha-de-grupo"><th colspan="${totalDeColunas}">${escapar(grupo)}</th></tr>
+        <tr class="linha-de-grupo"><th colspan="${totalDeColunas}">${escapar(grupo)}<span class="quantidade-do-grupo">${itens.length} ${itens.length === 1 ? "item" : "itens"}</span></th></tr>
         ${itens.map(montarLinhaDoItem).join("")}
       `,
     )
