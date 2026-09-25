@@ -1,6 +1,6 @@
 import { CORES } from "./tema.js";
 import { formatarNumero } from "./formatadores.js";
-import { abrirConteudo } from "./detalhes.js";
+import { abrirConteudo, ehCelular } from "./detalhes.js";
 
 // As cinco regionais aparecem sempre, na mesma ordem e sempre todas: os itens
 // se repetem nas cinco, então uma coluna vazia é informação (falta ali), não
@@ -164,7 +164,9 @@ export function desenharReposicao(reposicao, estoque) {
     return;
   }
 
-  cartao.onclick = () => abrirCalendarioDeReposicao(reposicao);
+  cartao.onclick = () => {
+    if (!ehCelular()) abrirCalendarioDeReposicao(reposicao);
+  };
 
   const hoje = hojeLocal();
   const siglaFiltrada = estoque.filtrada ? estoque.regionais[0].sigla : null;
@@ -501,6 +503,12 @@ export function desenharTabelaDeEstoque(estoque, niveis = new Set(Object.keys(NI
     return;
   }
 
+  if (ehCelular()) {
+    alvo.onclick = null;
+    alvo.innerHTML = montarListaDoCelular(grupos, estoque, niveis, filtrando);
+    return;
+  }
+
   // As colunas são as regionais visíveis: com filtro, uma só — e as outras não
   // podem aparecer como zero, que é como regional sem dado é mostrada.
   const totalDeColunas = 3 + estoque.regionais.length;
@@ -563,6 +571,38 @@ export function desenharTabelaDeEstoque(estoque, niveis = new Set(Object.keys(NI
       <tbody>${linhas}</tbody>
     </table>
   `;
+}
+
+// No celular uma tabela de sete colunas não cabe. Cada item vira um bloco:
+// nome e mínimo em cima, e as regionais embaixo em pílulas com a cor do nível.
+// Célula fora do filtro de nível fica apagada em vez de sumir, para as
+// regionais não trocarem de lugar entre um item e outro.
+function montarListaDoCelular(grupos, estoque, niveis, filtrando) {
+  const pilula = (item, { sigla, nome }) => {
+    const dados = celula(item, sigla);
+    const nivel = dados?.nivel ?? "ok";
+    const apagada = filtrando && !niveis.has(nivel) ? " apagada" : "";
+    return `
+      <span class="pilula-de-estoque ${NIVEIS[nivel].classe}${apagada}" title="${escapar(descreverCelula(dados, nome))}">
+        <small>${sigla}</small>
+        <b>${formatarNumero(dados?.quantidade ?? 0)}</b>
+      </span>`;
+  };
+
+  return `<div class="lista-de-estoque">${grupos
+    .map(({ grupo, itens }) => `
+      <h3 class="grupo-da-lista">${escapar(grupo)}<span>${itens.length} ${itens.length === 1 ? "item" : "itens"}</span></h3>
+      ${itens.map((item) => `
+        <article class="item-de-estoque">
+          <div class="topo-do-item">
+            <strong>${escapar(item.nome)}</strong>
+            <span>mín. ${formatarNumero(item.minimo)}${item.unidade ? ` ${escapar(item.unidade)}` : ""}</span>
+          </div>
+          <div class="pilulas-do-item" style="--colunas: ${estoque.regionais.length}">
+            ${estoque.regionais.map((regional) => pilula(item, regional)).join("")}
+          </div>
+        </article>`).join("")}`)
+    .join("")}</div>`;
 }
 
 // Azul para o que é só contagem, amarelo/laranja/vermelho conforme a gravidade.

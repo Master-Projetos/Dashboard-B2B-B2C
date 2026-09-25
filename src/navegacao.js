@@ -36,9 +36,19 @@ function lerTelaDoEndereco() {
   return TELAS.some((tela) => tela.id === id) ? id : TELAS[0].id;
 }
 
+// Ícones de traço fino da barra lateral, um por tela.
+const ICONES_DAS_TELAS = {
+  b2b: '<rect x="3" y="7" width="18" height="13" rx="2"/><path d="M8 7V5a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2M3 13h18"/>',
+  estoque: '<path d="M21 8l-9-5-9 5 9 5 9-5z"/><path d="M3 8v8l9 5 9-5V8M12 13v8"/>',
+  b2c: '<path d="M5 12.5a10 10 0 0 1 14 0M8.5 16a5 5 0 0 1 7 0"/><circle cx="12" cy="19.5" r="1"/><path d="M1.5 9a15 15 0 0 1 21 0"/>',
+};
+
 function desenharAbas() {
-  document.getElementById("abas").innerHTML = TELAS.map(({ id, rotulo }) =>
-    `<button type="button" class="aba${id === telaAtual ? " ativa" : ""}" data-tela="${id}">${rotulo}</button>`
+  document.getElementById("abas").innerHTML = TELAS.map(({ id, titulo }) => `
+    <button type="button" class="aba${id === telaAtual ? " ativa" : ""}" data-tela="${id}" data-rotulo="${titulo}" aria-label="${titulo}"${id === telaAtual ? ' aria-current="page"' : ""}>
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">${ICONES_DAS_TELAS[id] ?? ""}</svg>
+      <span>${titulo}</span>
+    </button>`
   ).join("");
 
   document.querySelectorAll(".aba").forEach((botao) => {
@@ -106,8 +116,38 @@ export function telaVisivel() {
   return telaAtual;
 }
 
+// Barra lateral recolhida: só os ícones, num canto. A escolha fica salva
+// neste navegador; os gráficos se ajustam sozinhos à largura nova.
+const CHAVE_DA_LATERAL = "master-painel:lateral-recolhida";
+
+function recolherLateral(recolher) {
+  document.getElementById("painel").classList.toggle("lateral-recolhida", recolher);
+  const botao = document.getElementById("recolherLateral");
+  botao.setAttribute("aria-expanded", String(!recolher));
+  botao.title = recolher ? "Abrir menu" : "Recolher menu";
+  botao.setAttribute("aria-label", botao.title);
+  try {
+    localStorage.setItem(CHAVE_DA_LATERAL, recolher ? "1" : "0");
+  } catch (erro) {
+    // Navegação privada: vale só enquanto a página estiver aberta.
+  }
+}
+
+function prepararLateral() {
+  let recolhida = false;
+  try {
+    recolhida = localStorage.getItem(CHAVE_DA_LATERAL) === "1";
+  } catch (erro) {
+    recolhida = false;
+  }
+  recolherLateral(recolhida);
+  document.getElementById("recolherLateral").onclick = () =>
+    recolherLateral(!document.getElementById("painel").classList.contains("lateral-recolhida"));
+}
+
 export function iniciarNavegacao(aoTrocar) {
   aoTrocarDeTela = aoTrocar;
+  prepararLateral();
 
   document.addEventListener("keydown", (evento) => {
     if (evento.key === "ArrowRight") avancarTela(1);

@@ -6,7 +6,7 @@ import { CanvasRenderer } from "echarts/renderers";
 import { CORES, CORES_DOS_STATUS, FONTE, corDe, eixoDeCategoria, eixoDeValor, dicaDeContexto, estiloDeTextoSuave, tamanhoDeFonteDoGrafico } from "./tema.js";
 import { formatarNumero, formatarMes } from "./formatadores.js";
 import { DIMENSOES, obterContagens, obterItens } from "./dados-b2b.js";
-import { abrirDetalhes } from "./detalhes.js";
+import { abrirDetalhes, ehCelular } from "./detalhes.js";
 
 echarts.use([BarChart, LineChart, GridComponent, TooltipComponent, LegendComponent, GraphicComponent, CanvasRenderer]);
 
@@ -114,7 +114,8 @@ function aoClicarNaFaixa(instancia, eixo, aoEscolher) {
   });
 }
 
-const DICA_DE_CLIQUE = '<span style="opacity:.7">clique para ver os projetos</span>';
+// No celular o clique não abre nada, então a dica não aparece.
+const dicaDeClique = () => (ehCelular() ? "" : '<br/><span style="opacity:.7">clique para ver os projetos</span>');
 
 // ===== Projetos por mês =====
 
@@ -132,7 +133,7 @@ export function desenharProjetosPorMes(b2b) {
       trigger: "axis",
       axisPointer: { type: "line", lineStyle: { color: CORES.eixo, width: 1 } },
       formatter: ([ponto]) =>
-        `${ponto.axisValue}<br/><b>${formatarNumero(ponto.value)}</b> projetos<br/>${DICA_DE_CLIQUE}`,
+        `${ponto.axisValue}<br/><b>${formatarNumero(ponto.value)}</b> projetos${dicaDeClique()}`,
     }),
     xAxis: eixoDeCategoria({ data: meses.map(formatarMes), boundaryGap: false }),
     yAxis: eixoDeValor({ minInterval: 1 }),
@@ -210,7 +211,7 @@ export function desenharStatus(b2b) {
     tooltip: dicaDeContexto({
       trigger: "axis",
       axisPointer: { type: "shadow", shadowStyle: { color: "rgba(128, 128, 128, 0.12)" } },
-      formatter: ([ponto]) => `<b>${ponto.name}</b> — ${formatarNumero(ponto.value)} projetos<br/>${DICA_DE_CLIQUE}`,
+      formatter: ([ponto]) => `<b>${ponto.name}</b> — ${formatarNumero(ponto.value)} projetos${dicaDeClique()}`,
     }),
     xAxis: eixoDeValor({ minInterval: 1 }),
     yAxis: eixoDeCategoria({ data: faixas.map((faixa) => faixa.rotulo), axisLine: { show: false } }),
@@ -252,7 +253,7 @@ export function desenharProjetosPorStatus(b2b) {
     tooltip: dicaDeContexto({
       trigger: "axis",
       axisPointer: { type: "shadow", shadowStyle: { color: "rgba(128, 128, 128, 0.12)" } },
-      formatter: ([ponto]) => `<b>${ponto.name}</b> — ${formatarNumero(ponto.value)} projetos<br/>${DICA_DE_CLIQUE}`,
+      formatter: ([ponto]) => `<b>${ponto.name}</b> — ${formatarNumero(ponto.value)} projetos${dicaDeClique()}`,
     }),
     xAxis: eixoDeValor({ show: false }),
     yAxis: eixoDeCategoria({
@@ -440,7 +441,8 @@ export function desenharPortasPorRegional(viabilidade) {
       },
     }),
     legend: legendaInferior(),
-    xAxis: eixoDeValor({ axisLabel: { ...estiloDeTextoSuave(), formatter: formatarNumero } }),
+    // No celular o eixo é estreito: números que não cabem somem em vez de se sobrepor.
+    xAxis: eixoDeValor({ axisLabel: { ...estiloDeTextoSuave(), formatter: formatarNumero, hideOverlap: true } }),
     yAxis: eixoDeCategoria({ data: regioes.map((regiao) => regiao.nome), axisLine: { show: false } }),
     series: faixas.map(({ rotulo, chave, cor }, indice) => ({
       name: rotulo,
@@ -609,7 +611,7 @@ export function desenharStatusPorEquipe(b2b, quantidade = 8) {
         const linhas = pontos
           .filter((p) => p.value)
           .map((p) => `${p.marker} ${p.seriesName}: <b>${formatarNumero(p.value)}</b>`);
-        return `${pontos[0].axisValue}<br/>${linhas.join("<br/>")}<br/>${DICA_DE_CLIQUE}`;
+        return `${pontos[0].axisValue}<br/>${linhas.join("<br/>")}${dicaDeClique()}`;
       },
     }),
     legend: legendaInferior(),

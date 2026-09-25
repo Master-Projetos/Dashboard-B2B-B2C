@@ -19,6 +19,7 @@ import {
 import { formatarHorario, formatarDataCurta, formatarMes } from "./formatadores.js";
 import { restaurarTemaSalvo, alternarTema } from "./tema.js";
 import { iniciarNavegacao, telaVisivel } from "./navegacao.js";
+import { exigirAcesso } from "./acesso.js";
 import { aplicarPeriodo, mesesDisponiveis, mesInicialPadrao, ultimoDiaDoMes } from "./periodo.js";
 import {
   regionaisDosDados,
@@ -356,28 +357,38 @@ async function atualizarViabilidade() {
   }
 }
 
-// Fontes e paddings dependem da altura da janela: ao redimensionar, redesenha.
-aoRedimensionar(desenharTelaVisivel);
 
 // Tecla T troca entre tema claro (padrão) e escuro. Os gráficos são canvas,
 // então precisam ser redesenhados com a nova paleta.
 document.addEventListener("keydown", (evento) => {
   if (evento.key.toLowerCase() !== "t" || evento.ctrlKey || evento.altKey || evento.metaKey) return;
+  if (evento.target.closest?.("input, select, textarea")) return; // digitando no login
 
   alternarTema();
   desenharTelaVisivel();
 });
 
 restaurarTemaSalvo();
-restaurarDoArmazenamento();
 
-// Setas ← → trocam de tela; o rodízio automático é de 5 minutos.
-iniciarNavegacao(desenharTelaVisivel);
+// O painel só começa a buscar e desenhar depois que o login é aprovado.
+function iniciarPainel() {
+  restaurarDoArmazenamento();
 
-atualizarB2b();
-atualizarEstoque();
-atualizarViabilidade();
+  // Fontes e paddings dependem da altura da janela: ao redimensionar, redesenha.
+  aoRedimensionar(desenharTelaVisivel);
 
-setInterval(atualizarB2b, INTERVALO_ATUALIZACAO_B2B_MS);
-setInterval(atualizarEstoque, INTERVALO_ATUALIZACAO_B2B_MS);
-setInterval(atualizarViabilidade, INTERVALO_VERIFICACAO_VIABILIDADE_MS);
+  // Setas ← → trocam de tela; o rodízio automático é de 2 minutos.
+  iniciarNavegacao(desenharTelaVisivel);
+
+  atualizarB2b();
+  atualizarEstoque();
+  atualizarViabilidade();
+
+  setInterval(atualizarB2b, INTERVALO_ATUALIZACAO_B2B_MS);
+  setInterval(atualizarEstoque, INTERVALO_ATUALIZACAO_B2B_MS);
+  setInterval(atualizarViabilidade, INTERVALO_VERIFICACAO_VIABILIDADE_MS);
+}
+
+// O segundo argumento redesenha os gráficos quando a pessoa troca o tema
+// salvo na conta.
+exigirAcesso(iniciarPainel, desenharTelaVisivel);

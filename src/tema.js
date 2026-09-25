@@ -117,6 +117,8 @@ export const FONTE = 'system-ui, -apple-system, "Segoe UI", sans-serif';
 
 // O painel roda em telas de 768px a 1080p: as fontes do gráfico acompanham a altura.
 export function tamanhoDeFonteDoGrafico() {
+  // No celular a altura não diz nada sobre o tamanho da letra: fica fixo e legível.
+  if (window.innerWidth <= 760) return 12;
   return Math.round(Math.min(13, Math.max(9, window.innerHeight * 0.0105)));
 }
 

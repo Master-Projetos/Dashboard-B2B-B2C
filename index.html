@@ -23,44 +23,119 @@
 </head>
 <body>
 
-  <div id="painel">
+  <!-- ===== Entrada (Supabase) =====
+       O painel só aparece para quem tem conta aprovada pelo admin. -->
+  <div id="acesso" class="acesso" hidden>
+    <aside class="acesso-marca" aria-hidden="true">
+      <span class="bolha bolha-grande"></span>
+      <span class="bolha bolha-media"></span>
+      <span class="bolha bolha-amarela"></span>
 
-    <header id="cabecalho">
-      <div class="marca">
-        <img class="logo-clara" src="/imagens/master-projetos.png" alt="Master Projetos">
-        <img class="logo-escura" src="/imagens/master-projetos-escuro.png" alt="Master Projetos">
+      <div class="selo-da-marca">
+        <img src="/imagens/master-projetos.png" alt="">
       </div>
 
-      <h1 id="tituloDaTela">Projetos B2B</h1>
-
-      <nav id="abas" class="abas" aria-label="Telas do painel"></nav>
-
-      <div id="periodo" class="controles-do-cabecalho" hidden>
-        <label for="periodoInicio">De</label>
-        <select id="periodoInicio"></select>
-        <label for="periodoFim">até</label>
-        <select id="periodoFim"></select>
-        <button type="button" id="limparPeriodo" class="botao-limpar" hidden>limpar</button>
+      <div class="texto-da-marca">
+        <h2>Painel Master Projetos</h2>
+        <p>Projetos B2B, estoque e viabilidade B2C num só lugar, atualizados a cada minuto.</p>
       </div>
+    </aside>
 
-      <div id="filtrosDoEstoque" class="controles-do-cabecalho" hidden>
-        <label for="regionalDoEstoque">Regional</label>
-        <select id="regionalDoEstoque"></select>
-        <span class="rotulo-de-grupo" id="rotuloDoNivel">Nível</span>
-        <div id="nivelDoEstoque" class="alternadores-de-nivel" role="group" aria-labelledby="rotuloDoNivel">
-          <button type="button" data-nivel="critical" aria-pressed="true" style="--marcador: var(--status-critico)">Críticos</button>
-          <button type="button" data-nivel="alert" aria-pressed="true" style="--marcador: var(--status-atencao)">Em alerta</button>
-          <button type="button" data-nivel="ok" aria-pressed="true" style="--marcador: var(--serie-3)">Normais</button>
+    <main class="acesso-lado-do-formulario">
+      <div class="caixa-de-acesso">
+        <img class="logo-do-acesso logo-clara" src="/imagens/master-projetos.png" alt="Master Projetos">
+        <img class="logo-do-acesso logo-escura" src="/imagens/master-projetos-escuro.png" alt="Master Projetos">
+        <div id="conteudoDoAcesso"></div>
+      </div>
+      <small class="rodape-do-acesso">© 2026 Master Projetos · acesso restrito à equipe</small>
+    </main>
+  </div>
+
+  <div id="painel" hidden>
+
+    <!-- ===== Barra lateral: marca, telas e horário da última atualização ===== -->
+    <aside id="barraLateral" class="barra-lateral">
+      <div class="topo-da-lateral">
+        <div class="marca-lateral">
+          <img class="logo-clara" src="/imagens/master-projetos.png" alt="Master Projetos">
+          <img class="logo-escura" src="/imagens/master-projetos-escuro.png" alt="Master Projetos">
+          <img class="logo-icone" src="/imagens/icone.png" alt="Master Projetos">
         </div>
       </div>
 
-      <div id="prazos" class="prazos"></div>
+      <!-- Botão redondo encaixado na borda da barra: recolhe e abre. -->
+      <button type="button" id="recolherLateral" class="recolher-lateral" aria-expanded="true" aria-label="Recolher menu" title="Recolher menu">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M14.5 7l-5 5 5 5"/></svg>
+      </button>
+
+      <span class="rotulo-da-lateral">Painéis</span>
+      <nav id="abas" class="abas-laterais" aria-label="Telas do painel"></nav>
 
       <div class="atualizacoes">
         <span id="atualizacaoB2b">B2B —</span>
         <span id="atualizacaoViabilidade">Viabilidade —</span>
       </div>
-    </header>
+    </aside>
+
+    <div class="area-principal">
+      <header id="cabecalho">
+        <h1 id="tituloDaTela">Projetos B2B</h1>
+
+        <!-- Filtros na mesma linha do título: cada um numa caixa com o nome em cima. -->
+        <div class="barra-de-filtros">
+          <div id="periodo" class="grupo-de-filtros" hidden>
+            <label class="filtro" for="periodoInicio">
+              <span>Período · de</span>
+              <select id="periodoInicio"></select>
+            </label>
+            <label class="filtro" for="periodoFim">
+              <span>Período · até</span>
+              <select id="periodoFim"></select>
+            </label>
+            <button type="button" id="limparPeriodo" class="limpar-filtros" hidden>Limpar filtros</button>
+          </div>
+
+          <div id="filtrosDoEstoque" class="grupo-de-filtros" hidden>
+            <label class="filtro" for="regionalDoEstoque">
+              <span>Regional</span>
+              <select id="regionalDoEstoque"></select>
+            </label>
+            <div class="filtro filtro-de-nivel">
+              <span id="rotuloDoNivel">Nível</span>
+              <div id="nivelDoEstoque" class="alternadores-de-nivel" role="group" aria-labelledby="rotuloDoNivel">
+                <button type="button" data-nivel="critical" aria-pressed="true" style="--marcador: var(--status-critico)">Críticos</button>
+                <button type="button" data-nivel="alert" aria-pressed="true" style="--marcador: var(--status-atencao)">Em alerta</button>
+                <button type="button" data-nivel="ok" aria-pressed="true" style="--marcador: var(--serie-3)">Normais</button>
+              </div>
+            </div>
+          </div>
+        </div>
+
+
+        <div id="prazos" class="prazos"></div>
+
+        <!-- Conta: as iniciais abrem o menu com Minha conta, Membros (admin) e
+             Sair. Para o admin, o número de pedidos esperando aparece no avatar. -->
+        <div class="menu-da-conta">
+          <button type="button" id="botaoDaConta" class="botao-da-conta" aria-haspopup="menu" aria-expanded="false"
+                  aria-controls="menuDaConta" title="Minha conta">
+            <span id="iniciaisDaConta"></span>
+            <span id="pedidosNoAvatar" class="pedidos-no-avatar" hidden></span>
+          </button>
+          <div id="menuDaConta" class="menu-suspenso" role="menu" hidden>
+            <div class="quem-esta-conectado">
+              <strong id="nomeNoMenu"></strong>
+              <span id="emailNoMenu"></span>
+              <span id="papelNoMenu" class="selo-admin" hidden></span>
+            </div>
+            <button type="button" role="menuitem" id="minhaConta">Minha conta</button>
+            <button type="button" role="menuitem" id="gerenciarAcessos" hidden>
+              Membros <span id="pedidosNoMenu" class="contagem-de-pendentes" hidden></span>
+            </button>
+            <button type="button" role="menuitem" id="sairDoPainel" class="sair">Sair</button>
+          </div>
+        </div>
+      </header>
 
     <!-- ===== Tela B2B ===== -->
     <section class="tela" data-tela="b2b">
@@ -137,11 +212,11 @@
         </article>
       </div>
     </section>
-
+    </div>
   </div>
 
   <!-- Fica abaixo do painel, que ocupa a tela inteira: só aparece rolando. -->
-  <footer id="rodape">
+  <footer id="rodape" hidden>
     Elaborado e Desenvolvido pela "EQUIPE de projetos" (<a href="https://www.linkedin.com/in/alberto-soares-0a941a163/" target="_blank">@Beto</a>, <a href="https://www.linkedin.com/in/rafael-mesquita-447135128/" target="_blank">@Rafinha</a>, <a href="https://github.com/dusoup" target="_blank">@dusoup</a>, <a href="https://github.com/VinnyByn" target="_blank">@VinnyByn</a> e pelo <a href="https://github.com/23Edu4rd0" target="_blank">@23Edu4rd0</a>)
     <small class="direitos">
       © 2026 Master Projetos. Todos os direitos reservados. Proibida a cópia, reprodução ou

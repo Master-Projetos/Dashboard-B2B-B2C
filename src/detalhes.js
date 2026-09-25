@@ -135,11 +135,16 @@ function montarFiltro(solicitantes) {
           </select>`;
 }
 
+// No celular o painel é só para olhar: listas de detalhe e calendário ficam
+// no computador, onde há espaço para ler uma tabela.
+export const ehCelular = () => window.matchMedia("(max-width: 760px)").matches;
+
 function fechar() {
   document.getElementById("detalhes").hidden = true;
 }
 
 export function abrirDetalhes(titulo, itensRecebidos, { filtrarPorSolicitante = false } = {}) {
+  if (ehCelular()) return;
   const painel = document.getElementById("detalhes");
   const itens = emAndamentoPrimeiro(itensRecebidos);
   // Colunas calculadas sobre a lista inteira: se saíssem do resultado filtrado,
@@ -187,11 +192,12 @@ export function abrirDetalhes(titulo, itensRecebidos, { filtrarPorSolicitante = 
 // Mesmo painel sobreposto, para conteúdo que não é lista de projetos (o
 // calendário de reposição do estoque). Fecha do mesmo jeito: ✕, Esc ou clique
 // fora da caixa.
-export function abrirConteudo(titulo, corpoHtml) {
+// `classe` muda o tamanho da caixa para o que não é tabela (Minha conta).
+export function abrirConteudo(titulo, corpoHtml, { classe = "" } = {}) {
   const painel = document.getElementById("detalhes");
 
   painel.innerHTML = `
-    <div class="caixa-de-detalhes" role="dialog" aria-label="${escapar(titulo)}">
+    <div class="caixa-de-detalhes${classe ? ` ${classe}` : ""}" role="dialog" aria-label="${escapar(titulo)}">
       <header>
         <h2>${escapar(titulo)}</h2>
         <button type="button" class="fechar-detalhes" aria-label="Fechar">✕</button>

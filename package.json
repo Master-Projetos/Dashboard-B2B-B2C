@@ -11,6 +11,7 @@
     "snapshot": "node scripts/gerar-snapshot.mjs"
   },
   "dependencies": {
+    "@supabase/supabase-js": "^2.117.1",
     "echarts": "^5.5.1"
   },
   "devDependencies": {

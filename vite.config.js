@@ -49,5 +49,9 @@ export default defineConfig({
   },
   build: {
     target: "es2020",
+    // Duas páginas: o painel e a de dívidas, que só abre pelo endereço.
+    rollupOptions: {
+      input: { painel: "index.html", dividas: "dividas.html" },
+    },
   },
 });

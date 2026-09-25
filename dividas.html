@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <!-- Página fora do painel: só quem tem o endereço chega aqui, e ela não deve
+       aparecer em busca nenhuma. -->
+  <meta name="robots" content="noindex, nofollow">
+  <link rel="icon" type="image/png" sizes="32x32" href="/imagens/icone-32.png">
+  <link rel="apple-touch-icon" href="/imagens/apple-touch-icon.png">
+  <title>Dívidas do setor</title>
+</head>
+<body class="pagina-de-dividas">
+
+  <!-- ===== Entrada ===== -->
+  <div id="entrada" class="entrada">
+    <form id="formularioDeEntrada" class="cartao caixa-de-entrada" autocomplete="off">
+      <img class="logo-clara" src="/imagens/master-projetos.png" alt="Master Projetos">
+      <img class="logo-escura" src="/imagens/master-projetos-escuro.png" alt="Master Projetos">
+      <h2>Dívidas do setor</h2>
+      <label>Usuário <input id="usuario" name="usuario" required autofocus></label>
+      <label>Senha <input id="senha" name="senha" type="password" required></label>
+      <p id="erroDeEntrada" class="erro-de-entrada" hidden>Usuário ou senha incorretos</p>
+      <button type="submit" class="botao-principal">Entrar</button>
+    </form>
+  </div>
+
+  <!-- ===== Página ===== -->
+  <div id="paginaDeDividas" class="conteudo-de-dividas" hidden>
+    <header class="cabecalho-de-dividas">
+      <div class="marca">
+        <img class="logo-clara" src="/imagens/master-projetos.png" alt="Master Projetos">
+        <img class="logo-escura" src="/imagens/master-projetos-escuro.png" alt="Master Projetos">
+      </div>
+      <h1>Dívidas do setor</h1>
+      <button type="button" id="sair" class="botao-secundario">Sair</button>
+    </header>
+
+    <div id="indicadoresDeDividas" class="indicadores indicadores-de-dividas"></div>
+
+    <div class="grade-de-dividas">
+      <article class="cartao">
+        <h2>Em aberto por membro</h2>
+        <div class="area-grafico" id="graficoPorMembro"></div>
+      </article>
+
+      <article class="cartao">
+        <h2>Dívidas por mês</h2>
+        <div class="area-grafico" id="graficoPorMes"></div>
+      </article>
+    </div>
+
+    <article class="cartao">
+      <h2>Nova dívida</h2>
+      <form id="formularioDeDivida" class="formulario-de-divida" autocomplete="off">
+        <label>Membro
+          <input id="membro" list="membrosConhecidos" required placeholder="Nome">
+          <datalist id="membrosConhecidos"></datalist>
+        </label>
+        <label>Descrição <input id="descricao" required placeholder="Do que é"></label>
+        <label>Valor (R$) <input id="valor" type="number" min="0.01" step="0.01" required placeholder="0,00"></label>
+        <label>Data <input id="data" type="date" required></label>
+        <button type="submit" class="botao-principal">Cadastrar</button>
+      </form>
+    </article>
+
+    <article class="cartao">
+      <div class="topo-da-lista">
+        <h2>Dívidas</h2>
+        <select id="filtroDeMembro" aria-label="Filtrar por membro"></select>
+        <select id="filtroDeSituacao" aria-label="Filtrar por situação">
+          <option value="">Todas</option>
+          <option value="aberta">Em aberto</option>
+          <option value="paga">Pagas</option>
+        </select>
+      </div>
+      <div id="listaDeDividas"></div>
+    </article>
+  </div>
+
+  <script type="module" src="/src/dividas.js"></script>
+</body>
+</html>
